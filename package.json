@@ -72,7 +72,7 @@
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.0",
     "@types/react-router-dom": "5.3.3",
-		"@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
     "@typescript-eslint/parser": "7.9.0",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
@@ -89,5 +89,8 @@
     "stylelint-config-standard": "^25.0.0",
     "ts-node": "10.9.1",
     "typescript": "~5.4.4"
-  }
+  },
+  "description": "Monorepo with Angular, React, Vanilla TS boilerplates for JS camp. Created with [Nx](https://nx.dev/). Update project name and description, when you start working on your own project.",
+  "main": "index.js",
+  "author": ""
 }

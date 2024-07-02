@@ -1,5 +1,35 @@
 @import url("../global/index.css");
 
-.title {
-  color: var(--heading-color-1);
+header {
+  color: var(--on-surface);
+  height: 64px;
+  border-bottom: 1px var(--border) solid;
+  display: flex;
+  align-items: center;
+}
+
+.main-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bookCard {
+  width: 180px;
+}
+
+.bookCard-cover {
+  aspect-ratio: 2/3;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.bookCard-cover img {
+  width: 100%;
+  height: 100%;
+}
+
+footer {
+  height: 128px;
+  display: flex;
+  justify-content: space-between;
 }

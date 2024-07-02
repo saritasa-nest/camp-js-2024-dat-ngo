@@ -1,4 +1,4 @@
-a,
+/* a,
 :link,
 .link {
   --link-color: var(--primary-color);
@@ -25,4 +25,47 @@ a:hover,
 
   margin: 80px auto 0;
   max-width: var(--default-layout-width);
+} */
+
+.container {
+  width: 1244px;
+  margin: 0 auto;
+}
+
+.booksGroup {
+  width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter {
+  width: 320px;
+  height: 100px;
+  background: red;
+}
+
+@media screen and (max-width: 1920px) {
+  .container {
+    width: 1244px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .container {
+    width: 1200px;
+  }
+}
+
+@media screen and (max-width: 786px) {
+  .container {
+    width: 738px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .container {
+    width: 312px;
+  }
 }
