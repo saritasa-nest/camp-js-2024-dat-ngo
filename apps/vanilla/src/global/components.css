@@ -26,23 +26,27 @@ a:hover,
   margin: 80px auto 0;
   max-width: var(--default-layout-width);
 } */
+.booksGroup {
+  width: 900px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.filters {
+  width: 320px;
+  height: 248px;
+  display: grid;
+  padding: 8px 16px;
+}
+
+.main-section {
+  display: flex;
+  justify-content: space-between;
+}
 
 .container {
   width: 1244px;
   margin: 0 auto;
-}
-
-.booksGroup {
-  width: 900px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.filter {
-  width: 320px;
-  height: 100px;
-  background: red;
 }
 
 @media screen and (max-width: 1920px) {
@@ -62,10 +66,19 @@ a:hover,
   .container {
     width: 738px;
   }
+  .booksGroup {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .main-section {
+    flex-direction: column-reverse;
+  }
 }
 
 @media screen and (max-width: 360px) {
   .container {
     width: 312px;
+  }
+  .booksGroup {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

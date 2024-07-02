@@ -1,143 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="./index.css" />
-		<title>Vite App</title>
-	</head>
-	<body class="container">
-		<header class="font-logo">📚 Books app
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Vite App</title>
+  </head>
+  <body class="container">
+    <header class="font-logo">📚 Books app</header>
     <section class="main-section">
-      <section class="booksGroup">
-        <div class="bookCard">
-          <div class="bookCard-cover">
-            <img src="./resources/01.png" alt="01.png" srcset="" />
+      <section>
+        <div class="font_subtitle">2022 year</div>
+        <section class="booksGroup">
+          <div class="bookCard">
+            <div class="bookCard-cover">
+              <img src="./resources/01.png" alt="01.png" srcset="" />
+            </div>
+            <p class="font_body_small">Yotsuba to!</p>
           </div>
-          <p>Yotsuba to!</p>
-        </div>
-        <div class="bookCard">
-          <div class="bookCard-cover">
-            <img src="./resources/02.png" alt="01.png" srcset="" />
+          <div class="bookCard">
+            <div class="bookCard-cover">
+              <img src="./resources/02.png" alt="01.png" srcset="" />
+            </div>
+            <p class="font_body_small">Yotsuba to!</p>
           </div>
-          <p>Yotsuba to!</p>
-        </div>
-        <div class="bookCard">
-          <div class="bookCard-cover">
-            <img src="./resources/03.png" alt="01.png" srcset="" />
+          <div class="bookCard">
+            <div class="bookCard-cover">
+              <img src="./resources/03.png" alt="01.png" srcset="" />
+            </div>
+            <p class="font_body_small">Yotsuba to!</p>
           </div>
-          <p>Yotsuba to!</p>
-        </div>
-        <div class="bookCard">
-          <div class="bookCard-cover">
-            <img src="./resources/04.png" alt="01.png" srcset="" />
+        </section>
+        <div class="font_subtitle">1900 Year</div>
+        <section class="booksGroup">
+          <div class="bookCard">
+            <div class="bookCard-cover">
+              <img src="./resources/04.png" alt="01.png" srcset="" />
+            </div>
+            <p class="font_body_small">Yotsuba to!</p>
           </div>
-          <p>Yotsuba to!</p>
-        </div>
-        <div class="bookCard">
-          <div class="bookCard-cover">
-            <img src="./resources/05.png" alt="01.png" srcset="" />
+          <div class="bookCard">
+            <div class="bookCard-cover">
+              <img src="./resources/05.png" alt="01.png" srcset="" />
+            </div>
+            <p class="font_body_small">Yotsuba to!</p>
           </div>
-          <p>Yotsuba to!</p>
-        </div>
-        <div class="bookCard">
-          <div class="bookCard-cover">
-            <img src="./resources/06.png" alt="01.png" srcset="" />
+          <div class="bookCard">
+            <div class="bookCard-cover">
+              <img src="./resources/06.png" alt="01.png" srcset="" />
+            </div>
+            <p class="font_body_small">Yotsuba to!</p>
           </div>
-          <p>Yotsuba to!</p>
-        </div>
-        <div class="bookCard">
-          <div class="bookCard-cover">
-            <img src="./resources/07.png" alt="01.png" srcset="" />
+          <div class="bookCard">
+            <div class="bookCard-cover">
+              <img src="./resources/07.png" alt="01.png" srcset="" />
+            </div>
+            <p class="font_body_small">Yotsuba to!</p>
           </div>
-          <p>Yotsuba to!</p>
-        </div>
-        <div class="bookCard">
-          <div class="bookCard-cover">
-            <img src="./resources/08.png" alt="01.png" srcset="" />
+          <div class="bookCard">
+            <div class="bookCard-cover">
+              <img src="./resources/08.png" alt="01.png" srcset="" />
+            </div>
+            <p class="font_body_small">Yotsuba to!</p>
           </div>
-          <p>Yotsuba to!</p>
-        </div>
-        <div class="bookCard">
-          <div class="bookCard-cover">
-            <img src="./resources/09.png" alt="01.png" srcset="" />
+          <div class="bookCard">
+            <div class="bookCard-cover">
+              <img src="./resources/09.png" alt="01.png" srcset="" />
+            </div>
+            <p class="font_body_small">Yotsuba to!</p>
           </div>
-          <p>Yotsuba to!</p>
-        </div>
-        <div class="bookCard">
-          <div class="bookCard-cover">
-            <img src="./resources/10.png" alt="01.png" srcset="" />
+          <div class="bookCard">
+            <div class="bookCard-cover">
+              <img src="./resources/10.png" alt="01.png" srcset="" />
+            </div>
+            <p class="font_body_small">Yotsuba to!</p>
           </div>
-          <p>Yotsuba to!</p>
-        </div>
-        <div class="bookCard">
-          <div class="bookCard-cover">
-            <img src="./resources/11.png" alt="01.png" srcset="" />
+          <div class="bookCard">
+            <div class="bookCard-cover">
+              <img src="./resources/11.png" alt="01.png" srcset="" />
+            </div>
+            <p class="font_body_small">Yotsuba to!</p>
           </div>
-          <p>Yotsuba to!</p>
-        </div>
+        </section>
       </section>
-      <div class="filter">
-        asdas
+
+      <div class="filters">
+        <label for="filters" class="font_subtitle">Filter</label>
+        <input type="text" placeholder='🔎︎ e.g. "Refactoring"' />
+        <select>
+          <option value="">Choose sort field</option>
+          <!-- Add more options here -->
+        </select>
+        <label> <input type="checkbox" /> Show comics </label>
       </div>
     </section>
-		<!-- <section>
+    <!-- <section>
 			<div class="book">
 				<img src="./resources/01.png" alt="1231" srcset="" />
-				<p>Yotsuba to!</p>
+				<p class="font_body_small">Yotsuba to!</p>
 			</div>
 			<div class="book">
 				<img src="./resources/02.png" alt="1231" srcset="" />
-				<p>Yotsuba to!</p>
+				<p class="font_body_small">Yotsuba to!</p>
 			</div>
 			<div class="book">
 				<img src="./resources/03.png" alt="1231" srcset="" />
-				<p>Yotsuba to!</p>
+				<p class="font_body_small">Yotsuba to!</p>
 			</div>
 		</section>
 		<section>
 			<div class="book">
 				<img src="./resources/04.png" alt="1231" srcset="" />
-				<p>Yotsuba to!</p>
+				<p class="font_body_small">Yotsuba to!</p>
 			</div>
 			<div class="book">
 				<img src="./resources/05.png" alt="1231" srcset="" />
-				<p>Yotsuba to!</p>
+				<p class="font_body_small">Yotsuba to!</p>
 			</div>
 			<div class="book">
 				<img src="./resources/06.png" alt="1231" srcset="" />
-				<p>Yotsuba to!</p>
+				<p class="font_body_small">Yotsuba to!</p>
 			</div>
 			<div class="book">
 				<img src="./resources/07.png" alt="1231" srcset="" />
-				<p>Yotsuba to!</p>
+				<p class="font_body_small">Yotsuba to!</p>
 			</div>
 			<div class="book">
 				<img src="./resources/08.png" alt="1231" srcset="" />
-				<p>Yotsuba to!</p>
+				<p class="font_body_small">Yotsuba to!</p>
 			</div>
 			<div class="book">
 				<img src="./resources/09.png" alt="1231" srcset="" />
-				<p>Yotsuba to!</p>
+				<p class="font_body_small">Yotsuba to!</p>
 			</div>
 			<div class="book">
 				<img src="./resources/10.png" alt="1231" srcset="" />
-				<p>Yotsuba to!</p>
+				<p class="font_body_small">Yotsuba to!</p>
 			</div>
 			<div class="book">
 				<img src="./resources/11.png" alt="1231" srcset="" />
-				<p>Yotsuba to!</p>
+				<p class="font_body_small">Yotsuba to!</p>
 			</div>
 		</section> -->
-		<footer>
-			<p>Books app @ 2024</p>
-			<a href="github.com">GitHub</a>
-		</footer>
-		<!-- <h1 class="title">Main page ⚡</h1>
+    <footer>
+      <p>Books app @ 2024</p>
+      <a href="github.com">GitHub</a>
+    </footer>
+    <!-- <h1 class="title">Main page ⚡</h1>
     <div class="links">
       <a href="example/">Go to example page</a>
     </div>
     <script type="module" src="./index.ts"></script> -->
-	</body>
+  </body>
 </html>
