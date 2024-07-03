@@ -8,11 +8,10 @@ header {
   align-items: center;
 }
 
-/*
 .sticky {
-  position:fixed;
+  position: fixed;
   width: 100%;
-} */
+}
 
 .year {
   position: sticky;
