@@ -1,64 +1,83 @@
-/* a,
-:link,
-.link {
-  --link-color: var(--primary-color);
-
-  color: var(--link-color);
-  text-decoration: none;
-  border-bottom: 1px solid var(--link-color);
-}
-
-a:hover,
-:link:hover,
-.link:hover {
-  --link-color: var(--primary-light-color);
-}
-
-.links {
+.booksGroup {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-}
-
-.default-layout {
-  --default-layout-width: 600px;
-
-  margin: 80px auto 0;
-  max-width: var(--default-layout-width);
-} */
-.booksGroup {
-  width: 900px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-}
-
-.filters {
-  width: 320px;
-  height: 248px;
-  display: grid;
-  padding: 8px 16px;
+  gap: 8px;
 }
 
 .main-section {
   display: flex;
-  justify-content: space-between;
+  gap: 24px;
 }
 
 .container {
   width: 1244px;
   margin: 0 auto;
+  display: grid;
+  gap: 24px;
+}
+
+.filters {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+}
+
+.fixed {
+  position: fixed;
+  width: 320px;
+}
+
+.form_wrapper {
+  display: grid;
+  grid-gap: 24px;
+}
+
+.filters input[type="text"] {
+  width: 100%;
+  height: 48px;
+  background-color: transparent;
+  border: none;
+}
+
+.filters select {
+  width: 100%;
+  background-color: transparent;
+  height: 48px;
+  border: none;
+}
+
+footer {
+  height: 128px;
+  display: flex;
+  padding-top: 24px;
+  justify-content: space-between;
+  border-top: 1px var(--border) solid;
+}
+
+.footer__information {
+  display: flex;
+  gap: 32px;
 }
 
 @media screen and (max-width: 1920px) {
   .container {
     width: 1244px;
-    margin: 0 auto;
   }
 }
 
 @media screen and (max-width: 1280px) {
   .container {
     width: 1200px;
+  }
+
+  .filters {
+    width: 276px;
+  }
+
+  .fixed {
+    width: 276px;
   }
 }
 
@@ -67,12 +86,34 @@ a:hover,
     width: 738px;
   }
 
-  .booksGroup {
-    grid-template-columns: repeat(3, 1fr);
+  .form_wrapper {
+    display: flex;
+    align-items: center;
   }
 
   .main-section {
     flex-direction: column-reverse;
+  }
+
+  .filters {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: space-between;
+  }
+
+  .fixed {
+    position: relative;
+    width: 100%;
+  }
+
+  .filters input[type="text"] {
+    max-width: 250px;
+  }
+
+  .filters select {
+    max-width: 250px;
   }
 }
 
@@ -82,6 +123,19 @@ a:hover,
   }
 
   .booksGroup {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+  }
+
+  footer {
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .footer__information {
+    display: flex;
+    justify-content: space-between;
   }
 }
