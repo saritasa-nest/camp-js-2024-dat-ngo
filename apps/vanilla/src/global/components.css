@@ -1,4 +1,4 @@
-.booksGroup {
+.books-wrapper__books-group {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -24,12 +24,12 @@
   position: relative;
 }
 
-.fixed {
+.filters__fixed {
   position: fixed;
   width: 320px;
 }
 
-.form_wrapper {
+.filters__fixed__form-wrapper {
   display: grid;
   grid-gap: 24px;
 }
@@ -43,8 +43,8 @@
 
 .filters select {
   width: 100%;
-  background-color: transparent;
   height: 48px;
+  background-color: transparent;
   border: none;
 }
 
@@ -76,7 +76,7 @@ footer {
     width: 276px;
   }
 
-  .fixed {
+  .filters__fixed {
     width: 276px;
   }
 }
@@ -86,7 +86,7 @@ footer {
     width: 738px;
   }
 
-  .form_wrapper {
+  .filters__fixed__form-wrapper {
     display: flex;
     align-items: center;
   }
@@ -103,7 +103,7 @@ footer {
     justify-content: space-between;
   }
 
-  .fixed {
+  .filters__fixed {
     position: relative;
     width: 100%;
   }
@@ -112,7 +112,8 @@ footer {
     max-width: 250px;
   }
 
-  .filters select {
+  .form-wrapper__form-select {
+    width: 100%;
     max-width: 250px;
   }
 }
@@ -122,11 +123,43 @@ footer {
     width: 312px;
   }
 
-  .booksGroup {
+  .books-wrapper__books-group {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
     align-items: center;
+  }
+
+  .filters {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+  }
+
+  .filters__fixed__form-wrapper {
+    display: grid;
+    grid-gap: 24px;
+  }
+
+  .filters input[type="text"] {
+    width: 100%;
+    height: 48px;
+    background-color: transparent;
+    border: none;
+  }
+
+  .filters select {
+    width: 100%;
+    height: 48px;
+    background-color: transparent;
+    border: none;
+  }
+
+  .form-wrapper__form-select {
+    width: 100%;
+    max-width: 320px;
   }
 
   footer {

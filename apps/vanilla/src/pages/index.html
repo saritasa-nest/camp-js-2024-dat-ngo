@@ -8,109 +8,115 @@
   </head>
   <body class="container">
     <header class="font_logo">📚 Books app</header>
+    <!-- Main Section -->
     <section class="main-section">
-      <section class="books_wrapper">
-        <div class="font_subtitle year">2022 year</div>
-        <section class="booksGroup">
-          <div class="bookCard">
-            <div class="bookCard-cover">
+      <!-- Book Wrapper -->
+      <section class="main-section__books-wrapper books-wrapper">
+        <div class="font_subtitle books-wrapper__books-year">2022 year</div>
+        <section class="books-wrapper__books-group books-group">
+          <div class="books-group__book-card book-card">
+            <div class="book-card__cover">
               <img src="./resources/01.png" alt="01.png" srcset="" />
             </div>
             <div class="font_body_small">Yotsuba to!</div>
           </div>
-          <div class="bookCard">
-            <div class="bookCard-cover">
+          <div class="books-group__book-card book-card">
+            <div class="book-card__cover">
               <img src="./resources/02.png" alt="01.png" srcset="" />
             </div>
             <div class="font_body_small">Yokohama Kaidashi Kikou</div>
           </div>
-          <div class="bookCard">
-            <div class="bookCard-cover">
+          <div class="books-group__book-card book-card">
+            <div class="book-card__cover">
               <img src="./resources/03.png" alt="01.png" srcset="" />
             </div>
             <div class="font_body_small">Blue Period</div>
           </div>
-          <div class="bookCard">
-            <div class="bookCard-cover">
+          <div class="books-group__book-card book-card">
+            <div class="book-card__cover">
               <img src="./resources/04.png" alt="7 Навыков высокэффективных..." srcset="" />
             </div>
             <div class="font_body_small">7 Навыков высокэффективных</div>
           </div>
-          <div class="bookCard">
-            <div class="bookCard-cover">
+          <div class="books-group__book-card book-card">
+            <div class="book-card__cover">
               <img src="./resources/05.png" alt="01.png" srcset="" />
             </div>
             <div class="font_body_small">Yotsuba to!</div>
           </div>
-          <div class="bookCard">
-            <div class="bookCard-cover">
+          <div class="books-group__book-card book-card">
+            <div class="book-card__cover">
               <img src="./resources/06.png" alt="01.png" srcset="" />
             </div>
             <div class="font_body_small">Implementing Domain-Driven Design</div>
           </div>
         </section>
         <!--  -->
-        <div class="font_subtitle year">1900 year</div>
-        <section class="booksGroup">
-          <div class="bookCard">
-            <div class="bookCard-cover">
+        <div class="font_subtitle books-wrapper__books-year">1900 year</div>
+        <section class="books-wrapper__books-group books-group">
+          <div class="books-group__book-card book-card">
+            <div class="book-card__cover">
               <img src="./resources/07.png" alt="01.png" srcset="" />
             </div>
             <div class="font_body_small">Implementing Domain-Driven Design</div>
           </div>
-          <div class="bookCard">
-            <div class="bookCard-cover">
+          <div class="books-group__book-card book-card">
+            <div class="book-card__cover">
               <img src="./resources/08.png" alt="01.png" srcset="" />
             </div>
             <div class="font_body_small">Learning JavaScript Design Patterns</div>
           </div>
-          <div class="bookCard">
-            <div class="bookCard-cover">
+          <div class="books-group__book-card book-card">
+            <div class="book-card__cover">
               <img src="./resources/09.png" alt="01.png" srcset="" />
             </div>
             <div class="font_body_small">Refactoring UI</div>
           </div>
-          <div class="bookCard">
-            <div class="bookCard-cover">
+          <div class="books-group__book-card book-card">
+            <div class="book-card__cover">
               <img src="./resources/10.png" alt="01.png" srcset="" />
             </div>
             <div class="font_body_small">Yotsuba to!</div>
           </div>
-          <div class="bookCard">
-            <div class="bookCard-cover">
+          <div class="books-group__book-card book-card">
+            <div class="book-card__cover">
               <img src="./resources/11.png" alt="Master the Skill of Debugging CSS" srcset="" />
             </div>
             <div class="font_body_small">Master the Skill of Debugging CSS</div>
           </div>
-          <div class="bookCard">
-            <div class="bookCard-cover">
+          <div class="books-group__book-card book-card">
+            <div class="book-card__cover">
               <img src="./resources/03.png" alt="01.png" srcset="" />
             </div>
             <div class="font_body_small">Yotsuba to!</div>
           </div>
         </section>
       </section>
-
+      <!-- Filter -->
       <div class="filters">
-        <!-- <section class="filters_wrapper"> -->
-        <section class="fixed">
+        <section class="filters__fixed">
           <div class="font_subtitle">Filter</div>
-          <form class="form_wrapper">
-            <section class="filter__form--input">
+          <form class="filters__fixed__form-wrapper form-wrapper">
+            <section class="form-wrapper__form-input">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20.9998 21L15.8028 15.803M15.8028 15.803C17.2094 14.3964 17.9996 12.4887 17.9996 10.4995C17.9996 8.5103 17.2094 6.60258 15.8028 5.196C14.3962 3.78942 12.4885 2.99922 10.4993 2.99922C8.51011 2.99922 6.60238 3.78942 5.19581 5.196C3.78923 6.60258 2.99902 8.5103 2.99902 10.4995C2.99902 12.4887 3.78923 14.3964 5.19581 15.803C6.60238 17.2096 8.51011 17.9998 10.4993 17.9998C12.4885 17.9998 14.3962 17.2096 15.8028 15.803Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <input type="text" placeholder='e.g. "Refactoring"' />
+                <path
+                  d="M20.9998 21L15.8028 15.803M15.8028 15.803C17.2094 14.3964 17.9996 12.4887 17.9996 10.4995C17.9996 8.5103 17.2094 6.60258 15.8028 5.196C14.3962 3.78942 12.4885 2.99922 10.4993 2.99922C8.51011 2.99922 6.60238 3.78942 5.19581 5.196C3.78923 6.60258 2.99902 8.5103 2.99902 10.4995C2.99902 12.4887 3.78923 14.3964 5.19581 15.803C6.60238 17.2096 8.51011 17.9998 10.4993 17.9998C12.4885 17.9998 14.3962 17.2096 15.8028 15.803Z"
+                  stroke="black"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <input type="text" placeholder='e.g. "Refactoring"' />
             </section>
-            <section class="filter__form--select">
+            <section class="form-wrapper__form-select">
               <select>
                 <option value="">Choose sort field</option>
               </select>
             </section>
-            <label class="font_body"> <input type="checkbox" /> Show comics </label>
+            <label class="font_body" style="min-width: 160px"> <input type="checkbox" /> Show comics </label>
           </form>
         </section>
-        <!-- </section> -->
       </div>
     </section>
     <footer>
@@ -118,9 +124,7 @@
         <div class="font_logo">Books app @ 2024</div>
         <a href="github.com">GitHub</a>
       </section>
-      <section class="footer__go-top">
-        Go to top ↑
-      </section>
+      <section class="footer__go-top">Go to top ↑</section>
     </footer>
   </body>
 </html>
