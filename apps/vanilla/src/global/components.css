@@ -66,9 +66,11 @@ a:hover,
   .container {
     width: 738px;
   }
+
   .booksGroup {
     grid-template-columns: repeat(3, 1fr);
   }
+
   .main-section {
     flex-direction: column-reverse;
   }
@@ -78,6 +80,7 @@ a:hover,
   .container {
     width: 312px;
   }
+
   .booksGroup {
     grid-template-columns: repeat(2, 1fr);
   }
