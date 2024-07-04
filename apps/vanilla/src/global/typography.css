@@ -1,5 +1,5 @@
 /* Font */
-.font-subtitle {
+.font-title {
   font-size: var(--font-size-lg);
   line-height: var(--line-height-md);
   font-weight: var(--font-weight-medium);
@@ -18,7 +18,7 @@
   font-weight: var(--font-weight-medium);
 }
 
-.font-logo {
+.font-header {
   font-size: var(--font-size-xl);
   line-height: var(--line-height-md);
   font-weight: var(--font-weight-bold);
