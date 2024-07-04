@@ -7,6 +7,7 @@
   --primary-color: rgb(241 89 36 / 100%);
   --on-primary-color: rgb(255 255 255);
   --border-color: rgb(0 0 0 / 15%);
+  --focus-outline-color: #212121;
 
   /* Spacing */
   --spacing-sm: 8px;
@@ -37,10 +38,10 @@
   --border-radius-md: 16px;
   --border-radius-lg: 24px;
 
-  /* Filter size */
-  --filter-size-md: 276px;
-  --filter-size-lg: 320px;
-  --filter-size-xl: 360px;
+  /* Filter width */
+  --filter-width-md: 276px;
+  --filter-width-lg: 320px;
+  --filter-width-xl: 360px;
 
   /* Form control height */
   --form-control-height: 48px;

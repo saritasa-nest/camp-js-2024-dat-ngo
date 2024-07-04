@@ -9,9 +9,9 @@
   <body class="container">
     <header class="header font-logo">📚 Books app</header>
     <!-- Main Section -->
-    <section class="main-section">
+    <section class="main">
       <!-- Book Wrapper -->
-      <section class="main-section__books-wrapper books-wrapper">
+      <section class="main__books-wrapper books-wrapper">
         <div class="font-subtitle books-wrapper__books-year">2022 year</div>
         <section class="books-wrapper__books-group books-group">
           <article class="books-group__book-card book-card">
@@ -103,8 +103,8 @@
       <section class="filters">
         <section class="filters__form-wrapper form-wrapper">
           <div class="font-subtitle">Filter</div>
-          <form class="form-wrapper__form form">
-            <section class="form__form-control form-control">
+          <form class="form-wrapper__form-control form-control">
+            <div class="form-control__field-style field-style">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M20.9998 21L15.8028 15.803M15.8028 15.803C17.2094 14.3964 17.9996 12.4887 17.9996 10.4995C17.9996 8.5103 17.2094 6.60258 15.8028 5.196C14.3962 3.78942 12.4885 2.99922 10.4993 2.99922C8.51011 2.99922 6.60238 3.78942 5.19581 5.196C3.78923 6.60258 2.99902 8.5103 2.99902 10.4995C2.99902 12.4887 3.78923 14.3964 5.19581 15.803C6.60238 17.2096 8.51011 17.9998 10.4993 17.9998C12.4885 17.9998 14.3962 17.2096 15.8028 15.803Z"
@@ -114,14 +114,14 @@
                   stroke-linejoin="round"
                 />
               </svg>
-              <input class="form-control__input" type="text" placeholder='e.g. "Refactoring"' />
-            </section>
-            <section class="form__form-control form-control">
-              <select class="form-control__select">
+              <input class="field-style__input" type="text" placeholder='e.g. "Refactoring"' />
+            </div>
+            <div class="form-control__field-style field-style">
+              <select class="field-style__select">
                 <option value="">Choose sort field</option>
               </select>
-            </section>
-            <label class="font-body"> <input class="form__checkbox" type="checkbox" /> Show comics </label>
+            </div>
+            <label class="font-body"> <input class="form-control__checkbox" type="checkbox" /> Show comics </label>
           </form>
         </section>
       </section>
@@ -129,13 +129,13 @@
     <!-- Footer -->
     <footer class="footer">
       <section class="footer__information">
-        <section class="footer_copyright">
+        <section class="footer__copyright">
           <div class="font-logo">Books app</div>
           <div class="font-body">@ 2024</div>
         </section>
         <a class="footer__link font-body" href="github.com">GitHub</a>
       </section>
-      <section class="footer__go-top font-body">Go to top ↑</section>
+      <div class="footer__go-top font-body">Go to top ↑</div>
     </footer>
   </body>
 </html>
