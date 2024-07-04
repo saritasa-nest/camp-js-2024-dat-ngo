@@ -5,6 +5,7 @@
     {
       "files": ["**/*.css", "**/*.scss"],
       "rules": {
+        "value-no-vendor-prefix": null
       }
     }
   ]

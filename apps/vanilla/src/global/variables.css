@@ -1,37 +1,47 @@
 :root {
-  --heading-color-1: #ffd700;
-  --heading-color-2: #e9967a;
-  --heading-color-3: #b0e0e6;
-  --surface: rgb(255 255 255 / 100%);
-  --surface-overlay: rgb(0 0 0 / 5%);
-  --on-surface: rgb(0 0 0 / 100%);
-  --on-surface-dim: rgb(0 0 0 / 50%);
-  --primary: rgb(241 89 36 / 100%);
-  --on-primary: rgb(255 255 255);
-  --border: rgb(0 0 0 / 15%);
-}
+  /* Colors */
+  --surface-color: rgb(255 255 255 / 100%);
+  --surface-overlay-color: rgb(0 0 0 / 5%);
+  --on-surface-color: rgb(0 0 0 / 100%);
+  --on-surface-dim-color: rgb(0 0 0 / 50%);
+  --primary-color: rgb(241 89 36 / 100%);
+  --on-primary-color: rgb(255 255 255);
+  --border-color: rgb(0 0 0 / 15%);
 
-.font_subtitle {
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 500;
-  text-transform: uppercase;
-}
+  /* Spacing */
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
 
-.font_body {
-  font-size: 20px;
-  line-height: 32px;
-  font-weight: 400;
-}
+  /* Font size */
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
 
-.font_body_small {
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-}
+  /* Line height */
+  --line-height-md: 24px;
+  --line-height-lg: 32px;
 
-.font_logo {
-  font-size: 20px;
-  line-height: 24px;
-  font-weight: 700;
+  /* Font weight */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Sizes */
+  --header-height: 64px;
+  --footer-height: 128px;
+
+  /* Border Radius */
+  --border-radius-md: 16px;
+  --border-radius-lg: 24px;
+
+  /* Filter size */
+  --filter-size-md: 276px;
+  --filter-size-lg: 320px;
+  --filter-size-xl: 360px;
+
+  /* Form control height */
+  --form-control-height: 48px;
 }
