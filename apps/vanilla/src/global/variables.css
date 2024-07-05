@@ -12,17 +12,18 @@
   /* Spacing */
   --spacing-sm: 8px;
   --spacing-md: 16px;
+  --spacing-default: 20px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
 
   /* Font size */
-  --font-size-md: 16px;
-  --font-size-lg: 18px;
-  --font-size-xl: 20px;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
 
   /* Line height */
-  --line-height-md: 24px;
-  --line-height-lg: 32px;
+  --line-height-md: 1.5rem;
+  --line-height-lg: 2rem;
 
   /* Font weight */
   --font-weight-regular: 400;
