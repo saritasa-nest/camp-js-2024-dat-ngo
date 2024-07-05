@@ -78,25 +78,25 @@
   width: var(--filter-width-lg);
 }
 
-.form-wrapper__form-control {
+.form-wrapper__form {
   display: grid;
   grid-gap: var(--spacing-lg);
 }
 
 .field-style__input {
   width: 100%;
-  height: var(--form-control-height);
+  height: var(--form-height);
   background-color: transparent;
   border: none;
 }
 
-.form-control__checkbox {
+.form__checkbox {
   accent-color: var(--primary-color);
 }
 
 .field-style__select {
   width: 100%;
-  height: var(--form-control-height);
+  height: var(--form-height);
   background-color: transparent;
   border: none;
 }
@@ -106,19 +106,24 @@
   outline: none;
 }
 
-.form-control__field-style {
+.form__field-style {
   display: flex;
   background-color: var(--surface-overlay-color);
   border-radius: var(--border-radius-md);
   align-items: center;
   justify-content: center;
-  height: var(--form-control-height);
+  height: var(--form-height);
   padding: var(--spacing-sm) var(--spacing-md);
   gap: var(--spacing-sm);
 }
 
-.form-control__field-style:focus-within {
+.form__field-style:focus-within {
   outline: 1px solid var(--focus-outline-color);
+}
+
+.form__checkbox-control {
+  display: inline;
+  height: fit-content;
 }
 
 /* Footer */
@@ -169,8 +174,9 @@
 
 /* Mobile */
 @media screen and (max-width: 786px) {
-  .form-wrapper__form-control {
+  .form-wrapper__form {
     grid-template-columns: repeat(3, 1fr);
+    align-items: center;
   }
 
   .main {
@@ -197,7 +203,7 @@
   }
 }
 
-/* Mobile */
+/* Small Screen */
 @media screen and (max-width: 480px) {
   .filters {
     width: var(--filter-width-xl);
@@ -207,21 +213,21 @@
     position: relative;
   }
 
-  .form-wrapper__form-control {
+  .form-wrapper__form {
     display: flex;
     flex-direction: column;
   }
 
   .field-style__input {
     width: 100%;
-    height: var(--form-control-height);
+    height: var(--form-height);
     background-color: transparent;
     border: none;
   }
 
   .field-style__select {
     width: 100%;
-    height: var(--form-control-height);
+    height: var(--form-height);
     background-color: transparent;
     border: none;
   }
