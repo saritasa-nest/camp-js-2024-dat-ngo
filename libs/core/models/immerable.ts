@@ -9,4 +9,5 @@ export abstract class Immerable {
 	private readonly [immerable] = true;
 }
 
+/** JSDoc . */
 export type OmitImmerable<T> = Omit<T, '[immerable]'>;

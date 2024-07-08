@@ -4,7 +4,9 @@
   "overrides": [
     {
       "files": ["**/*.css", "**/*.scss"],
-      "rules": {}
+      "rules": {
+        "value-no-vendor-prefix": null
+      }
     }
   ]
 }
