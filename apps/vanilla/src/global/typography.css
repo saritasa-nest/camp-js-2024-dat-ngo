@@ -1,25 +1,25 @@
 /* Font */
 .font-title {
-  font-size: var(--font-size-lg);
-  line-height: var(--line-height-md);
-  font-weight: var(--font-weight-medium);
-  text-transform: uppercase;
+	font-size: var(--font-size-lg);
+	line-height: var(--line-height-md);
+	font-weight: var(--font-weight-medium);
+	text-transform: uppercase;
 }
 
 .font-body {
-  font-size: var(--font-size-xl);
-  line-height: var(--line-height-lg);
-  font-weight: var(--font-weight-regular);
+	font-size: var(--font-size-xl);
+	line-height: var(--line-height-lg);
+	font-weight: var(--font-weight-regular);
 }
 
 .font-body-small {
-  font-size: var(--font-size-md);
-  line-height: var(--line-height-md);
-  font-weight: var(--font-weight-medium);
+	font-size: var(--font-size-md);
+	line-height: var(--line-height-md);
+	font-weight: var(--font-weight-medium);
 }
 
 .font-header {
-  font-size: var(--font-size-xl);
-  line-height: var(--line-height-md);
-  font-weight: var(--font-weight-bold);
+	font-size: var(--font-size-xl);
+	line-height: var(--line-height-md);
+	font-weight: var(--font-weight-bold);
 }
