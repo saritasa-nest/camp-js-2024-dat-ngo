@@ -29,37 +29,40 @@ class Publisher<T> {
 
 /** This is foo comment . */
 class TurnGenerator extends Publisher<number> {
-	public constructor(private playerCount: number, public currentPlayerIndex: number) {
+	private playerCount;
+
+	public currentPlayerIndex = 0;
+
+	public constructor(private playerCount: number) {
 		super();
-		this.currentPlayerIndex = 0;
+		this.playerCount = playerCount;
 	}
 
 	/** Next . */
 	public next(): void {
 		const playerIndex = this.currentPlayerIndex;
 		this.currentPlayerIndex = (playerIndex + 1) % this.playerCount;
-		this.notify(this.currentPlayerIndex);
+	}
+
+	public override notify(): void {
+		super.notify(this.currentPlayerIndex);
+		this.next();
 	}
 }
 
 /** This is foo comment . */
 class DiceGenerator extends Publisher<PlayerTurnResult> implements Subscriber<number> {
 	/** */
-	public sideCount: number;
-
-	public constructor(count: number) {
-		super();
-		this.sideCount = count;
-	}
+	public sideCount = 6;
 
 	public roll(): number {
 		return Math.floor(Math.random() * this.sideCount) + 1;
 	}
 
-	update(playerIndex: number) {
-		const roll = this.roll();
-		const obj = new PlayerTurnResult(playerIndex, roll);
-		this.notify(obj);
+	public update(playerIndex: number) {
+		const diceResult = this.roll();
+		const turnResult = new PlayerTurnResult(playerIndex, diceResult);
+		this.notify(turnResult);
 	}
 }
 
@@ -71,11 +74,11 @@ class PlayerTurnResult {
 
 /** This is foo comment . */
 class Player implements Subscriber<PlayerTurnResult> {
-	private diceResults: number[] = [];
+	private readonly diceResults: number[] = [];
 
-	public results: Publisher<number[]>;
+	public results: Publisher<number[]> = [];
 
-	public winStatus: Publisher<boolean>;
+	public winStatus: Publisher<boolean> = false;
 
 	public constructor(private playerIndex: number) {}
 
@@ -96,31 +99,31 @@ class Player implements Subscriber<PlayerTurnResult> {
 }
 
 /** This is foo comment . */
-class ResultDisplayer implements Subscriber<PlayerTurnResult> {
+class ResultDisplayer implements Subscriber<number[]> {
 	/** This is foo comment . */
-	private listElement: HTMLElement;
+	private diceResult: number[] = [];
 
-	public constructor(element: HTMLElement) {
-		this.listElement = element;
-	}
+	private totalScores: number = 0;
 
-	/** This is foo comment . */
-	public update(message: PlayerTurnResult): void {
+	public constructor(private resultElement: HTMLElement|null, private totalScoreElement: HTMLElement|null){}
 
-	}
 }
 
-const turn = new TurnGenerator(2, 0);
-const diceGenerator = new DiceGenerator(6);
-turn.subscribe(diceGenerator);
-const player1 = new Player(0);
-const player2 = new Player(1);
+class WinnerDisplayer implements Subscriber<boolean>{
+	public constructor(private winnerElement: HTMLElement|null ){}
+}
 
-const resultDisplayer1 = new ResultDisplayer(document.getElementById('1') as HTMLElement);
-diceGenerator.subscribe(resultDisplayer1);
-const resultDisplayer2 = new ResultDisplayer(document.getElementById('2') as HTMLElement);
-diceGenerator.subscribe(resultDisplayer2);
+// const turn = new TurnGenerator(2, 0);
+// const diceGenerator = new DiceGenerator(6);
+// turn.subscribe(diceGenerator);
+// const player1 = new Player(0);
+// const player2 = new Player(1);
 
-const roll = document.getElementById('rollDice')?.addEventListener('click', () => {
-	turn.next();
-});
+// const resultDisplayer1 = new ResultDisplayer(document.getElementById('1') as HTMLElement);
+// diceGenerator.subscribe(resultDisplayer1);
+// const resultDisplayer2 = new ResultDisplayer(document.getElementById('2') as HTMLElement);
+// diceGenerator.subscribe(resultDisplayer2);
+
+// const roll = document.getElementById('rollDice')?.addEventListener('click', () => {
+// 	turn.next();
+// });

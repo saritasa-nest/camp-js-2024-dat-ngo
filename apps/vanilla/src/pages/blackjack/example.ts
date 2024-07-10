@@ -1,120 +1,124 @@
-// // Subscriber interface
-// interface Subscriber<T> {
+// /* eslint-disable jsdoc/require-jsdoc */
+// /* eslint-disable @typescript-eslint/explicit-function-return-type */
+// /* eslint-disable no-console */
+// type Subscriber<T> = {
+// 	/** Update the message . */
 // 	update(message: T): void;
-// }
+// };
 
-// // Publisher class
+// /** Publisher class . */
 // class Publisher<T> {
+// 	/** Array of subscribers . */
 // 	private subscribers: Subscriber<T>[] = [];
 
-// 	subscribe(subscriber: Subscriber<T>): void {
+// 	/** Method to add subscriber . */
+// 	public subscribe(subscriber: Subscriber<T>): void {
 // 		this.subscribers.push(subscriber);
 // 	}
 
-// 	unsubscribe(subscriber: Subscriber<T>): void {
+// 	/** Method to remove subscriber . */
+// 	public unsubscribe(subscriber: Subscriber<T>): void {
 // 		this.subscribers = this.subscribers.filter((sub) => sub !== subscriber);
 // 	}
 
-// 	notify(message: T): void {
-// 		this.subscribers.forEach((subscriber) => subscriber.update(message));
+// 	/** Method to notify . */
+// 	public notify(message: T): void {
+// 		this.subscribers.forEach((sub) => sub.update(message));
 // 	}
 // }
 
-// // PlayerTurnResult class
-// class PlayerTurnResult {
-// 	constructor(public playerIndex: number, public diceResult: number) {}
-// }
+// /** This is foo comment . */
+// class TurnGenerator extends Publisher<number> {
+// 	public constructor(private playerCount: number, public currentPlayerIndex: number) {
+// 		super();
+// 		this.currentPlayerIndex = 0;
+// 	}
 
-// // TurnGenerator class
-// class TurnGenerator {
-// 	private currentPlayerIndex: number = 0;
-
-// 	constructor(public playersCount: number) {}
-
-// 	next(): number {
+// 	/** Next . */
+// 	public next(): void {
 // 		const playerIndex = this.currentPlayerIndex;
-// 		this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.playersCount;
-// 		return playerIndex;
+// 		this.currentPlayerIndex = (playerIndex + 1) % this.playerCount;
+// 		this.notify(this.currentPlayerIndex);
 // 	}
 // }
 
-// // DiceGenerator class
-// class DiceGenerator {
-// 	constructor(public sidesCount: number) {}
+// /** This is foo comment . */
+// class DiceGenerator extends Publisher<PlayerTurnResult> implements Subscriber<number> {
+// 	/** */
+// 	public sideCount: number;
 
-// 	roll(): number {
-// 		return Math.floor(Math.random() * this.sidesCount) + 1;
+// 	public constructor(count: number) {
+// 		super();
+// 		this.sideCount = count;
+// 	}
+
+// 	public roll(): number {
+// 		return Math.floor(Math.random() * this.sideCount) + 1;
+// 	}
+
+// 	update(playerIndex: number) {
+// 		const roll = this.roll();
+// 		const obj = new PlayerTurnResult(playerIndex, roll);
+// 		this.notify(obj);
 // 	}
 // }
 
-// // Player class
-// class Player {
-// 	private diceResults: number[] = [];
-// 	results: Publisher<number[]> = new Publisher<number[]>();
-// 	winStatus: Publisher<boolean> = new Publisher<boolean>();
+// /** This is foo comment . */
+// class PlayerTurnResult {
+// 	/** This is foo comment . */
+// 	public constructor(public playerIndex: number, public diceResult: number) {}
+// }
 
-// 	addResult(result: number): void {
-// 		this.diceResults.push(result);
-// 		this.results.notify(this.diceResults);
-// 		if (this.getTotalScore() >= 21) {
-// 			this.winStatus.notify(true);
-// 		}
-// 	}
+// /** This is foo comment . */
+// class Player implements Subscriber<PlayerTurnResult> {
+// 	private readonly diceResults: number[] = [];
 
-// 	getTotalScore(): number {
+// 	public results: Publisher<number[]>;
+
+// 	public winStatus: Publisher<boolean>;
+
+// 	public constructor(private playerIndex: number) {}
+
+// 	private getTotalScore(): number {
 // 		return this.diceResults.reduce((sum, result) => sum + result, 0);
 // 	}
-// }
 
-// // ResultDisplayer class
-// class ResultDisplayer implements Subscriber<number[]> {
-// 	constructor(private listElement: HTMLElement) {}
-
-// 	update(results: number[]): void {
-// 		this.listElement.innerHTML = results.join(', ');
+// 	/** This is foo comment . */
+// 	public update(message: PlayerTurnResult): void {
+// 		if (message.playerIndex === this.playerIndex) {
+// 			this.diceResults.push(message.diceResult);
+// 			this.results.notify(this.diceResults);
+// 			if (this.getTotalScore() > 21) {
+// 				this.winStatus.notify(true);
+// 			}
+// 		}
 // 	}
 // }
 
-// // Main game logic
-// class Game {
-// 	private players: Player[];
-// 	private turnGenerator: TurnGenerator;
-// 	private diceGenerator: DiceGenerator;
+// /** This is foo comment . */
+// class ResultDisplayer implements Subscriber<PlayerTurnResult> {
+// 	/** This is foo comment . */
+// 	private listElement: HTMLElement;
 
-// 	constructor(playersCount: number, sidesCount: number, playerElements: HTMLElement[]) {
-// 		this.players = Array.from({ length: playersCount }, () => new Player());
-// 		this.turnGenerator = new TurnGenerator(playersCount);
-// 		this.diceGenerator = new DiceGenerator(sidesCount);
-
-// 		this.players.forEach((player, index) => {
-// 			const displayer = new ResultDisplayer(playerElements[index]);
-// 			player.results.subscribe(displayer);
-// 			player.winStatus.subscribe({
-// 				update: (win) => {
-// 					if (win) {
-// 						playerElements[index].style.backgroundColor = 'red';
-// 					}
-// 				},
-// 			});
-// 		});
+// 	public constructor(element: HTMLElement) {
+// 		this.listElement = element;
 // 	}
 
-// 	makeMove(): void {
-// 		const playerIndex = this.turnGenerator.next();
-// 		const diceResult = this.diceGenerator.roll();
-// 		this.players[playerIndex].addResult(diceResult);
-// 	}
+// 	/** This is foo comment . */
+// 	public update(message: PlayerTurnResult): void {}
 // }
 
-// // Setting up the game
-// document.addEventListener('DOMContentLoaded', () => {
-// 	const player1Element = document.getElementById('player1')!;
-// 	const player2Element = document.getElementById('player2')!;
-// 	const rollButton = document.getElementById('rollButton')!;
+// const turn = new TurnGenerator(2, 0);
+// const diceGenerator = new DiceGenerator(6);
+// turn.subscribe(diceGenerator);
+// const player1 = new Player(0);
+// const player2 = new Player(1);
 
-// 	const game = new Game(2, 6, [player1Element, player2Element]);
+// const resultDisplayer1 = new ResultDisplayer(document.getElementById('1') as HTMLElement);
+// diceGenerator.subscribe(resultDisplayer1);
+// const resultDisplayer2 = new ResultDisplayer(document.getElementById('2') as HTMLElement);
+// diceGenerator.subscribe(resultDisplayer2);
 
-// 	rollButton.addEventListener('click', () => {
-// 		game.makeMove();
-// 	});
+// const roll = document.getElementById('rollDice')?.addEventListener('click', () => {
+// 	turn.next();
 // });
