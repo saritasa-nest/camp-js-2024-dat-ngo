@@ -1,0 +1,68 @@
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f9f9f9;
+	margin: 0;
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.container {
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	width: 300px;
+	text-align: center;
+}
+
+h1 {
+	color: #ff6347;
+	margin: 0;
+}
+
+.main-page-link {
+	color: #ff6347;
+	text-decoration: none;
+	display: block;
+	margin-bottom: 20px;
+}
+
+.dice-cap,
+.computer,
+.player {
+	font-weight: bold;
+	margin: 10px 0;
+}
+
+.score {
+	background-color: #f0f0f0;
+	padding: 5px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+
+.player-score {
+	background-color: #ffdddd;
+}
+
+.buttons {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 20px;
+}
+
+button {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	background-color: #ff6347;
+	color: white;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #ff4500;
+}
