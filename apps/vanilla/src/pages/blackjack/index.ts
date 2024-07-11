@@ -1,10 +1,8 @@
+/* eslint-disable jsdoc/require-param */
 /* eslint-disable jsdoc/require-jsdoc */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable no-console */
-type Subscriber<T> = {
-	/** Update the message . */
-	update(message: T): void;
-};
+import { Subscriber } from './Subscriber';
 
 /** Publisher class . */
 class Publisher<T> {
@@ -33,20 +31,20 @@ class TurnGenerator extends Publisher<number> {
 
 	public currentPlayerIndex = 0;
 
-	public constructor(private playerCount: number) {
+	public constructor(private plCount: number) {
 		super();
-		this.playerCount = playerCount;
+		this.playerCount = this.plCount;
 	}
 
 	/** Next . */
 	public next(): void {
 		const playerIndex = this.currentPlayerIndex;
 		this.currentPlayerIndex = (playerIndex + 1) % this.playerCount;
+		this.notify();
 	}
 
 	public override notify(): void {
 		super.notify(this.currentPlayerIndex);
-		this.next();
 	}
 }
 
@@ -76,9 +74,9 @@ class PlayerTurnResult {
 class Player implements Subscriber<PlayerTurnResult> {
 	private readonly diceResults: number[] = [];
 
-	public results: Publisher<number[]> = [];
+	public results: Publisher<number[]> = new Publisher<number[]>();
 
-	public winStatus: Publisher<boolean> = false;
+	public winStatus: Publisher<boolean> = new Publisher<boolean>();
 
 	public constructor(private playerIndex: number) {}
 
@@ -103,27 +101,64 @@ class ResultDisplayer implements Subscriber<number[]> {
 	/** This is foo comment . */
 	private diceResult: number[] = [];
 
-	private totalScores: number = 0;
+	private totalScores = 0;
 
-	public constructor(private resultElement: HTMLElement|null, private totalScoreElement: HTMLElement|null){}
+	private getTotalScore(): number {
+		return this.diceResult.reduce((sum, result) => sum + result, 0);
+	}
 
+	public constructor(private resultElement: HTMLElement | null, private totalElement: HTMLElement | null) {}
+
+	public update(message: number[]): void {
+		this.diceResult = message;
+		this.totalScores = this.getTotalScore();
+		if (this.resultElement) {
+			this.resultElement.innerText = `${this.diceResult.join(', ')}`;
+		}
+		if (this.totalElement) {
+			this.totalElement.innerText = `${this.totalScores}`;
+		}
+	}
 }
 
-class WinnerDisplayer implements Subscriber<boolean>{
-	public constructor(private winnerElement: HTMLElement|null ){}
+class WinnerDisplayer implements Subscriber<boolean> {
+	public constructor(private winnerElement: HTMLElement | null) {}
+
+	public update(message: boolean): void {
+		console.log(message);
+		if (message && this.winnerElement) {
+			this.winnerElement.classList.add('won');
+		}
+	}
 }
 
-// const turn = new TurnGenerator(2, 0);
-// const diceGenerator = new DiceGenerator(6);
-// turn.subscribe(diceGenerator);
-// const player1 = new Player(0);
-// const player2 = new Player(1);
+const player1DiceResult = document.getElementById('0');
+const player2DiceResult = document.getElementById('1');
+const player1TotalResult = document.getElementById('player1');
+const player2TotalResult = document.getElementById('player2');
+const player1WinerDisplayer = document.getElementById('score1');
+const player2WinerDisplayer = document.getElementById('score2');
 
-// const resultDisplayer1 = new ResultDisplayer(document.getElementById('1') as HTMLElement);
-// diceGenerator.subscribe(resultDisplayer1);
+const turn = new TurnGenerator(2);
+const diceGenerator = new DiceGenerator();
+turn.subscribe(diceGenerator);
+const player1 = new Player(0);
+const player2 = new Player(1);
+diceGenerator.subscribe(player1);
+diceGenerator.subscribe(player2);
+const displayer1 = new ResultDisplayer(player1DiceResult, player1TotalResult);
+const displayer2 = new ResultDisplayer(player2DiceResult, player2TotalResult);
+player1.results.subscribe(displayer1);
+player2.results.subscribe(displayer2);
+const winnerDisplayer1 = new WinnerDisplayer(player1WinerDisplayer);
+const winnerDisplayer2 = new WinnerDisplayer(player2WinerDisplayer);
+player1.winStatus.subscribe(winnerDisplayer1);
+player2.winStatus.subscribe(winnerDisplayer2);
+
 // const resultDisplayer2 = new ResultDisplayer(document.getElementById('2') as HTMLElement);
 // diceGenerator.subscribe(resultDisplayer2);
 
-// const roll = document.getElementById('rollDice')?.addEventListener('click', () => {
-// 	turn.next();
-// });
+const rollDice = document.getElementById?.('rollDice');
+rollDice?.addEventListener('click', () => {
+	turn.next();
+});

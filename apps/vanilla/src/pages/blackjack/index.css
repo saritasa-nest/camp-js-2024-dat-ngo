@@ -1,4 +1,4 @@
-body {
+/* body {
 	font-family: Arial, sans-serif;
 	background-color: #f9f9f9;
 	margin: 0;
@@ -44,8 +44,8 @@ h1 {
 	margin-bottom: 10px;
 }
 
-.player-score {
-	background-color: #ffdddd;
+.won {
+	background-color: #fdd;
 }
 
 .buttons {
@@ -65,4 +65,8 @@ button {
 
 button:hover {
 	background-color: #ff4500;
+} */
+
+.won {
+	background-color: #fdd;
 }
