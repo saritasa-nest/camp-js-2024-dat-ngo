@@ -1,35 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Hello World</title>
-	<link rel="stylesheet" href="./index.css">
-</head>
-<body>
-	<div class="container">
-		<h1>Lesson 1</h1>
-		<a href="#" class="main-page-link">Take me to main page</a>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="./index.css" />
+		<title>Vite App</title>
+	</head>
+	<body class="container">
+		<main class="content-wrapper">
+			<div id="dice-cap"></div>
+			<div id="wrapper"></div>
+			<button id="button-roll">Roll the dice</button>
+		</main>
 
-		<div class="dice-cap">Dice cap - 15</div>
-		<div class="score">
-				<p>3 1 3 5 3</p>
-		</div>
-
-		<div class="computer">Player 1 - <p id="player1"></p></div>
-		<div class="score"  id="score1">
-				<p id="0"></p>
-		</div>
-
-		<div class="player" id="player2">Player 2 - <p id="player2"></p></div>
-		<div class="score" id="score2">
-				<p id="1"></p>
-		</div>
-
-		<div class="buttons">
-				<button id="rollDice">Roll the dice</button>
-		</div>
-</div>
-</body>
-<script type="module" src="./index.ts"></script>
+		<script type="module" src="./index.ts"></script>
+	</body>
 </html>

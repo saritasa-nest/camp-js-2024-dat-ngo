@@ -1,5 +1,4 @@
-/** This is foo comment . */
+/** PlayerTurnResult  . */
 export class PlayerTurnResult {
-	/** This is foo comment . */
 	public constructor(public playerIndex: number, public diceResult: number) {}
 }

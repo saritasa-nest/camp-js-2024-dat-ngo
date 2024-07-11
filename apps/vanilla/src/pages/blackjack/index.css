@@ -67,6 +67,12 @@ button:hover {
 	background-color: #ff4500;
 } */
 
-.won {
+.win {
 	background-color: #fdd;
+}
+
+.displayer {
+	width: 200px;
+	height: 200px;
+	color: red;
 }
