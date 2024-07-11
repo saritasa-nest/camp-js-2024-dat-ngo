@@ -17,8 +17,8 @@ class App {
 	public constructor() {
 		this.turnGenerator = new TurnGenerator(this.playerCount);
 		this.turnGenerator.subscribe(this.diceGenerator);
-		const debugger1 = document.getElementById('dice-cap');
-		const debuggerTool = new Debugger(debugger1);
+		// const debugger1 = document.getElementById('dice-cap');
+		const debuggerTool = new Debugger();
 		this.diceGenerator.subscribe(debuggerTool);
 		const players = this.createPlayers();
 		players.forEach((player) => {
@@ -48,10 +48,10 @@ class App {
 
 const app = new App();
 
-window.onload = function() {
+window.onload = function () {
 	const rollButton = document.getElementById('button-roll');
 	if (rollButton) {
-		rollButton.onclick = function() {
+		rollButton.onclick = function () {
 			app.roll();
 		};
 	}

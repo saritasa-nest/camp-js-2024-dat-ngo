@@ -1,4 +1,5 @@
 import { Subscriber } from '../Types/Subscriber';
+import { PlayerTurnResult } from './PlayerTurnResult';
 
 class Displayer<T> implements Subscriber<T> {
 	protected containerElement: HTMLElement | null = null;
@@ -9,6 +10,44 @@ class Displayer<T> implements Subscriber<T> {
 
 	public update(message: T): void {}
 }
+
+// export class Debugger extends Displayer<PlayerTurnResult> {
+// 	private resultElement: HTMLElement | null = null;
+
+// 	private totalElement: HTMLElement | null = null;
+
+// 	public constructor(name: string) {
+// 		super(name);
+// 		super(name);
+// 		this.containerElement = document.createElement('div');
+// 		this.containerElement.id = name;
+// 		this.containerElement.classList.add('displayer');
+
+// 		const wrapper = document.getElementById('wrapper');
+// 		if (this.containerElement) {
+// 			wrapper?.appendChild(this.containerElement);
+// 		}
+
+// 		this.resultElement = document.createElement('div');
+// 		this.totalElement = document.createElement('span');
+
+// 		const heading = document.createElement('h2');
+// 		heading.textContent = name;
+// 		heading.appendChild(this.totalElement);
+
+// 		this.containerElement?.appendChild(heading);
+// 		this.containerElement?.appendChild(this.resultElement);
+// 	}
+
+// 	/** Append new value in the Debugger .
+// 	 * @param diceResult Dice result of current turn.
+// 	 */
+// 	public update(diceResult: PlayerTurnResult): void {
+// 		if (this.resultElement) {
+// 			this.debuggerElement.innerText += ` ${diceResult.diceResult}`;
+// 		}
+// 	}
+// }
 
 /** This is foo comment . */
 export class ResultDisplayer extends Displayer<number[]> {
