@@ -18,7 +18,6 @@ export class TurnGenerator extends Publisher<number> {
 		const playerIndex = this.currentPlayerIndex;
 		this.notify();
 		this.currentPlayerIndex = (playerIndex + 1) % this.playerCount;
-		console.log(this.currentPlayerIndex);
 	}
 
 	/** Notify current player index .*/

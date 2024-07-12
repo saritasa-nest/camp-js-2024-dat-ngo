@@ -1,56 +1,34 @@
 import { Subscriber } from '../Types/Subscriber';
-import { PlayerTurnResult } from './PlayerTurnResult';
 
+/** ResultData. */
+export class ResultData {
+	public constructor(public diceResult: number[], public totalScore: number) {}
+}
+
+/**  Displayer class for Result Displayer and Winner Displayer to extend .*/
 class Displayer<T> implements Subscriber<T> {
+	/** */
 	protected containerElement: HTMLElement | null = null;
 
 	public constructor(name: string) {
 		this.containerElement = document.getElementById(name);
 	}
 
+	/** Update message. @param message Message from Publisher .*/
 	public update(message: T): void {}
+
+	/** Function to create new HTML elements .
+	 * @param htmlString String of HTML elements.
+	 */
+	public createElement(htmlString: string): HTMLElement {
+		const div = document.createElement('div');
+		div.innerHTML = htmlString.trim();
+		return div.firstChild as HTMLElement;
+	}
 }
 
-// export class Debugger extends Displayer<PlayerTurnResult> {
-// 	private resultElement: HTMLElement | null = null;
-
-// 	private totalElement: HTMLElement | null = null;
-
-// 	public constructor(name: string) {
-// 		super(name);
-// 		super(name);
-// 		this.containerElement = document.createElement('div');
-// 		this.containerElement.id = name;
-// 		this.containerElement.classList.add('displayer');
-
-// 		const wrapper = document.getElementById('wrapper');
-// 		if (this.containerElement) {
-// 			wrapper?.appendChild(this.containerElement);
-// 		}
-
-// 		this.resultElement = document.createElement('div');
-// 		this.totalElement = document.createElement('span');
-
-// 		const heading = document.createElement('h2');
-// 		heading.textContent = name;
-// 		heading.appendChild(this.totalElement);
-
-// 		this.containerElement?.appendChild(heading);
-// 		this.containerElement?.appendChild(this.resultElement);
-// 	}
-
-// 	/** Append new value in the Debugger .
-// 	 * @param diceResult Dice result of current turn.
-// 	 */
-// 	public update(diceResult: PlayerTurnResult): void {
-// 		if (this.resultElement) {
-// 			this.debuggerElement.innerText += ` ${diceResult.diceResult}`;
-// 		}
-// 	}
-// }
-
 /** This is foo comment . */
-export class ResultDisplayer extends Displayer<number[]> {
+export class ResultDisplayer extends Displayer<ResultData> {
 	private diceResult: number[] = [];
 
 	private totalScores = 0;
@@ -65,29 +43,28 @@ export class ResultDisplayer extends Displayer<number[]> {
 
 	public constructor(name: string) {
 		super(name);
-		this.containerElement = document.createElement('div');
-		this.containerElement.id = name;
-		this.containerElement.classList.add('displayer');
+		this.containerElement = this.createHTMLElement(name);
 
 		const wrapper = document.getElementById('wrapper');
 		if (this.containerElement) {
 			wrapper?.appendChild(this.containerElement);
 		}
+		this.resultElement = document.getElementById(`${name}-dice-results`);
+		this.totalElement = document.getElementById(`${name}-score`);
+	}
 
-		this.resultElement = document.createElement('div');
-		this.totalElement = document.createElement('span');
-
-		const heading = document.createElement('h2');
-		heading.textContent = name;
-		heading.appendChild(this.totalElement);
-
-		this.containerElement?.appendChild(heading);
-		this.containerElement?.appendChild(this.resultElement);
+	private createHTMLElement(name: string): HTMLElement {
+		return this.createElement(`<article id="${name}" class="displayer">
+				<h2 class="displayer__heading">${name}
+					<span id="${name}-score"><span/>
+				</h2>
+				<div id="${name}-dice-results" class="dice-results"></div>
+			</article>`);
 	}
 
 	/** @param resultArray Result Array from Player. */
-	public override update(resultArray: number[]): void {
-		this.diceResult = resultArray;
+	public override update(resultArray: ResultData): void {
+		this.diceResult = resultArray.diceResult;
 		this.totalScores = this.getTotalScore();
 		if (this.resultElement) {
 			this.resultElement.innerText = `${this.diceResult.join(', ')}`;
@@ -97,12 +74,16 @@ export class ResultDisplayer extends Displayer<number[]> {
 		}
 	}
 }
+
+/** Winner .*/
 export class WinnerDisplayer extends Displayer<boolean> {
 	public constructor(name: string) {
 		super(name);
 	}
 
-	override update(winStatus: boolean): void {
+	/** Update winStatus.
+	 *  @param winStatus From the Player.*/
+	public override update(winStatus: boolean): void {
 		if (winStatus) {
 			this.containerElement?.classList.add('win');
 			(document.getElementById('button-roll') as HTMLButtonElement).disabled = true;
