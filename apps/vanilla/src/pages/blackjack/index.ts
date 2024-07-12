@@ -1,26 +1,30 @@
 import { Debugger } from './Classes/debugger';
-import { DiceGenerator } from './Classes/diceGenerator';
+import { DiceGenerator } from './Classes/dice-generator';
 import { Player } from './Classes/player';
-import { ResultDisplayer, WinnerDisplayer } from './Classes/resultDisplayer';
-import { TurnGenerator } from './Classes/turnGenerator';
+import { ResultDisplayer, WinnerDisplayer } from './Classes/result-displayer';
+import { TurnGenerator } from './Classes/turn-generator';
+import { NUMBER_OF_PLAYER } from './constants';
 
 /** Initialize Game . */
 class App {
-	// Create number of Player
-	private playerCount = 10;
+	/** Create number of Player. */
+	private readonly playerCount = NUMBER_OF_PLAYER;
 
-	// Create a Turn Generator
-	private turnGenerator: TurnGenerator;
+	/** Turn generator. */
+	private readonly turnGenerator: TurnGenerator;
 
-	// Create a Dice Generator
-	private diceGenerator = new DiceGenerator();
+	/** Create a Dice Generator. */
+	private readonly diceGenerator: DiceGenerator;
 
 	//
 	public constructor() {
+		this.diceGenerator = new DiceGenerator();
+
 		this.turnGenerator = new TurnGenerator(this.playerCount);
 		this.turnGenerator.subscribe(this.diceGenerator);
+
 		const debbugerTool = new Debugger();
-		const debuggerDisplayer = new ResultDisplayer('debugger');
+		const debuggerDisplayer = new ResultDisplayer('Debugger');
 		debbugerTool.result.subscribe(debuggerDisplayer);
 		this.diceGenerator.subscribe(debbugerTool);
 
@@ -35,8 +39,8 @@ class App {
 			.fill(null)
 			.map((_, index) => {
 				const player = new Player(index);
-				const playerDisplayer = new ResultDisplayer(`player ${index + 1}`);
-				const playerWinStatusDisplayer = new WinnerDisplayer(`player ${index + 1}`);
+				const playerDisplayer = new ResultDisplayer(`Player ${index + 1}`);
+				const playerWinStatusDisplayer = new WinnerDisplayer(`Player ${index + 1}`);
 
 				player.result.subscribe(playerDisplayer);
 				player.winStatus.subscribe(playerWinStatusDisplayer);
@@ -45,7 +49,7 @@ class App {
 			});
 	}
 
-	/** Function to generate next turn . */
+	/** Generate next turn . */
 	public roll(): void {
 		this.turnGenerator.next();
 	}

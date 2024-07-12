@@ -1,4 +1,4 @@
-import { Subscriber } from '../Types/Subscriber';
+import { Subscriber } from './subscriber';
 
 /** Publisher class . */
 export class Publisher<T> {

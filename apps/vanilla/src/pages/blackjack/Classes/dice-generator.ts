@@ -1,9 +1,7 @@
-/** This is foo comment .*/
-import { Subscriber } from '../Types/Subscriber';
+import { Subscriber } from '../Types/subscriber';
+import { Publisher } from '../Types/publisher';
 
-import { Publisher } from './Publisher';
-
-import { PlayerTurnResult } from './playerTurnResult';
+import { PlayerTurnResult } from '../Types/player-turn-result';
 
 /** DiceGenerator .*/
 export class DiceGenerator extends Publisher<PlayerTurnResult> implements Subscriber<number> {

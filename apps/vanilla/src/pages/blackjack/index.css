@@ -4,7 +4,7 @@ body {
 	font-family: Arial, sans-serif;
 	background-color: #f9f9f9;
 	margin: 0;
-	padding: 20px;
+	padding: var(--spacing-default);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -12,27 +12,30 @@ body {
 }
 
 .container {
+	--container-box-shadow: 0 0 10px rgba(0 0 0/ 10%);
+
 	background-color: white;
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 0 10px rgba(0 0 0/ 10%);
+	padding: var(--spacing-default);
+	box-shadow: var(--container-box-shadow);
 }
 
 .content-wrapper {
-	width: 500px;
-	border: 1px solid #000;
-	padding: 20px;
+	max-width: 500px;
+	width: 100%;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-md);
+	padding: var(--spacing-default);
 }
 
 .win {
-	background-color: #fdd;
+	background-color: var(--primary-color);
 }
 
 .displayer {
 	height: 100px;
 }
 
-.dice-results {
+.displayer__dice-results {
 	white-space: nowrap;
 	overflow: auto;
 }
