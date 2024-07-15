@@ -18,7 +18,7 @@ export class Publisher<T> {
 	 * @param subscriber A subscriber to remove from the subscribers array.
 	 */
 	public unsubscribe(subscriber: Subscriber<T>): void {
-		this.subscribers = this.subscribers.filter((sub) => sub !== subscriber);
+		this.subscribers = this.subscribers.filter(sub => sub !== subscriber);
 	}
 
 	/**
@@ -26,6 +26,6 @@ export class Publisher<T> {
 	 * @param message Data for notification to subscriber.
 	 */
 	public notify(message: T): void {
-		this.subscribers.forEach((sub) => sub.update(message));
+		this.subscribers.forEach(sub => sub.update(message));
 	}
 }
