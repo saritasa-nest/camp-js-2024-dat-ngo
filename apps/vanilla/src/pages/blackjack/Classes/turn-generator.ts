@@ -1,11 +1,11 @@
-/** This is foo comment . */
-import { Publisher } from '../Types/publisher';
+/** This is foo comment. */
+import { Publisher } from '../types/publisher';
 
-/** TurnGenerator .*/
+/** TurnGenerator.*/
 export class TurnGenerator extends Publisher<number> {
 	private readonly playerCount;
 
-	/** Default player index = 0 .*/
+	/** Default player index = 0. */
 	public currentPlayerIndex = 0;
 
 	/** @param players Number of Player. */
@@ -14,7 +14,8 @@ export class TurnGenerator extends Publisher<number> {
 		this.playerCount = this.players;
 	}
 
-	/** When the next() function execute, it notify the currentPlayer Index to Dice
+	/**
+	 * When the next() function execute, it notify the currentPlayer Index to Dice
 	 * and currentPlayerIndex will be move to the next player, Dice will receive the
 	 * index and dice a random number along with the index and notify that Player and
 	 * Debugger will receive that that notify for the Result Displayer to display out

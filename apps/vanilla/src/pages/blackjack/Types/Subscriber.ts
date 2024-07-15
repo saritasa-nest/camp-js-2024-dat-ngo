@@ -1,6 +1,6 @@
-/** Subscriber Interface . */
+/** Subscriber Interface. */
 export type Subscriber<T> = {
 
-	/** Update the message . */
+	/** Update the message. */
 	update(message: T): void;
 };

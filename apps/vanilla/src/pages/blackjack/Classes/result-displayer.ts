@@ -1,13 +1,12 @@
-import { isHTMLButtonElement } from '../guards/isHTMLButtonElement';
 import { isHTMLElement } from '../guards/isHTMLElement';
-import { Subscriber } from '../Types/subscriber';
+import { Subscriber } from '../types/subscriber';
 
 /** ResultData. */
 export class ResultData {
 	public constructor(public readonly diceResult: number[], public readonly totalScore: number) {}
 }
 
-/** This is foo comment . */
+/** ResultDisplayer is the displayer of the result and debugger . */
 export class ResultDisplayer implements Subscriber<ResultData> {
 	private diceResult: number[] = [];
 
@@ -66,28 +65,6 @@ export class ResultDisplayer implements Subscriber<ResultData> {
 		}
 		if (this.totalElement) {
 			this.totalElement.innerText = ` - ${this.totalScores}`;
-		}
-	}
-}
-
-/** Winner displayer.*/
-export class WinnerDisplayer implements Subscriber<boolean> {
-
-	private readonly containerElement: HTMLElement | null = null;
-
-	public constructor(name: string) {
-		this.containerElement = document.getElementById(name);
-	}
-
-	/** Update winStatus.
-	 *  @param winStatus From the Player.*/
-	public update(winStatus: boolean): void {
-		if (winStatus) {
-			this.containerElement?.classList.add('win');
-			const buttonElement = document.getElementById('button-roll');
-			if (isHTMLButtonElement(buttonElement)) {
-				buttonElement.disabled = true;
-			}
 		}
 	}
 }

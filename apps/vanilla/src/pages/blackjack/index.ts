@@ -1,22 +1,22 @@
-import { Debugger } from './Classes/debugger';
-import { DiceGenerator } from './Classes/dice-generator';
-import { Player } from './Classes/player';
-import { ResultDisplayer, WinnerDisplayer } from './Classes/result-displayer';
-import { TurnGenerator } from './Classes/turn-generator';
+import { Debugger } from './classes/debugger';
+import { DiceGenerator } from './classes/dice-generator';
+import { Player } from './classes/player';
+import { ResultDisplayer } from './classes/result-displayer';
+import { WinnerDisplayer } from './classes/winner-displayer';
+import { TurnGenerator } from './classes/turn-generator';
 import { NUMBER_OF_PLAYER } from './constants';
 
-/** Initialize Game . */
+/** Initialize Game.*/
 class App {
-	/** Create number of Player. */
+	/** Create number of Player.*/
 	private readonly playerCount = NUMBER_OF_PLAYER;
 
-	/** Turn generator. */
+	/** Turn generator.*/
 	private readonly turnGenerator: TurnGenerator;
 
-	/** Create a Dice Generator. */
+	/** Create a Dice Generator.*/
 	private readonly diceGenerator: DiceGenerator;
 
-	//
 	public constructor() {
 		this.diceGenerator = new DiceGenerator();
 
@@ -43,13 +43,13 @@ class App {
 				const playerWinStatusDisplayer = new WinnerDisplayer(`Player ${index + 1}`);
 
 				player.result.subscribe(playerDisplayer);
-				player.winStatus.subscribe(playerWinStatusDisplayer);
+				player.isWin.subscribe(playerWinStatusDisplayer);
 
 				return player;
 			});
 	}
 
-	/** Generate next turn . */
+	/** Generate next turn.*/
 	public roll(): void {
 		this.turnGenerator.next();
 	}

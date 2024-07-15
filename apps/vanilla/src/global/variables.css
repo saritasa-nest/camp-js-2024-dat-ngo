@@ -5,10 +5,14 @@
 	--on-surface-color: rgb(0 0 0 / 100%);
 	--on-surface-dim-color: rgb(0 0 0 / 50%);
 	--primary-color: rgb(241 89 36 / 100%);
-	--winner-color: rgb(16 227 100/50%);
+	--primary-color-overlay: rgb(241 89 36 / 100%);
+	--winner-color: rgb(16 227 100 / 50%);
 	--on-primary-color: rgb(255 255 255);
 	--border-color: rgb(0 0 0 / 15%);
 	--focus-outline-color: #212121;
+
+	/* Box shadow */
+	--container-box-shadow: 0 0 10px rgba(0 0 0 / 10%);
 
 	/* Spacing */
 	--spacing-sm: 8px;

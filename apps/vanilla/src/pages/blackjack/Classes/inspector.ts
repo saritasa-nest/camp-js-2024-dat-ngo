@@ -1,6 +1,6 @@
-import { Publisher } from '../Types/publisher';
+import { Publisher } from '../types/publisher';
 
-import { PlayerTurnResult } from '../Types/player-turn-result';
+import { PlayerTurnResult } from '../types/player-turn-result';
 
 import { ResultData } from './result-displayer';
 
@@ -21,7 +21,8 @@ export class Inspector {
 	/**
 	 * Function to update the current diceResults array using PlayerTurnResult.
 	 * @param turnResult Player and Debugger will extends this class and they are subscriber of
-	 * DiceGenerator which is a Publisher<PlayerTurnResult> .*/
+	 * DiceGenerator which is a Publisher<PlayerTurnResult>.
+	 */
 	protected updateDiceList(turnResult: PlayerTurnResult): number[] {
 		this.diceResults.push(turnResult.diceResult);
 		return [...this.diceResults];

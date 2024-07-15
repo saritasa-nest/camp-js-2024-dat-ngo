@@ -1,19 +1,21 @@
-import { Subscriber } from '../Types/subscriber';
-import { Publisher } from '../Types/publisher';
+import { Subscriber } from '../types/subscriber';
+import { Publisher } from '../types/publisher';
 
-import { PlayerTurnResult } from '../Types/player-turn-result';
+import { PlayerTurnResult } from '../types/player-turn-result';
+import { getRandomIntegerNumber } from '../utils/utils';
+import { SIDE_COUNT } from '../constants';
 
-/** DiceGenerator .*/
+/** DiceGenerator is a publisher for PlayerTurnResult to notify for inspector.*/
 export class DiceGenerator extends Publisher<PlayerTurnResult> implements Subscriber<number> {
-	/** */
-	public sideCount = 6;
-
-	/** Roll dice return a random number base on side count. */
+	/** Roll dice return a random number base on side count.*/
 	public roll(): number {
-		return Math.floor(Math.random() * this.sideCount) + 1;
+		return getRandomIntegerNumber(SIDE_COUNT);
 	}
 
-	/** @param playerIndex Index of current player . */
+	/**
+	 * Update turn results.
+	 * @param playerIndex Index of current player.
+	 */
 	public update(playerIndex: number): void {
 		const diceResult = this.roll();
 		const turnResult = new PlayerTurnResult(playerIndex, diceResult);
