@@ -1,0 +1,9 @@
+table {
+	width: 100%;
+}
+
+img {
+	width: 150px;
+	aspect-ratio: auto;
+	object-fit: fill;
+}

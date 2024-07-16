@@ -21,7 +21,7 @@
           "apps/angular/src/assets"
         ],
         "styles": [
-          "@angular/material/prebuilt-themes/azure-blue.css",
+          "@angular/material/prebuilt-themes/rose-red.css",
           "apps/angular/src/theme/styles.css",
           "libs/theme/src/index.css"
         ],

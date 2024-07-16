@@ -23,7 +23,8 @@
     "vanilla:lint": "nx run vanilla:lint --fix",
     "vanilla:stylelint": "nx run vanilla:stylelint",
     "core:lint": "nx run core:lint --fix",
-    "theme:stylelint": "nx run theme:stylelint"
+    "theme:stylelint": "nx run theme:stylelint",
+    "material": "nx add @angular/material"
   },
   "private": true,
   "dependencies": {
