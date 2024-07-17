@@ -18,7 +18,7 @@ export class AnimeMapper {
 			titleJpn: data.title_jpn,
 			coverImage: data.image,
 			broadcasted: {
-				startDate : data.aired.start ? new Date(data.aired.start) : null,
+				startDate: data.aired.start ? new Date(data.aired.start) : null,
 				endDate: data.aired.end ? new Date(data.aired.end) : null,
 			},
 			animeType: data.type,
@@ -28,5 +28,8 @@ export class AnimeMapper {
 			studios: data.studios,
 			genres: data.genres,
 		};
+	}
+	public fromDtoArray(data: readonly AnimeDto[]): readonly Anime[] {
+		return data.map((item) => this.fromDto(item));
 	}
 }
