@@ -1,18 +1,27 @@
 import { Immerable, OmitImmerable } from './immerable';
 
-/** Genre. */
-export class Pagination extends Immerable {
-	/** Id. */
-	public readonly id: number;
+/** Pagination class. */
+export class Pagination<T> extends Immerable {
+	/** Total count of items. */
+	public readonly totalCount: number;
 
-	/** Name. */
-	public readonly name: string;
+	/** Next page of items. */
+	public readonly hasNext: boolean;
 
-	public constructor(data: GenreConstructorData) {
+	/** Previous page of items. */
+	public readonly hasPrevious: boolean;
+
+	/** Array of items requested. */
+	public readonly items: readonly T[];
+
+	public constructor(data: PaginationConstructorData<T>) {
 		super();
-		this.id = data.id;
-		this.name = data.name;
+		this.items = data.items;
+		this.totalCount = data.totalCount;
+		this.hasNext = data.hasNext;
+		this.hasPrevious = data.hasPrevious;
 	}
 }
 
-type GenreConstructorData = OmitImmerable<Pagination>;
+/** Pagination Type. */
+export type PaginationConstructorData<T> = OmitImmerable<Pagination<T>>;
