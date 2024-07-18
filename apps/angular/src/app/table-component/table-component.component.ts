@@ -20,7 +20,7 @@ export type animeData = {
 	user_score: number | null;
 	studios: number[];
 	genres: number[];
-}
+};
 
 const ELEMENT_DATA: animeData[] = [
 	{

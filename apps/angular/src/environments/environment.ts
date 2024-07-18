@@ -4,6 +4,7 @@
 /** JSDocs. */
 export const environment = {
 	production: false,
+	apiURL: 'https://api.camp-js.saritasa.rocks/api/v1/',
 };
 
 /*

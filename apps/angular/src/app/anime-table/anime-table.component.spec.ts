@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExampleComponent } from './example.component';
+import { AnimeTableComponent } from './anime-table.component';
 
-describe('ExampleComponent', () => {
-	let component: ExampleComponent;
-	let fixture: ComponentFixture<ExampleComponent>;
+describe('AnimeTableComponent', () => {
+	let component: AnimeTableComponent;
+	let fixture: ComponentFixture<AnimeTableComponent>;
 
 	beforeEach(async() => {
 		await TestBed.configureTestingModule({
-			imports: [ExampleComponent],
+			imports: [AnimeTableComponent],
 		}).compileComponents();
 
-		fixture = TestBed.createComponent(ExampleComponent);
+		fixture = TestBed.createComponent(AnimeTableComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

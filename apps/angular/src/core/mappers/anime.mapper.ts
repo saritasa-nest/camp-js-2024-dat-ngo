@@ -29,7 +29,8 @@ export class AnimeMapper {
 			genres: data.genres,
 		};
 	}
+
 	public fromDtoArray(data: readonly AnimeDto[]): readonly Anime[] {
-		return data.map((item) => this.fromDto(item));
+		return data.map(item => this.fromDto(item));
 	}
 }

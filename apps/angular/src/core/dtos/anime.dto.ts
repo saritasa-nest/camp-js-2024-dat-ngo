@@ -1,5 +1,5 @@
-import { animeType } from "../enums/amimeType.enum";
-import { animeStatus } from "../enums/animeStatus.enum";
+import { animeType } from '../enums/amimeType.enum';
+import { animeStatus } from '../enums/animeStatus.enum';
 
 export type AnimeDto = {
 

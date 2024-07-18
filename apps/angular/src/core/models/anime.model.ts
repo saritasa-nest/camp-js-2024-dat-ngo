@@ -4,6 +4,7 @@ import { BroadCastedTime } from '../types/BroadcastedTime.type';
 
 /** Models of anime . */
 export type Anime = {
+
 	/** Id of anime. */
 	readonly id: number;
 
