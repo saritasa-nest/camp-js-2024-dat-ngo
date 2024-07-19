@@ -6,9 +6,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { environment } from '@js-camp/angular/environments/environment';
 
-import { Anime } from '../models/anime.model';
-import { AnimeDto } from '../dtos/anime.dto';
-import { PaginationMapper } from '../mappers/pagination.mapper';
+import { Anime } from '../../../../../libs/core/models/anime.model';
+import { AnimeDto } from '../../../../../libs/core/dtos/anime.dto';
+import { PaginationMapper } from '../../../../../libs/core/mappers/pagination.mapper';
 
 @Injectable({ providedIn: 'root' })
 export class AnimeService {

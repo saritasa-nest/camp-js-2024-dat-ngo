@@ -5,5 +5,5 @@ table {
 img {
 	width: 150px;
 	aspect-ratio: 1;
-	object-fit: fill;
+	object-fit: contain;
 }
