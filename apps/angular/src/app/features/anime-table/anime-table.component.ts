@@ -11,6 +11,8 @@ import { Observable } from 'rxjs';
 	styleUrl: './anime-table.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
+/** */
 export class AnimeTableComponent {
 
 	@Input() public animeResponse$ !: Observable<AnimeResponse>;
