@@ -2,45 +2,65 @@ import { animeType } from '../enums/amimeType.enum';
 import { animeStatus } from '../enums/animeStatus.enum';
 import { BroadCastedTime } from '../types/BroadcastedTime.type';
 
-/** Models of anime . */
-export type Anime = {
+import { Immerable, OmitImmerable } from './immerable';
 
+/** Models of anime . */
+export class Anime extends Immerable {
 	/** Id of anime. */
-	readonly id: number;
+	public readonly id: number;
 
 	/** Date that anime was created. */
-	readonly createdDate: Date;
+	public readonly createdDate: Date;
 
 	/** Last modified time. */
-	readonly modifiedDate: Date;
+	public readonly modifiedDate: Date;
 
 	/** Title in English. */
-	readonly titleEng: string;
+	public readonly titleEng: string;
 
 	/** Title in Japanese. */
-	readonly titleJpn: string;
+	public readonly titleJpn: string;
 
 	/** Cover image of the anime. */
-	readonly coverImage: string;
+	public readonly coverImage: string;
 
 	/** Broadcast time frame from start to end of a anime. */
-	readonly broadcasted: BroadCastedTime;
+	public readonly broadcasted: BroadCastedTime;
 
 	/** Type of the anime ex OVA. */
-	readonly animeType: animeType;
+	public readonly animeType: animeType;
 
 	/** Status of the anime. */
-	readonly animeStatus: animeStatus;
+	public readonly animeStatus: animeStatus;
 
 	/** Score of the anime from website. */
-	readonly score: number | null;
+	public readonly score: number | null;
 
 	/** Score from users. */
-	readonly userScore: number | null;
+	public readonly userScore: number | null;
 
 	/** Studio's id as array of string. */
-	readonly studios: readonly string[];
+	public readonly studios: readonly string[];
 
 	/** Genres' id as array of string. */
-	readonly genres: readonly string[];
-};
+	public readonly genres: readonly string[];
+
+	public constructor(data: PaginationConstructorData) {
+		super();
+		this.id = data.id;
+		this.createdDate = data.createdDate;
+		this.modifiedDate = data.modifiedDate;
+		this.titleEng = data.titleEng;
+		this.titleJpn = data.titleJpn;
+		this.coverImage = data.coverImage;
+		this.broadcasted = data.broadcasted;
+		this.animeType = data.animeType;
+		this.animeStatus = data.animeStatus;
+		this.score = data.score;
+		this.userScore = data.userScore;
+		this.studios = data.studios;
+		this.genres = data.genres;
+	}
+}
+
+type PaginationConstructorData = OmitImmerable<Anime>;
