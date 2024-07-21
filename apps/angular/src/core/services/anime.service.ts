@@ -9,10 +9,13 @@ import { PaginationMapper } from '@js-camp/core/mappers/pagination.mapper';
 import { AnimeMapper } from '@js-camp/core/mappers/anime.mapper';
 import { Pagination } from '@js-camp/core/models/pagination';
 
+/** Anime pagination dto.*/
 type AnimeResponseDto = PaginationDto<AnimeDto>;
 
+/** Anime pagination.*/
 export type AnimeResponse = Pagination<Anime>;
 
+/** Anime services. */
 @Injectable({ providedIn: 'root' })
 export class AnimeService {
 	private readonly baseUrl = new URL('anime/', environment.apiURL);
@@ -23,9 +26,11 @@ export class AnimeService {
 
 	private animeMapper = inject(AnimeMapper);
 
-	private readonly param = new HttpParams().set('offset', 25)
+	private readonly param = new HttpParams()
+		.set('offset', 25)
 		.set('limit', 25);
 
+	/** Observable to get all anime and map from pagination dto to pagination.*/
 	public getAllAnime(): Observable<AnimeResponse> {
 		const url = new URL(`anime/`, this.baseUrl);
 		return this.httpClient
