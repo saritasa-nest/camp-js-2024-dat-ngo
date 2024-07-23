@@ -1,5 +1,6 @@
 /** Pagination meta info. */
 export type PaginationDto<T> = {
+
 	/** Total count of items. */
 	readonly count: number;
 
