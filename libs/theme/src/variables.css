@@ -8,7 +8,6 @@
     --<name>-light-color: <light-color>;
     --<name>-light-contrast-color: <light-contrast-color>;
   */
-	box-sizing: border-box;
 
 	/** Prevalent color in the application */
 	--primary-color: #f97316;
