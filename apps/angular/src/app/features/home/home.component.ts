@@ -1,10 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { AnimeResponse, AnimeService } from '@js-camp/angular/core/services/anime.service';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { Observable } from 'rxjs';
-
-import { AnimeTableComponent } from '../anime-table/anime-table.component';
+import { AnimeTableComponent } from './anime-table/anime-table.component';
 
 /** Home component. */
 @Component({
@@ -15,12 +12,4 @@ import { AnimeTableComponent } from '../anime-table/anime-table.component';
 	imports: [AnimeTableComponent, CommonModule],
 })
 export class HomeComponent {
-	/** Anime response observable.  */
-	protected readonly animeResponse$: Observable<AnimeResponse>;
-
-	private readonly animeService: AnimeService = inject(AnimeService);
-
-	public constructor() {
-		this.animeResponse$ = this.animeService.getAllAnime();
-	}
 }

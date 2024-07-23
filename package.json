@@ -16,7 +16,7 @@
     "angular:build": "nx run angular:build",
     "angular:build:development": "nx run angular:build:development",
     "angular:serve": "nx run angular:serve",
-    "angular:lint": "nx run angular:lint --verbose",
+    "angular:lint": "nx run angular:lint --fix",
     "angular:stylelint": "nx run angular:stylelint",
     "vanilla:build": "nx run vanilla:build",
     "vanilla:serve": "nx run vanilla:serve",
