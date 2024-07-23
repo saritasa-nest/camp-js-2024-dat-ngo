@@ -1,11 +1,11 @@
 /** Anime Type enum. */
-export enum animeType {
+export enum AnimeType {
 	TV = 'TV',
 	OVA = 'OVA',
 	Movie = 'Movie',
 	Special = 'Special',
 	ONA = 'ONA',
 	Music = 'Music',
-	PromationalVideos = 'Promotional Videos',
+	PromotionalVideos = 'Promotional Videos',
 	Unknown = 'Unknown',
 }

@@ -1,5 +1,5 @@
 :root {
-  /*
+	/*
     Please use the following template to add new variables, dark/light valuations are optional.
     --<name>-color: <color>;
     --<name>-contrast-color: <contrast-color>;
@@ -8,15 +8,67 @@
     --<name>-light-color: <light-color>;
     --<name>-light-contrast-color: <light-contrast-color>;
   */
+	box-sizing: border-box;
 
-  /** Prevalent color in the application */
-  --primary-color: #f97316;
-  --primary-contrast-color: white;
-  --primary-dark-color: #ea580c;
-  --primary-dark-contrast-color: white;
-  --primary-light-color: #fb923c;
-  --primary-light-contrast-color: black;
-  --background-color: white;
-  --background-contrast-color: black;
-  --error-color: red;
+	/** Prevalent color in the application */
+	--primary-color: #f97316;
+	--primary-contrast-color: white;
+	--primary-dark-color: #ea580c;
+	--primary-dark-contrast-color: white;
+	--primary-light-color: #fb923c;
+	--primary-light-contrast-color: black;
+	--background-color: white;
+	--background-contrast-color: black;
+	--error-color: red;
+
+	/* Colors */
+	--surface-color: rgb(255 255 255 / 100%);
+	--surface-overlay-color: rgb(0 0 0 / 5%);
+	--on-surface-color: rgb(0 0 0 / 100%);
+	--on-surface-dim-color: rgb(0 0 0 / 50%);
+	--on-primary-color: rgb(255 255 255);
+	--border-color: rgb(0 0 0 / 15%);
+	--focus-outline-color: #212121;
+
+	/* Spacing */
+	--spacing-sm: 8px;
+	--spacing-md: 16px;
+	--spacing-default: 20px;
+	--spacing-lg: 24px;
+	--spacing-xl: 32px;
+	--spacing-xxl: 40px;
+
+	/* Font size */
+	--font-size-md: 1rem;
+	--font-size-lg: 1.125rem;
+	--font-size-xl: 1.25rem;
+
+	/* Line height */
+	--line-height-md: 1.5rem;
+	--line-height-lg: 2rem;
+
+	/* Font weight */
+	--font-weight-regular: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	/* Sizes */
+	--header-height: 64px;
+	--footer-height: 128px;
+
+	/* Border Radius */
+	--border-radius-md: 16px;
+	--border-radius-lg: 24px;
+
+	/* Filter width */
+	--filter-width-md: 276px;
+	--filter-width-lg: 320px;
+	--filter-width-xl: 360px;
+
+	/* Form control height */
+	--form-height: 48px;
+
+	/* container width */
+	--container-width-lg: 1280px;
 }

@@ -2,62 +2,94 @@ import { Injectable } from '@angular/core';
 
 import { Anime } from '../models/anime.model';
 import { AnimeDto } from '../dtos/anime.dto';
+import { AnimeTypeDto } from '../dtos/amime-type.dto';
+import { AnimeType } from '../models/amime-type';
+import { AnimeStatusDto } from '../dtos/anime-status.dto';
+import { AnimeStatus } from '../models/anime-status';
 
-/** Auth mapper. */
+const MAP_ANIME_STATUS_FROM_DTO: Record<AnimeStatusDto, AnimeStatus> = {
+	[AnimeStatusDto.CurrentlyAiring]: AnimeStatus.CurrentlyAiring,
+	[AnimeStatusDto.FinishedAiring]: AnimeStatus.FinishedAiring,
+	[AnimeStatusDto.NotYetAired]: AnimeStatus.NotYetAired,
+};
+const MAP_ANIME_STATUS_TO_DTO: Record<AnimeStatus, AnimeStatusDto> = {
+	[AnimeStatus.CurrentlyAiring]: AnimeStatusDto.CurrentlyAiring,
+	[AnimeStatus.FinishedAiring]: AnimeStatusDto.FinishedAiring,
+	[AnimeStatus.NotYetAired]: AnimeStatusDto.NotYetAired,
+};
+const MAP_ANIME_TYPE_FROM_DTO: Record<AnimeTypeDto, AnimeType> = {
+	[AnimeTypeDto.Movie]: AnimeType.Movie,
+	[AnimeTypeDto.Music]: AnimeType.Music,
+	[AnimeTypeDto.ONA]: AnimeType.ONA,
+	[AnimeTypeDto.OVA]: AnimeType.OVA,
+	[AnimeTypeDto.PromotionalVideos]: AnimeType.PromotionalVideos,
+	[AnimeTypeDto.Special]: AnimeType.Special,
+	[AnimeTypeDto.TV]: AnimeType.TV,
+	[AnimeTypeDto.Unknown]: AnimeType.Unknown,
+};
+const MAP_ANIME_TYPE_TO_DTO: Record<AnimeType, AnimeTypeDto> = {
+	[AnimeType.Movie]: AnimeTypeDto.Movie,
+	[AnimeType.Music]: AnimeTypeDto.Music,
+	[AnimeType.ONA]: AnimeTypeDto.ONA,
+	[AnimeType.OVA]: AnimeTypeDto.OVA,
+	[AnimeType.PromotionalVideos]: AnimeTypeDto.PromotionalVideos,
+	[AnimeType.Special]: AnimeTypeDto.Special,
+	[AnimeType.TV]: AnimeTypeDto.TV,
+	[AnimeType.Unknown]: AnimeTypeDto.Unknown,
+};
+
+/** Mapper for mapping AnimeDto and Anime. */
 @Injectable({
 	providedIn: 'root',
 })
 export class AnimeMapper {
-	/** @inheritdoc */
-	public fromDto(data: AnimeDto): Anime {
+	/**
+	 *  Mapper for dto to model.
+	 * @param dto AnimeDto .
+	 */
+	public fromDto(dto: AnimeDto): Anime {
 		return new Anime({
-			id: data.id,
-			createdDate: new Date(data.created),
-			modifiedDate: new Date(data.modified),
-			titleEng: data.title_eng,
-			titleJpn: data.title_jpn,
-			coverImage: data.image,
+			id: dto.id,
+			createdDate: new Date(dto.created),
+			modifiedDate: new Date(dto.modified),
+			titleEng: dto.title_eng,
+			titleJpn: dto.title_jpn,
+			coverImage: dto.image,
 			broadcasted: {
-				startDate: data.aired.start ? new Date(data.aired.start) : null,
-				endDate: data.aired.end ? new Date(data.aired.end) : null,
+				startDate: dto.aired.start ? new Date(dto.aired.start) : null,
+				endDate: dto.aired.end ? new Date(dto.aired.end) : null,
 			},
-			animeType: data.type,
-			animeStatus: data.status,
-			score: data.score,
-			userScore: data.user_score,
-			studios: data.studios,
-			genres: data.genres,
+			animeType: MAP_ANIME_TYPE_FROM_DTO[dto.type],
+			animeStatus: MAP_ANIME_STATUS_FROM_DTO[dto.status],
+			score: dto.score,
+			userScore: dto.user_score,
+			studios: dto.studios,
+			genres: dto.genres,
 		});
 	}
 
-	/** @inheritdoc */
-	public toDto(data: Anime): AnimeDto {
-		return {
-			id: data.id,
-			created: data.createdDate.toISOString(),
-			modified: data.modifiedDate.toISOString(),
-			title_eng: data.titleEng,
-			title_jpn: data.titleJpn,
-			image: data.coverImage,
-			aired: {
-				start: data.broadcasted.startDate ? data.broadcasted.startDate.toISOString() : null,
-				end: data.broadcasted.endDate ? data.broadcasted.endDate.toISOString() : null,
-			},
-			type: data.animeType,
-			status: data.animeStatus,
-			score: data.score,
-			user_score: data.userScore,
-			studios: data.studios,
-			genres: data.genres,
-		};
-	}
-
 	/**
-	 *
-	 * @param data
-	 * @returns
+	 *  Mapper for model to dto.
+	 * @param anime Anime model .
 	 */
-	public fromDtoArray(data: readonly AnimeDto[]): readonly Anime[] {
-		return data.map((item) => this.fromDto(item));
+	public toDto(anime: Anime): AnimeDto {
+		return {
+			id: anime.id,
+			created: anime.createdDate.toISOString(),
+			modified: anime.modifiedDate.toISOString(),
+			title_eng: anime.titleEng,
+			title_jpn: anime.titleJpn,
+			image: anime.coverImage,
+			aired: {
+				start: anime.broadcasted.startDate ? anime.broadcasted.startDate.toISOString() : null,
+				end: anime.broadcasted.endDate ? anime.broadcasted.endDate.toISOString() : null,
+			},
+			type: MAP_ANIME_TYPE_TO_DTO[anime.animeType],
+			status: MAP_ANIME_STATUS_TO_DTO[anime.animeStatus],
+			score: anime.score,
+			user_score: anime.userScore,
+			studios: anime.studios,
+			genres: anime.genres,
+		};
 	}
 }

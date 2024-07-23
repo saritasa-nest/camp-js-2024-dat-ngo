@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { AnimeTableComponent } from './anime-table/anime-table.component';
+import { AnimeTableComponent } from './components/anime-table/anime-table.component';
 
 /** Home component. */
 @Component({
@@ -9,7 +8,8 @@ import { AnimeTableComponent } from './anime-table/anime-table.component';
 	styleUrl: 'home.component.css',
 	templateUrl: 'home.component.html',
 	standalone: true,
-	imports: [AnimeTableComponent, CommonModule],
+	imports: [AnimeTableComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
 }

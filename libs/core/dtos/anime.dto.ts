@@ -1,5 +1,5 @@
-import { animeType } from '../enums/amimeType.enum';
-import { animeStatus } from '../enums/animeStatus.enum';
+import { AnimeTypeDto } from './amime-type.dto';
+import { AnimeStatusDto } from './anime-status.dto';
 
 export type AnimeDto = {
 
@@ -24,18 +24,18 @@ export type AnimeDto = {
 	/** Broadcast time frame from start to end of a anime. */
 	readonly aired: {
 
-		/** Todo.*/
+		/** Start Date.*/
 		readonly start: string | null;
 
-		/** Todo.*/
+		/** End Date.*/
 		readonly end: string | null;
 	};
 
 	/** Type of the anime ex OVA. */
-	readonly type: animeType;
+	readonly type: AnimeTypeDto;
 
 	/** Status of the anime. */
-	readonly status: animeStatus;
+	readonly status: AnimeStatusDto;
 
 	/** Score of the anime from website. */
 	readonly score: number | null;
@@ -43,7 +43,7 @@ export type AnimeDto = {
 	/** Score from users. */
 	readonly user_score: number | null;
 
-	/** Studio's id as array of string. */
+	/** Studios' id as array of string. */
 	readonly studios: readonly string[];
 
 	/** Genres' id as array of string. */

@@ -1,6 +1,7 @@
-import { animeType } from '../enums/amimeType.enum';
-import { animeStatus } from '../enums/animeStatus.enum';
 import { BroadCastedTime } from '../types/BroadcastedTime.type';
+
+import { AnimeType } from './amime-type';
+import { AnimeStatus } from './anime-status';
 
 import { Immerable, OmitImmerable } from './immerable';
 
@@ -28,10 +29,10 @@ export class Anime extends Immerable {
 	public readonly broadcasted: BroadCastedTime;
 
 	/** Type of the anime ex OVA. */
-	public readonly animeType: animeType;
+	public readonly animeType: AnimeType;
 
 	/** Status of the anime. */
-	public readonly animeStatus: animeStatus;
+	public readonly animeStatus: AnimeStatus;
 
 	/** Score of the anime from website. */
 	public readonly score: number | null;

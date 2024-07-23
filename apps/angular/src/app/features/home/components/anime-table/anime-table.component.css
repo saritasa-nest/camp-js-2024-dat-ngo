@@ -7,15 +7,15 @@
 .anime__table-container {
 	height: 100%;
 	overflow-y: auto;
-	border-radius: 16px;
+	border-radius: var(--border-radius);
 }
 
-.mat-mdc-header-cell,
-.mat-mdc-cell {
+.anime__header,
+.anime__cell {
 	text-align: center;
 }
 
-[class*="mat-column-title_"] {
+.anime__column {
 	word-wrap: break-word;
 	white-space: unset;
 	width: 20%;
