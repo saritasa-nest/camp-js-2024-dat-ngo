@@ -1,6 +1,6 @@
 @if(animePage$ | async; as animePage) {
 	<section class="mat-elevation-z8 anime__table-container" >
-		<table mat-table [dataSource]="animePage !== null ? animePage.items : []">
+		<table mat-table [dataSource]="animePage !== null ? animePage.items : []" [trackBy]="trackBy">
 			<!--- Note that these columns can be defined in any order.
 						The actual rendered columns are set as a property on the row definition" -->
 			<ng-container class="anime__column" matColumnDef="Image">

@@ -17,7 +17,6 @@ import { Anime } from '@js-camp/core/models/anime.model';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimeTableComponent {
-
 	/** Anime response observable.  */
 	protected readonly animePage$: Observable<Pagination<Anime>>;
 
@@ -25,6 +24,14 @@ export class AnimeTableComponent {
 
 	public constructor() {
 		this.animePage$ = this.animeService.getAllAnime();
+	}
+
+	/** This informs the table how to uniquely identify rows to track how the data changes with each update.
+	 * @param index Index of them Anime on table.
+	 * @param item Items on table.
+	 */
+	protected trackBy(index: number, item: Anime): Anime['id'] {
+		return item.id;
 	}
 
 	/** Displayed columns .*/
