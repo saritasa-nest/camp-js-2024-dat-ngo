@@ -7,11 +7,13 @@ import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Pagination } from '@js-camp/core/models/pagination';
 import { Anime } from '@js-camp/core/models/anime.model';
 
+import { PaginatorComponent } from '../../paginator/paginator.component';
+
 /** Create anime table componet.*/
 @Component({
 	selector: 'camp-anime-table',
 	standalone: true,
-	imports: [MatTableModule, CommonModule, EmptyPipe, AsyncPipe],
+	imports: [MatTableModule, CommonModule, EmptyPipe, AsyncPipe, PaginatorComponent],
 	templateUrl: './anime-table.component.html',
 	styleUrl: './anime-table.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
