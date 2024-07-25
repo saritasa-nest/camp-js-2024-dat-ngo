@@ -14,13 +14,7 @@ export class TurnGenerator extends Publisher<number> {
 		this.playerCount = this.players;
 	}
 
-	/**
-	 * When the next() function execute, it notify the currentPlayer Index to Dice
-	 * and currentPlayerIndex will be move to the next player, Dice will receive the
-	 * index and dice a random number along with the index and notify that Player and
-	 * Debugger will receive that that notify for the Result Displayer to display out
-	 * the result and debugger.
-	 */
+	/** Function next() to inform the dice it's next turn to do a dice*/
 	public next(): void {
 		this.notify(this.currentPlayerIndex);
 		this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.playerCount;
