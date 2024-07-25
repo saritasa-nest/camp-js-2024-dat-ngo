@@ -41,5 +41,6 @@
 			<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 		</table>
 	</section>
-	<camp-paginator></camp-paginator>
+	<!-- <camp-paginator [data]="animePage.items"></camp-paginator> -->
+	<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 }

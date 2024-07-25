@@ -1,11 +1,12 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewChild } from '@angular/core';
 import { AnimeService } from '@js-camp/angular/core/services/anime.service';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Pagination } from '@js-camp/core/models/pagination';
 import { Anime } from '@js-camp/core/models/anime.model';
+import { MatPaginator } from '@angular/material/paginator';
 
 import { PaginatorComponent } from '../../paginator/paginator.component';
 
@@ -13,7 +14,7 @@ import { PaginatorComponent } from '../../paginator/paginator.component';
 @Component({
 	selector: 'camp-anime-table',
 	standalone: true,
-	imports: [MatTableModule, CommonModule, EmptyPipe, AsyncPipe, PaginatorComponent],
+	imports: [MatTableModule, CommonModule, EmptyPipe, AsyncPipe, PaginatorComponent, MatPaginator],
 	templateUrl: './anime-table.component.html',
 	styleUrl: './anime-table.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,6 +28,10 @@ export class AnimeTableComponent {
 	public constructor() {
 		this.animePage$ = this.animeService.getAllAnime();
 	}
+
+	dataSource = new MatTableDataSource()
+
+	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
 	/** This informs the table how to uniquely identify rows to track how the data changes with each update.
 	 * @param index Index of them Anime on table.
