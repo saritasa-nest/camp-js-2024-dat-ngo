@@ -1,13 +1,13 @@
 import { isHTMLElement } from '../guards/isHTMLElement';
 import { Subscriber } from '../types/subscriber';
 
-/** ResultData. */
-export class ResultData {
+/** Result. */
+export class Result {
 	public constructor(public readonly diceResult: number[], public readonly totalScore: number) {}
 }
 
 /** ResultDisplayer is the displayer of the result and debugger . */
-export class ResultDisplayer implements Subscriber<ResultData> {
+export class ResultDisplayer implements Subscriber<Result> {
 	private diceResult: number[] = [];
 
 	private totalScores = 0;
@@ -57,7 +57,7 @@ export class ResultDisplayer implements Subscriber<ResultData> {
 	 * Add docs here.
 	 * @param resultArray Result Array from Player.
 	 */
-	public update(resultArray: ResultData): void {
+	public update(resultArray: Result): void {
 		this.diceResult = resultArray.diceResult;
 		this.totalScores = this.getTotalScore();
 		if (this.resultElement) {

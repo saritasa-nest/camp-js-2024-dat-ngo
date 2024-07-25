@@ -1,5 +1,5 @@
 /** This is foo comment. */
-import { Publisher } from '../types/publisher';
+import { Publisher } from '../Types/publisher';
 
 /** TurnGenerator.*/
 export class TurnGenerator extends Publisher<number> {

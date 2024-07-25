@@ -1,8 +1,8 @@
-import { Publisher } from '../types/publisher';
+import { Publisher } from '../Types/publisher';
 
 import { PlayerTurnResult } from '../types/player-turn-result';
 
-import { ResultData } from './result-displayer';
+import { Result } from './result-displayer';
 
 /** Inspector is the class illustrate the member that subscribe to the game. */
 export class Inspector {
@@ -11,7 +11,7 @@ export class Inspector {
 	private readonly diceResults: number[] = [];
 
 	/** Create a publisher for Result Data.*/
-	public readonly result: Publisher<ResultData> = new Publisher<ResultData>();
+	public readonly result: Publisher<Result> = new Publisher<Result>();
 
 	/** Function to get total score of dice result array. */
 	protected get getTotalScore(): number {

@@ -1,7 +1,7 @@
 import { Subscriber } from '../types/subscriber';
-import { Publisher } from '../types/publisher';
+import { Publisher } from '../Types/publisher';
 
-import { PlayerTurnResult } from '../types/player-turn-result';
+import { PlayerTurnResult } from '../Types/player-turn-result';
 import { getRandomIntegerNumber } from '../utils/utils';
 import { SIDE_COUNT } from '../constants';
 

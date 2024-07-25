@@ -22,6 +22,13 @@ export class Publisher<T> {
 	}
 
 	/**
+	 * Method to remove all subscriber.
+	 */
+	public unsubscribeAll(): void {
+		this.subscribers = [];
+	}
+
+	/**
 	 * Method to notify.
 	 * @param message Data for notification to subscriber.
 	 */
