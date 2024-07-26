@@ -11,7 +11,7 @@ import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
 
 /** Anime services. */
 @Injectable({ providedIn: 'root' })
-export class AnimeService {
+export class DataService {
 	// Them readonly
 	private readonly httpClient = inject(HttpClient);
 
@@ -21,14 +21,21 @@ export class AnimeService {
 
 	private appApiConfig = inject(AppUrlsConfig);
 
+	public constructor(private http: HttpClient) {}
+
 	// TODO (Dat Ngo): Create filter params model and dto instead of using this while doing next task
-	private readonly param = new HttpParams().set('offset', 25).set('limit', 25);
+	// private readonly param = new HttpParams().set('offset', 25).set('limit', 25);
 
 	/** Observable to get all anime and map from pagination dto to pagination.*/
-	public getAllAnime(): Observable<Pagination<Anime>> {
+	public getPaginatorAnime(offset: number, limit: number): Observable<Pagination<Anime>> {
 		const url = new URL(this.appApiConfig.anime.list);
+		// const param = new HttpParams().set('offset', offset).set('limit', limit);
+		const param = {
+			offset: offset.toString(),
+			limit: limit.toString(),
+		};
 		return this.httpClient
-			.get<PaginationDto<AnimeDto>>(url.toString(), { params: this.param })
+			.get<PaginationDto<AnimeDto>>(url.toString(), { params: param })
 			.pipe(map((value) => this.paginationMapper.fromDto(value, this.animeMapper.fromDto)));
 	}
 }
