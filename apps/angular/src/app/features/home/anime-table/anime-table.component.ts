@@ -2,7 +2,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { AnimeService } from '@js-camp/angular/core/services/anime.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { catchError, map, Observable, of, startWith, switchMap, tap } from 'rxjs';
+import { catchError, combineLatest, map, Observable, of, startWith, switchMap, tap } from 'rxjs';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Pagination } from '@js-camp/core/models/pagination';
 import { Anime } from '@js-camp/core/models/anime.model';
@@ -11,7 +11,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { PaginatorComponent } from '../../paginator/paginator.component';
 import { DataService } from '@js-camp/angular/core/services/pagination-anime.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 /** Create anime table componet.*/
 @Component({
@@ -32,7 +32,9 @@ export class AnimeTableComponent {
 
 	protected paginatorForm: FormGroup;
 
-	private route = inject(Router);
+	private router = inject(Router);
+
+	private route = inject(ActivatedRoute);
 
 	protected resultsLength = 0;
 
@@ -41,19 +43,23 @@ export class AnimeTableComponent {
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
 	public constructor(private fb: FormBuilder) {
-		// this.animePage$ = this.animePaginatorService.getPaginatorAnime(0, 100);
+		const initialOffset = +(this.route.snapshot.queryParamMap.get('offset') ?? 0);
+		const initialLimit = +(this.route.snapshot.queryParamMap.get('limit') ?? 10);
 		this.paginatorForm = this.fb.group({
-			pageIndex: [0],
-			pageSize: [10],
+			offset: initialOffset,
+			limit: initialLimit,
 		});
 
-		this.animePage$ = this.paginatorForm.valueChanges.pipe(
-			startWith(this.paginatorForm.value),
-			tap(() => (this.isLoading = true)),
-			switchMap((value) => {
-				console.log(value);
-				const offset = value.pageIndex * value.pageSize;
-				const limit = value.pageSize;
+		const pagination$ = this.paginatorForm.valueChanges.pipe(startWith(this.paginatorForm.value));
+		this.animePage$ = combineLatest([pagination$, this.route.queryParamMap]).pipe(
+			tap(([pagination]) => {
+				this.updateUrl(pagination.offset, pagination.limit);
+				this.isLoading = true;
+			}),
+			switchMap(([pagination]) => {
+				console.log(pagination);
+				const offset = pagination.offset;
+				const limit = pagination.limit;
 				return this.animePaginatorService.getPaginatorAnime(offset, limit);
 			}),
 			map((data) => {
@@ -61,16 +67,32 @@ export class AnimeTableComponent {
 				this.isLoading = false;
 				return data;
 			})
-			// catchError(() => {
-			//   return of([]);
-			// })
 		);
+
+		// this.animePage$ = this.paginatorForm.valueChanges.pipe(
+		// 	startWith(this.paginatorForm.value),
+		// 	tap(() => (this.isLoading = true)),
+		// 	switchMap((value) => {
+		// 		console.log(value);
+		// 		const offset = value.offset;
+		// 		const limit = value.limit;
+		// 		return this.animePaginatorService.getPaginatorAnime(offset, limit);
+		// 	}),
+		// 	map((data) => {
+		// 		this.resultsLength = data.totalCount;
+		// 		this.isLoading = false;
+		// 		return data;
+		// 	})
+		// 	// catchError(() => {
+		// 	//   return of([]);
+		// 	// })
+		// );
 	}
 
 	onPageChange(event: any) {
 		this.paginatorForm.patchValue({
-			pageIndex: event.pageIndex,
-			pageSize: event.pageSize,
+			offset: event.pageIndex * event.pageSize,
+			limit: event.pageSize,
 		});
 	}
 
@@ -80,6 +102,14 @@ export class AnimeTableComponent {
 	 */
 	protected trackBy(index: number, item: Anime): Anime['id'] {
 		return item.id;
+	}
+
+	updateUrl(offset: number, limit: number) {
+		this.router.navigate([], {
+			relativeTo: this.route,
+			queryParams: { offset, limit },
+			queryParamsHandling: 'merge',
+		});
 	}
 
 	/** Displayed columns .*/

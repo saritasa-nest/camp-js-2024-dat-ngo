@@ -1,6 +1,6 @@
 @if(animePage$ | async; as animePage) {
 <section class="mat-elevation-z8 anime__table-container">
-	<table mat-table [dataSource]="animePage !== null ? animePage.items : []" [trackBy]="trackBy">
+	<table mat-table [dataSource]="animePage.items" [trackBy]="trackBy">
 		<!--- Note that these columns can be defined in any order.
 						The actual rendered columns are set as a property on the row definition" -->
 		<ng-container class="anime__column" matColumnDef="Image">
@@ -44,7 +44,7 @@
 <!-- <camp-paginator [data]="animePage.items"></camp-paginator> -->
 <mat-paginator
 	[length]="resultsLength"
-	[pageSize]="paginatorForm.value.pageSize"
+	[pageSize]="paginatorForm.value.limit"
 	[pageSizeOptions]="[5, 10, 25, 100]"
 	(page)="onPageChange($event)"
 	[disabled]="isLoading"
