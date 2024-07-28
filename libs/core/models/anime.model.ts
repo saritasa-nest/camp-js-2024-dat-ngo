@@ -1,6 +1,6 @@
 import { BroadCastedTime } from '../types/BroadcastedTime.type';
 
-import { AnimeType } from './amime-type';
+import { AnimeType } from './anime-type';
 import { AnimeStatus } from './anime-status';
 
 import { Immerable, OmitImmerable } from './immerable';

@@ -12,6 +12,8 @@ import { PaginatorComponent } from '../../paginator/paginator.component';
 import { DataService } from '@js-camp/angular/core/services/pagination-anime.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UrlParamsService } from '@js-camp/angular/core/services/url-param.service';
+import { AnimeQueryParams } from '@js-camp/core/models/url-query';
 
 /** Create anime table componet.*/
 @Component({
@@ -36,13 +38,18 @@ export class AnimeTableComponent {
 
 	private route = inject(ActivatedRoute);
 
+	private urlParamsService = inject(UrlParamsService);
+
 	protected resultsLength = 0;
 
 	protected isLoading = true;
 
+	private queryParams$: Observable<AnimeQueryParams.Combined>;
+
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
 	public constructor(private fb: FormBuilder) {
+		this.queryParams$ = this.urlParamsService.getCombinedQueryParams();
 		const initialOffset = +(this.route.snapshot.queryParamMap.get('offset') ?? 0);
 		const initialLimit = +(this.route.snapshot.queryParamMap.get('limit') ?? 10);
 		this.paginatorForm = this.fb.group({
@@ -57,7 +64,6 @@ export class AnimeTableComponent {
 				this.isLoading = true;
 			}),
 			switchMap(([pagination]) => {
-				console.log(pagination);
 				const offset = pagination.offset;
 				const limit = pagination.limit;
 				return this.animePaginatorService.getPaginatorAnime(offset, limit);
@@ -68,25 +74,6 @@ export class AnimeTableComponent {
 				return data;
 			})
 		);
-
-		// this.animePage$ = this.paginatorForm.valueChanges.pipe(
-		// 	startWith(this.paginatorForm.value),
-		// 	tap(() => (this.isLoading = true)),
-		// 	switchMap((value) => {
-		// 		console.log(value);
-		// 		const offset = value.offset;
-		// 		const limit = value.limit;
-		// 		return this.animePaginatorService.getPaginatorAnime(offset, limit);
-		// 	}),
-		// 	map((data) => {
-		// 		this.resultsLength = data.totalCount;
-		// 		this.isLoading = false;
-		// 		return data;
-		// 	})
-		// 	// catchError(() => {
-		// 	//   return of([]);
-		// 	// })
-		// );
 	}
 
 	onPageChange(event: any) {
