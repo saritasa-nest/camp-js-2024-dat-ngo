@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { AnimeQueryParams } from '@js-camp/core/models/url-query';
 import { AnimeType } from '@js-camp/core/models/anime-type';
@@ -19,7 +19,7 @@ export class UrlParamsService {
 
 	/** Convert the params from URL. */
 	public getCombinedQueryParams(): Observable<AnimeQueryParams.Combined> {
-		return this.route.queryParamMap.pipe(
+		return this.route.queryParamMap.pipe(tap((data) => console.log(data))).pipe(
 			map((params) => {
 				const combinedParams: Partial<AnimeQueryParams.Combined> = {
 					search: params.get('search') ?? undefined,
@@ -28,7 +28,6 @@ export class UrlParamsService {
 					sortFields: params.getAll('sortFields').length > 0 ? params.getAll('sortFields') : undefined,
 					type: (params.get('type') as AnimeType) ?? undefined,
 				};
-				console.log(combinedParams);
 				return combinedParams as AnimeQueryParams.Combined;
 			})
 		);
@@ -36,23 +35,13 @@ export class UrlParamsService {
 
 	/** Set query parameters from AnimeQueryParams.Combined type. */
 	public setCombinedQueryParams(params: AnimeQueryParams.Combined): void {
-		const queryParams: UrlQueryParams = {};
-
-		if (params.search != null) {
-			queryParams.search = params.search;
-		}
-		if (params.pageNumber != null) {
-			queryParams.pageNumber = params.pageNumber.toString();
-		}
-		if (params.pageSize != null) {
-			queryParams.pageSize = params.pageSize.toString();
-		}
-		if (params.sortFields != null) {
-			queryParams.sortFields = params.sortFields;
-		}
-		if (params.type != null) {
-			queryParams.type = params.type;
-		}
+		const queryParams: UrlQueryParams = {
+			...(params.search != null && { search: params.search }),
+			...(params.pageNumber != null && { pageNumber: params.pageNumber.toString() }),
+			...(params.pageSize != null && { pageSize: params.pageSize.toString() }),
+			...(params.sortFields != null && { sortFields: params.sortFields }),
+			...(params.type != null && { type: params.type }),
+		};
 
 		this.router.navigate([], {
 			relativeTo: this.route,

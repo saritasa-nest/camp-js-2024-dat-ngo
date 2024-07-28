@@ -15,11 +15,21 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UrlParamsService } from '@js-camp/angular/core/services/url-param.service';
 import { AnimeQueryParams } from '@js-camp/core/models/url-query';
 
+import { AnimeCatalogComponent } from '../anime-catalog/anime-catalog.component';
+
 /** Create anime table componet.*/
 @Component({
 	selector: 'camp-anime-table',
 	standalone: true,
-	imports: [MatTableModule, CommonModule, EmptyPipe, AsyncPipe, PaginatorComponent, MatPaginator],
+	imports: [
+		MatTableModule,
+		CommonModule,
+		EmptyPipe,
+		AsyncPipe,
+		PaginatorComponent,
+		MatPaginator,
+		AnimeCatalogComponent,
+	],
 	templateUrl: './anime-table.component.html',
 	styleUrl: './anime-table.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,7 +38,7 @@ export class AnimeTableComponent {
 	/** Anime response observable.  */
 	protected animePage$: Observable<Pagination<Anime>>;
 
-	// private readonly animeService = inject(AnimeService);
+	private readonly animeService = inject(AnimeService);
 
 	private readonly animePaginatorService = inject(DataService);
 
@@ -58,22 +68,23 @@ export class AnimeTableComponent {
 		});
 
 		const pagination$ = this.paginatorForm.valueChanges.pipe(startWith(this.paginatorForm.value));
-		this.animePage$ = combineLatest([pagination$, this.route.queryParamMap]).pipe(
-			tap(([pagination]) => {
-				this.updateUrl(pagination.offset, pagination.limit);
-				this.isLoading = true;
-			}),
-			switchMap(([pagination]) => {
-				const offset = pagination.offset;
-				const limit = pagination.limit;
-				return this.animePaginatorService.getPaginatorAnime(offset, limit);
-			}),
-			map((data) => {
-				this.resultsLength = data.totalCount;
-				this.isLoading = false;
-				return data;
-			})
-		);
+		// this.animePage$ = combineLatest([pagination$, this.route.queryParamMap]).pipe(
+		// 	tap(([pagination]) => {
+		// 		this.updateUrl(pagination.offset, pagination.limit);
+		// 		this.isLoading = true;
+		// 	}),
+		// 	switchMap(([pagination]) => {
+		// 		const offset = pagination.offset;
+		// 		const limit = pagination.limit;
+		// 		return this.animePaginatorService.getPaginatorAnime(offset, limit);
+		// 	}),
+		// 	map((data) => {
+		// 		this.resultsLength = data.totalCount;
+		// 		this.isLoading = false;
+		// 		return data;
+		// 	})
+		// );
+		this.animePage$ = this.animeService.getAllAnime();
 	}
 
 	onPageChange(event: any) {

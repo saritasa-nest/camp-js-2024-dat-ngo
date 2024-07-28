@@ -1,8 +1,8 @@
 import { HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { AnimeQueryParamsDto } from '@js-camp/core/dtos/query-params.dto';
+import { AnimeQueryParamsDto } from '@js-camp/core/dtos/url-query.dto';
 import { AnimeQueryParamsMapper } from '@js-camp/core/mappers/query-params.mapper';
-import { AnimeQueryParams } from '@js-camp/core/models/query-params';
+import { AnimeQueryParams } from '@js-camp/core/models/url-query';
 
 /** Http Params Service. */
 @Injectable({

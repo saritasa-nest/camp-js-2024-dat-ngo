@@ -1,4 +1,5 @@
 @if(animePage$ | async; as animePage) {
+<camp-anime-catalog></camp-anime-catalog>
 <section class="mat-elevation-z8 anime__table-container">
 	<table mat-table [dataSource]="animePage.items" [trackBy]="trackBy">
 		<!--- Note that these columns can be defined in any order.
@@ -48,7 +49,8 @@
 	[pageSizeOptions]="[5, 10, 25, 100]"
 	(page)="onPageChange($event)"
 	[disabled]="isLoading"
-	> showFirstLastButtons></mat-paginator
+>
+	showFirstLastButtons></mat-paginator
 >
 <div *ngIf="isLoading" class="loading-spinner">
 	<!-- Add a spinner or loading indicator here -->
