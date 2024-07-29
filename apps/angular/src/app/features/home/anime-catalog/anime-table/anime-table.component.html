@@ -1,63 +1,70 @@
-
+<mat-form-field class="main__type-select" appearance="fill">
+	<mat-label>Anime type</mat-label>
+	<mat-select [(value)]="params.type" (valueChange)="onSelectType()" multiple>
+		@for (option of selectTypes; track option) {
+		<mat-option [value]="option">{{ option }}</mat-option>
+		}
+	</mat-select>
+</mat-form-field>
 <div class="main__search-group">
 	<mat-form-field appearance="fill">
 		<mat-label>Search</mat-label>
-		<input matInput [(ngModel)]="params.search" placeholder="Placeholder">
+		<input matInput [(ngModel)]="params.search" placeholder="Placeholder" />
 	</mat-form-field>
 	<button class="main__search-button" mat-flat-button type="button" (click)="onSearch()">Search</button>
 </div>
-	@if(animePage$ | async; as animePage) {
-	<section class="mat-elevation-z8 anime__table-container">
-		<table mat-table [dataSource]="animePage.items" [trackBy]="trackBy">
-			<!--- Note that these columns can be defined in any order.
+@if(animePage$ | async; as animePage) {
+<section class="mat-elevation-z8 anime__table-container">
+	<table mat-table [dataSource]="animePage.items" [trackBy]="trackBy">
+		<!--- Note that these columns can be defined in any order.
 						The actual rendered columns are set as a property on the row definition" -->
-			<ng-container class="anime__column" matColumnDef="Image">
-				<th class="anime__header" mat-header-cell *matHeaderCellDef>Image</th>
-				<td mat-cell class="anime__cell" *matCellDef="let anime">
-					<div class="anime__image-container">
-						<img class="anime__image" [src]="anime.coverImage" [alt]="anime.titleJpn" />
-					</div>
-				</td>
-			</ng-container>
+		<ng-container class="anime__column" matColumnDef="Image">
+			<th class="anime__header" mat-header-cell *matHeaderCellDef>Image</th>
+			<td mat-cell class="anime__cell" *matCellDef="let anime">
+				<div class="anime__image-container">
+					<img class="anime__image" [src]="anime.coverImage" [alt]="anime.titleJpn" />
+				</div>
+			</td>
+		</ng-container>
 
-			<ng-container class="anime__column" matColumnDef="English Title">
-				<th class="anime__header" mat-header-cell *matHeaderCellDef>English Title</th>
-				<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.titleEng | empty }}</td>
-			</ng-container>
+		<ng-container class="anime__column" matColumnDef="English Title">
+			<th class="anime__header" mat-header-cell *matHeaderCellDef>English Title</th>
+			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.titleEng | empty }}</td>
+		</ng-container>
 
-			<ng-container class="anime__column" matColumnDef="Japanese Title">
-				<th class="anime__header" mat-header-cell *matHeaderCellDef>Japanese Title</th>
-				<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.titleJpn | empty }}</td>
-			</ng-container>
+		<ng-container class="anime__column" matColumnDef="Japanese Title">
+			<th class="anime__header" mat-header-cell *matHeaderCellDef>Japanese Title</th>
+			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.titleJpn | empty }}</td>
+		</ng-container>
 
-			<ng-container class="anime__column" matColumnDef="Broadcasted Date">
-				<th class="anime__header" mat-header-cell *matHeaderCellDef>Broadcasted Date</th>
-				<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.broadcasted.startDate | date | empty }}</td>
-			</ng-container>
+		<ng-container class="anime__column" matColumnDef="Broadcasted Date">
+			<th class="anime__header" mat-header-cell *matHeaderCellDef>Broadcasted Date</th>
+			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.broadcasted.startDate | date | empty }}</td>
+		</ng-container>
 
-			<ng-container class="anime__column" matColumnDef="Type">
-				<th class="anime__header" mat-header-cell *matHeaderCellDef>Type</th>
-				<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.animeType | empty }}</td>
-			</ng-container>
+		<ng-container class="anime__column" matColumnDef="Type">
+			<th class="anime__header" mat-header-cell *matHeaderCellDef>Type</th>
+			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.animeType | empty }}</td>
+		</ng-container>
 
-			<ng-container class="anime__column" matColumnDef="Status">
-				<th class="anime__header" mat-header-cell *matHeaderCellDef>Status</th>
-				<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.animeStatus | empty }}</td>
-			</ng-container>
+		<ng-container class="anime__column" matColumnDef="Status">
+			<th class="anime__header" mat-header-cell *matHeaderCellDef>Status</th>
+			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.animeStatus | empty }}</td>
+		</ng-container>
 
-			<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-			<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-		</table>
-	</section>
-	<mat-paginator
-		[length]="animePage.totalCount"
-		[pageSizeOptions]="[5, 10, 25, 100]"
-		[pageSize]="animePage.items.length"
-		(page)="onPageChange($event)"
-	>
-		showFirstLastButtons></mat-paginator
-	>
-	<!-- <div *ngIf="isLoading" class="loading-spinner">
+		<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+	</table>
+</section>
+<mat-paginator
+	[length]="animePage.totalCount"
+	[pageSizeOptions]="[5, 10, 25, 100]"
+	[pageSize]="animePage.items.length"
+	(page)="onPageChange($event)"
+>
+	showFirstLastButtons></mat-paginator
+>
+<!-- <div *ngIf="isLoading" class="loading-spinner">
 		Loading...
 	</div> -->
-	}
+}

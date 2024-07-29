@@ -17,6 +17,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatFormField } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { AnimeType } from '@js-camp/core/models/anime-type';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSort } from '@angular/material/sort';
 /** Create anime table componet.*/
 @Component({
 	selector: 'camp-anime-table',
@@ -33,6 +36,8 @@ import { FormsModule } from '@angular/forms';
 		MatFormFieldModule,
 		MatFormField,
 		FormsModule,
+		MatSelectModule,
+		MatSort,
 	],
 	templateUrl: './anime-table.component.html',
 	styleUrl: './anime-table.component.css',
@@ -48,7 +53,12 @@ export class AnimeTableComponent {
 
 	private readonly urlService = inject(UrlParamsService);
 
+	/** An array of available anime types to choose from. */
+	protected readonly selectTypes = Object.values(AnimeType);
+
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
+
+	@ViewChild(MatSort) protected sort!: MatSort;
 
 	public constructor() {
 		this.animePage$ = this.animeService.getAllAnime();
@@ -66,6 +76,10 @@ export class AnimeTableComponent {
 	}
 
 	protected onSearch(): void {
+		this.urlService.updateCombinedQueryParams(this.params);
+	}
+
+	protected onSelectType(): void {
 		this.urlService.updateCombinedQueryParams(this.params);
 	}
 
