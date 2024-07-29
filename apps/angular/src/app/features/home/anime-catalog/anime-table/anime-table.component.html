@@ -1,4 +1,11 @@
 
+<div class="main__search-group">
+	<mat-form-field appearance="fill">
+		<mat-label>Search</mat-label>
+		<input matInput [(ngModel)]="params.search" placeholder="Placeholder">
+	</mat-form-field>
+	<button class="main__search-button" mat-flat-button type="button" (click)="onSearch()">Search</button>
+</div>
 	@if(animePage$ | async; as animePage) {
 	<section class="mat-elevation-z8 anime__table-container">
 		<table mat-table [dataSource]="animePage.items" [trackBy]="trackBy">

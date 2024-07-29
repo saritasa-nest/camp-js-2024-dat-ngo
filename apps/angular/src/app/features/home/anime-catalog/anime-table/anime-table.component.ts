@@ -13,7 +13,10 @@ import { AnimeQueryParams } from '@js-camp/core/models/url-query';
 
 import { PaginatorComponent } from '../../../paginator/paginator.component';
 import { AnimeCatalogComponent } from '../anime-catalog.component';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormField } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 /** Create anime table componet.*/
 @Component({
 	selector: 'camp-anime-table',
@@ -26,6 +29,10 @@ import { AnimeCatalogComponent } from '../anime-catalog.component';
 		PaginatorComponent,
 		MatPaginator,
 		AnimeCatalogComponent,
+		MatInputModule,
+		MatFormFieldModule,
+		MatFormField,
+		FormsModule,
 	],
 	templateUrl: './anime-table.component.html',
 	styleUrl: './anime-table.component.css',
@@ -35,6 +42,8 @@ export class AnimeTableComponent {
 	/** Anime response observable.  */
 	protected animePage$: Observable<Pagination<Anime>>;
 
+	protected params: Partial<AnimeQueryParams.Combined>;
+
 	private readonly animeService = inject(AnimeService);
 
 	private readonly urlService = inject(UrlParamsService);
@@ -43,14 +52,21 @@ export class AnimeTableComponent {
 
 	public constructor() {
 		this.animePage$ = this.animeService.getAllAnime();
+		this.params = {};
 	}
 
 	protected onPageChange(event: PageEvent): void {
-		const searchParams: Partial<AnimeQueryParams.Combined> = {
+		const newParams: Partial<AnimeQueryParams.Combined> = {
+			...this.params,
 			pageNumber: event.pageIndex,
 			pageSize: event.pageSize,
 		};
-		this.urlService.updateCombinedQueryParams(searchParams);
+		this.params = newParams;
+		this.urlService.updateCombinedQueryParams(this.params);
+	}
+
+	protected onSearch(): void {
+		this.urlService.updateCombinedQueryParams(this.params);
 	}
 
 	/** This informs the table how to uniquely identify rows to track how the data changes with each update.
