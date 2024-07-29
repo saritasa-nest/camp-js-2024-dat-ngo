@@ -30,9 +30,6 @@ export class AnimeService {
 
 	private urlParamsService = inject(UrlParamsService);
 
-	// TODO (Dat Ngo): Create filter params model and dto instead of using this while doing next task
-	private readonly param = new HttpParams().set('offset', 25).set('limit', 25);
-
 	private fetchAnimeWithParams(queryParams: AnimeQueryParams.Combined): Observable<Pagination<Anime>> {
 		const params = this.httpParamsService.getHttpParams(queryParams);
 		return this.httpClient

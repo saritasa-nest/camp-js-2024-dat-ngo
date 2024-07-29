@@ -21,7 +21,7 @@ const MAP_ANIME_TYPE_TO_DTO: Record<AnimeType, AnimeTypeDto> = {
 export class AnimeQueryParamsMapper {
 	/** @inheritdoc */
 	public mapPaginationOptionsToDto(model: AnimeQueryParams.Pagination): AnimeQueryParamsDto.Pagination | null {
-		if (model.pageNumber && model.pageSize) {
+		if (model.pageNumber !== null && model.pageSize !== null) {
 			return {
 				offset: model.pageNumber * model.pageSize,
 				limit: model.pageSize,

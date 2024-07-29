@@ -1,4 +1,20 @@
-<main class="main">
+
+<div class="search-sort-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="Search..." [(ngModel)]="searchQuery" (input)="onSearchChange()">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Sort By</mat-label>
+    <mat-select [(value)]="sortBy" (selectionChange)="onSortChange()">
+      <mat-option *ngFor="let option of sortOptions" [value]="option.value">
+        {{ option.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<!-- <main class="main">
 	<section class="main__table">
 		<div class="main__container container">
 			<h1 class="main__header">Anime Catalog</h1>
@@ -20,9 +36,9 @@
 					<button class="main__search-button" mat-flat-button type="button" (click)="onSearch()">Search</button>
 				</div>
 			</div>
-			<!-- <camp-anime-table [animeList]="(paginatedAnime)?.results" (sortChange)="onSortChange($event)"/>
+			<camp-anime-table [animeList]="(paginatedAnime)?.results" (sortChange)="onSortChange($event)"/>
 			<mat-paginator #paginator [length]="(paginatedAnime)?.totalCount" [pageSize]="animeParameters.limitPerPage" [pageIndex]="animeParameters.offset / animeParameters.limitPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)" aria-label="Select page">
-			</mat-paginator> -->
+			</mat-paginator>
 		</div>
 	</section>
-</main>
+</main> -->
