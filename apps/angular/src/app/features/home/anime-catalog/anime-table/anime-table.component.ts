@@ -1,5 +1,5 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { AnimeService } from '@js-camp/angular/core/services/anime.service';
 import { MatTableModule } from '@angular/material/table';
 import { Observable } from 'rxjs';
@@ -43,7 +43,7 @@ import { MatSort } from '@angular/material/sort';
 	styleUrl: './anime-table.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnimeTableComponent {
+export class AnimeTableComponent implements OnInit {
 	/** Anime response observable.  */
 	protected animePage$: Observable<Pagination<Anime>>;
 
@@ -60,9 +60,22 @@ export class AnimeTableComponent {
 
 	@ViewChild(MatSort) protected sort!: MatSort;
 
+	protected pageSize: number | null = null;
+
+	protected pageNumber: number | null = null;
+
 	public constructor() {
 		this.animePage$ = this.animeService.getAllAnime();
 		this.params = {};
+	}
+
+	ngOnInit(): void {
+		this.animeService.pageNumberSubject$.subscribe((pageNumber) => {
+			this.pageNumber = pageNumber;
+		});
+		this.animeService.pageSizeSubject$.subscribe((pageSize) => {
+			this.pageSize = pageSize;
+		});
 	}
 
 	protected onPageChange(event: PageEvent): void {
@@ -76,10 +89,20 @@ export class AnimeTableComponent {
 	}
 
 	protected onSearch(): void {
+		const newParams: Partial<AnimeQueryParams.Combined> = {
+			...this.params,
+			pageNumber: 0,
+		};
+		this.params = newParams;
 		this.urlService.updateCombinedQueryParams(this.params);
 	}
 
 	protected onSelectType(): void {
+		const newParams: Partial<AnimeQueryParams.Combined> = {
+			...this.params,
+			pageNumber: 0,
+		};
+		this.params = newParams;
 		this.urlService.updateCombinedQueryParams(this.params);
 	}
 

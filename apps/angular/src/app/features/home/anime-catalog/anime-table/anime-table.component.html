@@ -1,6 +1,6 @@
 <mat-form-field class="main__type-select" appearance="fill">
 	<mat-label>Anime type</mat-label>
-	<mat-select [(value)]="params.type" (valueChange)="onSelectType()" multiple>
+	<mat-select [(value)]="params.type" (valueChange)="onSelectType()">
 		@for (option of selectTypes; track option) {
 		<mat-option [value]="option">{{ option }}</mat-option>
 		}
@@ -59,12 +59,10 @@
 <mat-paginator
 	[length]="animePage.totalCount"
 	[pageSizeOptions]="[5, 10, 25, 100]"
-	[pageSize]="animePage.items.length"
+	[pageSize]="pageSize"
 	(page)="onPageChange($event)"
+	[pageIndex]="pageNumber"
 >
 	showFirstLastButtons></mat-paginator
 >
-<!-- <div *ngIf="isLoading" class="loading-spinner">
-		Loading...
-	</div> -->
 }
