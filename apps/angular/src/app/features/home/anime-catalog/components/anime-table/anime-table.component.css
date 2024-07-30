@@ -1,9 +1,3 @@
-:host {
-	display: block;
-	width: 100%;
-	height: 100%;
-}
-
 .anime__table-container {
 	height: 100%;
 	overflow-y: auto;
