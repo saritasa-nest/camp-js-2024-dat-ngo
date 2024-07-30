@@ -13,9 +13,8 @@
 	</mat-form-field>
 	<button class="main__search-button" mat-flat-button type="button" (click)="onSearch()">Search</button>
 </div>
-@if(animePage$ | async; as animePage) {
 <section class="mat-elevation-z8 anime__table-container">
-	<table mat-table [dataSource]="animePage.items" [trackBy]="trackBy">
+	<table mat-table [dataSource]="dataSource" matSort [trackBy]="trackBy">
 		<!--- Note that these columns can be defined in any order.
 						The actual rendered columns are set as a property on the row definition" -->
 		<ng-container class="anime__column" matColumnDef="Image">
@@ -47,7 +46,7 @@
 			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.animeType | empty }}</td>
 		</ng-container>
 
-		<ng-container class="anime__column" matColumnDef="Status">
+		<ng-container class="anime__column" matColumnDef="Status" mat-sort-header>
 			<th class="anime__header" mat-header-cell *matHeaderCellDef>Status</th>
 			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.animeStatus | empty }}</td>
 		</ng-container>
@@ -56,7 +55,7 @@
 		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 	</table>
 </section>
-<mat-paginator
+<!-- <mat-paginator
 	[length]="animePage.totalCount"
 	[pageSizeOptions]="[5, 10, 25, 100]"
 	[pageSize]="pageSize"
@@ -64,5 +63,4 @@
 	[pageIndex]="pageNumber"
 >
 	showFirstLastButtons></mat-paginator
->
-}
+> -->

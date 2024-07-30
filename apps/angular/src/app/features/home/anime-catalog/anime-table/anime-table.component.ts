@@ -1,7 +1,7 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { AnimeService } from '@js-camp/angular/core/services/anime.service';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Pagination } from '@js-camp/core/models/pagination';
@@ -43,7 +43,7 @@ import { MatSort } from '@angular/material/sort';
 	styleUrl: './anime-table.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnimeTableComponent implements OnInit {
+export class AnimeTableComponent implements OnInit, OnChanges {
 	/** Anime response observable.  */
 	protected animePage$: Observable<Pagination<Anime>>;
 
@@ -59,6 +59,10 @@ export class AnimeTableComponent implements OnInit {
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
 	@ViewChild(MatSort) protected sort!: MatSort;
+
+	@Input() public animeList: ReadonlyArray<Anime> = [];
+
+	protected dataSource = new MatTableDataSource<Anime>();
 
 	protected pageSize: number | null = null;
 
@@ -76,6 +80,12 @@ export class AnimeTableComponent implements OnInit {
 		this.animeService.pageSizeSubject$.subscribe((pageSize) => {
 			this.pageSize = pageSize;
 		});
+	}
+
+	ngOnChanges(changes: SimpleChanges): void {
+		if (changes['animeList']) {
+			this.dataSource.data = [...this.animeList];
+		}
 	}
 
 	protected onPageChange(event: PageEvent): void {

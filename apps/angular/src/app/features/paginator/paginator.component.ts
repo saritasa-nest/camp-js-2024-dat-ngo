@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { Anime } from '@js-camp/core/models/anime.model';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 /**
  *Paginator.
@@ -15,11 +14,24 @@ import { Anime } from '@js-camp/core/models/anime.model';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginatorComponent {
-	protected readonly length = 100;
+	@Input() public pageNumber: number | null = null;
 
-	protected readonly pageSize = 25;
+	@Input() public pageSize: number | null = null;
 
+	/** Page size options. */
 	protected readonly pageSizeOptions = [5, 10, 25, 100];
 
-	@Input() data!: readonly Anime[];
+	/** Total amount of fetched items. */
+	@Input() public totalCount = 0;
+
+	/** Event emitter for page changing. */
+	@Output() public pageChange = new EventEmitter<PageEvent>();
+
+	/**
+	 * Emit the page event.
+	 * @param event The page event.
+	 */
+	public onPageChange(event: PageEvent): void {
+		this.pageChange.emit(event);
+	}
 }

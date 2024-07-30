@@ -1,38 +1,58 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormField } from '@angular/material/form-field';
-import { MatLabel } from '@angular/material/form-field';
-import { MatSelect } from '@angular/material/select';
-import { MatOption } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
+import { Observable, tap } from 'rxjs';
+import { Pagination } from '@js-camp/core/models/pagination';
+import { Anime } from '@js-camp/core/models/anime.model';
+import { AnimeService } from '@js-camp/angular/core/services/anime.service';
+import { PageEvent } from '@angular/material/paginator';
+import { UrlParamsService } from '@js-camp/angular/core/services/url-param.service';
+import { AnimeQueryParams } from '@js-camp/core/models/url-query';
+import { AnimeTableComponent } from './anime-table/anime-table.component';
+import { PaginatorComponent } from '../../paginator/paginator.component';
 @Component({
 	selector: 'camp-anime-catalog',
 	standalone: true,
-	imports: [CommonModule, MatFormField, MatLabel, MatSelect, MatOption, FormsModule],
+	imports: [CommonModule, MatFormField, AnimeTableComponent, PaginatorComponent],
 	templateUrl: './anime-catalog.component.html',
 	styleUrl: './anime-catalog.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnimeCatalogComponent {
-	searchQuery: string = '';
-	sortBy: string = '';
+export class AnimeCatalogComponent implements OnInit {
+	/** Anime response observable.  */
+	protected animePage$: Observable<Pagination<Anime>>;
 
-	/** 1. */
-	protected sortOptions = [
-		{ value: 'name', viewValue: 'Name' },
-		{ value: 'date', viewValue: 'Date' },
-		{ value: 'rating', viewValue: 'Rating' },
-	];
+	private readonly animeService = inject(AnimeService);
 
-	/** 1. */
-	public onSearchChange(): void {
-		// Logic for handling search query change
-		console.log('Search query:', this.searchQuery);
+	private readonly urlService = inject(UrlParamsService);
+
+	protected pageSize: number | null = null;
+
+	protected pageNumber: number | null = null;
+
+	protected params: Partial<AnimeQueryParams.Combined>;
+
+	public constructor() {
+		this.animePage$ = this.animeService.getAllAnime();
+		this.params = {};
 	}
 
-	/** 1. */
-	public onSortChange(): void {
-		// Logic for handling sort option change
-		console.log('Sort by:', this.sortBy);
+	ngOnInit(): void {
+		this.animeService.pageNumberSubject$.subscribe((pageNumber) => {
+			this.pageNumber = pageNumber;
+		});
+		this.animeService.pageSizeSubject$.subscribe((pageSize) => {
+			this.pageSize = pageSize;
+		});
+	}
+
+	protected onPageChange(event: PageEvent): void {
+		const newParams: Partial<AnimeQueryParams.Combined> = {
+			...this.params,
+			pageNumber: event.pageIndex,
+			pageSize: event.pageSize,
+		};
+		this.params = newParams;
+		this.urlService.updateCombinedQueryParams(this.params);
 	}
 }
