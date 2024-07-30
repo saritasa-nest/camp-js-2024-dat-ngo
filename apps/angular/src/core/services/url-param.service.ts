@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { AnimeQueryParams } from '@js-camp/core/models/url-query';
 import { AnimeType } from '@js-camp/core/models/anime-type';
@@ -50,6 +50,11 @@ export class UrlParamsService {
 		});
 	}
 
+	/** Get current URL parameters. */
+	public getCurrentParams(): AnimeQueryParams.Combined {
+		return this.route.snapshot.queryParams as AnimeQueryParams.Combined;
+	}
+
 	/** Update query parameter. */
 	public updateCombinedQueryParams(params: Partial<AnimeQueryParams.Combined>): void {
 		const currentParams = { ...this.route.snapshot.queryParams };
@@ -61,4 +66,5 @@ export class UrlParamsService {
 			queryParamsHandling: 'merge',
 		});
 	}
+
 }

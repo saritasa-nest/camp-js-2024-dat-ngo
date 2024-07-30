@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { AnimeTableComponent } from './anime-catalog/anime-table/anime-table.component';
+import { AnimeTableComponent } from './anime-catalog/components/anime-table/anime-table.component';
 import { AnimeCatalogComponent } from './anime-catalog/anime-catalog.component';
 
 /** Home component. */

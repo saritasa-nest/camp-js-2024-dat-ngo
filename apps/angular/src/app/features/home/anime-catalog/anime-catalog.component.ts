@@ -8,12 +8,14 @@ import { AnimeService } from '@js-camp/angular/core/services/anime.service';
 import { PageEvent } from '@angular/material/paginator';
 import { UrlParamsService } from '@js-camp/angular/core/services/url-param.service';
 import { AnimeQueryParams } from '@js-camp/core/models/url-query';
-import { AnimeTableComponent } from './anime-table/anime-table.component';
-import { PaginatorComponent } from '../../paginator/paginator.component';
+import { AnimeTableComponent } from './components/anime-table/anime-table.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { AnimeType } from '@js-camp/core/models/anime-type';
+import { SearchFilterFormComponent } from './components/search-filter-form/search-filter-form.component';
 @Component({
 	selector: 'camp-anime-catalog',
 	standalone: true,
-	imports: [CommonModule, MatFormField, AnimeTableComponent, PaginatorComponent],
+	imports: [CommonModule, MatFormField, AnimeTableComponent, PaginatorComponent, SearchFilterFormComponent],
 	templateUrl: './anime-catalog.component.html',
 	styleUrl: './anime-catalog.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,5 +56,13 @@ export class AnimeCatalogComponent implements OnInit {
 		};
 		this.params = newParams;
 		this.urlService.updateCombinedQueryParams(this.params);
+	}
+
+	protected onSelectionChange(event: AnimeType): void {
+		this.animeService.updateTypesParams({ type: event });
+	}
+
+	protected onSearchChange(event: string): void {
+		this.animeService.updateSearchParams({ search: event });
 	}
 }

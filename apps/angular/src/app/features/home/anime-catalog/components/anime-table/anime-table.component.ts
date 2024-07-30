@@ -1,24 +1,32 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	EventEmitter,
+	inject,
+	Input,
+	OnChanges,
+	Output,
+	SimpleChanges,
+	ViewChild,
+} from '@angular/core';
 import { AnimeService } from '@js-camp/angular/core/services/anime.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Observable } from 'rxjs';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
-import { Pagination } from '@js-camp/core/models/pagination';
 import { Anime } from '@js-camp/core/models/anime.model';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 import { UrlParamsService } from '@js-camp/angular/core/services/url-param.service';
 import { AnimeQueryParams } from '@js-camp/core/models/url-query';
 
-import { PaginatorComponent } from '../../../paginator/paginator.component';
-import { AnimeCatalogComponent } from '../anime-catalog.component';
+import { PaginatorComponent } from '../paginator/paginator.component';
+import { AnimeCatalogComponent } from '../../anime-catalog.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatFormField } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { AnimeType } from '@js-camp/core/models/anime-type';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSort } from '@angular/material/sort';
 /** Create anime table componet.*/
 @Component({
@@ -43,18 +51,9 @@ import { MatSort } from '@angular/material/sort';
 	styleUrl: './anime-table.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnimeTableComponent implements OnInit, OnChanges {
+export class AnimeTableComponent implements OnChanges {
 	/** Anime response observable.  */
-	protected animePage$: Observable<Pagination<Anime>>;
-
 	protected params: Partial<AnimeQueryParams.Combined>;
-
-	private readonly animeService = inject(AnimeService);
-
-	private readonly urlService = inject(UrlParamsService);
-
-	/** An array of available anime types to choose from. */
-	protected readonly selectTypes = Object.values(AnimeType);
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -68,52 +67,25 @@ export class AnimeTableComponent implements OnInit, OnChanges {
 
 	protected pageNumber: number | null = null;
 
-	public constructor() {
-		this.animePage$ = this.animeService.getAllAnime();
-		this.params = {};
+	/** Event emitter for page changing. */
+	@Output() public pageChange = new EventEmitter<PageEvent>();
+
+	/**
+	 * Emit the page event.
+	 * @param event The page event.
+	 */
+	public onPageChange(event: PageEvent): void {
+		this.pageChange.emit(event);
 	}
 
-	ngOnInit(): void {
-		this.animeService.pageNumberSubject$.subscribe((pageNumber) => {
-			this.pageNumber = pageNumber;
-		});
-		this.animeService.pageSizeSubject$.subscribe((pageSize) => {
-			this.pageSize = pageSize;
-		});
+	public constructor() {
+		this.params = {};
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes['animeList']) {
 			this.dataSource.data = [...this.animeList];
 		}
-	}
-
-	protected onPageChange(event: PageEvent): void {
-		const newParams: Partial<AnimeQueryParams.Combined> = {
-			...this.params,
-			pageNumber: event.pageIndex,
-			pageSize: event.pageSize,
-		};
-		this.params = newParams;
-		this.urlService.updateCombinedQueryParams(this.params);
-	}
-
-	protected onSearch(): void {
-		const newParams: Partial<AnimeQueryParams.Combined> = {
-			...this.params,
-			pageNumber: 0,
-		};
-		this.params = newParams;
-		this.urlService.updateCombinedQueryParams(this.params);
-	}
-
-	protected onSelectType(): void {
-		const newParams: Partial<AnimeQueryParams.Combined> = {
-			...this.params,
-			pageNumber: 0,
-		};
-		this.params = newParams;
-		this.urlService.updateCombinedQueryParams(this.params);
 	}
 
 	/** This informs the table how to uniquely identify rows to track how the data changes with each update.
