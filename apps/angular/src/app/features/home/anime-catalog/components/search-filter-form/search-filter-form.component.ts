@@ -20,7 +20,7 @@ export class SearchFilterFormComponent {
 	protected readonly selectTypes = Object.values(AnimeType);
 
 	/** Event emitter for page changing. */
-	@Output() public typeChange = new EventEmitter<AnimeType>();
+	@Output() public 	typeChange = new EventEmitter<AnimeType>();
 
 	@Input() public search = '';
 
@@ -35,12 +35,4 @@ export class SearchFilterFormComponent {
 	protected onSearch() {
 		this.searchChange.emit(this.search);
 	}
-	// protected onSearch(): void {
-	// 	const newParams: Partial<AnimeQueryParams.Combined> = {
-	// 		...this.params,
-	// 		pageNumber: 0,
-	// 	};
-	// 	this.params = newParams;
-	// 	this.urlService.updateCombinedQueryParams(this.params);
-	// }
 }

@@ -4,6 +4,10 @@
 	border-radius: var(--border-radius);
 }
 
+.anime__header-row {
+	background-color: rgb(232 244 255);
+}
+
 .anime__header,
 .anime__cell {
 	text-align: center;
@@ -25,4 +29,52 @@
 	height: 100%;
 	aspect-ratio: 1;
 	object-fit: contain;
+}
+
+.anime__TV {
+	padding: 4px 6px;
+	border: none;
+	border-radius: 4px;
+	background-color: rgb(232 244 255);
+	color: rgb(53 141 235);
+}
+
+.anime__OVA {
+	padding: 4px 6px;
+	border: none;
+	border-radius: 4px;
+	background-color: rgb(255 248 222);
+	color: rgb(179 145 41);
+}
+
+.anime__Movie {
+	padding: 4px 6px;
+	border: none;
+	border-radius: 4px;
+	background-color: rgb(255 240 237);
+	color: rgb(208 86 86);
+}
+
+.anime__Special {
+	padding: 4px 6px;
+	border: none;
+	border-radius: 4px;
+	background-color: rgb(227 255 252);
+	color: rgb(51 153 153);
+}
+
+.anime__ONA {
+	padding: 4px 6px;
+	border: none;
+	border-radius: 4px;
+	background-color: rgb(242 232 255);
+	color: rgb(156 108 235);
+}
+
+.anime__Music {
+	padding: 4px 6px;
+	border: none;
+	border-radius: 4px;
+	background-color: rgb(255 247 242);
+	color: rgb(201 117 80);
 }

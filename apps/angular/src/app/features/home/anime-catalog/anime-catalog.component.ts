@@ -49,6 +49,7 @@ export class AnimeCatalogComponent implements OnInit {
 	}
 
 	protected onPageChange(event: PageEvent): void {
+		console.log('event', event);
 		const newParams: Partial<AnimeQueryParams.Combined> = {
 			...this.params,
 			pageNumber: event.pageIndex,

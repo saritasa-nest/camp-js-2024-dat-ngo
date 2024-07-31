@@ -1,4 +1,11 @@
-.form-search-filter {
+.main {
+	height: fit-content;
 	display: flex;
-	gap: 40px;
+	gap: 10px;
+	justify-content: flex-end;
+	align-items: baseline;
+}
+
+.main__search-button {
+	height: fit-content;
 }

@@ -1,7 +1,7 @@
-<div class="form-search-filter">
-	<mat-form-field class="main__type-select" appearance="fill">
+<div class="main">
+	<mat-form-field class="main__type-select">
 		<mat-label>Anime type</mat-label>
-		<mat-select [(value)]="selectedType" (selectionChange)="onSelectionChange($event)">
+		<mat-select class="type-select__mat-select" [(value)]="selectedType" (selectionChange)="onSelectionChange($event)">
 			@for (option of selectTypes; track option) {
 			<mat-option [value]="option">{{ option }}</mat-option>
 			}
@@ -12,6 +12,6 @@
 			<mat-label>Search</mat-label>
 			<input matInput [(ngModel)]="search" placeholder="Placeholder" />
 		</mat-form-field>
-		<button class="main__search-button" mat-flat-button type="button" (click)="onSearch()">Search</button>
 	</div>
+	<button class="main__search-button" mat-flat-button type="button" (click)="onSearch()">Search</button>
 </div>

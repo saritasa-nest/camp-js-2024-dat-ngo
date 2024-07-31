@@ -28,7 +28,7 @@
 
 		<ng-container class="anime__column" matColumnDef="Type">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef>Type</th>
-			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.animeType | empty }}</td>
+			<td mat-cell class="anime__cell" *matCellDef="let anime"><span class="anime__{{anime.animeType}}">{{ anime.animeType | empty }}</span></td>
 		</ng-container>
 
 		<ng-container class="anime__column" matColumnDef="Status" mat-sort-header>
@@ -36,7 +36,7 @@
 			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.animeStatus | empty }}</td>
 		</ng-container>
 
-		<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+		<tr mat-header-row class="anime__header-row" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
 		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 	</table>
 </section>
