@@ -25,7 +25,7 @@ export class UrlParamsService {
 					search: params.get('search') ?? undefined,
 					pageNumber: params.has('pageNumber') ? Number(params.get('pageNumber')) : 0,
 					pageSize: params.has('pageSize') ? Number(params.get('pageSize')) : 5,
-					sortFields: params.getAll('sortFields').length > 0 ? params.getAll('sortFields') : undefined,
+					sortFields: params.get('sortFields') ?? undefined,
 					type: (params.get('type') as AnimeType) ?? undefined,
 				};
 				return combinedParams as AnimeQueryParams.Combined;
@@ -35,19 +35,29 @@ export class UrlParamsService {
 
 	/** Set query parameters from AnimeQueryParams.Combined type. */
 	public setCombinedQueryParams(params: AnimeQueryParams.Combined): void {
+		const paramsWithoutUndefined = this.removeUndefinedFields(params);
+		console.log("paramsWithoutUndefined",paramsWithoutUndefined);
 		const queryParams: UrlQueryParams = {
-			...(params.search != null && { search: params.search }),
-			...(params.pageNumber != null && { pageNumber: params.pageNumber.toString() }),
-			...(params.pageSize != null && { pageSize: params.pageSize.toString() }),
-			...(params.sortFields != null && { sortFields: params.sortFields }),
-			...(params.type != null && { type: params.type }),
+			...(paramsWithoutUndefined.search != null && { search: paramsWithoutUndefined.search }),
+			...(paramsWithoutUndefined.pageNumber != null && { pageNumber: paramsWithoutUndefined.pageNumber.toString() }),
+			...(paramsWithoutUndefined.pageSize != null && { pageSize: paramsWithoutUndefined.pageSize.toString() }),
+			...(paramsWithoutUndefined.sortFields != null && { sortFields: paramsWithoutUndefined.sortFields }),
+			...(paramsWithoutUndefined.type != null && { type: paramsWithoutUndefined.type }),
 		};
-
+		console.log({queryParams})
 		this.router.navigate([], {
 			relativeTo: this.route,
 			queryParams,
-			queryParamsHandling: 'merge',
+			queryParamsHandling: '',
 		});
+	}
+
+	/**
+	 * Remove undefined fields.
+	 * @param obj Object to remove.
+	 */
+	private removeUndefinedFields(obj: AnimeQueryParams.Combined): AnimeQueryParams.Combined {
+		return Object.fromEntries(Object.entries(obj).filter(([_, value]) => value !== undefined)) as AnimeQueryParams.Combined;
 	}
 
 	/** Get current URL parameters. */
@@ -66,5 +76,4 @@ export class UrlParamsService {
 			queryParamsHandling: 'merge',
 		});
 	}
-
 }

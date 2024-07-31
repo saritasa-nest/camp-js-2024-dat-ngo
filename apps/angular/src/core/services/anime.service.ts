@@ -73,6 +73,7 @@ export class AnimeService {
 
 	/** Update new params for types. */
 	public updateSortParams(param: AnimeQueryParams.Sort): void {
+		console.log('params', param);
 		const newParams: AnimeQueryParams.Combined = {
 			...this.urlParamsService.getCurrentParams(),
 			pageNumber: 0,

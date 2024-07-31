@@ -44,7 +44,7 @@ export class AnimeQueryParamsMapper {
 	public mapOrderingOptionToDto(model: AnimeQueryParams.Sort): AnimeQueryParamsDto.Sort | null {
 		if (model.sortFields) {
 			return {
-				ordering: model.sortFields.join(','),
+				ordering: model.sortFields,
 			};
 		}
 		return null;

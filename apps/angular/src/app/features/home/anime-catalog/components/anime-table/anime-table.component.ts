@@ -25,7 +25,6 @@ import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimeTableComponent implements OnChanges {
-
 	@ViewChild(MatSort) protected sort!: MatSort;
 
 	@Input() public animeList: ReadonlyArray<Anime> = [];
@@ -33,17 +32,20 @@ export class AnimeTableComponent implements OnChanges {
 	protected dataSource = new MatTableDataSource<Anime>();
 
 	/** Event emitter for page changing. */
-	@Output() public sortChange = new EventEmitter<string[]>();
-
-	@Input() public sortArr: string[] = [];
+	@Output() public sortChange = new EventEmitter<string>();
 
 	/**
 	 * Emit the page event.
 	 * @param event The page event.
 	 */
 	public onSortChange(event: Sort): void {
-		console.log(event);
-		this.sortChange.emit(this.sortArr);
+		if (event.direction === 'asc') {
+			this.sortChange.emit(event.active);
+		} else if (event.direction === 'desc') {
+			this.sortChange.emit(`-${event.active}`);
+		} else {
+			this.sortChange.emit(undefined);
+		}
 	}
 
 	public constructor() {}

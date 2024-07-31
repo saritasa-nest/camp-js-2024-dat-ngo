@@ -66,7 +66,8 @@ export class AnimeCatalogComponent implements OnInit {
 		this.animeService.updateSearchParams({ search: event });
 	}
 
-	protected onSortChange(event: string[]): void {
+	protected onSortChange(event: string): void {
+		console.log(event)
 		this.animeService.updateSortParams({ sortFields: event });
 	}
 }
