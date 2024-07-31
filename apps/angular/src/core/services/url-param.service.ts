@@ -35,20 +35,20 @@ export class UrlParamsService {
 
 	/** Set query parameters from AnimeQueryParams.Combined type. */
 	public setCombinedQueryParams(params: AnimeQueryParams.Combined): void {
-		const paramsWithoutUndefined = this.removeUndefinedFields(params);
-		console.log("paramsWithoutUndefined",paramsWithoutUndefined);
+		// const paramsWithoutUndefined = this.removeUndefinedFields(params);
+		// console.log("paramsWithoutUndefined",paramsWithoutUndefined);
 		const queryParams: UrlQueryParams = {
-			...(paramsWithoutUndefined.search != null && { search: paramsWithoutUndefined.search }),
-			...(paramsWithoutUndefined.pageNumber != null && { pageNumber: paramsWithoutUndefined.pageNumber.toString() }),
-			...(paramsWithoutUndefined.pageSize != null && { pageSize: paramsWithoutUndefined.pageSize.toString() }),
-			...(paramsWithoutUndefined.sortFields != null && { sortFields: paramsWithoutUndefined.sortFields }),
-			...(paramsWithoutUndefined.type != null && { type: paramsWithoutUndefined.type }),
+			...(params.search != null && { search: params.search }),
+			...(params.pageNumber != null && { pageNumber: params.pageNumber.toString() }),
+			...(params.pageSize != null && { pageSize: params.pageSize.toString() }),
+			...(params.sortFields != null ? { sortFields: params.sortFields } : { sortFields: null }),
+			...(params.type != null ? { type: params.type } : { type: null }),
 		};
-		console.log({queryParams})
+		console.log({ queryParams });
 		this.router.navigate([], {
 			relativeTo: this.route,
 			queryParams,
-			queryParamsHandling: '',
+			queryParamsHandling: 'merge',
 		});
 	}
 
@@ -57,7 +57,9 @@ export class UrlParamsService {
 	 * @param obj Object to remove.
 	 */
 	private removeUndefinedFields(obj: AnimeQueryParams.Combined): AnimeQueryParams.Combined {
-		return Object.fromEntries(Object.entries(obj).filter(([_, value]) => value !== undefined)) as AnimeQueryParams.Combined;
+		return Object.fromEntries(
+			Object.entries(obj).filter(([_, value]) => value !== undefined)
+		) as AnimeQueryParams.Combined;
 	}
 
 	/** Get current URL parameters. */
