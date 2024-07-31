@@ -3,6 +3,6 @@
 }
 
 .container {
-	max-width: var(--container-width-lg);
+	max-width: var(--container-width-xl);
 	margin: 0 auto;
 }

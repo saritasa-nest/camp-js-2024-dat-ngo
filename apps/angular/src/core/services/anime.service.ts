@@ -53,7 +53,6 @@ export class AnimeService {
 
 	/** Update new params for types. */
 	public updateTypesParams(param: AnimeQueryParams.Type): void {
-		console.log(312312,param);
 		const newParams: AnimeQueryParams.Combined = {
 			...this.urlParamsService.getCurrentParams(),
 			pageNumber: 0,
@@ -64,6 +63,16 @@ export class AnimeService {
 
 	/** Update new params for types. */
 	public updateSearchParams(param: AnimeQueryParams.Search): void {
+		const newParams: AnimeQueryParams.Combined = {
+			...this.urlParamsService.getCurrentParams(),
+			pageNumber: 0,
+			...param,
+		};
+		this.urlParamsService.setCombinedQueryParams(newParams);
+	}
+
+	/** Update new params for types. */
+	public updateSortParams(param: AnimeQueryParams.Sort): void {
 		const newParams: AnimeQueryParams.Combined = {
 			...this.urlParamsService.getCurrentParams(),
 			pageNumber: 0,

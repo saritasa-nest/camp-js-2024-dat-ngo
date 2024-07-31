@@ -27,8 +27,7 @@ export class SearchFilterFormComponent {
 	@Output() public searchChange = new EventEmitter<string>();
 
 	protected onSelectionChange(event: MatSelectChange) {
-		console.log(event.value);
-		if (event.value in AnimeType) {
+		if (Object.values(AnimeType).includes(event.value)) {
 			this.typeChange.emit(event.value);
 		}
 	}

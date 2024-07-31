@@ -1,61 +1,30 @@
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
+	AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
-	inject,
 	Input,
 	OnChanges,
 	Output,
 	SimpleChanges,
 	ViewChild,
 } from '@angular/core';
-import { AnimeService } from '@js-camp/angular/core/services/anime.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Anime } from '@js-camp/core/models/anime.model';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-
-import { UrlParamsService } from '@js-camp/angular/core/services/url-param.service';
-import { AnimeQueryParams } from '@js-camp/core/models/url-query';
-
-import { PaginatorComponent } from '../paginator/paginator.component';
-import { AnimeCatalogComponent } from '../../anime-catalog.component';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatFormField } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
-import { AnimeType } from '@js-camp/core/models/anime-type';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { MatSort } from '@angular/material/sort';
-/** Create anime table componet.*/
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+/** Create anime table component.*/
 @Component({
 	selector: 'camp-anime-table',
 	standalone: true,
-	imports: [
-		MatTableModule,
-		CommonModule,
-		EmptyPipe,
-		AsyncPipe,
-		PaginatorComponent,
-		MatPaginator,
-		AnimeCatalogComponent,
-		MatInputModule,
-		MatFormFieldModule,
-		MatFormField,
-		FormsModule,
-		MatSelectModule,
-		MatSort,
-	],
+	imports: [MatTableModule, CommonModule, EmptyPipe, MatPaginator, MatSortModule],
 	templateUrl: './anime-table.component.html',
 	styleUrl: './anime-table.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimeTableComponent implements OnChanges {
-	/** Anime response observable.  */
-	protected params: Partial<AnimeQueryParams.Combined>;
-
-	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
 	@ViewChild(MatSort) protected sort!: MatSort;
 
@@ -63,24 +32,21 @@ export class AnimeTableComponent implements OnChanges {
 
 	protected dataSource = new MatTableDataSource<Anime>();
 
-	protected pageSize: number | null = null;
-
-	protected pageNumber: number | null = null;
-
 	/** Event emitter for page changing. */
-	@Output() public pageChange = new EventEmitter<PageEvent>();
+	@Output() public sortChange = new EventEmitter<string[]>();
+
+	@Input() public sortArr: string[] = [];
 
 	/**
 	 * Emit the page event.
 	 * @param event The page event.
 	 */
-	public onPageChange(event: PageEvent): void {
-		this.pageChange.emit(event);
+	public onSortChange(event: Sort): void {
+		console.log(event);
+		this.sortChange.emit(this.sortArr);
 	}
 
-	public constructor() {
-		this.params = {};
-	}
+	public constructor() {}
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes['animeList']) {
@@ -88,7 +54,7 @@ export class AnimeTableComponent implements OnChanges {
 		}
 	}
 
-	/** This informs the table how to uniquely identify rows to track how the data changes with each update.
+	/** This informs the table how to uniquely identify rows to track how the dataSource changes with each update.
 	 * @param index Index of them Anime on table.
 	 * @param item Items on table.
 	 */
@@ -100,7 +66,7 @@ export class AnimeTableComponent implements OnChanges {
 	protected readonly displayedColumns: string[] = [
 		'Image',
 		'English Title',
-		'Japanese Title',
+		'titleJpn',
 		'Broadcasted Date',
 		'Type',
 		'Status',

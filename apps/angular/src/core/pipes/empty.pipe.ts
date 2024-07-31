@@ -11,6 +11,6 @@ export class EmptyPipe implements PipeTransform {
 	 * @param value Value can be a string or a null.
 	 */
 	public transform(value: string | null): string {
-		return value && value.length > 0 ? value : 'N/A';
+		return value && value.length > 0 ? value : '-';
 	}
 }

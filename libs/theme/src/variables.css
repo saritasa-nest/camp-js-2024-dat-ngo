@@ -70,4 +70,5 @@
 
 	/* container width */
 	--container-width-lg: 1280px;
+	--container-width-xl: 1600px;
 }

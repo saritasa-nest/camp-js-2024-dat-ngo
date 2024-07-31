@@ -49,7 +49,6 @@ export class AnimeCatalogComponent implements OnInit {
 	}
 
 	protected onPageChange(event: PageEvent): void {
-		console.log('event', event);
 		const newParams: Partial<AnimeQueryParams.Combined> = {
 			...this.params,
 			pageNumber: event.pageIndex,
@@ -65,5 +64,9 @@ export class AnimeCatalogComponent implements OnInit {
 
 	protected onSearchChange(event: string): void {
 		this.animeService.updateSearchParams({ search: event });
+	}
+
+	protected onSortChange(event: string[]): void {
+		this.animeService.updateSortParams({ sortFields: event });
 	}
 }
