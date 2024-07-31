@@ -1,4 +1,4 @@
-import { Subscriber } from '../types/subscriber';
+import { Subscriber } from '../Types/subscriber';
 import { Publisher } from '../Types/publisher';
 
 import { PlayerTurnResult } from '../Types/player-turn-result';
@@ -7,7 +7,7 @@ import { SIDE_COUNT } from '../constants';
 
 /** DiceGenerator is a publisher for PlayerTurnResult to notify for inspector.*/
 export class DiceGenerator extends Publisher<PlayerTurnResult> implements Subscriber<number> {
-	/** Roll dice return a random number base on side count.*/
+	/** Rolls the dice. */
 	public roll(): number {
 		return getRandomIntegerNumber(SIDE_COUNT);
 	}

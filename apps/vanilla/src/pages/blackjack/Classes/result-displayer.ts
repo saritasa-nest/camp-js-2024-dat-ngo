@@ -2,11 +2,16 @@ import { isHTMLElement } from '../guards/isHTMLElement';
 import { Subscriber } from '../types/subscriber';
 
 /** Result. */
-export class Result {
-	public constructor(public readonly diceResult: number[], public readonly totalScore: number) {}
-}
+export type Result = {
 
-/** ResultDisplayer is the displayer of the result and debugger . */
+	/** Dice Result of current turn. */
+	readonly diceResult: number[];
+
+	/** Total score of current player. */
+	readonly totalScore: number;
+};
+
+/** ResultDisplayer is the displayer of the result and history . */
 export class ResultDisplayer implements Subscriber<Result> {
 	private diceResult: number[] = [];
 

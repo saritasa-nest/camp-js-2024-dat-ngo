@@ -4,7 +4,7 @@ import { PlayerTurnResult } from '../types/player-turn-result';
 
 import { Result } from './result-displayer';
 
-/** Inspector is the class illustrate the member that subscribe to the game. */
+/** The class illustrates the member that subscribe to the game. */
 export class Inspector {
 
 	/** The number array of dice results. */
@@ -20,7 +20,7 @@ export class Inspector {
 
 	/**
 	 * Function to update the current diceResults array using PlayerTurnResult.
-	 * @param turnResult Player and Debugger will extends this class and they are subscriber of
+	 * @param turnResult Player and ResultHistory will extends this class and they are subscriber of
 	 * DiceGenerator which is a Publisher<PlayerTurnResult>.
 	 */
 	protected updateDiceList(turnResult: PlayerTurnResult): number[] {

@@ -4,7 +4,7 @@ import { PlayerTurnResult } from '../types/player-turn-result';
 import { Inspector } from './inspector';
 import { Result } from './result-displayer';
 
-/** Player. */
+/** Class illustrate a player in a game.*/
 export class Player extends Inspector implements Subscriber<PlayerTurnResult> {
 	public constructor(private readonly playerIndex: number) {
 		super();
@@ -17,7 +17,11 @@ export class Player extends Inspector implements Subscriber<PlayerTurnResult> {
 	public update(turnResult: PlayerTurnResult): void {
 		if (turnResult.playerIndex === this.playerIndex) {
 			const diceResults = this.updateDiceList(turnResult);
-			this.result.notify(new Result(diceResults, this.getTotalScore));
+			const newResult: Result = {
+				diceResult: diceResults,
+				totalScore: this.getTotalScore,
+			};
+			this.result.notify(newResult);
 		}
 	}
 }

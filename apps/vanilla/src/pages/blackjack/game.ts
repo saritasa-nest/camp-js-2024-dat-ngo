@@ -1,4 +1,4 @@
-import { Debugger } from './Classes/Debugger';
+import { ResultHistory } from './Classes/Debugger';
 import { DiceGenerator } from './Classes/dice-generator';
 import { Player } from './Classes/Player';
 import { ResultDisplayer } from './Classes/result-displayer';
@@ -17,9 +17,9 @@ export class Game {
 	/** Create a Dice Generator.*/
 	private readonly diceGenerator: DiceGenerator;
 
-	private readonly gameResults: Debugger;
+	private readonly gameResults: ResultHistory;
 
-	private debuggerDisplayer: ResultDisplayer;
+	private historyDisplayer: ResultDisplayer;
 
 	private players: Player[];
 
@@ -29,9 +29,9 @@ export class Game {
 		this.turnGenerator = new TurnGenerator(this.playerCount);
 		this.turnGenerator.subscribe(this.diceGenerator);
 
-		this.gameResults = new Debugger();
-		this.debuggerDisplayer = new ResultDisplayer('Debugger');
-		this.gameResults.result.subscribe(this.debuggerDisplayer);
+		this.gameResults = new ResultHistory();
+		this.historyDisplayer = new ResultDisplayer('ResultHistory');
+		this.gameResults.result.subscribe(this.historyDisplayer);
 		this.diceGenerator.subscribe(this.gameResults);
 
 		this.players = this.createPlayers();
