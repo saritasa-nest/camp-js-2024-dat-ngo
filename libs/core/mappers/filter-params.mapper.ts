@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { AnimeQueryParams } from '../models/url-query';
+import { AnimeFilterParams } from '../models/anime-filter-params';
 import { AnimeQueryParamsDto } from '../dtos/url-query.dto';
 import { AnimeType } from '../models/anime-type';
 import { AnimeTypeDto } from '../dtos/amime-type.dto';
@@ -18,9 +18,9 @@ const MAP_ANIME_TYPE_TO_DTO: Record<AnimeType, AnimeTypeDto> = {
 
 /** Mapper for filter params. */
 @Injectable({ providedIn: 'root' })
-export class AnimeQueryParamsMapper {
+export class AnimeFiltersParamsMapper {
 	/** @inheritdoc */
-	public mapPaginationOptionsToDto(model: AnimeQueryParams.Pagination): AnimeQueryParamsDto.Pagination | null {
+	public mapPaginationOptionsToDto(model: AnimeFilterParams.Pagination): AnimeQueryParamsDto.Pagination | null {
 		if (model.pageNumber !== null && model.pageSize !== null) {
 			return {
 				offset: model.pageNumber * model.pageSize,
@@ -31,7 +31,7 @@ export class AnimeQueryParamsMapper {
 	}
 
 	/** @inheritdoc */
-	public mapSearchOptionsToDto(model: AnimeQueryParams.Search): AnimeQueryParamsDto.Search | null {
+	public mapSearchOptionsToDto(model: AnimeFilterParams.Search): AnimeQueryParamsDto.Search | null {
 		if (model.search) {
 			return {
 				search: model.search,
@@ -41,7 +41,7 @@ export class AnimeQueryParamsMapper {
 	}
 
 	/** @inheritdoc */
-	public mapOrderingOptionToDto(model: AnimeQueryParams.Sort): AnimeQueryParamsDto.Sort | null {
+	public mapOrderingOptionToDto(model: AnimeFilterParams.Sort): AnimeQueryParamsDto.Sort | null {
 		if (model.sortFields) {
 			return {
 				ordering: model.sortFields,
@@ -51,7 +51,7 @@ export class AnimeQueryParamsMapper {
 	}
 
 	/** @inheritdoc */
-	public mapTypeOptionToDto(model: AnimeQueryParams.Type): AnimeQueryParamsDto.Type | null {
+	public mapTypeOptionToDto(model: AnimeFilterParams.Type): AnimeQueryParamsDto.Type | null {
 		if (model.type) {
 			return {
 				type: MAP_ANIME_TYPE_TO_DTO[model.type],
@@ -61,7 +61,7 @@ export class AnimeQueryParamsMapper {
 	}
 
 	/** @inheritdoc */
-	public mapCombinedOptionsToDto(model: AnimeQueryParams.Combined): AnimeQueryParamsDto.Combined {
+	public mapCombinedOptionsToDto(model: AnimeFilterParams.Combined): AnimeQueryParamsDto.Combined {
 		return {
 			...this.mapPaginationOptionsToDto(model),
 			...this.mapSearchOptionsToDto(model),

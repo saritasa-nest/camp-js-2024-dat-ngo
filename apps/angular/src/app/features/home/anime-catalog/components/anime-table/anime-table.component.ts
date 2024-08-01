@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import {
-	AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
@@ -13,7 +12,7 @@ import {
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Anime } from '@js-camp/core/models/anime.model';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 /** Create anime table component.*/
 @Component({
@@ -32,20 +31,14 @@ export class AnimeTableComponent implements OnChanges {
 	protected dataSource = new MatTableDataSource<Anime>();
 
 	/** Event emitter for page changing. */
-	@Output() public sortChange = new EventEmitter<string>();
+	@Output() public sortChange = new EventEmitter<Sort>();
 
 	/**
 	 * Emit the page event.
 	 * @param event The page event.
 	 */
 	public onSortChange(event: Sort): void {
-		if (event.direction === 'asc') {
-			this.sortChange.emit(event.active);
-		} else if (event.direction === 'desc') {
-			this.sortChange.emit(`-${event.active}`);
-		} else {
-			this.sortChange.emit(undefined);
-		}
+			this.sortChange.emit(event);
 	}
 
 	public constructor() {}
@@ -68,9 +61,9 @@ export class AnimeTableComponent implements OnChanges {
 	protected readonly displayedColumns: string[] = [
 		'Image',
 		'English Title',
-		'titleJpn',
+		'title_jpn',
 		'Broadcasted Date',
 		'Type',
-		'Status',
+		'status',
 	];
 }

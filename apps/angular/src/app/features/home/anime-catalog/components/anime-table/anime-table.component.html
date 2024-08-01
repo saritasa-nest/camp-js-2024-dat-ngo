@@ -16,7 +16,7 @@
 			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.titleEng | empty }}</td>
 		</ng-container>
 
-		<ng-container class="anime__column" matColumnDef="titleJpn">
+		<ng-container class="anime__column" matColumnDef="title_jpn">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Japanese Title</th>
 			<td mat-cell class="anime__cell" *matCellDef="let anime"><span class="anime__japan-title">{{ anime.titleJpn | empty }}</span></td>
 		</ng-container>
@@ -31,7 +31,7 @@
 			<td mat-cell class="anime__cell" *matCellDef="let anime"><span class="anime__{{anime.animeType}}">{{ anime.animeType | empty }}</span></td>
 		</ng-container>
 
-		<ng-container class="anime__column" matColumnDef="Status">
+		<ng-container class="anime__column" matColumnDef="status">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
 			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.animeStatus | empty }}</td>
 		</ng-container>

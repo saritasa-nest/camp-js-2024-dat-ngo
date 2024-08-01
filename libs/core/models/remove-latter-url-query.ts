@@ -1,7 +1,7 @@
 import { AnimeType } from './anime-type';
 
 /** Anime query params . */
-export namespace AnimeQueryParams {
+export namespace AnimeQueryParamsdasd {
 	/** Search. */
 	export type Search = {
 		/** Search filter. */
