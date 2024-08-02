@@ -1,18 +1,18 @@
-
 import { Injectable } from '@angular/core';
 
 import { AnimeFilterParams } from '../models/anime-filter-params';
 import { TMapper } from '../types/mapper';
 
 /** Anime query params. */
-export type AnimeQueryParams = Partial<Omit<AnimeFilterParams.Combined, 'pageNumber' | 'pageSize'> & {
+export type AnimeQueryParams = Partial<
+	Omit<AnimeFilterParams.Combined, 'pageNumber' | 'pageSize'> & {
+		/** Page number query param. */
+		pageNumber: string | null;
 
-	/** Page number query param. */
-	pageNumber: string | null;
-
-	/** Page size query param. */
-	pageSize: string | null;
-}>;
+		/** Page size query param. */
+		pageSize: string | null;
+	}
+>;
 
 /** Service for handling URL query params. */
 @Injectable({
@@ -26,7 +26,8 @@ export class AnimeQueryParamsMapper implements TMapper<AnimeQueryParams, AnimeFi
 			pageNumber: dto.pageNumber ? Number(dto.pageNumber) : 0,
 			pageSize: dto.pageSize ? Number(dto.pageSize) : 10,
 			search: dto.search ?? null,
-			sortFields: dto.sortFields ?? null,
+			sortField: dto.sortField ?? null,
+			sortDirection: dto.sortDirection ?? null,
 		};
 	}
 
@@ -37,7 +38,8 @@ export class AnimeQueryParamsMapper implements TMapper<AnimeQueryParams, AnimeFi
 			pageNumber: model.pageNumber != null && model.pageNumber >= 0 ? model.pageNumber.toString() : undefined,
 			pageSize: model.pageSize != null ? model.pageSize.toString() : undefined,
 			search: model.search !== undefined ? model.search : undefined,
-			sortFields: model.sortFields,
+			sortField: model.sortField !== undefined ? model.sortField : undefined,
+			sortDirection: model.sortDirection !== undefined ? model.sortDirection : undefined,
 		};
 	}
 }

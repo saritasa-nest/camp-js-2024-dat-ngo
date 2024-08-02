@@ -1,5 +1,5 @@
 <section class="mat-elevation-z8 anime__table-container">
-	<table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)" [trackBy]="trackBy">
+	<table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)" [matSortActive]="sortActive" [matSortDirection]="sortDirection" [trackBy]="trackBy">
 		<!--- Note that these columns can be defined in any order.
 						The actual rendered columns are set as a property on the row definition" -->
 		<ng-container class="anime__column" matColumnDef="Image">
@@ -11,8 +11,8 @@
 			</td>
 		</ng-container>
 
-		<ng-container class="anime__column" matColumnDef="English Title">
-			<th class="anime__header" mat-header-cell *matHeaderCellDef>English Title</th>
+		<ng-container class="anime__column" matColumnDef="titleEng">
+			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>English Title</th>
 			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.titleEng | empty }}</td>
 		</ng-container>
 
@@ -21,8 +21,8 @@
 			<td mat-cell class="anime__cell" *matCellDef="let anime"><span class="anime__japan-title">{{ anime.titleJpn | empty }}</span></td>
 		</ng-container>
 
-		<ng-container class="anime__column" matColumnDef="Broadcasted Date">
-			<th class="anime__header" mat-header-cell *matHeaderCellDef>Broadcasted Date</th>
+		<ng-container class="anime__column" matColumnDef="airedStartDate">
+			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Broadcasted Date</th>
 			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.broadcasted.startDate | date | empty }}</td>
 		</ng-container>
 

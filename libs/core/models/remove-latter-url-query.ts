@@ -20,7 +20,7 @@ export namespace AnimeQueryParamsdasd {
 	/** Sort. */
 	export type Sort = {
 		/** Order. */
-		sortFields: string | null;
+		sortField: string | null;
 	};
 
 	/** Anime Type. */

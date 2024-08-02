@@ -4,6 +4,6 @@ export type UrlQueryParams = {
 	search?: string;
 	pageNumber?: string;
 	pageSize?: string;
-	sortFields?: string | null;
+	sortField?: string | null;
 	type?: AnimeType | null;
 };

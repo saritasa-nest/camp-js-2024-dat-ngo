@@ -16,7 +16,9 @@ import {
 	ANIME_FILTER_PARAMS_TOKEN,
 } from '@js-camp/angular/core/provider/anime-filter-params';
 import { AnimeQueryParamsService } from '@js-camp/angular/core/services/anime-query-params.service';
-import { Sort } from '@angular/material/sort';
+import { Sort, SortDirection } from '@angular/material/sort';
+
+import { SortMapper } from '@js-camp/core/mappers/sort-mapper';
 @Component({
 	selector: 'camp-anime-catalog',
 	standalone: true,
@@ -36,8 +38,16 @@ export class AnimeCatalogComponent implements OnInit {
 
 	private readonly animeQueryParamsService = inject(AnimeQueryParamsService);
 
+	private readonly sortMapper = inject(SortMapper);
+
 	/** Filter params. */
 	protected filterParams: AnimeFilterParams.Combined | null = null;
+
+	/** Filter params. */
+	protected sortActive: string = '';
+
+	/** Filter params. */
+	protected sortDirection: SortDirection = '';
 
 	public constructor() {
 		this.animePage$ = this.animeService.getAllAnime(this.filter$);
@@ -45,8 +55,17 @@ export class AnimeCatalogComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.filter$.subscribe((params) => {
+			const sortParams: AnimeFilterParams.Sort = {
+				sortField: params.sortField,
+				sortDirection: params.sortDirection,
+			};
+
+			const data = this.sortMapper.toDto(sortParams);
+			this.sortActive = data.active;
+			this.sortDirection = data.direction;
+			console.log('1', {...data});
+
 			this.filterParams = params;
-			console.log(this.filterParams);
 		});
 	}
 
@@ -63,7 +82,7 @@ export class AnimeCatalogComponent implements OnInit {
 	}
 
 	protected onSortChange(event: Sort): void {
-		console.log(event.active);
-		this.animeQueryParamsService.appendParamsAndResetPageNumber({ sortFields: event.active });
+		const param = this.sortMapper.fromDto(event);
+		this.animeQueryParamsService.appendParamsAndResetPageNumber(param);
 	}
 }

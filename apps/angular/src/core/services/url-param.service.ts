@@ -47,13 +47,11 @@ export class UrlParamsService {
 
 	/** Set query parameters from AnimeFilterParams.Combined type. */
 	public setCombinedQueryParams(params: AnimeFilterParams.Combined): void {
-		// const paramsWithoutUndefined = this.removeUndefinedFields(params);
-		// console.log("paramsWithoutUndefined",paramsWithoutUndefined);
 		const queryParams: UrlQueryParams = {
 			...(params.search != null && { search: params.search }),
 			...(params.pageNumber != null && { pageNumber: params.pageNumber.toString() }),
 			...(params.pageSize != null && { pageSize: params.pageSize.toString() }),
-			...(params.sortFields != null ? { sortFields: params.sortFields } : { sortFields: null }),
+			...(params.sortField != null ? { sortField: params.sortField } : { sortField: null }),
 			...(params.type != null ? { type: params.type } : { type: null }),
 		};
 		this.router.navigate([], {

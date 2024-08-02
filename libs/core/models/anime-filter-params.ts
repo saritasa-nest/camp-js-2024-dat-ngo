@@ -1,4 +1,6 @@
+import { AnimeSortField } from './anime-sort-field';
 import { AnimeType } from './anime-type';
+import { SortsDirection } from './sort-direction';
 
 /** Anime query params . */
 export namespace AnimeFilterParams {
@@ -23,8 +25,10 @@ export namespace AnimeFilterParams {
 	/** Sort. */
 	export type Sort = {
 
-		/** Order. */
-		sortFields: string | null;
+		// /** Order. */
+		sortField: AnimeSortField | null;
+
+		sortDirection: SortsDirection | null;
 	};
 
 	/** Anime Type. */

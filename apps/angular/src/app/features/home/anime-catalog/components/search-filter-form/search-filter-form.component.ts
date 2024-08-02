@@ -14,15 +14,15 @@ import { MatInputModule } from '@angular/material/input';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchFilterFormComponent {
-	protected selectedType: AnimeType | null = null;
-
 	/** An array of available anime types to choose from. */
 	protected readonly selectTypes = Object.values(AnimeType);
 
 	/** Event emitter for page changing. */
-	@Output() public 	typeChange = new EventEmitter<AnimeType>();
+	@Output() public typeChange = new EventEmitter<AnimeType>();
 
 	@Input() public search = '';
+
+	@Input() selectedType: AnimeType | null = null;
 
 	@Output() public searchChange = new EventEmitter<string>();
 

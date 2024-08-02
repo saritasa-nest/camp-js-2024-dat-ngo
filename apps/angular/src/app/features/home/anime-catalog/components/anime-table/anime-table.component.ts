@@ -3,6 +3,7 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
+	inject,
 	Input,
 	OnChanges,
 	Output,
@@ -13,7 +14,11 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Anime } from '@js-camp/core/models/anime.model';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+import { MatSort, MatSortModule, Sort, SortDirection } from '@angular/material/sort';
+import { SortsDirection } from '@js-camp/core/models/sort-direction';
+import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
+import { SortMapper } from '@js-camp/core/mappers/sort-mapper';
+
 /** Create anime table component.*/
 @Component({
 	selector: 'camp-anime-table',
@@ -28,7 +33,15 @@ export class AnimeTableComponent implements OnChanges {
 
 	@Input() public animeList: ReadonlyArray<Anime> = [];
 
+	@Input() public sortActive: string = '';
+
+	@Input() public sortDirection: SortDirection = '';
+
 	protected dataSource = new MatTableDataSource<Anime>();
+
+	protected readonly sortMapper = inject(SortMapper);
+
+	// private data: SortDirection =
 
 	/** Event emitter for page changing. */
 	@Output() public sortChange = new EventEmitter<Sort>();
@@ -38,7 +51,8 @@ export class AnimeTableComponent implements OnChanges {
 	 * @param event The page event.
 	 */
 	public onSortChange(event: Sort): void {
-			this.sortChange.emit(event);
+		console.log(this.sortActive);
+		this.sortChange.emit(event);
 	}
 
 	public constructor() {}
@@ -60,9 +74,9 @@ export class AnimeTableComponent implements OnChanges {
 	/** Displayed columns .*/
 	protected readonly displayedColumns: string[] = [
 		'Image',
-		'English Title',
+		'titleEng',
 		'title_jpn',
-		'Broadcasted Date',
+		'airedStartDate',
 		'Type',
 		'status',
 	];
