@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AnimeFilterParams } from '../models/anime-filter-params';
 import { AnimeSortField } from '../models/anime-sort-field';
 import { SortsDirection } from '../models/sort-direction';
-import { TMapper, TMapperFromDto } from '../types/mapper';
+import { TMapper } from '../types/mapper';
 import { Sort, SortDirection } from '@angular/material/sort';
 
 @Injectable({

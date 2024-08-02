@@ -33,9 +33,10 @@ export class AnimeTableComponent implements OnChanges {
 
 	@Input() public animeList: ReadonlyArray<Anime> = [];
 
-	@Input() public sortActive: string = '';
-
-	@Input() public sortDirection: SortDirection = '';
+	@Input() public sortParams: Sort = {
+		direction: '',
+		active: '',
+	}
 
 	protected dataSource = new MatTableDataSource<Anime>();
 
@@ -51,7 +52,6 @@ export class AnimeTableComponent implements OnChanges {
 	 * @param event The page event.
 	 */
 	public onSortChange(event: Sort): void {
-		console.log(this.sortActive);
 		this.sortChange.emit(event);
 	}
 

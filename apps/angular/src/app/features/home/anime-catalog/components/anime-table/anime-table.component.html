@@ -1,5 +1,5 @@
 <section class="mat-elevation-z8 anime__table-container">
-	<table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)" [matSortActive]="sortActive" [matSortDirection]="sortDirection" [trackBy]="trackBy">
+	<table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)" [matSortActive]="sortParams.active" [matSortDirection]="sortParams.direction" [trackBy]="trackBy">
 		<!--- Note that these columns can be defined in any order.
 						The actual rendered columns are set as a property on the row definition" -->
 		<ng-container class="anime__column" matColumnDef="Image">

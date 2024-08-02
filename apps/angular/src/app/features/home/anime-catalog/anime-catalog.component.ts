@@ -44,10 +44,10 @@ export class AnimeCatalogComponent implements OnInit {
 	protected filterParams: AnimeFilterParams.Combined | null = null;
 
 	/** Filter params. */
-	protected sortActive: string = '';
-
-	/** Filter params. */
-	protected sortDirection: SortDirection = '';
+	protected sortParams: Sort = {
+		direction: '',
+		active: '',
+	};
 
 	public constructor() {
 		this.animePage$ = this.animeService.getAllAnime(this.filter$);
@@ -60,10 +60,7 @@ export class AnimeCatalogComponent implements OnInit {
 				sortDirection: params.sortDirection,
 			};
 
-			const data = this.sortMapper.toDto(sortParams);
-			this.sortActive = data.active;
-			this.sortDirection = data.direction;
-			console.log('1', {...data});
+			this.sortParams = this.sortMapper.toDto(sortParams);
 
 			this.filterParams = params;
 		});
