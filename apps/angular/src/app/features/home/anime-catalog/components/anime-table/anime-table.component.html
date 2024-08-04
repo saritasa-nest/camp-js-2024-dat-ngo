@@ -1,5 +1,25 @@
 <section class="mat-elevation-z8 anime__table-container">
-	<table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)" [matSortActive]="sortParams.active" [matSortDirection]="sortParams.direction" [trackBy]="trackBy">
+	<div *appSkeletonLoader="isLoading">
+		<div class="skeleton-header"></div>
+		<div class="skeleton-row" *ngFor="let _ of [1, 2, 3, 4, 5]">
+			<div class="skeleton-cell"></div>
+			<div class="skeleton-cell"></div>
+			<div class="skeleton-cell"></div>
+			<div class="skeleton-cell"></div>
+			<div class="skeleton-cell"></div>
+			<div class="skeleton-cell"></div>
+		</div>
+	</div>
+	<table
+		mat-table
+		*ngIf="!isLoading"
+		[dataSource]="dataSource"
+		matSort
+		(matSortChange)="onSortChange($event)"
+		[matSortActive]="sortParams.active"
+		[matSortDirection]="sortParams.direction"
+		[trackBy]="trackBy"
+	>
 		<!--- Note that these columns can be defined in any order.
 						The actual rendered columns are set as a property on the row definition" -->
 		<ng-container class="anime__column" matColumnDef="Image">
@@ -10,7 +30,7 @@
 				</div>
 			</td>
 		</ng-container>
-
+		<!-- <ng-container *skeleton="isLoading"></ng-container> -->
 		<ng-container class="anime__column" matColumnDef="titleEng">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>English Title</th>
 			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.titleEng | empty }}</td>
@@ -18,7 +38,9 @@
 
 		<ng-container class="anime__column" matColumnDef="title_jpn">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Japanese Title</th>
-			<td mat-cell class="anime__cell" *matCellDef="let anime"><span class="anime__japan-title">{{ anime.titleJpn | empty }}</span></td>
+			<td mat-cell class="anime__cell" *matCellDef="let anime">
+				<span appHighlight class="anime__japan-title">{{ anime.titleJpn | empty }}</span>
+			</td>
 		</ng-container>
 
 		<ng-container class="anime__column" matColumnDef="airedStartDate">
@@ -28,7 +50,9 @@
 
 		<ng-container class="anime__column" matColumnDef="Type">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef>Type</th>
-			<td mat-cell class="anime__cell" *matCellDef="let anime"><span class="anime__{{anime.animeType}}">{{ anime.animeType | empty }}</span></td>
+			<td mat-cell class="anime__cell" *matCellDef="let anime">
+				<span class="anime__{{ anime.animeType }}">{{ anime.animeType | empty }}</span>
+			</td>
 		</ng-container>
 
 		<ng-container class="anime__column" matColumnDef="status">

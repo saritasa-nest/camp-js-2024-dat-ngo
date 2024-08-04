@@ -1,7 +1,20 @@
-<ng-container *ngIf="{
-	animePage: animePage$ | async
-} as data">
-	<camp-search-filter-form (typeChange)="onSelectionChange($event)" (searchChange)="onSearchChange($event)" [search]="filterParams?.search ?? ''" [selectedType]="filterParams?.type ?? null"></camp-search-filter-form>
-	<camp-anime-table [animeList]="data.animePage ? data.animePage.items : []" (sortChange)="onSortChange($event)" [sortParams]="sortParams"></camp-anime-table>
-	<camp-paginator [pageNumber]="filterParams?.pageNumber ?? 0" [pageSize]="filterParams?.pageSize ?? 10" [totalCount]="data.animePage ? data.animePage.totalCount : 0" (pageChange)="onPageChange($event)"></camp-paginator>
+<ng-container *ngIf="{ animePage: animePage$ | async, isLoading: isLoading$ | async } as data">
+	<camp-search-filter-form
+		(typeChange)="onSelectionChange($event)"
+		(searchChange)="onSearchChange($event)"
+		[search]="filterParams?.search ?? ''"
+		[selectedType]="filterParams?.type ?? null"
+	></camp-search-filter-form>
+	<camp-anime-table
+		[animeList]="data.animePage ? data.animePage.items : []"
+		[isLoading]="data.isLoading"
+		(sortChange)="onSortChange($event)"
+		[sortParams]="sortParams"
+	></camp-anime-table>
+	<camp-paginator
+		[pageNumber]="filterParams?.pageNumber ?? 0"
+		[pageSize]="filterParams?.pageSize ?? 10"
+		[totalCount]="data.animePage ? data.animePage.totalCount : 0"
+		(pageChange)="onPageChange($event)"
+	></camp-paginator>
 </ng-container>

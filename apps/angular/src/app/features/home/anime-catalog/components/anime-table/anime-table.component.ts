@@ -18,12 +18,13 @@ import { MatSort, MatSortModule, Sort, SortDirection } from '@angular/material/s
 import { SortsDirection } from '@js-camp/core/models/sort-direction';
 import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
 import { SortMapper } from '@js-camp/core/mappers/sort-mapper';
+import { SkeletonLoaderDirective } from '@js-camp/angular/shared/directives/skeleton.directive';
 
 /** Create anime table component.*/
 @Component({
 	selector: 'camp-anime-table',
 	standalone: true,
-	imports: [MatTableModule, CommonModule, EmptyPipe, MatPaginator, MatSortModule],
+	imports: [MatTableModule, CommonModule, EmptyPipe, MatPaginator, MatSortModule, SkeletonLoaderDirective],
 	templateUrl: './anime-table.component.html',
 	styleUrl: './anime-table.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,10 +34,12 @@ export class AnimeTableComponent implements OnChanges {
 
 	@Input() public animeList: ReadonlyArray<Anime> = [];
 
+	@Input() public isLoading: boolean | null = false;
+
 	@Input() public sortParams: Sort = {
 		direction: '',
 		active: '',
-	}
+	};
 
 	protected dataSource = new MatTableDataSource<Anime>();
 

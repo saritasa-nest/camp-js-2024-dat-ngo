@@ -40,6 +40,8 @@ export class AnimeCatalogComponent implements OnInit {
 
 	private readonly sortMapper = inject(SortMapper);
 
+	protected isLoading$: Observable<boolean>;
+
 	/** Filter params. */
 	protected filterParams: AnimeFilterParams.Combined | null = null;
 
@@ -51,6 +53,8 @@ export class AnimeCatalogComponent implements OnInit {
 
 	public constructor() {
 		this.animePage$ = this.animeService.getAllAnime(this.filter$);
+		this.isLoading$ = this.animeService.isLoading$;
+		this.isLoading$.subscribe((data) => console.log(data));
 	}
 
 	ngOnInit(): void {
