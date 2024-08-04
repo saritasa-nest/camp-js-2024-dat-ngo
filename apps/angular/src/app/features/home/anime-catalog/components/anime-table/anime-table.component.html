@@ -1,13 +1,9 @@
 <section class="mat-elevation-z8 anime__table-container">
 	<!-- Skeleton Loader -->
-	<div *appSkeletonLoader="isLoading; cellSizes: cellSizes; displayedColumns: displayedColumns">
+	<div *appSkeletonLoader="isLoading; height: '100px'; width: '200px'">
 		<div class="skeleton-loader">
 			<div *ngFor="let _ of [1, 2, 3, 4, 5]" class="skeleton-row">
-				<app-skeleton-cell
-					*ngFor="let column of displayedColumns"
-					[width]="cellSizes[column].width"
-					[height]="cellSizes[column].height"
-				></app-skeleton-cell>
+				<div class="skeleton-cell" *ngFor="let _ of displayedColumns"></div>
 			</div>
 		</div>
 	</div>

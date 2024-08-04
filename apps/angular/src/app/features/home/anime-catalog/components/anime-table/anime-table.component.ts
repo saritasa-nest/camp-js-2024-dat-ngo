@@ -19,30 +19,12 @@ import { SortsDirection } from '@js-camp/core/models/sort-direction';
 import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
 import { SortMapper } from '@js-camp/core/mappers/sort-mapper';
 import { SkeletonLoaderDirective } from '@js-camp/angular/shared/directives/skeleton.directive';
-import { SkeletonCellComponent } from '@js-camp/angular/app/skeleton-cell/skeleton-cell.component';
-import { LoadingMatTableDirective } from '@js-camp/angular/shared/directives/highlight.directive';
-interface CellSize {
-	width: string;
-	height: string;
-}
 
-interface CellSizes {
-	[key: string]: CellSize;
-}
 /** Create anime table component.*/
 @Component({
 	selector: 'camp-anime-table',
 	standalone: true,
-	imports: [
-		MatTableModule,
-		CommonModule,
-		EmptyPipe,
-		MatPaginator,
-		MatSortModule,
-		SkeletonLoaderDirective,
-		SkeletonCellComponent,
-		LoadingMatTableDirective,
-	],
+	imports: [MatTableModule, CommonModule, EmptyPipe, MatPaginator, MatSortModule, SkeletonLoaderDirective],
 	templateUrl: './anime-table.component.html',
 	styleUrl: './anime-table.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -101,13 +83,4 @@ export class AnimeTableComponent implements OnChanges {
 		'Type',
 		'status',
 	];
-
-	cellSizes: CellSizes = {
-		Image: { width: '50px', height: '50px' },
-		titleEng: { width: '150px', height: '20px' },
-		title_jpn: { width: '150px', height: '20px' },
-		airedStartDate: { width: '100px', height: '20px' },
-		Type: { width: '80px', height: '20px' },
-		status: { width: '100px', height: '20px' },
-	};
 }
