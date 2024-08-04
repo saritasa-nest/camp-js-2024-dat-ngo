@@ -104,34 +104,25 @@
 .skeleton-cell {
 	background: #e0e0e0;
 	border-radius: 4px;
+	height: 100px;
 	animation: shimmer 1.5s infinite linear;
 }
 
-.skeleton-header {
-	height: 32px;
-	margin-bottom: 8px;
+.skeleton-loader {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 16px;
 }
 
 .skeleton-row {
 	display: flex;
-	margin-bottom: 8px;
+	gap: 16px;
 }
 
 .skeleton-cell {
-	flex: 1;
 	height: 24px;
-	margin-right: 8px;
-}
-
-.skeleton-cell:last-child {
-	margin-right: 0;
-}
-
-@keyframes shimmer {
-	0% {
-		background-position: -200px 0;
-	}
-	100% {
-		background-position: 200px 0;
-	}
+	background-color: #e0e0e0;
+	border-radius: 4px;
+	flex: 1;
 }

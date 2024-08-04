@@ -1,23 +1,41 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { MatTable } from '@angular/material/table';
 
 @Directive({
-	selector: '[appHighlight]',
+	selector: '[appLoadingMatTable]',
 	standalone: true,
 })
-export class HighlightDirective {
-	@Input('appHighlight') highlightColor: string = 'yellow';
+export class LoadingMatTableDirective implements OnChanges {
+	@Input() loading: boolean | null = false;
+	@Input() skeletonRows: number = 3;
+	private originalData: any[] = [];
 
-	constructor(private el: ElementRef) {}
+	constructor(private matTable: MatTable<any>) {}
 
-	@HostListener('mouseenter') onMouseEnter() {
-		this.highlight(this.highlightColor || 'yellow');
+	ngOnChanges(changes: SimpleChanges): void {
+		if (changes['loading']) {
+			this.toggleLoadingState(this.loading);
+		}
 	}
 
-	@HostListener('mouseleave') onMouseLeave() {
-		this.highlight('');
+	private toggleLoadingState(isLoading: boolean | null): void {
+		if (isLoading) {
+			this.showSkeletonRows();
+		} else {
+			this.hideSkeletonRows();
+		}
 	}
 
-	private highlight(color: string) {
-		this.el.nativeElement.style.backgroundColor = color;
+	private showSkeletonRows(): void {
+		// Logic to display skeleton rows
+		const data = Array(this.skeletonRows).fill({});
+		this.matTable.dataSource = data;
+		// Additional styling or placeholder text can be added here
+	}
+
+	private hideSkeletonRows(): void {
+		// Logic to clear skeleton rows and restore original data
+		this.matTable.dataSource = this.originalData;
+		// Reset to original data source if necessary
 	}
 }

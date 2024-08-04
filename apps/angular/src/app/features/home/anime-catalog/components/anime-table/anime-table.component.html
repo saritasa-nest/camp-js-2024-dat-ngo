@@ -1,15 +1,18 @@
 <section class="mat-elevation-z8 anime__table-container">
-	<div *appSkeletonLoader="isLoading">
-		<div class="skeleton-header"></div>
-		<div class="skeleton-row" *ngFor="let _ of [1, 2, 3, 4, 5]">
-			<div class="skeleton-cell"></div>
-			<div class="skeleton-cell"></div>
-			<div class="skeleton-cell"></div>
-			<div class="skeleton-cell"></div>
-			<div class="skeleton-cell"></div>
-			<div class="skeleton-cell"></div>
+	<!-- Skeleton Loader -->
+	<div *appSkeletonLoader="isLoading; cellSizes: cellSizes; displayedColumns: displayedColumns">
+		<div class="skeleton-loader">
+			<div *ngFor="let _ of [1, 2, 3, 4, 5]" class="skeleton-row">
+				<app-skeleton-cell
+					*ngFor="let column of displayedColumns"
+					[width]="cellSizes[column].width"
+					[height]="cellSizes[column].height"
+				></app-skeleton-cell>
+			</div>
 		</div>
 	</div>
+
+	<!-- Actual Table Data -->
 	<table
 		mat-table
 		*ngIf="!isLoading"
@@ -20,8 +23,7 @@
 		[matSortDirection]="sortParams.direction"
 		[trackBy]="trackBy"
 	>
-		<!--- Note that these columns can be defined in any order.
-						The actual rendered columns are set as a property on the row definition" -->
+		<!-- Define Columns and Data Cells -->
 		<ng-container class="anime__column" matColumnDef="Image">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef>Image</th>
 			<td mat-cell class="anime__cell" *matCellDef="let anime">
@@ -30,7 +32,9 @@
 				</div>
 			</td>
 		</ng-container>
-		<!-- <ng-container *skeleton="isLoading"></ng-container> -->
+
+		<!-- Other column definitions go here -->
+
 		<ng-container class="anime__column" matColumnDef="titleEng">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>English Title</th>
 			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.titleEng | empty }}</td>
