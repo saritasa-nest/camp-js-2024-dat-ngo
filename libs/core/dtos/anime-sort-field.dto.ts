@@ -1,5 +1,5 @@
 export enum AnimeSortFieldDto {
 	TitleEng = 'title_eng',
-	StartDate = 'aired_startswith',
+	StartDate = 'aired__startswith',
 	Status = 'status',
 }

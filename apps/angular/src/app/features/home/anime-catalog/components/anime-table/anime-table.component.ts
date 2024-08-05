@@ -16,9 +16,9 @@ import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Anime } from '@js-camp/core/models/anime.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
-import { SortMapper } from '@js-camp/core/mappers/sort-mapper';
 import { SkeletonDirective } from '@js-camp/angular/shared/directives/skeleton.directive';
 import { TableCellContentComponent } from '@js-camp/angular/shared/directives/table-cell-content/table-cell-content.component';
+import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
 
 /** Create anime table component.*/
 @Component({
@@ -53,8 +53,6 @@ console.log({values})
 	};
 
 	protected dataSource = new MatTableDataSource<Anime>();
-
-	protected readonly sortMapper = inject(SortMapper);
 
 	// private data: SortDirection =
 
@@ -96,7 +94,7 @@ console.log({values})
 	];
 	/** Generate number array for the template table data source. */
 	protected get templateArray(): object[] {
-		return Array(10)
+		return Array(DEFAULT_PAGINATION.pageSize)
 			.fill(null)
 			.map((_, index) => ({}));
 	}
