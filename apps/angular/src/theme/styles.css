@@ -1,7 +1,7 @@
 /* Global styles. */
 
 @import url("/libs/theme/src/variables.css");
-@import url(./mat-form/form-search-filter.css);
+@import url("./mat-form/form-search-filter.css");
 
 * {
 	box-sizing: border-box;

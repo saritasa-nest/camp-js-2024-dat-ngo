@@ -1,3 +1,7 @@
+[custom-attribute="true"] {
+	--size: 400px; /* Override the CSS variable */
+}
+
 .anime__table-container {
 	height: 100%;
 	overflow-y: auto;
@@ -15,6 +19,7 @@
 }
 
 .anime__column {
+	display: block;
 	word-wrap: break-word;
 	white-space: unset;
 	width: 20%;
@@ -100,29 +105,14 @@
 	color: rgb(51 51 51);
 }
 
-.skeleton-header,
-.skeleton-cell {
-	background: #e0e0e0;
-	border-radius: 4px;
-	height: 100px;
-	animation: shimmer 1.5s infinite linear;
+.camp-skeleton {
+	height: 100%;
+	min-height: 16px;
+	background-color: red;
 }
 
-.skeleton-loader {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-	padding: 16px;
-}
+.image-skeleton {
+	--size: 100px;
 
-.skeleton-row {
-	display: flex;
-	gap: 16px;
-}
-
-.skeleton-cell {
-	height: 50px;
-	background-color: #e0e0e0;
-	border-radius: 4px;
-	flex: 1;
+	margin: 5px;
 }

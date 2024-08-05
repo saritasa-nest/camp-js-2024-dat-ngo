@@ -1,49 +1,24 @@
-// import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-
-// @Directive({
-// 	selector: '[appSkeletonLoader]',
-// 	standalone: true,
-// })
-// export class SkeletonLoaderDirective {
-// 	private hasView = false;
-
-// 	@Input() set appSkeletonLoader(isLoading: boolean | null) {
-// 		if (isLoading && !this.hasView) {
-// 			this.viewContainer.clear();
-// 			this.viewContainer.createEmbeddedView(this.templateRef);
-// 			this.hasView = true;
-// 		} else if (!isLoading && this.hasView) {
-// 			this.viewContainer.clear();
-// 			this.hasView = false;
-// 		}
-// 	}
-
-// 	constructor(private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef) {}
-// }
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, ElementRef, Renderer2 } from '@angular/core';
 
 @Directive({
-	selector: '[appSkeletonLoader]',
+	selector: '[appSkeletonCell]',
 	standalone: true,
 })
-export class SkeletonLoaderDirective {
-	private hasView = false;
-
-	@Input() set appSkeletonLoader(isLoading: boolean | null) {
-		if (isLoading && !this.hasView) {
-			this.viewContainer.clear();
-			this.viewContainer.createEmbeddedView(this.templateRef, {
-				$implicit: { height: this.height, width: this.width },
-			});
-			this.hasView = true;
-		} else if (!isLoading && this.hasView) {
-			this.viewContainer.clear();
-			this.hasView = false;
-		}
+export class SkeletonDirective {
+	constructor(private el: ElementRef, private renderer: Renderer2) {
+		this.setSkeletonCellStyle();
 	}
 
-	@Input() height: string | null = '100px';
-	@Input() width: string | null = '100px';
+	private setSkeletonCellStyle(): void {
 
-	constructor(private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef) {}
+		// Apply skeleton loading styles
+		this.renderer.setStyle(
+			this.el.nativeElement,
+			'background',
+			'linear-gradient(-90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
+		);
+		this.renderer.setStyle(this.el.nativeElement, 'backgroundSize', '200% 100%');
+		this.renderer.setStyle(this.el.nativeElement, 'animation', 'skeleton-loading 1.5s infinite');
+		this.renderer.setStyle(this.el.nativeElement, 'borderRadius', '4px');
+	}
 }

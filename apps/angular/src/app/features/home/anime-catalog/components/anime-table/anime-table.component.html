@@ -1,66 +1,71 @@
 <section class="mat-elevation-z8 anime__table-container">
-	<!-- Skeleton Loader -->
-	<div *appSkeletonLoader="isLoading; height: '100px'; width: '200px'">
-		<div class="skeleton-loader">
-			<div *ngFor="let _ of [1, 2, 3, 4, 5]" class="skeleton-row">
-				<div class="skeleton-cell" *ngFor="let _ of displayedColumns"></div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Actual Table Data -->
 	<table
 		mat-table
-		*ngIf="!isLoading"
-		[dataSource]="dataSource"
+		[dataSource]="dataSource.data.length === 0 ? templateArray : dataSource.data"
 		matSort
 		(matSortChange)="onSortChange($event)"
 		[matSortActive]="sortParams.active"
 		[matSortDirection]="sortParams.direction"
-		[trackBy]="trackBy"
 	>
 		<!-- Define Columns and Data Cells -->
 		<ng-container class="anime__column" matColumnDef="Image">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef>Image</th>
 			<td mat-cell class="anime__cell" *matCellDef="let anime">
-				<div class="anime__image-container">
-					<img class="anime__image" [src]="anime.coverImage" [alt]="anime.titleJpn" />
-				</div>
+				<app-table-cell-content [isLoading]="isLoading" class="image-skeleton"
+					><div class="anime__image-container">
+						<img class="anime__image" [src]="anime.coverImage" [alt]="isLoading ? null: anime.titleJpn" /></div
+				></app-table-cell-content>
 			</td>
 		</ng-container>
 
 		<!-- Other column definitions go here -->
 
-		<ng-container class="anime__column" matColumnDef="titleEng">
-			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>English Title</th>
-			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.titleEng | empty }}</td>
+		<ng-container class="anime__column" matColumnDef="titleEng"
+			><th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>English Title</th>
+			<td mat-cell class="anime__cell" *matCellDef="let anime">
+				<app-table-cell-content [isLoading]="isLoading">
+					{{ anime.titleEng | empty }}
+				</app-table-cell-content>
+			</td>
+			<!-- <td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.titleEng | empty }}</td> -->
 		</ng-container>
 
 		<ng-container class="anime__column" matColumnDef="title_jpn">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Japanese Title</th>
 			<td mat-cell class="anime__cell" *matCellDef="let anime">
-				<span appHighlight class="anime__japan-title">{{ anime.titleJpn | empty }}</span>
+				<app-table-cell-content [isLoading]="isLoading">
+					<span class="anime__japan-title">{{ anime.titleJpn | empty }}</span>
+				</app-table-cell-content>
 			</td>
 		</ng-container>
 
 		<ng-container class="anime__column" matColumnDef="airedStartDate">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Broadcasted Date</th>
-			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.broadcasted.startDate | date | empty }}</td>
+			<td mat-cell class="anime__cell" *matCellDef="let anime">
+				<app-table-cell-content [isLoading]="isLoading">
+					{{ anime.broadcasted?.startDate | date | empty }}
+				</app-table-cell-content>
+			</td>
 		</ng-container>
 
 		<ng-container class="anime__column" matColumnDef="Type">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef>Type</th>
 			<td mat-cell class="anime__cell" *matCellDef="let anime">
-				<span class="anime__{{ anime.animeType }}">{{ anime.animeType | empty }}</span>
+				<app-table-cell-content [isLoading]="isLoading">
+					<span class="anime__{{ anime.animeType }}">{{ anime.animeType | empty }}</span>
+				</app-table-cell-content>
 			</td>
 		</ng-container>
 
 		<ng-container class="anime__column" matColumnDef="status">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-			<td mat-cell class="anime__cell" *matCellDef="let anime">{{ anime.animeStatus | empty }}</td>
+			<td mat-cell class="anime__cell" *matCellDef="let anime">
+				<app-table-cell-content [isLoading]="isLoading">
+					{{ anime.animeStatus | empty }}
+				</app-table-cell-content>
+			</td>
 		</ng-container>
-
-		<tr mat-header-row class="anime__header-row" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+		<tr mat-header-row class="anime__header-row" *matHeaderRowDef="displayedColumns; sticky: isLoading"></tr>
 		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 	</table>
 </section>

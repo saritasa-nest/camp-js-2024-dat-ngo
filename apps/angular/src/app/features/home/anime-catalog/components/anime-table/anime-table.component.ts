@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
@@ -14,27 +15,37 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Anime } from '@js-camp/core/models/anime.model';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, MatSortModule, Sort, SortDirection } from '@angular/material/sort';
-import { SortsDirection } from '@js-camp/core/models/sort-direction';
-import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { SortMapper } from '@js-camp/core/mappers/sort-mapper';
-import { SkeletonLoaderDirective } from '@js-camp/angular/shared/directives/skeleton.directive';
+import { SkeletonDirective } from '@js-camp/angular/shared/directives/skeleton.directive';
+import { TableCellContentComponent } from '@js-camp/angular/shared/directives/table-cell-content/table-cell-content.component';
 
 /** Create anime table component.*/
 @Component({
 	selector: 'camp-anime-table',
 	standalone: true,
-	imports: [MatTableModule, CommonModule, EmptyPipe, MatPaginator, MatSortModule, SkeletonLoaderDirective],
+	imports: [
+		MatTableModule,
+		CommonModule,
+		EmptyPipe,
+		MatPaginator,
+		MatSortModule,
+		SkeletonDirective,
+		TableCellContentComponent,
+	],
 	templateUrl: './anime-table.component.html',
 	styleUrl: './anime-table.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnimeTableComponent implements OnChanges {
+export class AnimeTableComponent {
 	@ViewChild(MatSort) protected sort!: MatSort;
 
-	@Input() public animeList: ReadonlyArray<Anime> = [];
+	@Input() public set animeList(values: ReadonlyArray<Anime>) {
+console.log({values})
+		this.dataSource.data = [...values];
+	};
 
-	@Input() public isLoading: boolean | null = false;
+	@Input({transform: booleanAttribute}) public isLoading: boolean = false;
 
 	@Input() public sortParams: Sort = {
 		direction: '',
@@ -60,11 +71,7 @@ export class AnimeTableComponent implements OnChanges {
 
 	public constructor() {}
 
-	ngOnChanges(changes: SimpleChanges): void {
-		if (changes['animeList']) {
-			this.dataSource.data = [...this.animeList];
-		}
-	}
+
 
 	/** This informs the table how to uniquely identify rows to track how the dataSource changes with each update.
 	 * @param index Index of them Anime on table.
@@ -72,6 +79,10 @@ export class AnimeTableComponent implements OnChanges {
 	 */
 	protected trackBy(index: number, item: Anime): Anime['id'] {
 		return item.id;
+	}
+
+	protected trackByFallback(index: number): number {
+		return index;
 	}
 
 	/** Displayed columns .*/
@@ -83,4 +94,10 @@ export class AnimeTableComponent implements OnChanges {
 		'Type',
 		'status',
 	];
+	/** Generate number array for the template table data source. */
+	protected get templateArray(): object[] {
+		return Array(10)
+			.fill(null)
+			.map((_, index) => ({}));
+	}
 }
