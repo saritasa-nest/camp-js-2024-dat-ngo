@@ -41,16 +41,18 @@ export class AnimeTableComponent {
 	@ViewChild(MatSort) protected sort!: MatSort;
 
 	@Input() public set animeList(values: ReadonlyArray<Anime>) {
-console.log({values})
+		console.log({ values });
 		this.dataSource.data = [...values];
-	};
+	}
 
-	@Input({transform: booleanAttribute}) public isLoading: boolean = false;
+	@Input({ transform: booleanAttribute }) public isLoading: boolean = false;
 
 	@Input() public sortParams: Sort = {
 		direction: '',
 		active: '',
 	};
+
+	// protected dataSource = new MatTableDataSource<Anime>();
 
 	protected dataSource = new MatTableDataSource<Anime>();
 
@@ -68,8 +70,6 @@ console.log({values})
 	}
 
 	public constructor() {}
-
-
 
 	/** This informs the table how to uniquely identify rows to track how the dataSource changes with each update.
 	 * @param index Index of them Anime on table.
