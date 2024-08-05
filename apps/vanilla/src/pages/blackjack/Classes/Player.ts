@@ -1,8 +1,7 @@
 import { Subscriber } from '../Types/subscriber';
-import { PlayerTurnResult } from '../types/player-turn-result';
+import { PlayerTurnResult } from '../Types/player-turn-result';
 
 import { Inspector } from './inspector';
-import { Result } from './result-displayer';
 
 /** Class illustrate a player in a game.*/
 export class Player extends Inspector implements Subscriber<PlayerTurnResult> {
@@ -10,18 +9,14 @@ export class Player extends Inspector implements Subscriber<PlayerTurnResult> {
 		super();
 	}
 
-	/**
-	 * Update turn.
-	 * @param turnResult The result of current dice turn which has result and index of player.
-	 */
+	/** @inheritdoc */
 	public update(turnResult: PlayerTurnResult): void {
 		if (turnResult.playerIndex === this.playerIndex) {
 			const diceResults = this.updateDiceList(turnResult);
-			const newResult: Result = {
+			this.result.notify({
 				diceResult: diceResults,
 				totalScore: this.getTotalScore,
-			};
-			this.result.notify(newResult);
+			});
 		}
 	}
 }

@@ -46,7 +46,7 @@ export class ResultDisplayer implements Subscriber<Result> {
 	}
 
 	/**
-	 * Function to create new HTML elements .
+	 * Create new HTML elements .
 	 * @param htmlString String of HTML elements.
 	 */
 	private createElement(htmlString: string): HTMLElement | null {

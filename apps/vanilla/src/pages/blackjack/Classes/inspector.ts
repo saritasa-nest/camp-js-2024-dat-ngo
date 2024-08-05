@@ -1,6 +1,6 @@
 import { Publisher } from '../Types/publisher';
 
-import { PlayerTurnResult } from '../types/player-turn-result';
+import { PlayerTurnResult } from '../Types/player-turn-result';
 
 import { Result } from './result-displayer';
 

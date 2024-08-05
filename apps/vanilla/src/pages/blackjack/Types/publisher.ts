@@ -6,7 +6,7 @@ export class Publisher<T> {
 	private subscribers: Subscriber<T>[] = [];
 
 	/**
-	 * Method to add subscriber.
+	 * Add subscriber.
 	 * @param subscriber A subscriber to add to the subscribers array.
 	 */
 	public subscribe(subscriber: Subscriber<T>): void {

@@ -13,18 +13,15 @@ export class WinnerDisplayer implements Subscriber<number> {
 	 * Update win Status.
 	 *  @param winnerIndex From the Player.*/
 	public update(winnerIndex: number): void {
+		const buttonElement =
+			winnerIndex != null ? document.getElementById('button-roll') : document.getElementById('button-reset');
 		if (winnerIndex != null) {
-			const buttonElement = document.getElementById('button-roll');
-			if (isHTMLButtonElement(buttonElement)) {
-				buttonElement.disabled = true;
-			}
-			this.containerElement = document.getElementById(`Player-${(winnerIndex + 1)}`);
+			this.containerElement = document.getElementById(`Player-${winnerIndex + 1}`);
 			this.containerElement?.classList.add('win');
-		} else {
-			const buttonElement = document.getElementById('button-reset');
-			if (isHTMLButtonElement(buttonElement)) {
-				buttonElement.disabled = true;
-			}
+		}
+
+		if (isHTMLButtonElement(buttonElement)) {
+			buttonElement.disabled = true;
 		}
 	}
 }

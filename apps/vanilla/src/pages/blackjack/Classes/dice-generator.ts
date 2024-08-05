@@ -18,7 +18,7 @@ export class DiceGenerator extends Publisher<PlayerTurnResult> implements Subscr
 	 */
 	public update(playerIndex: number): void {
 		const diceResult = this.roll();
-		const turnResult = new PlayerTurnResult(playerIndex, diceResult);
+		const turnResult = { playerIndex, diceResult };
 		this.notify(turnResult);
 	}
 }

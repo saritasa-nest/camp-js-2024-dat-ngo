@@ -5,9 +5,8 @@ import { PlayerTurnResult } from '../Types/player-turn-result';
 import { NUMBER_OF_PLAYER, WIN_SCORE } from '../constants';
 
 import { Inspector } from './inspector';
-import { Result } from './result-displayer';
 
-/** ResultHistory update the dice result base on the DiceGenerator.*/
+/** Update the dice result base on the DiceGenerator.*/
 export class ResultHistory extends Inspector implements Subscriber<PlayerTurnResult> {
 	/** Winning player index.*/
 	public readonly winnerIndex: Publisher<number> = new Publisher<number>();
@@ -17,11 +16,10 @@ export class ResultHistory extends Inspector implements Subscriber<PlayerTurnRes
 	/** @inheritdoc */
 	public update(playerDiceResult: PlayerTurnResult): void {
 		const diceResults = this.updateDiceList(playerDiceResult);
-		const newResult: Result = {
+		this.result.notify({
 			diceResult: diceResults,
 			totalScore: this.getTotalScore,
-		};
-		this.result.notify(newResult);
+		});
 		this.playersResult[playerDiceResult.playerIndex] += playerDiceResult.diceResult;
 		if (this.playersResult[playerDiceResult.playerIndex] > WIN_SCORE) {
 			this.winnerIndex.notify(playerDiceResult.playerIndex);

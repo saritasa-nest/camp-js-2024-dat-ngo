@@ -1,4 +1,9 @@
 /** Player turn result. */
-export class PlayerTurnResult {
-	public constructor(public readonly playerIndex: number, public readonly diceResult: number) {}
-}
+export type PlayerTurnResult = {
+
+	/** Player Index. */
+	readonly playerIndex: number;
+
+	/** Dice Result. */
+	readonly diceResult: number;
+};
