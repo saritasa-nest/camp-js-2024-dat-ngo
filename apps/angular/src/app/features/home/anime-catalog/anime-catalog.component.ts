@@ -78,7 +78,7 @@ export class AnimeCatalogComponent implements OnInit {
 		this.animeQueryParamsService.appendParamsAndResetPageNumber({ type: event });
 	}
 
-	protected onSearchChange(event: string): void {
+	protected onSearchChange(event: string | null): void {
 		this.animeQueryParamsService.appendParamsAndResetPageNumber({ search: event });
 	}
 

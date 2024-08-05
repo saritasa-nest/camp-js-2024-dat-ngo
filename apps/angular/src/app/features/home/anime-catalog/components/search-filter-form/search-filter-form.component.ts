@@ -24,7 +24,7 @@ export class SearchFilterFormComponent {
 
 	@Input() selectedType: AnimeType | null = null;
 
-	@Output() public searchChange = new EventEmitter<string>();
+	@Output() public searchChange = new EventEmitter<string | null>();
 
 	protected onSelectionChange(event: MatSelectChange) {
 		if (Object.values(AnimeType).includes(event.value)) {
@@ -32,6 +32,10 @@ export class SearchFilterFormComponent {
 		}
 	}
 	protected onSearch() {
-		this.searchChange.emit(this.search);
+		if(this.search.length > 0) {
+			this.searchChange.emit(this.search);
+		}else{
+			this.searchChange.emit(null);
+		}
 	}
 }

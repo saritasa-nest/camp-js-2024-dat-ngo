@@ -58,7 +58,7 @@
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
 			<td mat-cell class="anime__cell anime__status" *matCellDef="let anime">
 				<app-table-cell-content [isLoading]="isLoading">
-					{{ anime.animeStatus | empty }}
+					<span class="anime__{{ anime.animeStatus }}">{{ anime.animeStatus | empty }}</span>
 				</app-table-cell-content>
 			</td>
 		</ng-container>

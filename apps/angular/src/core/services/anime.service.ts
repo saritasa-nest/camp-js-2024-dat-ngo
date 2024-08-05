@@ -38,7 +38,7 @@ export class AnimeService {
 		return this.httpClient.get<PaginationDto<AnimeDto>>(this.appUrlsConfig.anime.list, { params }).pipe(
 			delay(2000),
 			map((responseDto) => this.paginationMapper.fromDto(responseDto, this.animeMapper)),
-			tap(() => this.isLoadingSubject.next(false))
+			tap(() => this.isLoadingSubject.next(false)),
 		);
 	}
 

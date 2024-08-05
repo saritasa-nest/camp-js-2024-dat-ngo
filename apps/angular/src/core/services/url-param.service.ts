@@ -44,37 +44,4 @@ export class UrlParamsService {
 	public appendAndResetPageNumber(params: Record<string, any>, defaultPageNumber: number): void {
 		return this.append({ ...params, pageNumber: defaultPageNumber });
 	}
-
-	/** Set query parameters from AnimeFilterParams.Combined type. */
-	public setCombinedQueryParams(params: AnimeFilterParams.Combined): void {
-		const queryParams: UrlQueryParams = {
-			...(params.search != null && { search: params.search }),
-			...(params.pageNumber != null && { pageNumber: params.pageNumber.toString() }),
-			...(params.pageSize != null && { pageSize: params.pageSize.toString() }),
-			...(params.sortField != null ? { sortField: params.sortField } : { sortField: null }),
-			...(params.type != null ? { type: params.type } : { type: null }),
-		};
-		this.router.navigate([], {
-			relativeTo: this.activatedRoute,
-			queryParams,
-			queryParamsHandling: 'merge',
-		});
-	}
-
-	/** Get current URL parameters. */
-	public getCurrentParams(): AnimeFilterParams.Combined {
-		return this.activatedRoute.snapshot.queryParams as AnimeFilterParams.Combined;
-	}
-
-	/** Update query parameter. */
-	public updateCombinedQueryParams(params: Partial<AnimeFilterParams.Combined>): void {
-		const currentParams = { ...this.activatedRoute.snapshot.queryParams };
-		const newParams = { ...currentParams, ...params };
-
-		this.router.navigate([], {
-			relativeTo: this.activatedRoute,
-			queryParams: newParams,
-			queryParamsHandling: 'merge',
-		});
-	}
 }
