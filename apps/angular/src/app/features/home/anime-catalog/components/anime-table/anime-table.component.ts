@@ -19,6 +19,7 @@ import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { SkeletonDirective } from '@js-camp/angular/shared/directives/skeleton.directive';
 import { TableCellContentComponent } from '@js-camp/angular/shared/directives/table-cell-content/table-cell-content.component';
 import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
+import { ClassifyPipe } from '@js-camp/angular/core/pipes/classify.pipe';
 
 /** Create anime table component.*/
 @Component({
@@ -28,6 +29,7 @@ import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
 		MatTableModule,
 		CommonModule,
 		EmptyPipe,
+		ClassifyPipe,
 		MatPaginator,
 		MatSortModule,
 		SkeletonDirective,
@@ -97,5 +99,9 @@ export class AnimeTableComponent {
 		return Array(DEFAULT_PAGINATION.pageSize)
 			.fill(null)
 			.map((_, index) => ({}));
+	}
+
+	protected formatDynamicClass(status: string): string {
+		return status.toLowerCase().replace(/\s+/g, '-');
 	}
 }
