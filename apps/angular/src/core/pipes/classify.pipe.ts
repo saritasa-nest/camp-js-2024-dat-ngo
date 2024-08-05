@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ClassifyPipe implements PipeTransform {
 	transform(value: string): string {
 		if (!value) {
-			return ''; // Trả về chuỗi rỗng nếu giá trị là undefined hoặc null
+			return '';
 		}
 		return value.toLowerCase().replace(/\s+/g, '-');
 	}
