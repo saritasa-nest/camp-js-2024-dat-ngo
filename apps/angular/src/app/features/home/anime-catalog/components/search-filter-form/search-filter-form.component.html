@@ -1,17 +1,18 @@
-<div class="main">
-	<mat-form-field class="main__type-select">
+<section class="main">
+	<mat-form-field>
 		<mat-label>Anime type</mat-label>
-		<mat-select class="type-select__mat-select" [(value)]="selectedType" (selectionChange)="onSelectionChange($event)">
+		<mat-select [(value)]="selectedType" (selectionChange)="onSelectionChange($event)">
 			@for (option of selectTypes; track option) {
-			<mat-option [value]="option">{{ option }}</mat-option>
+				<mat-option [value]="option">{{ option }}</mat-option>
 			}
 		</mat-select>
 	</mat-form-field>
+	<!-- TODO (Dat Ngo): Remove redundant classes. -->
 	<div class="main__search-group">
 		<mat-form-field appearance="fill">
 			<mat-label>Search</mat-label>
-			<input matInput [(ngModel)]="search" placeholder="Placeholder" />
+			<!-- TODO (Dat Ngo): Add button. -->
+			<input matInput [(ngModel)]="search" placeholder="Placeholder" (keydown)="onKeyDown($event)"/>
 		</mat-form-field>
 	</div>
-	<button class="main__search-button" mat-flat-button type="button" (click)="onSearch()">Search</button>
-</div>
+</section>

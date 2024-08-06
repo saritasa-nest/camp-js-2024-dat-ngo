@@ -5,8 +5,13 @@
 }
 
 .anime__header-row {
-	background-color: rgb(232 244 255);
-	color: rgb(2 30 74);
+	background-color: var(--anime-header-row-bg);
+	color: var(--anime-header-row-color);
+}
+
+.anime-table {
+	table-layout: fixed;
+	width: 100%;
 }
 
 .anime__header {
@@ -32,125 +37,72 @@
 }
 
 .anime__japan-title {
-	color: rgb(53 141 235);
+	color: var(--anime-japan-title-row-color);
 	font-weight: var(--font-weight-medium);
 }
 
-.anime__image {
-	width: 20%;
-}
-
-.anime__title {
-	width: 22%;
-}
-
-.anime__started-date {
-	width: 15%;
-}
-
-.anime__status {
-	width: 10%;
-}
-
-.anime__type {
-	width: 11%;
+.anime__pill-shape {
+	padding: 4px 6px;
+	border: none;
+	border-radius: 4px;
 }
 
 .anime__tv {
-	padding: 4px 6px;
-	border: none;
-	border-radius: 4px;
-	background-color: rgb(232 244 255);
-	color: rgb(53 141 235);
+	background-color: var(--anime-tv-bg);
+	color: var(--anime-tv-color);
 }
 
 .anime__ova {
-	padding: 4px 6px;
-	border: none;
-	border-radius: 4px;
-	background-color: rgb(255 248 222);
-	color: rgb(179 145 41);
+	background-color: var(--anime-ova-bg);
+	color: var(--anime-ova-color);
 }
 
 .anime__movie {
-	padding: 4px 6px;
-	border: none;
-	border-radius: 4px;
-	background-color: rgb(255 240 237);
-	color: rgb(208 86 86);
+	background-color: var(--anime-movie-bg);
+	color: var(--anime-movie-color);
 }
 
 .anime__special {
-	padding: 4px 6px;
-	border: none;
-	border-radius: 4px;
-	background-color: rgb(227 255 252);
-	color: rgb(51 153 153);
+	background-color: var(--anime-special-bg);
+	color: var(--anime-special-color);
 }
 
 .anime__ona {
-	padding: 4px 6px;
-	border: none;
-	border-radius: 4px;
-	background-color: rgb(242 232 255);
-	color: rgb(156 108 235);
+	background-color: var(--anime-ona-bg);
+	color: var(--anime-ona-color);
 }
 
 .anime__music {
-	padding: 4px 6px;
-	border: none;
-	border-radius: 4px;
-	background-color: rgb(255 247 242);
-	color: rgb(201 117 80);
+	background-color: var(--anime-music-bg);
+	color: var(--anime-music-color);
 }
 
 .anime__promotional-videos {
-	padding: 4px 6px;
-	border: none;
-	border-radius: 4px;
-	background-color: rgb(255 235 245);
-	color: rgb(215 106 131);
+	background-color: var(--anime-promotional-videos-bg);
+	color: var(--anime-promotional-videos-color);
 }
 
 .anime__unknown {
-	padding: 4px 6px;
-	border: none;
-	border-radius: 4px;
-	background-color: rgb(176 176 176);
-	color: rgb(51 51 51);
+	background-color: var(--anime-unknown-bg);
+	color: var(--anime-unknown-color);
 }
 
 .anime__currently-airing {
-	padding: 4px 6px;
-	border: none;
-	border-radius: 4px;
-	background-color: rgb(255 243 224);
-	color: rgb(255 152 0);
+	background-color: var(--anime-currently-airing-bg);
+	color: var(--anime-currently-airing-color);
 }
 
 .anime__finished-airing {
-	padding: 4px 6px;
-	border: none;
-	border-radius: 4px;
-	background-color: rgb(232 245 233);
-	color: rgb(76 175 80);
+	background-color: var(--anime-finished-airing-bg);
+	color: var(--anime-finished-airing-color);
 }
 
 .anime__not-yet-aired {
-	padding: 4px 6px;
-	border: none;
-	border-radius: 4px;
-	background-color: rgb(255 235 238);
-	color: rgb(244 67 54);
+	background-color: var(--anime-not-yet-aired-bg);
+	color: var(--anime-not-yet-aired-color);
 }
 
-.camp-skeleton {
-	height: 100%;
-	min-height: 16px;
-	background-color: red;
-}
-
-.image-skeleton {
+.anime__image-cell {
 	--height: 150px;
 
 	margin: 5px;

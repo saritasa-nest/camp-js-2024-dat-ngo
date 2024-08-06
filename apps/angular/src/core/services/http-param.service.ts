@@ -9,14 +9,13 @@ import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
 	providedIn: 'root',
 })
 export class HttpParamsService {
-	private readonly animeQueryMapper = inject(AnimeFiltersParamsMapper);
 
-	private buildHttpParamsFromDto(params: AnimeQueryParamsDto.Combined): HttpParams {
+	public buildHttpParamsFromDto<T extends object>(params: T): HttpParams {
 		let httpParams = new HttpParams();
 
-		Object.keys(params).forEach(key => {
-			const value = params[key as keyof AnimeQueryParamsDto.Combined];
-			if (value !== undefined && value !== null) {
+		Object.keys(params).forEach((key) => {
+			const value = params[key as keyof T];
+			if (value != null) {
 				httpParams = httpParams.set(key, value.toString());
 			}
 		});
@@ -24,13 +23,4 @@ export class HttpParamsService {
 		return httpParams;
 	}
 
-	/**
-	 * Build HttpParams from URL query params.
-	 * @param params URL query params.
-	 * @returns Http params.
-	 */
-	public getHttpParams(params: AnimeFilterParams.Combined): HttpParams {
-		const dtoQueryParams = this.animeQueryMapper.mapCombinedOptionsToDto(params);
-		return this.buildHttpParamsFromDto(dtoQueryParams);
-	}
 }

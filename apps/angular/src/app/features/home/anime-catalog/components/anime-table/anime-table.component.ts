@@ -4,28 +4,23 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
-	inject,
 	Input,
-	OnChanges,
 	Output,
-	SimpleChanges,
 	ViewChild,
 } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Anime } from '@js-camp/core/models/anime.model';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { SkeletonDirective } from '@js-camp/angular/shared/directives/skeleton.directive';
 import { TableCellContentComponent } from '@js-camp/angular/shared/directives/table-cell-content/table-cell-content.component';
 import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
-import { ClassifyPipe } from '@js-camp/angular/core/pipes/classify.pipe';
 import { MovieStatusComponent } from '@js-camp/angular/shared/components/movie-status/movie-status.component';
 import { MovieTypeComponent } from '@js-camp/angular/shared/components/movie-type/movie-type.component';
 
 import { MovieNotFoundComponent } from '../movie-not-found/movie-not-found.component';
 
-/** Create anime table component.*/
+/** Anime table component.*/
 @Component({
 	selector: 'camp-anime-table',
 	standalone: true,
@@ -33,8 +28,6 @@ import { MovieNotFoundComponent } from '../movie-not-found/movie-not-found.compo
 		MatTableModule,
 		CommonModule,
 		EmptyPipe,
-		ClassifyPipe,
-		MatPaginator,
 		MatSortModule,
 		SkeletonDirective,
 		TableCellContentComponent,
@@ -47,9 +40,10 @@ import { MovieNotFoundComponent } from '../movie-not-found/movie-not-found.compo
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimeTableComponent {
-	@ViewChild(MatSort) protected sort!: MatSort;
 
-	@Input() public set animeList(values: ReadonlyArray<Anime> | null) {
+	/** Anime list. */
+	@Input()
+	public set animeList(values: ReadonlyArray<Anime> | null) {
 		if (values !== null) {
 			this.dataSource.data = [...values];
 		} else if (values === null) {
@@ -57,18 +51,15 @@ export class AnimeTableComponent {
 		}
 	}
 
+	/** Loading state. */
 	@Input({ transform: booleanAttribute }) public isLoading = false;
 
-	@Input() public sortParams: Sort = {
-		direction: '',
-		active: '',
-	};
+	/** Sort params. */
+	@Input({ required: true })
+	public sortParams: Sort | null = null;
 
-	// protected dataSource = new MatTableDataSource<Anime>();
-
+	/** Table data source. */
 	protected dataSource = new MatTableDataSource<Anime>();
-
-	// private data: SortDirection =
 
 	/** Event emitter for page changing. */
 	@Output() public sortChange = new EventEmitter<Sort>();
@@ -81,20 +72,7 @@ export class AnimeTableComponent {
 		this.sortChange.emit(event);
 	}
 
-	public constructor() {}
-
-	/** This informs the table how to uniquely identify rows to track how the dataSource changes with each update.
-	 * @param index Index of them Anime on table.
-	 * @param item Items on table.
-	 */
-	protected trackBy(index: number, item: Anime): Anime['id'] {
-		return item.id;
-	}
-
-	protected trackByFallback(index: number): number {
-		return index;
-	}
-
+	// TODO (Dat Ngo): Create a constant object for columns. Then use Object.values for displayedColumns;
 	/** Displayed columns .*/
 	protected readonly displayedColumns: string[] = [
 		'Image',
@@ -109,6 +87,6 @@ export class AnimeTableComponent {
 	protected get templateArray(): object[] {
 		return Array(DEFAULT_PAGINATION.pageSize)
 			.fill(null)
-			.map((_, index) => ({}));
+			.map(_ => ({}));
 	}
 }

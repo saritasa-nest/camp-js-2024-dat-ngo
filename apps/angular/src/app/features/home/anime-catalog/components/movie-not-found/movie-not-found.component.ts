@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+/** Anime not found. */
 @Component({
 	selector: 'camp-movie-not-found',
 	standalone: true,
@@ -9,4 +10,5 @@ import { CommonModule } from '@angular/common';
 	styleUrl: './movie-not-found.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class MovieNotFoundComponent {}

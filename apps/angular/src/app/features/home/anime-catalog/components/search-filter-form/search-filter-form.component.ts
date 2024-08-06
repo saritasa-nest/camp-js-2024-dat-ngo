@@ -5,6 +5,8 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { AnimeType } from '@js-camp/core/models/anime-type';
 import { MatInputModule } from '@angular/material/input';
+
+/** Search and Filter component. */
 @Component({
 	selector: 'camp-search-filter-form',
 	standalone: true,
@@ -14,29 +16,51 @@ import { MatInputModule } from '@angular/material/input';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchFilterFormComponent {
+	/** Search input. */
+	@Input()
+	public search = '';
+
+	/** Selection type of anime. */
+	@Input()
+	public selectedType: AnimeType | null = null;
+
+	/** Event emitter for type sort change. */
+	@Output()
+	public typeChange = new EventEmitter<AnimeType>();
+
+	/** Event Emitter for search input change. */
+	@Output()
+	public searchChange = new EventEmitter<string | null>();
+
 	/** An array of available anime types to choose from. */
 	protected readonly selectTypes = Object.values(AnimeType);
 
-	/** Event emitter for page changing. */
-	@Output() public typeChange = new EventEmitter<AnimeType>();
-
-	@Input() public search = '';
-
-	@Input() selectedType: AnimeType | null = null;
-
-	@Output() public searchChange = new EventEmitter<string | null>();
-
-	protected onSelectionChange(event: MatSelectChange) {
-		if (Object.values(AnimeType).includes(event.value)) {
+	/**
+	 *  Emit selection type to parent.
+	 * @param event The selection type.
+	 */
+	protected onSelectionChange(event: MatSelectChange): void {
+		const isValidType = Object.values(AnimeType).includes(event.value);
+		if (isValidType) {
 			this.typeChange.emit(event.value);
 		}
 	}
 
-	protected onSearch() {
+	/** Emit search input to parent. */
+	protected onSearch(): void {
 		if (this.search.length > 0) {
 			this.searchChange.emit(this.search);
 		} else {
 			this.searchChange.emit(null);
+		}
+	}
+
+	/** Execute onSearch on Enter key down.
+	 * @param event Keyboard event.
+	 */
+	protected onKeyDown(event: KeyboardEvent): void {
+		if (event.key === 'Enter') {
+			this.onSearch();
 		}
 	}
 }

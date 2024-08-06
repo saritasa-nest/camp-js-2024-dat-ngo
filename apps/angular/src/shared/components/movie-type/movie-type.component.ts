@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 import { CommonModule } from '@angular/common';
 import { AnimeType } from '@js-camp/core/models/anime-type';
 
+/** Anime type. */
 @Component({
 	selector: 'camp-movie-type',
 	standalone: true,
@@ -17,6 +18,7 @@ export class MovieTypeComponent {
 	private get color(): string {
 		switch (this.animeType) {
 			case AnimeType.Movie:
+				// TODO (Dat Ngo): Use modified instead of element.
 				return 'anime__movie';
 			case AnimeType.ONA:
 				return 'anime__ona';

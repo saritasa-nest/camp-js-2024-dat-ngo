@@ -1,0 +1,7 @@
+.main {
+	display: flex;
+	justify-content: flex-end;
+
+	/* TODO (Dat Ngo): Use var. */
+	gap: 40px;
+}

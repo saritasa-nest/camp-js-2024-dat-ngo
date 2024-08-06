@@ -2,9 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { CommonModule } from '@angular/common';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
-/**
- *Paginator.
- */
+/** Paginator.  */
 @Component({
 	selector: 'camp-paginator',
 	standalone: true,
@@ -14,18 +12,27 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginatorComponent {
-	@Input() public pageNumber: number | null = null;
 
-	@Input() public pageSize: number | null = null;
+	// TODO (Dat Ngo): Put Input and Output correctly.
+
+	/** Paginator page number. */
+	@Input()
+	public pageNumber: number | null = null;
+
+	/** Paginator page size. */
+	@Input()
+	public pageSize: number | null = null;
 
 	/** Page size options. */
-	protected readonly pageSizeOptions = [5, 10, 25, 100];
+	protected readonly pageSizeOptions = [5, 10, 25, 100] as const;
 
 	/** Total amount of fetched items. */
-	@Input() public totalCount = 0;
+	@Input()
+	public totalCount = 0;
 
 	/** Event emitter for page changing. */
-	@Output() public pageChange = new EventEmitter<PageEvent>();
+	@Output()
+	public pageChange = new EventEmitter<PageEvent>();
 
 	/**
 	 * Emit the page event.

@@ -1,10 +1,5 @@
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
-import { AnimeType } from '@js-camp/core/models/anime-type';
-import { UrlQueryParams } from '@js-camp/core/models/url-query-param';
 
 /** Service for handling URL query params. */
 @Injectable({
@@ -40,8 +35,9 @@ export class UrlParamsService {
 
 	/**
 	 * Append the query params and reset the page number on URL.
+	 * @param params Params to append.
+	 * @param defaultPageNumber Default page number to reset.
 	 */
-
 	public appendAndResetPageNumber(params: Record<string, any>, defaultPageNumber: number): void {
 		return this.append({ ...params, pageNumber: defaultPageNumber });
 	}

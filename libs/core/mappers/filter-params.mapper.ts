@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { AnimeFilterParams } from '../models/anime-filter-params';
 import { AnimeQueryParamsDto } from '../dtos/url-query.dto';
@@ -7,6 +7,7 @@ import { AnimeTypeDto } from '../dtos/amime-type.dto';
 import { AnimeSortField } from '../models/anime-sort-field';
 import { AnimeSortFieldDto } from '../dtos/anime-sort-field.dto';
 import { SortsDirection } from '../models/sort-direction';
+import { BasedFiltersParamsMapper } from './base-filter-params.mapper';
 
 const MAP_ANIME_TYPE_TO_DTO: Record<AnimeType, AnimeTypeDto> = {
 	[AnimeType.Movie]: AnimeTypeDto.Movie,
@@ -25,29 +26,11 @@ const MAP_ANIME_SORT_TO_DTO: Record<AnimeSortField, AnimeSortFieldDto> = {
 	[AnimeSortField.TitleEng]: AnimeSortFieldDto.TitleEng,
 };
 
+// TODO (Dat Ngo): Make a base filter params
 /** Mapper for filter params. */
 @Injectable({ providedIn: 'root' })
 export class AnimeFiltersParamsMapper {
-	/** @inheritdoc */
-	public mapPaginationOptionsToDto(model: AnimeFilterParams.Pagination): AnimeQueryParamsDto.Pagination | null {
-		if (model.pageNumber !== null && model.pageSize !== null) {
-			return {
-				offset: model.pageNumber * model.pageSize,
-				limit: model.pageSize,
-			};
-		}
-		return null;
-	}
-
-	/** @inheritdoc */
-	public mapSearchOptionsToDto(model: AnimeFilterParams.Search): AnimeQueryParamsDto.Search | null {
-		if (model.search) {
-			return {
-				search: model.search,
-			};
-		}
-		return null;
-	}
+	private readonly basedFilterParamsMapper = inject(BasedFiltersParamsMapper);
 
 	/** @inheritdoc */
 	public mapOrderingOptionToDto(model: AnimeFilterParams.Sort): AnimeQueryParamsDto.Sort | null {
@@ -73,8 +56,7 @@ export class AnimeFiltersParamsMapper {
 	/** @inheritdoc */
 	public mapCombinedOptionsToDto(model: AnimeFilterParams.Combined): AnimeQueryParamsDto.Combined {
 		return {
-			...this.mapPaginationOptionsToDto(model),
-			...this.mapSearchOptionsToDto(model),
+			...this.basedFilterParamsMapper.mapCombinedOptionsToDto(model),
 			...this.mapOrderingOptionToDto(model),
 			...this.mapTypeOptionToDto(model),
 		};

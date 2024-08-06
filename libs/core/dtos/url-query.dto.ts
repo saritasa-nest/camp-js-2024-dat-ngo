@@ -1,20 +1,7 @@
+import { BasedQueryParamsDto } from './based-filter-params.dto';
+
 /** Anime query params dto. */
 export namespace AnimeQueryParamsDto {
-	/** Search. */
-	export type Search = {
-		/** Search filter. */
-		readonly search?: string;
-	};
-
-	/** Pagination. */
-	export type Pagination = {
-		/** Offset. */
-		readonly offset?: number;
-
-		/** Page size. */
-		readonly limit?: number;
-	};
-
 	/** Sort. */
 	export type Sort = {
 		/** Order. */
@@ -28,5 +15,5 @@ export namespace AnimeQueryParamsDto {
 	};
 
 	/** Anime query params dto. */
-	export type Combined = Search & Pagination & Sort & Type;
+	export type Combined = BasedQueryParamsDto.Combined & Sort & Type;
 }

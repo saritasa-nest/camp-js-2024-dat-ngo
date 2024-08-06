@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 import { CommonModule } from '@angular/common';
 import { AnimeStatus } from '@js-camp/core/models/anime-status';
 
+/** Movie status. */
 @Component({
 	selector: 'camp-movie-status',
 	standalone: true,
@@ -13,9 +14,6 @@ import { AnimeStatus } from '@js-camp/core/models/anime-status';
 export class MovieStatusComponent {
 	/** Session status. */
 	@Input({ required: true }) public animeStatus!: AnimeStatus;
-
-	// /** Map to human-readable. */
-	// public readonly toReadable = toReadable(this.animeStatus);
 
 	private get color(): string {
 		switch (this.animeStatus) {

@@ -14,9 +14,11 @@ import { SkeletonDirective } from '../skeleton.directive';
 	styleUrls: ['./table-cell-content.component.css'],
 })
 export class TableCellContentComponent {
-	@Input() width = '100%'; // Default width
+	/** Default width. */
+	@Input() private width = '100%';
 
-	@Input() height = 24; // Default height
+	/** Default height. */
+	@Input() private height = 24;
 
 	/** Whether cell is loading or not. */
 	@Input()

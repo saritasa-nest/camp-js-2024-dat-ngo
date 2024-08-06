@@ -1,7 +1,6 @@
-import { inject, InjectionToken } from '@angular/core';
+import { inject, InjectionToken, Provider } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
-import { Provider } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
 import { AnimeQueryParams, AnimeQueryParamsMapper } from '@js-camp/core/mappers/url-params.mapper';
 

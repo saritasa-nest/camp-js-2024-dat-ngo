@@ -1,17 +1,18 @@
 import { Directive, ElementRef, Renderer2 } from '@angular/core';
 
+/** Skeleton Cell .*/
 @Directive({
-	selector: '[appSkeletonCell]',
+	selector: '[campcSkeleton]',
 	standalone: true,
 })
 export class SkeletonDirective {
-	constructor(private el: ElementRef, private renderer: Renderer2) {
+	public constructor(private el: ElementRef, private renderer: Renderer2) {
 		this.setSkeletonCellStyle();
 	}
 
 	private setSkeletonCellStyle(): void {
 
-		// Apply skeleton loading styles
+		/** Apply skeleton loading styles */
 		this.renderer.setStyle(
 			this.el.nativeElement,
 			'background',

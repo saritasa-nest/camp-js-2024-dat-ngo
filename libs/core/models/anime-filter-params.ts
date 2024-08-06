@@ -1,33 +1,18 @@
 import { AnimeSortField } from './anime-sort-field';
 import { AnimeType } from './anime-type';
+import { BasedFilterParams } from './based-filter-params';
 import { SortsDirection } from './sort-direction';
 
 /** Anime query params . */
 export namespace AnimeFilterParams {
 
-	/** Search. */
-	export type Search = {
-
-		/** Search filter. */
-		search: string | null;
-	};
-
-	/** Pagination. */
-	export type Pagination = {
-
-		/** Offset. */
-		pageNumber: number | null;
-
-		/** Page size. */
-		pageSize: number | null;
-	};
-
 	/** Sort. */
 	export type Sort = {
 
-		// /** Order. */
+		/** Order. */
 		sortField: AnimeSortField | null;
 
+		/** Sort Direction. */
 		sortDirection: SortsDirection | null;
 	};
 
@@ -39,5 +24,7 @@ export namespace AnimeFilterParams {
 	};
 
 	/** Anime query params. */
-	export type Combined = Search & Pagination & Sort & Type;
+	export type Combined = Sort & Type & BasedFilterParams.Combined;
 }
+
+// type BooksParams = Pagination.Combined;
