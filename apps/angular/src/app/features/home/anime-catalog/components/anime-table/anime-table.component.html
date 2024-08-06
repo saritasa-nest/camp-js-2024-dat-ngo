@@ -1,19 +1,15 @@
 <section class="mat-elevation-z8 anime__table-container">
 	<table
 		mat-table
-		[dataSource]="
-			dataSource.data.length > 0 && !isLoading
-				? dataSource.data
-				: dataSource.data.length === 0 && !isLoading
-				? []
-				: templateArray
-		"
+		[dataSource]="isLoading ? templateArray : dataSource"
 		matSort
 		(matSortChange)="onSortChange($event)"
 		[matSortActive]="sortParams.active"
 		[matSortDirection]="sortParams.direction"
 		class="anime-table"
 	>
+	{{dataSource}}
+	{{templateArray}}
 		<ng-container class="anime__column" matColumnDef="Image">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef>Image</th>
 			<td mat-cell class="anime__cell anime__image" *matCellDef="let anime">
@@ -72,5 +68,15 @@
 
 		<tr mat-header-row class="anime__header-row" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
 		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+		<tr class="mat-row" *matNoDataRow>
+			<td class="mat-cell" [attr.colspan]="displayedColumns.length">No data matching the filter.
+				{{dataSource}}
+				{{templateArray}}
+			</td>
+		</tr>
 	</table>
+	<!-- Not Found Message -->
+	<div *ngIf="dataSource.data.length === 0 && !isLoading" class="not-found-message">
+		<camp-movie-not-found></camp-movie-not-found>
+	</div>
 </section>

@@ -7,10 +7,9 @@ import { Anime } from '@js-camp/core/models/anime.model';
 import { AnimeService } from '@js-camp/angular/core/services/anime.service';
 import { PageEvent } from '@angular/material/paginator';
 import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
-import { AnimeTableComponent } from './components/anime-table/anime-table.component';
-import { PaginatorComponent } from './components/paginator/paginator.component';
+
 import { AnimeType } from '@js-camp/core/models/anime-type';
-import { SearchFilterFormComponent } from './components/search-filter-form/search-filter-form.component';
+
 import {
 	ANIME_FILTER_PARAMS_PROVIDERS,
 	ANIME_FILTER_PARAMS_TOKEN,
@@ -19,6 +18,10 @@ import { AnimeQueryParamsService } from '@js-camp/angular/core/services/anime-qu
 import { Sort, SortDirection } from '@angular/material/sort';
 
 import { SortMapper } from '@js-camp/core/mappers/sort-mapper';
+
+import { SearchFilterFormComponent } from './components/search-filter-form/search-filter-form.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { AnimeTableComponent } from './components/anime-table/anime-table.component';
 @Component({
 	selector: 'camp-anime-catalog',
 	standalone: true,
@@ -54,11 +57,11 @@ export class AnimeCatalogComponent implements OnInit {
 	public constructor() {
 		this.animePage$ = this.animeService.getAllAnime(this.filter$);
 		this.isLoading$ = this.animeService.isLoading$;
-		this.isLoading$.subscribe((data) => console.log(data));
+		this.isLoading$.subscribe(data => console.log(data));
 	}
 
 	ngOnInit(): void {
-		this.filter$.subscribe((params) => {
+		this.filter$.subscribe(params => {
 			const sortParams: AnimeFilterParams.Sort = {
 				sortField: params.sortField,
 				sortDirection: params.sortDirection,

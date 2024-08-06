@@ -1,13 +1,16 @@
-import { inject, Injectable } from "@angular/core";
-import { AnimeQueryParamsMapper } from "@js-camp/core/mappers/url-params.mapper";
-import { UrlParamsService } from "./url-param.service";
-import { AnimeFilterParams } from "@js-camp/core/models/anime-filter-params";
-import { DEFAULT_PAGINATION } from "@js-camp/core/const/pagination";
+import { inject, Injectable } from '@angular/core';
+import { AnimeQueryParamsMapper } from '@js-camp/core/mappers/url-params.mapper';
+
+import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
+import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
+
+import { UrlParamsService } from './url-param.service';
 
 /** Anime query params service. */
 @Injectable({ providedIn: 'root' })
 export class AnimeQueryParamsService {
 	private animeQueryParams = inject(AnimeQueryParamsMapper);
+
 	private queryParamsService = inject(UrlParamsService);
 
 	/**

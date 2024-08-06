@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { SkeletonDirective } from '../skeleton.directive';
+
 import { CommonModule } from '@angular/common';
+
+import { SkeletonDirective } from '../skeleton.directive';
 
 /** Table component content. */
 @Component({
@@ -12,8 +14,10 @@ import { CommonModule } from '@angular/common';
 	styleUrls: ['./table-cell-content.component.css'],
 })
 export class TableCellContentComponent {
-	@Input() width: string = '100%'; // Default width
-	@Input() height: number = 24; // Default height
+	@Input() width = '100%'; // Default width
+
+	@Input() height = 24; // Default height
+
 	/** Whether cell is loading or not. */
 	@Input()
 	public isLoading: boolean | null = false;

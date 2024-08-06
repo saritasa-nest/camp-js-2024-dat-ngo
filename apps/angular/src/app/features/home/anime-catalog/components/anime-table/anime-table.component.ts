@@ -23,6 +23,8 @@ import { ClassifyPipe } from '@js-camp/angular/core/pipes/classify.pipe';
 import { MovieStatusComponent } from '@js-camp/angular/shared/components/movie-status/movie-status.component';
 import { MovieTypeComponent } from '@js-camp/angular/shared/components/movie-type/movie-type.component';
 
+import { MovieNotFoundComponent } from '../movie-not-found/movie-not-found.component';
+
 /** Create anime table component.*/
 @Component({
 	selector: 'camp-anime-table',
@@ -38,6 +40,7 @@ import { MovieTypeComponent } from '@js-camp/angular/shared/components/movie-typ
 		TableCellContentComponent,
 		MovieStatusComponent,
 		MovieTypeComponent,
+		MovieNotFoundComponent,
 	],
 	templateUrl: './anime-table.component.html',
 	styleUrl: './anime-table.component.css',
@@ -46,12 +49,15 @@ import { MovieTypeComponent } from '@js-camp/angular/shared/components/movie-typ
 export class AnimeTableComponent {
 	@ViewChild(MatSort) protected sort!: MatSort;
 
-	@Input() public set animeList(values: ReadonlyArray<Anime>) {
-		console.log({ values });
-		this.dataSource.data = [...values];
+	@Input() public set animeList(values: ReadonlyArray<Anime> | null) {
+		if (values !== null) {
+			this.dataSource.data = [...values];
+		} else if (values === null) {
+			this.dataSource.data = [];
+		}
 	}
 
-	@Input({ transform: booleanAttribute }) public isLoading: boolean = false;
+	@Input({ transform: booleanAttribute }) public isLoading = false;
 
 	@Input() public sortParams: Sort = {
 		direction: '',
@@ -98,14 +104,11 @@ export class AnimeTableComponent {
 		'Type',
 		'status',
 	];
+
 	/** Generate number array for the template table data source. */
 	protected get templateArray(): object[] {
 		return Array(DEFAULT_PAGINATION.pageSize)
 			.fill(null)
 			.map((_, index) => ({}));
-	}
-
-	protected formatDynamicClass(status: string): string {
-		return status.toLowerCase().replace(/\s+/g, '-');
 	}
 }

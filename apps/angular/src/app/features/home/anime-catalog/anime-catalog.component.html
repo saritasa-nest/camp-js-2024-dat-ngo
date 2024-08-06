@@ -6,7 +6,7 @@
 		[selectedType]="filterParams?.type ?? null"
 	></camp-search-filter-form>
 	<camp-anime-table
-		[animeList]="data.animePage ? data.animePage.items : []"
+		[animeList]="data.animePage ? data.animePage.items : null"
 		[isLoading]="data.isLoading"
 		(sortChange)="onSortChange($event)"
 		[sortParams]="sortParams"

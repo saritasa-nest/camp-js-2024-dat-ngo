@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
 import { AnimeType } from '@js-camp/core/models/anime-type';
 import { UrlQueryParams } from '@js-camp/core/models/url-query-param';
+
 /** Service for handling URL query params. */
 @Injectable({
 	providedIn: 'root',

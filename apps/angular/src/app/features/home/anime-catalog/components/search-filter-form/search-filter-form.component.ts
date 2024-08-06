@@ -31,10 +31,11 @@ export class SearchFilterFormComponent {
 			this.typeChange.emit(event.value);
 		}
 	}
+
 	protected onSearch() {
-		if(this.search.length > 0) {
+		if (this.search.length > 0) {
 			this.searchChange.emit(this.search);
-		}else{
+		} else {
 			this.searchChange.emit(null);
 		}
 	}

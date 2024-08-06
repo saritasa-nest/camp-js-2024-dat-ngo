@@ -9,6 +9,7 @@ import { AnimeMapper } from '@js-camp/core/mappers/anime.mapper';
 import { Pagination } from '@js-camp/core/models/pagination';
 import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
 import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
+
 import { HttpParamsService } from './http-param.service';
 
 /** Anime services. */
@@ -37,7 +38,7 @@ export class AnimeService {
 		const params = this.httpParamsService.getHttpParams(queryParams);
 		return this.httpClient.get<PaginationDto<AnimeDto>>(this.appUrlsConfig.anime.list, { params }).pipe(
 			delay(2000),
-			map((responseDto) => this.paginationMapper.fromDto(responseDto, this.animeMapper)),
+			map(responseDto => this.paginationMapper.fromDto(responseDto, this.animeMapper)),
 			tap(() => this.isLoadingSubject.next(false)),
 		);
 	}
@@ -47,6 +48,6 @@ export class AnimeService {
 	 * @returns The anime page.
 	 */
 	public getAllAnime(filters$: Observable<AnimeFilterParams.Combined>): Observable<Pagination<Anime>> {
-		return filters$.pipe(switchMap((queryParams) => this.fetchAnimeWithParams(queryParams)));
+		return filters$.pipe(switchMap(queryParams => this.fetchAnimeWithParams(queryParams)));
 	}
 }

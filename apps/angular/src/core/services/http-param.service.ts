@@ -14,7 +14,7 @@ export class HttpParamsService {
 	private buildHttpParamsFromDto(params: AnimeQueryParamsDto.Combined): HttpParams {
 		let httpParams = new HttpParams();
 
-		Object.keys(params).forEach((key) => {
+		Object.keys(params).forEach(key => {
 			const value = params[key as keyof AnimeQueryParamsDto.Combined];
 			if (value !== undefined && value !== null) {
 				httpParams = httpParams.set(key, value.toString());
