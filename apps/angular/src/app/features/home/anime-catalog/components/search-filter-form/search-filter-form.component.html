@@ -3,16 +3,19 @@
 		<mat-label>Anime type</mat-label>
 		<mat-select [(value)]="selectedType" (selectionChange)="onSelectionChange($event)">
 			@for (option of selectTypes; track option) {
-				<mat-option [value]="option">{{ option }}</mat-option>
+			<mat-option [value]="option">{{ option }}</mat-option>
 			}
 		</mat-select>
 	</mat-form-field>
-	<!-- TODO (Dat Ngo): Remove redundant classes. -->
-	<div class="main__search-group">
+	<!-- TODO (Dat Ngo): Remove redundant classes. DONE-->
+	<div>
 		<mat-form-field appearance="fill">
 			<mat-label>Search</mat-label>
 			<!-- TODO (Dat Ngo): Add button. -->
-			<input matInput [(ngModel)]="search" placeholder="Placeholder" (keydown)="onKeyDown($event)"/>
+			<input matInput [(ngModel)]="search" placeholder="Placeholder" (keydown)="onKeyDown($event)" (onchange)="onSearch()" />
 		</mat-form-field>
+	</div>
+	<div class="main__search">
+		<button class="main__search-button" type="button" (click)="onSearch()">Search</button>
 	</div>
 </section>

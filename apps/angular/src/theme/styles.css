@@ -2,6 +2,8 @@
 
 @import url("/libs/theme/src/variables.css");
 @import url("material/index.css");
+@import url("./elements/movie-status.css");
+@import url("./elements/movie-type.css");
 
 * {
 	box-sizing: border-box;

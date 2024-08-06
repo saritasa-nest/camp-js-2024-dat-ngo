@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BasedFilterParams } from '../models/based-filter-params';
 import { BasedQueryParamsDto } from '../dtos/based-filter-params.dto';
 
-// TODO (Dat Ngo): Make a base filter params
+// TODO (Dat Ngo): Make a base filter params DONE
 /** Mapper for filter params. */
 @Injectable({ providedIn: 'root' })
 export class BasedFiltersParamsMapper {

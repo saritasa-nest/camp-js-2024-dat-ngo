@@ -13,18 +13,19 @@ import { AnimeStatus } from '@js-camp/core/models/anime-status';
 })
 export class MovieStatusComponent {
 	/** Session status. */
-	@Input({ required: true }) public animeStatus!: AnimeStatus;
+	@Input({ required: true })
+	public animeStatus: AnimeStatus = AnimeStatus.CurrentlyAiring;
 
 	private get color(): string {
 		switch (this.animeStatus) {
 			case AnimeStatus.CurrentlyAiring:
-				return 'anime__currently-airing';
+				return 'anime_currently-airing';
 			case AnimeStatus.FinishedAiring:
-				return 'anime__finished-airing';
+				return 'anime_finished-airing';
 			case AnimeStatus.NotYetAired:
-				return 'anime__not-yet-aired';
+				return 'anime_not-yet-aired';
 			default:
-				return '';
+				return 'anime_currently-airing';
 		}
 	}
 

@@ -10,8 +10,6 @@ export class UrlParamsService {
 
 	private readonly router = inject(Router);
 
-	private constructor() {}
-
 	/**
 	 * Remove undefined fields.
 	 * @param obj Object to remove.

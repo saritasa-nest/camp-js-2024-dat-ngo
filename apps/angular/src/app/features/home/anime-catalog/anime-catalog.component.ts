@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormField } from '@angular/material/form-field';
-import { BehaviorSubject, finalize, first, ignoreElements, Observable, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, debounceTime, finalize, first, ignoreElements, Observable, switchMap, tap } from 'rxjs';
 import { Pagination } from '@js-camp/core/models/pagination';
 import { Anime } from '@js-camp/core/models/anime.model';
 import { AnimeService } from '@js-camp/angular/core/services/anime.service';
@@ -62,6 +62,7 @@ export class AnimeCatalogComponent implements OnInit {
 
 	public constructor() {
 		this.animePage$ = this.filter$.pipe(
+			debounceTime(1000),
 			tap(() => {
 				this.isLoading$.next(true);
 			}),

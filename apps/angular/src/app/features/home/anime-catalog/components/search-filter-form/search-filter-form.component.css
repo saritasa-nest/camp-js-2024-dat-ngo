@@ -5,3 +5,7 @@
 	/* TODO (Dat Ngo): Use var. */
 	gap: 40px;
 }
+
+.main__search {
+	display: flex;
+}

@@ -18,22 +18,22 @@ export class MovieTypeComponent {
 	private get color(): string {
 		switch (this.animeType) {
 			case AnimeType.Movie:
-				// TODO (Dat Ngo): Use modified instead of element.
-				return 'anime__movie';
+				// TODO (Dat Ngo): Use modified instead of element. DONE
+				return 'anime_movie';
 			case AnimeType.ONA:
-				return 'anime__ona';
+				return 'anime_ona';
 			case AnimeType.Music:
-				return 'anime__music';
+				return 'anime_music';
 			case AnimeType.OVA:
-				return 'anime__ova';
+				return 'anime_ova';
 			case AnimeType.PromotionalVideos:
-				return 'anime__promotional-videos';
+				return 'anime_promotional-videos';
 			case AnimeType.Special:
-				return 'anime__special';
+				return 'anime_special';
 			case AnimeType.TV:
-				return 'anime__tv';
+				return 'anime_tv';
 			case AnimeType.Unknown:
-				return 'anime__unknown';
+				return 'anime_unknown';
 			default:
 				return '';
 		}

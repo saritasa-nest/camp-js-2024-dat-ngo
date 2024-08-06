@@ -20,6 +20,15 @@ import { MovieTypeComponent } from '@js-camp/angular/shared/components/movie-typ
 
 import { MovieNotFoundComponent } from '../movie-not-found/movie-not-found.component';
 
+const COLUMN_KEYS = {
+	IMAGE: 'Image',
+	TitleEng: 'titleEng',
+	TitleJpn: 'title_jpn',
+	AiredStartDate: 'airedStartDate',
+	Type: 'Type',
+	Status: 'status',
+} as const;
+
 /** Anime table component.*/
 @Component({
 	selector: 'camp-anime-table',
@@ -72,16 +81,9 @@ export class AnimeTableComponent {
 		this.sortChange.emit(event);
 	}
 
-	// TODO (Dat Ngo): Create a constant object for columns. Then use Object.values for displayedColumns;
+	// TODO (Dat Ngo): Create a constant object for columns. Then use Object.values for displayedColumns DONE;
 	/** Displayed columns .*/
-	protected readonly displayedColumns: string[] = [
-		'Image',
-		'titleEng',
-		'title_jpn',
-		'airedStartDate',
-		'Type',
-		'status',
-	];
+	protected readonly displayedColumns: string[] = Object.values(COLUMN_KEYS);
 
 	/** Generate number array for the template table data source. */
 	protected get templateArray(): object[] {
