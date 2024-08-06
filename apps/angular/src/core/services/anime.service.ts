@@ -26,12 +26,12 @@ export class AnimeService {
 
 	private appUrlsConfig = inject(AppUrlsConfig);
 
-	protected animeQueryMapper = inject(AnimeFiltersParamsMapper);
+	private animeQueryMapper = inject(AnimeFiltersParamsMapper);
 
-		// TODO (Dat Ngo): Move this to anime service. DONE
+	// TODO (Dat Ngo): Move this to anime service. DONE
 	/**
 	 * Build HttpParams from URL query params.
-	 * @param params URL query params.
+	 * @param params URL filter query params.
 	 * @returns Http params.
 	 */
 	public getHttpParams(params: AnimeFilterParams.Combined): HttpParams {
@@ -39,7 +39,10 @@ export class AnimeService {
 		return this.httpParamsService.buildHttpParamsFromDto(dtoQueryParams);
 	}
 
-	/** Get Anime. */
+	/**
+	 * Get Anime.
+	 * @param queryParams URL filter query params.
+	 */
 	public getAnime(queryParams: AnimeFilterParams.Combined): Observable<Pagination<Anime>> {
 		/** Set isLoading to true at the start of the fetch. */
 		const params = this.getHttpParams(queryParams);

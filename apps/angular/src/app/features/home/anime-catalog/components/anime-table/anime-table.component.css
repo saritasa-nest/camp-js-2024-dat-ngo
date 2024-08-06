@@ -30,7 +30,7 @@
 	margin-block: 4px;
 }
 
-.anime__cover {
+.anime__image {
 	height: 100%;
 	aspect-ratio: 1;
 	object-fit: contain;
@@ -40,8 +40,6 @@
 	color: var(--anime-japan-title-row-color);
 	font-weight: var(--font-weight-medium);
 }
-
-
 
 .anime__image-cell {
 	--height: 150px;

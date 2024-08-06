@@ -1,17 +1,9 @@
 import { CommonModule } from '@angular/common';
-import {
-	booleanAttribute,
-	ChangeDetectionStrategy,
-	Component,
-	EventEmitter,
-	Input,
-	Output,
-	ViewChild,
-} from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Anime } from '@js-camp/core/models/anime.model';
-import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+import { MatSortModule, Sort } from '@angular/material/sort';
 import { SkeletonDirective } from '@js-camp/angular/shared/directives/skeleton.directive';
 import { TableCellContentComponent } from '@js-camp/angular/shared/directives/table-cell-content/table-cell-content.component';
 import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
@@ -49,7 +41,6 @@ const COLUMN_KEYS = {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimeTableComponent {
-
 	/** Anime list. */
 	@Input()
 	public set animeList(values: ReadonlyArray<Anime> | null) {
@@ -89,6 +80,6 @@ export class AnimeTableComponent {
 	protected get templateArray(): object[] {
 		return Array(DEFAULT_PAGINATION.pageSize)
 			.fill(null)
-			.map(_ => ({}));
+			.map((_) => ({}));
 	}
 }

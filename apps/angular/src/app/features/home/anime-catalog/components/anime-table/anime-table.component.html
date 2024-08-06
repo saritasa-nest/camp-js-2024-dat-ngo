@@ -10,17 +10,17 @@
 	>
 		<ng-container class="anime__column" matColumnDef="Image">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef>Image</th>
-			<td mat-cell class="anime__cell anime__image" *matCellDef="let anime">
+			<td mat-cell class="anime__cell" *matCellDef="let anime">
 				<app-table-cell-content [isLoading]="isLoading" class="anime__image-cell">
 					<div class="anime__image-container">
-						<img class="anime__cover" [src]="anime.coverImage" [alt]="isLoading ? null : anime.titleJpn" />
+						<img class="anime__image" [src]="anime.coverImage" [alt]="isLoading ? null : anime.titleJpn" />
 					</div>
 				</app-table-cell-content>
 			</td>
 		</ng-container>
 
 		<ng-container class="anime__column" matColumnDef="titleEng">
-			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header >English Title</th>
+			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>English Title</th>
 			<td mat-cell class="anime__cell anime__title" *matCellDef="let anime">
 				<app-table-cell-content [isLoading]="isLoading">
 					{{ anime.titleEng | empty }}
@@ -32,7 +32,7 @@
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Japanese Title</th>
 			<td mat-cell class="anime__cell anime__title" *matCellDef="let anime">
 				<app-table-cell-content [isLoading]="isLoading">
-					<span class="anime__japan-title" >{{ anime.titleJpn | empty }}</span>
+					<span class="anime__japan-title">{{ anime.titleJpn | empty }}</span>
 				</app-table-cell-content>
 			</td>
 		</ng-container>
@@ -50,7 +50,7 @@
 			<th class="anime__header" mat-header-cell *matHeaderCellDef>Type</th>
 			<td mat-cell class="anime__cell anime__type" *matCellDef="let anime">
 				<app-table-cell-content [isLoading]="isLoading">
-					<camp-movie-type [animeType]="anime.animeType" class="anime__pill-shape"></camp-movie-type>
+					<camp-movie-type [animeType]="anime.animeType" class="anime-status"></camp-movie-type>
 				</app-table-cell-content>
 			</td>
 		</ng-container>
@@ -59,7 +59,7 @@
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
 			<td mat-cell class="anime__cell anime__status" *matCellDef="let anime">
 				<app-table-cell-content [isLoading]="isLoading">
-					<camp-movie-status [animeStatus]="anime.animeStatus" class="anime__pill-shape"></camp-movie-status>
+					<camp-movie-status [animeStatus]="anime.animeStatus" class="anime-status"></camp-movie-status>
 				</app-table-cell-content>
 			</td>
 		</ng-container>
@@ -74,6 +74,4 @@
 			</td>
 		</tr>
 	</table>
-	<!-- Not Found Message -->
-
 </section>
