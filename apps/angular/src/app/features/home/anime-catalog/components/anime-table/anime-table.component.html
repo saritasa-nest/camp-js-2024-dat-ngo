@@ -14,7 +14,6 @@
 		[matSortDirection]="sortParams.direction"
 		class="anime-table"
 	>
-		<!-- Cột hình ảnh -->
 		<ng-container class="anime__column" matColumnDef="Image">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef>Image</th>
 			<td mat-cell class="anime__cell anime__image" *matCellDef="let anime">
@@ -26,7 +25,6 @@
 			</td>
 		</ng-container>
 
-		<!-- Cột tiêu đề tiếng Anh -->
 		<ng-container class="anime__column" matColumnDef="titleEng">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>English Title</th>
 			<td mat-cell class="anime__cell anime__title" *matCellDef="let anime">
@@ -36,7 +34,6 @@
 			</td>
 		</ng-container>
 
-		<!-- Cột tiêu đề tiếng Nhật -->
 		<ng-container class="anime__column" matColumnDef="title_jpn">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Japanese Title</th>
 			<td mat-cell class="anime__cell anime__title" *matCellDef="let anime">
@@ -46,7 +43,6 @@
 			</td>
 		</ng-container>
 
-		<!-- Cột ngày phát sóng -->
 		<ng-container class="anime__column" matColumnDef="airedStartDate">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Broadcasted Date</th>
 			<td mat-cell class="anime__cell anime__started-date" *matCellDef="let anime">
@@ -56,27 +52,24 @@
 			</td>
 		</ng-container>
 
-		<!-- Cột loại anime -->
 		<ng-container class="anime__column" matColumnDef="Type">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef>Type</th>
 			<td mat-cell class="anime__cell anime__type" *matCellDef="let anime">
 				<app-table-cell-content [isLoading]="isLoading">
-					<span class="anime__{{ anime.animeType | classify }}">{{ anime.animeType | empty }}</span>
+					<camp-movie-type [animeType]="anime.animeType"></camp-movie-type>
 				</app-table-cell-content>
 			</td>
 		</ng-container>
 
-		<!-- Cột trạng thái -->
 		<ng-container class="anime__column" matColumnDef="status">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
 			<td mat-cell class="anime__cell anime__status" *matCellDef="let anime">
 				<app-table-cell-content [isLoading]="isLoading">
-					<span class="anime__{{ anime.animeStatus | classify }}">{{ anime.animeStatus | empty }}</span>
+					<camp-movie-status [animeStatus]="anime.animeStatus"></camp-movie-status>
 				</app-table-cell-content>
 			</td>
 		</ng-container>
 
-		<!-- Hàng tiêu đề và hàng dữ liệu -->
 		<tr mat-header-row class="anime__header-row" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
 		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 	</table>

@@ -20,6 +20,8 @@ import { SkeletonDirective } from '@js-camp/angular/shared/directives/skeleton.d
 import { TableCellContentComponent } from '@js-camp/angular/shared/directives/table-cell-content/table-cell-content.component';
 import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
 import { ClassifyPipe } from '@js-camp/angular/core/pipes/classify.pipe';
+import { MovieStatusComponent } from '@js-camp/angular/shared/components/movie-status/movie-status.component';
+import { MovieTypeComponent } from '@js-camp/angular/shared/components/movie-type/movie-type.component';
 
 /** Create anime table component.*/
 @Component({
@@ -34,6 +36,8 @@ import { ClassifyPipe } from '@js-camp/angular/core/pipes/classify.pipe';
 		MatSortModule,
 		SkeletonDirective,
 		TableCellContentComponent,
+		MovieStatusComponent,
+		MovieTypeComponent,
 	],
 	templateUrl: './anime-table.component.html',
 	styleUrl: './anime-table.component.css',
