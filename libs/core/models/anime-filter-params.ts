@@ -26,5 +26,3 @@ export namespace AnimeFilterParams {
 	/** Anime query params. */
 	export type Combined = Sort & Type & BasedFilterParams.Combined;
 }
-
-// type BooksParams = Pagination.Combined;

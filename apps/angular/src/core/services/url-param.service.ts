@@ -22,6 +22,7 @@ export class UrlParamsService {
 	 * Append provide query params to the URL.
 	 * @param params Params to append.
 	 */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public append(params: Record<string, any>): void {
 		const paramsWithoutUndefinedField = this.removeUndefinedFields(params);
 		this.router.navigate([], {
@@ -36,6 +37,7 @@ export class UrlParamsService {
 	 * @param params Params to append.
 	 * @param defaultPageNumber Default page number to reset.
 	 */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	public appendAndResetPageNumber(params: Record<string, any>, defaultPageNumber: number): void {
 		return this.append({ ...params, pageNumber: defaultPageNumber });
 	}

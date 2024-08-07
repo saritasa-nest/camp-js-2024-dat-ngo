@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormField } from '@angular/material/form-field';
-import { BehaviorSubject, debounceTime, finalize, first, ignoreElements, Observable, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, debounceTime, finalize, ignoreElements, Observable, switchMap, tap } from 'rxjs';
 import { Pagination } from '@js-camp/core/models/pagination';
 import { Anime } from '@js-camp/core/models/anime.model';
 import { AnimeService } from '@js-camp/angular/core/services/anime.service';
@@ -73,7 +73,6 @@ export class AnimeCatalogComponent implements OnInit {
 					}),
 				)),
 		);
-		this.sortParams$.subscribe(data=>console.log(1, data));
 	}
 
 	/** Subscribe the filter params and pass them to the filter form and paginator. */
