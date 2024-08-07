@@ -11,17 +11,17 @@
 		(searchChange)="onSearchChange($event)"
 		[search]="data.filterParams?.search ?? ''"
 		[selectedType]="data.filterParams?.type ?? null"
-	></camp-search-filter-form>
+	/>
 	<camp-anime-table
 		[animeList]="data.animePage ? data.animePage.items : null"
 		[isLoading]="data.isLoading"
 		(sortChange)="onSortChange($event)"
 		[sortParams]="data.sortParams"
-	></camp-anime-table>
+	/>
 	<camp-paginator
 		[pageNumber]="data.filterParams?.pageNumber ?? 0"
 		[pageSize]="data.filterParams?.pageSize ?? 10"
 		[totalCount]="data.animePage ? data.animePage.totalCount : 0"
 		(pageChange)="onPageChange($event)"
-	></camp-paginator>
+	/>
 </ng-container>
