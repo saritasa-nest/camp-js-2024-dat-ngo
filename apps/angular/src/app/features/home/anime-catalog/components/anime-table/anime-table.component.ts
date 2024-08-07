@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Anime } from '@js-camp/core/models/anime';
 import { MatSortModule, Sort } from '@angular/material/sort';
@@ -81,6 +81,6 @@ export class AnimeTableComponent {
 	protected get templateArray(): readonly object[] {
 		return Array(DEFAULT_PAGINATION.pageSize)
 			.fill(null)
-			.map((_) => ({}));
+			.map(_ => ({}));
 	}
 }
