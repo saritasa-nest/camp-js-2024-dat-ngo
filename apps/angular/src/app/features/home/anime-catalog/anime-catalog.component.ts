@@ -87,7 +87,6 @@ export class AnimeCatalogComponent implements OnInit {
 	private initializeFilterParamsSideEffect(): Observable<void> {
 		return this.filter$
 			.pipe(
-				first(),
 				tap(params => {
 					this.filterParams$.next(params);
 				}),

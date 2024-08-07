@@ -1,6 +1,6 @@
 .anime-table .mat-mdc-header-cell,
 .anime-table .mat-mdc-cell {
-	border-bottom-color: #e9edf5;
+	border-bottom-color: var(--anime-header-border-color);
 	text-align: center;
 }
 
@@ -9,8 +9,8 @@
 }
 
 .anime-table .mat-mdc-header-row {
-	background-color: #f7f9fc;
+	background-color: var(--anime-header-bg-color);
 	text-transform: uppercase;
 	font-weight: var(--font-weight-semibold);
-	color: #687182;
+	color: var(--anime-header-color);
 }

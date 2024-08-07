@@ -7,12 +7,10 @@
 			}
 		</mat-select>
 	</mat-form-field>
-	<!-- TODO (Dat Ngo): Remove redundant classes. DONE-->
 	<div>
 		<mat-form-field appearance="fill">
 			<mat-label>Search</mat-label>
-			<!-- TODO (Dat Ngo): Add button. -->
-			<input matInput [(ngModel)]="search" placeholder="Placeholder" (keydown)="onKeyDown($event)" (onchange)="onSearch()" />
+			<input matInput [(ngModel)]="search" placeholder="Anime Name" (keydown)="onKeyDown($event)" (onchange)="onSearch()" />
 		</mat-form-field>
 	</div>
 	<div class="main__search">

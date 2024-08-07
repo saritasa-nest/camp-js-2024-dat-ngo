@@ -5,7 +5,7 @@ import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Anime } from '@js-camp/core/models/anime.model';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { SkeletonDirective } from '@js-camp/angular/shared/directives/skeleton.directive';
-import { TableCellContentComponent } from '@js-camp/angular/shared/directives/table-cell-content/table-cell-content.component';
+import { TableCellContentComponent } from '@js-camp/angular/shared/components/table-cell-content/table-cell-content.component';
 import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
 import { MovieStatusComponent } from '@js-camp/angular/shared/components/movie-status/movie-status.component';
 import { MovieTypeComponent } from '@js-camp/angular/shared/components/movie-type/movie-type.component';
@@ -13,12 +13,12 @@ import { MovieTypeComponent } from '@js-camp/angular/shared/components/movie-typ
 import { MovieNotFoundComponent } from '../movie-not-found/movie-not-found.component';
 
 const COLUMN_KEYS = {
-	IMAGE: 'Image',
-	TitleEng: 'titleEng',
-	TitleJpn: 'title_jpn',
-	AiredStartDate: 'airedStartDate',
-	Type: 'Type',
-	Status: 'status',
+	image: 'image',
+	titleEng: 'title_eng',
+	titleJpn: 'title_jpn',
+	airedStartDate: 'aired_start_date',
+	type: 'type',
+	status: 'status',
 } as const;
 
 /** Anime table component.*/
@@ -72,7 +72,6 @@ export class AnimeTableComponent {
 		this.sortChange.emit(event);
 	}
 
-	// TODO (Dat Ngo): Create a constant object for columns. Then use Object.values for displayedColumns DONE;
 	/** Displayed columns .*/
 	protected readonly displayedColumns: string[] = Object.values(COLUMN_KEYS);
 
@@ -80,6 +79,6 @@ export class AnimeTableComponent {
 	protected get templateArray(): object[] {
 		return Array(DEFAULT_PAGINATION.pageSize)
 			.fill(null)
-			.map((_) => ({}));
+			.map(_ => ({}));
 	}
 }

@@ -2,7 +2,7 @@ import { inject, InjectionToken, Provider } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
 import { map, Observable, shareReplay } from 'rxjs';
-import { AnimeQueryParams, AnimeQueryParamsMapper } from '@js-camp/core/mappers/url-params.mapper';
+import { AnimeQueryParams, AnimeQueryParamsMapper } from '@js-camp/core/mappers/anime-query-params.mapper';
 
 /** Anime filter params token. */
 export const ANIME_FILTER_PARAMS_TOKEN = new InjectionToken<Observable<AnimeFilterParams.Combined>>(

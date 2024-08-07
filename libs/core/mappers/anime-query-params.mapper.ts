@@ -5,13 +5,14 @@ import { TMapper } from '../types/mapper';
 
 /** Anime query params. */
 export type AnimeQueryParams = Partial<
-	Omit<AnimeFilterParams.Combined, 'pageNumber' | 'pageSize'> & {
-		/** Page number query param. */
-		pageNumber: string | null;
+Omit<AnimeFilterParams.Combined, 'pageNumber' | 'pageSize'> & {
 
-		/** Page size query param. */
-		pageSize: string | null;
-	}
+	/** Page number query param. */
+	pageNumber: string | null;
+
+	/** Page size query param. */
+	pageSize: string | null;
+}
 >;
 
 /** Service for handling URL query params. */

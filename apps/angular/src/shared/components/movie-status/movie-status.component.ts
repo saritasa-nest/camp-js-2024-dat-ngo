@@ -19,18 +19,18 @@ export class MovieStatusComponent {
 	private get color(): string {
 		switch (this.animeStatus) {
 			case AnimeStatus.CurrentlyAiring:
-				return 'anime_currently-airing';
+				return 'anime-status_currently-airing';
 			case AnimeStatus.FinishedAiring:
-				return 'anime_finished-airing';
+				return 'anime-status_finished-airing';
 			case AnimeStatus.NotYetAired:
-				return 'anime_not-yet-aired';
+				return 'anime-status_not-yet-aired';
 			default:
-				return 'anime_currently-airing';
+				return 'anime-status_currently-airing';
 		}
 	}
 
 	private get classes(): string {
-		return `${this.color}`;
+		return `anime-badge ${this.color}`;
 	}
 
 	@HostBinding('class')

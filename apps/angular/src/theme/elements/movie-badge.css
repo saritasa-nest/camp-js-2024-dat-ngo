@@ -1,0 +1,6 @@
+/* TODO (Dat Ngo): Move movie status here. DONE */
+.anime-badge {
+	padding: var(--spacing-xs) var(--spacing-sm);
+	border: none;
+	border-radius: var(--border-radius-xs);
+}

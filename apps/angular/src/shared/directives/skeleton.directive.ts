@@ -2,7 +2,7 @@ import { Directive, ElementRef, Renderer2 } from '@angular/core';
 
 /** Skeleton Cell .*/
 @Directive({
-	selector: '[campcSkeleton]',
+	selector: '[campSkeleton]',
 	standalone: true,
 })
 export class SkeletonDirective {
@@ -11,8 +11,7 @@ export class SkeletonDirective {
 	}
 
 	private setSkeletonCellStyle(): void {
-
-		/** Apply skeleton loading styles */
+		/** Apply skeleton loading styles .*/
 		this.renderer.setStyle(
 			this.el.nativeElement,
 			'background',

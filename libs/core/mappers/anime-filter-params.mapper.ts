@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 
 import { AnimeFilterParams } from '../models/anime-filter-params';
-import { AnimeQueryParamsDto } from '../dtos/url-query.dto';
+import { AnimeQueryParamsDto } from '../dtos/anime-query-params.dto';
 import { AnimeType } from '../models/anime-type';
 import { AnimeTypeDto } from '../dtos/amime-type.dto';
 import { AnimeSortField } from '../models/anime-sort-field';
