@@ -29,7 +29,6 @@ export class AnimeService {
 
 	private animeQueryMapper = inject(AnimeFiltersParamsMapper);
 
-	// TODO (Dat Ngo): Move this to anime service. DONE
 	/**
 	 * Build HttpParams from URL query params.
 	 * @param params URL query params.

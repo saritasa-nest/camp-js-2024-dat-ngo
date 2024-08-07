@@ -11,7 +11,6 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginatorComponent {
-	// TODO (Dat Ngo): Put Input and Output correctly DONE.
 
 	/** Paginator page number. */
 	@Input()

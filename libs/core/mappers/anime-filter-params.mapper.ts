@@ -28,7 +28,6 @@ const MAP_ANIME_SORT_TO_DTO: Record<AnimeSortField, AnimeSortFieldDto> = {
 	[AnimeSortField.TitleEng]: AnimeSortFieldDto.TitleEng,
 };
 
-// TODO (Dat Ngo): Make a base filter params DONE
 /** Mapper for filter params. */
 @Injectable({ providedIn: 'root' })
 export class AnimeFiltersParamsMapper {

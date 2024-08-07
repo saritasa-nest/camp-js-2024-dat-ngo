@@ -1,8 +1,6 @@
 .main {
 	display: flex;
 	justify-content: flex-end;
-
-	/* TODO (Dat Ngo): Use var. */
 	gap: var(--spacing-xxl);
 }
 
