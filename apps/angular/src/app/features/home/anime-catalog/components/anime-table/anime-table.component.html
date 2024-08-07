@@ -6,6 +6,7 @@
 		(matSortChange)="onSortChange($event)"
 		[matSortActive]="sortParams.active"
 		[matSortDirection]="sortParams.direction"
+		[trackBy]="trackById"
 		class="anime-table"
 	>
 		<ng-container class="anime__column" matColumnDef="image">
@@ -13,8 +14,7 @@
 			<td mat-cell class="anime__cell" *matCellDef="let anime">
 				<app-table-cell-content [isLoading]="isLoading" class="anime__image-cell">
 					<div class="anime__image-container">
-						<img class="anime__image" [src]="anime.coverImage" [alt]="isLoading ? null : anime.titleJpn" (click)="logAnimeTitle(anime.id)"/>
-						<!-- <button type="button" (click)="logAnimeTitle(anime.id)">312312</button> -->
+						<img class="anime__image" [src]="anime.coverImage" [alt]="isLoading ? null : anime.titleJpn" />
 					</div>
 				</app-table-cell-content>
 			</td>

@@ -92,11 +92,10 @@ export class AnimeTableComponent {
 			.map((_, index) => ({ id: index }));
 	}
 
-	protected logAnimeTitle(title: string): void {
-		console.log(title);
+	/** Track object by id .*/
+	protected trackById<T extends { id: number }>(): TrackByFunction<T> {
+		return (index: number, item: T): number => {
+			return item.id;
+		};
 	}
-
-	// protected trackById (index: number, anime: Anime): TrackByFunction<Anime['id']> {
-	// 	return anime.id;
-	// }
 }
