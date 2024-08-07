@@ -1,5 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	Component,
+	EventEmitter,
+	Input,
+	Output,
+	TrackByFunction,
+} from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Anime } from '@js-camp/core/models/anime';
@@ -81,6 +89,14 @@ export class AnimeTableComponent {
 	protected get templateArray(): readonly object[] {
 		return Array(DEFAULT_PAGINATION.pageSize)
 			.fill(null)
-			.map(_ => ({}));
+			.map((_, index) => ({ id: index }));
 	}
+
+	protected logAnimeTitle(title: string): void {
+		console.log(title);
+	}
+
+	// protected trackById (index: number, anime: Anime): TrackByFunction<Anime['id']> {
+	// 	return anime.id;
+	// }
 }
