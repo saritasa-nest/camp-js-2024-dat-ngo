@@ -21,6 +21,7 @@ const MAP_ANIME_TYPE_TO_DTO: Record<AnimeType, AnimeTypeDto> = {
 };
 
 const MAP_ANIME_SORT_TO_DTO: Record<AnimeSortField, AnimeSortFieldDto> = {
+	[AnimeSortField.TitleJpn] : AnimeSortFieldDto.TitleJpn,
 	[AnimeSortField.StartDate]: AnimeSortFieldDto.StartDate,
 	[AnimeSortField.Status]: AnimeSortFieldDto.Status,
 	[AnimeSortField.TitleEng]: AnimeSortFieldDto.TitleEng,

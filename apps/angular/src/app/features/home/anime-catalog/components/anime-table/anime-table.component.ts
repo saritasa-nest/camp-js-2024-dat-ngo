@@ -69,7 +69,12 @@ export class AnimeTableComponent {
 	 * @param event The page event.
 	 */
 	public onSortChange(event: Sort): void {
+		console.log("event",event);
 		this.sortChange.emit(event);
+	}
+
+	constructor() {
+		console.log(this.sortParams);
 	}
 
 	/** Displayed columns .*/
@@ -79,6 +84,6 @@ export class AnimeTableComponent {
 	protected get templateArray(): object[] {
 		return Array(DEFAULT_PAGINATION.pageSize)
 			.fill(null)
-			.map(_ => ({}));
+			.map((_) => ({}));
 	}
 }

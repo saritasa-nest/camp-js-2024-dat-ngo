@@ -73,6 +73,7 @@ export class AnimeCatalogComponent implements OnInit {
 					}),
 				)),
 		);
+		this.sortParams$.subscribe(data=>console.log(1, data));
 	}
 
 	/** Subscribe the filter params and pass them to the filter form and paginator. */
@@ -89,6 +90,10 @@ export class AnimeCatalogComponent implements OnInit {
 			.pipe(
 				tap(params => {
 					this.filterParams$.next(params);
+					this.sortParams$.next(this.sortMapper.toDto({
+						sortField: params.sortField,
+						sortDirection: params.sortDirection,
+					}));
 				}),
 				ignoreElements(),
 			);

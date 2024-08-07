@@ -10,13 +10,16 @@ import { Sort, SortDirection } from '@angular/material/sort';
 })
 export class SortMapper implements TMapper<Sort, AnimeFilterParams.Sort> {
 	private fieldMapperFromDTO: Record<string, AnimeSortField> = {
-		titleEng: AnimeSortField.TitleEng,
-		airedStartDate: AnimeSortField.StartDate,
+		title_eng: AnimeSortField.TitleEng,
+		title_jpn: AnimeSortField.TitleJpn,
+		aired_start_date: AnimeSortField.StartDate,
 		status: AnimeSortField.Status,
 	};
+
 	private fieldMapperToDTO: Record<AnimeSortField, string> = {
-		[AnimeSortField.TitleEng]: 'titleEng',
-		[AnimeSortField.StartDate]: 'airedStartDate',
+		[AnimeSortField.TitleEng]: 'title_eng',
+		[AnimeSortField.TitleJpn]: 'title_jpn',
+		[AnimeSortField.StartDate]: 'aired_start_date',
 		[AnimeSortField.Status]: 'status',
 	};
 
