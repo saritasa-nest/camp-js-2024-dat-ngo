@@ -18,10 +18,12 @@ import { MatInputModule } from '@angular/material/input';
 export class SearchFilterFormComponent {
 	/** Search input. */
 	@Input()
+
 	public search = '';
 
 	/** Selection type of anime. */
 	@Input()
+
 	public selectedType: AnimeType | null = null;
 
 	/** Event emitter for type sort change. */

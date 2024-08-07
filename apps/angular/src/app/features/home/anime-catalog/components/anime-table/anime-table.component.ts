@@ -52,7 +52,8 @@ export class AnimeTableComponent {
 	}
 
 	/** Loading state. */
-	@Input({ transform: booleanAttribute }) public isLoading = false;
+	@Input({ transform: booleanAttribute })
+	public isLoading = false;
 
 	/** Sort params. */
 	@Input({ required: true })
@@ -62,7 +63,8 @@ export class AnimeTableComponent {
 	protected dataSource = new MatTableDataSource<Anime>();
 
 	/** Event emitter for page changing. */
-	@Output() public sortChange = new EventEmitter<Sort>();
+	@Output()
+	public sortChange = new EventEmitter<Sort>();
 
 	/**
 	 * Emit the page event.
@@ -79,6 +81,6 @@ export class AnimeTableComponent {
 	protected get templateArray(): object[] {
 		return Array(DEFAULT_PAGINATION.pageSize)
 			.fill(null)
-			.map(_ => ({}));
+			.map((_) => ({}));
 	}
 }

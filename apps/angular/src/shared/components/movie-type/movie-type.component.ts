@@ -23,7 +23,8 @@ const ANIME_MOVIE_COLORS: Record<AnimeType, string> = {
 })
 export class MovieTypeComponent {
 	/** Session status. */
-	@Input({ required: true }) public animeType!: AnimeType;
+	@Input({ required: true })
+	public animeType!: AnimeType;
 
 	private get color(): string {
 		return ANIME_MOVIE_COLORS[this.animeType];

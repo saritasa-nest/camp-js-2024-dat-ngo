@@ -15,12 +15,15 @@ import { SkeletonDirective } from '../../directives/skeleton.directive';
 })
 export class TableCellContentComponent {
 	/** Default width. */
-	@Input() private width = '100%';
+	@Input()
+ private width = '100%';
 
 	/** Default height. */
-	@Input() private height = 24;
+	@Input()
+ private height = 24;
 
 	/** Whether cell is loading or not. */
 	@Input()
+
 	public isLoading: boolean | null = false;
 }
