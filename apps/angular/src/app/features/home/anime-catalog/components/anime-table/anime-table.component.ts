@@ -45,9 +45,9 @@ export class AnimeTableComponent {
 	@Input()
 	public set animeList(values: ReadonlyArray<Anime> | null) {
 		if (values !== null) {
-			this.dataSource.data = [...values];
+			this.dataSource = [...values];
 		} else if (values === null) {
-			this.dataSource.data = [];
+			this.dataSource = [];
 		}
 	}
 
@@ -60,7 +60,7 @@ export class AnimeTableComponent {
 	public sortParams: Sort | null = null;
 
 	/** Table data source. */
-	protected dataSource = new MatTableDataSource<Anime>();
+	protected dataSource: ReadonlyArray<Anime> = [];
 
 	/** Event emitter for page changing. */
 	@Output()
@@ -78,7 +78,7 @@ export class AnimeTableComponent {
 	protected readonly displayedColumns: string[] = Object.values(COLUMN_KEYS);
 
 	/** Generate number array for the template table data source. */
-	protected get templateArray(): object[] {
+	protected get templateArray(): readonly object[] {
 		return Array(DEFAULT_PAGINATION.pageSize)
 			.fill(null)
 			.map((_) => ({}));
