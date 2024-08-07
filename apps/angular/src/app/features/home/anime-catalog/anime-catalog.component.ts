@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatFormField } from '@angular/material/form-field';
 import { BehaviorSubject, debounceTime, finalize, ignoreElements, Observable, switchMap, tap } from 'rxjs';
 import { Pagination } from '@js-camp/core/models/pagination';
-import { Anime } from '@js-camp/core/models/anime.model';
+import { Anime } from '@js-camp/core/models/anime';
 import { AnimeService } from '@js-camp/angular/core/services/anime.service';
 import { PageEvent } from '@angular/material/paginator';
 import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';

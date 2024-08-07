@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
-import { Anime } from '@js-camp/core/models/anime.model';
+import { Anime } from '@js-camp/core/models/anime';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { SkeletonDirective } from '@js-camp/angular/shared/directives/skeleton.directive';
 import { TableCellContentComponent } from '@js-camp/angular/shared/components/table-cell-content/table-cell-content.component';

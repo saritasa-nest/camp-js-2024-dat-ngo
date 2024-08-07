@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Anime } from '../models/anime.model';
+import { Anime } from '../models/anime';
 import { AnimeDto } from '../dtos/anime.dto';
 import { AnimeTypeDto } from '../dtos/amime-type.dto';
 import { AnimeType } from '../models/anime-type';
