@@ -1,0 +1,90 @@
+@import url("../../global/index.css");
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: var(--spacing-default);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.container {
+	padding: var(--spacing-default);
+	box-shadow: var(--container-box-shadow);
+}
+
+.background {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-image: url("./assets/lucky-dice-game-background.jpg");
+	background-size: cover;
+	background-position: center;
+	filter: blur(5px);
+	z-index: -1;
+}
+
+.content-wrapper {
+	max-width: 650px;
+	width: 100%;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-md);
+	padding: var(--spacing-default);
+	background-color: var(--surface-overlay-color);
+}
+
+.win {
+	background-color: var(--winner-color);
+	border-radius: var(--border-radius-md);
+}
+
+.displayer {
+	padding: 10px;
+	margin: 5px auto;
+}
+
+.displayer__heading {
+	margin-bottom: 10px;
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-md);
+	font-weight: var(--font-weight-bold);
+	text-transform: uppercase;
+}
+
+.displayer__dice-results {
+	white-space: nowrap;
+	overflow: auto;
+	min-height: 20px;
+}
+
+.header {
+	color: var(--on-surface-color);
+	padding: var(--spacing-default) 0;
+	border-bottom: 1px solid var(--border-color);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: var(--font-size-xl);
+	line-height: var(--line-height-md);
+	font-weight: var(--font-weight-bold);
+}
+
+.button-roll {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	background-color: var(--primary-color);
+	color: var(--surface-color);
+	cursor: pointer;
+}
+
+.button-roll:hover {
+	background-color: var(--primary-color-overlay);
+}
+
+.button-roll:disabled {
+	background-color: var(--surface-color);
+	color: var(--on-surface-color);
+}
