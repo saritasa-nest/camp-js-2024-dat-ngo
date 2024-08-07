@@ -8,7 +8,6 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 	standalone: true,
 	imports: [CommonModule, MatPaginatorModule],
 	templateUrl: './paginator.component.html',
-	styleUrl: './paginator.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginatorComponent {

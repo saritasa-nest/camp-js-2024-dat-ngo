@@ -19,7 +19,6 @@ const ANIME_MOVIE_COLORS: Record<AnimeType, string> = {
 	standalone: true,
 	imports: [CommonModule],
 	templateUrl: './movie-type.component.html',
-	styleUrl: './movie-type.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovieTypeComponent {

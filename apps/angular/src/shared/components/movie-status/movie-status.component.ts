@@ -8,7 +8,6 @@ import { AnimeStatus } from '@js-camp/core/models/anime-status';
 	standalone: true,
 	imports: [CommonModule],
 	templateUrl: './movie-status.component.html',
-	styleUrl: './movie-status.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovieStatusComponent {
