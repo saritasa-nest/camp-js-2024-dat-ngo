@@ -1,0 +1,39 @@
+.anime-type_tv {
+	background-color: var(--anime-tv-bg);
+	color: var(--anime-tv-color);
+}
+
+.anime-type_ova {
+	background-color: var(--anime-ova-bg);
+	color: var(--anime-ova-color);
+}
+
+.anime-type_movie {
+	background-color: var(--anime-movie-bg);
+	color: var(--anime-movie-color);
+}
+
+.anime-type_special {
+	background-color: var(--anime-special-bg);
+	color: var(--anime-special-color);
+}
+
+.anime-type_ona {
+	background-color: var(--anime-ona-bg);
+	color: var(--anime-ona-color);
+}
+
+.anime-type_music {
+	background-color: var(--anime-music-bg);
+	color: var(--anime-music-color);
+}
+
+.anime-type_promotional-videos {
+	background-color: var(--anime-promotional-videos-bg);
+	color: var(--anime-promotional-videos-color);
+}
+
+.anime-type_unknown {
+	background-color: var(--anime-unknown-bg);
+	color: var(--anime-unknown-color);
+}

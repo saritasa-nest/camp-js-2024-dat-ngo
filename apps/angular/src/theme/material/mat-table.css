@@ -1,0 +1,16 @@
+.anime-table .mat-mdc-header-cell,
+.anime-table .mat-mdc-cell {
+	border-bottom-color: var(--anime-header-border-color);
+	text-align: center;
+}
+
+.anime-table .mat-mdc-header-cell .mat-sort-header-container {
+	justify-content: center;
+}
+
+.anime-table .mat-mdc-header-row {
+	background-color: var(--anime-header-bg-color);
+	text-transform: uppercase;
+	font-weight: var(--font-weight-semibold);
+	color: var(--anime-header-color);
+}

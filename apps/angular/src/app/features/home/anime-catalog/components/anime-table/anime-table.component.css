@@ -1,0 +1,48 @@
+.anime__table-container {
+	height: 100%;
+	overflow-y: auto;
+	border-radius: var(--border-radius);
+}
+
+.anime__header-row {
+	background-color: var(--anime-header-row-bg);
+	color: var(--anime-header-row-color);
+}
+
+.anime-table {
+	table-layout: fixed;
+	width: 100%;
+}
+
+.anime__header {
+	text-align: center;
+}
+
+.anime__column {
+	display: block;
+	word-wrap: break-word;
+	white-space: unset;
+	overflow-wrap: break-word;
+}
+
+.anime__image-container {
+	height: 150px;
+	margin-block: 4px;
+}
+
+.anime__image {
+	height: 100%;
+	aspect-ratio: 1;
+	object-fit: contain;
+}
+
+.anime__japan-title {
+	color: var(--anime-japan-title-row-color);
+	font-weight: var(--font-weight-medium);
+}
+
+.anime__image-cell {
+	--height: 150px;
+
+	margin: 5px;
+}
