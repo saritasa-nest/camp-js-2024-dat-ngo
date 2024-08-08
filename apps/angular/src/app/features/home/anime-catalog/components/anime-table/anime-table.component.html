@@ -6,7 +6,7 @@
 		(matSortChange)="onSortChange($event)"
 		[matSortActive]="sortParams.active"
 		[matSortDirection]="sortParams.direction"
-		[trackBy]="trackById"
+		[trackBy]="trackBy('id')"
 		class="anime-table"
 	>
 		<ng-container class="anime__column" matColumnDef="image">

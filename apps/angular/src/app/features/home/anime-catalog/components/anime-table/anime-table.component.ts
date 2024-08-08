@@ -89,13 +89,16 @@ export class AnimeTableComponent {
 	protected get templateArray(): readonly object[] {
 		return Array(DEFAULT_PAGINATION.pageSize)
 			.fill(null)
-			.map((_, index) => ({ id: index }));
+			.map(_ => ({}));
 	}
 
-	/** Track object by id .*/
-	protected trackById<T extends { id: number }>(): TrackByFunction<T> {
-		return (index: number, item: T): number => {
-			return item.id;
+	/**
+	 *  Track object by id.
+	 *  @param key Key of Type.
+	 */
+	protected trackBy<T>(key: keyof T): TrackByFunction<T> {
+		return function(index: number, item: T): T[keyof T] {
+			return item[key];
 		};
 	}
 }
