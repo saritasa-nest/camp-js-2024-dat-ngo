@@ -5,5 +5,5 @@
     "outDir": "../../dist/out-tsc",
     "types": ["node"]
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "models/amime-type.ts", "models/anime-status.ts"]
 }
