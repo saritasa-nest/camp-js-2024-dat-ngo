@@ -1,13 +1,13 @@
 @if(animePage$ | async; as animePage) {
 	<section class="mat-elevation-z8 anime__table-container" >
-		<table mat-table [dataSource]="animePage !== null ? animePage.items : []" [trackBy]="trackBy">
+		<table mat-table [dataSource]="animePage !== null ? animePage.items : []" [trackBy]="trackById">
 			<!--- Note that these columns can be defined in any order.
 						The actual rendered columns are set as a property on the row definition" -->
 			<ng-container class="anime__column" matColumnDef="Image">
 				<th class="anime__header" mat-header-cell *matHeaderCellDef>Image</th>
 				<td mat-cell class="anime__cell" *matCellDef="let anime">
 					<div class="anime__image-container">
-						<img class="anime__image" [src]="anime.coverImage" [alt]="anime.titleJpn" />
+						<img class="anime__image" [src]="anime.coverImage" [alt]="anime.titleJpn ? anime.titleJpn : 'Anime cover Image' " />
 					</div>
 				</td>
 			</ng-container>

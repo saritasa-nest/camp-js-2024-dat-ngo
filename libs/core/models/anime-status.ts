@@ -1,4 +1,4 @@
-/** Anime Type enum. */
+/** Anime Status enum. */
 export enum AnimeStatus {
 	CurrentlyAiring = 'Currently Airing',
 	FinishedAiring = 'Finished Airing',

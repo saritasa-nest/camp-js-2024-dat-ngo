@@ -8,7 +8,7 @@ import { TMapperFromDto, TMapperFunction } from '../types/mapper';
 
 import { AnimeMapper } from './anime.mapper';
 
-/** Auth mapper. */
+/** Pagination mapper. */
 @Injectable({
 	providedIn: 'root',
 })

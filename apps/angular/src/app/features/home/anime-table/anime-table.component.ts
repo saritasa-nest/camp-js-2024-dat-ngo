@@ -1,4 +1,4 @@
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AnimeService } from '@js-camp/angular/core/services/anime.service';
 import { MatTableModule } from '@angular/material/table';
@@ -7,30 +7,30 @@ import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Pagination } from '@js-camp/core/models/pagination';
 import { Anime } from '@js-camp/core/models/anime.model';
 
-/** Create anime table componet.*/
+/** Anime table component.*/
 @Component({
 	selector: 'camp-anime-table',
 	standalone: true,
-	imports: [MatTableModule, CommonModule, EmptyPipe, AsyncPipe],
+	imports: [MatTableModule, CommonModule, EmptyPipe],
 	templateUrl: './anime-table.component.html',
 	styleUrl: './anime-table.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimeTableComponent {
-	/** Anime response observable.  */
+	/** Anime page observable.  */
 	protected readonly animePage$: Observable<Pagination<Anime>>;
 
 	private readonly animeService = inject(AnimeService);
 
 	public constructor() {
-		this.animePage$ = this.animeService.getAllAnime();
+		this.animePage$ = this.animeService.getAll();
 	}
 
 	/** This informs the table how to uniquely identify rows to track how the data changes with each update.
 	 * @param index Index of them Anime on table.
 	 * @param item Items on table.
 	 */
-	protected trackBy(index: number, item: Anime): Anime['id'] {
+	protected trackById(index: number, item: Anime): Anime['id'] {
 		return item.id;
 	}
 
@@ -42,5 +42,5 @@ export class AnimeTableComponent {
 		'Broadcasted Date',
 		'Type',
 		'Status',
-	];
+	] as const;
 }

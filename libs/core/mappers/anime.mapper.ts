@@ -44,7 +44,7 @@ const MAP_ANIME_TYPE_TO_DTO: Record<AnimeType, AnimeTypeDto> = {
 })
 export class AnimeMapper {
 	/**
-	 *  Mapper for dto to model.
+	 * Mapper for dto to model.
 	 * @param dto AnimeDto .
 	 */
 	public fromDto(dto: AnimeDto): Anime {

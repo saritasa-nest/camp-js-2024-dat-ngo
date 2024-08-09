@@ -1,6 +1,7 @@
 import { AnimeTypeDto } from './amime-type.dto';
 import { AnimeStatusDto } from './anime-status.dto';
 
+/** Anime Dto. */
 export type AnimeDto = {
 
 	/** Id of anime. */
