@@ -1,0 +1,43 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+	<div class="input-group">
+		<mat-form-field appearance="outline">
+			<mat-label class="label" for="email">Email</mat-label>
+			<input matInput type="email" id="email" name="email" placeholder="Enter email" formControlName="email" />
+		</mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label class="label" for="password">Password</mat-label>
+			<input
+				matInput
+				[type]="hide() ? 'password' : 'text'"
+				id="password"
+				name="password"
+				placeholder="Enter password"
+				formControlName="password"
+			/>
+			<span
+			class="icon-hide"
+				mat-icon-button
+				matSuffix
+				(click)="clickEvent($event)"
+				[attr.aria-label]="'Hide password'"
+				[attr.aria-pressed]="hide()"
+				type="submit"
+			>
+				<mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+			</span>
+		</mat-form-field>
+	</div>
+	<section class="option">
+		<div class="remember-me">
+			<input type="checkbox" id="rememberMe" />
+			<label for="rememberMe">Remember me</label>
+		</div>
+		<a href="#" class="forgot-password">Forgot password?</a>
+	</section>
+	<button type="submit" class="btn-signin">Sign in</button>
+	<button class="btn-google" type="button">Or sign in with Google</button>
+	<div class="signup-link">
+		<span>Don't have an account?</span>
+		<a href="/auth/signup">Sign up now</a>
+	</div>
+</form>

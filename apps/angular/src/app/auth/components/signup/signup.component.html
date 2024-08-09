@@ -1,0 +1,61 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+	<div class="input-group">
+		<mat-form-field appearance="outline">
+			<mat-label class="label" for="email">Login</mat-label>
+			<input matInput type="text" id="email" name="email" placeholder="Enter email" formControlName="email" />
+		</mat-form-field>
+
+		<mat-form-field appearance="outline">
+			<mat-label class="label" for="firstName">First Name</mat-label
+			><input
+				matInput
+				type="text"
+				id="firstName"
+				name="firstName"
+				placeholder="Enter First Name"
+				formControlName="firstName"
+		/></mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label class="label" for="lastName">Last Name</mat-label>
+			<input
+				matInput
+				type="text"
+				id="lastName"
+				name="lastName"
+				placeholder="Enter Last Name"
+				formControlName="lastName"
+			/>
+		</mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label class="label" for="password">Password</mat-label>
+			<input
+				matInput
+				type="password"
+				id="password"
+				name="password"
+				placeholder="Enter password"
+				formControlName="password"
+			/>
+		</mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-label class="label" for="reTypePassword">Retype Password</mat-label>
+			<input
+				matInput
+				type="text"
+				id="reTypePassword"
+				name="reTypePassword"
+				placeholder="Retype password"
+				formControlName="reTypePassword"
+			/>
+		</mat-form-field>
+	</div>
+	<div class="remember-me">
+		<input type="checkbox" id="rememberMe" />
+		<label for="rememberMe">Remember me</label>
+	</div>
+	<button type="submit" class="btn-signin">Sign up</button>
+	<div class="signup-link">
+		<span>Already have an account?</span>
+		<a href="/auth/signin">Sign in now</a>
+	</div>
+</form>
