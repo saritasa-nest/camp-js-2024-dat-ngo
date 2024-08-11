@@ -14,6 +14,11 @@ export class AppUrlsConfig {
 		list: this.toApi('anime/anime/'),
 	};
 
+	/** Auth-related routes. */
+	public readonly auth = {
+		login: this.toApi('auth/login/'),
+	};
+
 	/**
 	 * Generate Api urls as an constant.
 	 * @param args Multiple relative path.

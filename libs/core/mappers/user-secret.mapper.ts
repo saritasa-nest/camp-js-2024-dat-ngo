@@ -1,8 +1,12 @@
+import { Injectable } from '@angular/core';
 import { UserSecretDto } from '../dtos/user-secret.dto';
 import { UserSecret } from '../models/user-secret';
 import { TMapper } from '../types/mapper';
 
 /** UserSecret Mappper. */
+@Injectable({
+	providedIn: 'root',
+})
 export class UserSecretMapper implements TMapper<UserSecretDto, UserSecret> {
 	/**
 	 * Maps dto to model.

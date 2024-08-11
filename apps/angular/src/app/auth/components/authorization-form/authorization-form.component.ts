@@ -1,9 +1,13 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { Login } from '@js-camp/core/models/login';
+import { AuthApiService } from '@js-camp/angular/core/services/auth-api.service';
+import { map, Observable } from 'rxjs';
+import { UserSecret } from '@js-camp/core/models/user-secret';
 @Component({
 	selector: 'camp-authorization-form',
 	standalone: true,
@@ -13,16 +17,20 @@ import { MatIconModule } from '@angular/material/icon';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthorizationFormComponent {
-	public constructor(private formBuilder: FormBuilder) {}
+	private readonly authService = inject(AuthApiService);
+	// private readonly AuthObservable: Observable<UserSecret>;
 
 	protected profileForm = this.formBuilder.group({
 		email: ['', Validators.required],
 		password: ['', Validators.required],
 	});
 
+	public constructor(private formBuilder: NonNullableFormBuilder) {}
+
 	protected onSubmit() {
 		// TODO: Use EventEmitter with form value
-		console.warn(this.profileForm.value);
+		// console.warn(this.profileForm.getRawValue());
+		const credentials = new Login(this.profileForm.getRawValue());
 	}
 
 	protected hide = signal(true);
