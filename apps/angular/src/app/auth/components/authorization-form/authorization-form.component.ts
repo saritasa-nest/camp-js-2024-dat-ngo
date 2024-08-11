@@ -8,6 +8,7 @@ import { Login } from '@js-camp/core/models/login';
 import { AuthApiService } from '@js-camp/angular/core/services/auth-api.service';
 import { map, Observable } from 'rxjs';
 import { UserSecret } from '@js-camp/core/models/user-secret';
+import { UserService } from '@js-camp/angular/core/services/user.service';
 @Component({
 	selector: 'camp-authorization-form',
 	standalone: true,
@@ -17,7 +18,7 @@ import { UserSecret } from '@js-camp/core/models/user-secret';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthorizationFormComponent {
-	private readonly authService = inject(AuthApiService);
+	private readonly authService = inject(UserService);
 	// private readonly AuthObservable: Observable<UserSecret>;
 
 	protected profileForm = this.formBuilder.group({
@@ -31,6 +32,9 @@ export class AuthorizationFormComponent {
 		// TODO: Use EventEmitter with form value
 		// console.warn(this.profileForm.getRawValue());
 		const credentials = new Login(this.profileForm.getRawValue());
+		console.log(credentials);
+		console.log(typeof credentials);
+		this.authService.login(credentials).subscribe();
 	}
 
 	protected hide = signal(true);

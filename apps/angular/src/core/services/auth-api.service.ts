@@ -21,9 +21,11 @@ export class AuthApiService {
 	private readonly userSecretMapper = inject(UserSecretMapper);
 
 	public login(loginData: Login): Observable<UserSecret> {
+		console.log(1, this.loginDataMapper.toDto(loginData));
+		const data = this.loginDataMapper.toDto(loginData);
 		return this.httpClient
-			.post<UserSecretDto>(this.appUrlConfig.auth.login, this.loginDataMapper.toDto(loginData))
+			.post<UserSecretDto>(this.appUrlConfig.auth.login, data)
+			.pipe(tap((data) => console.log(1)))
 			.pipe(map((secret) => this.userSecretMapper.fromDto(secret)));
-		// .pipe(map((response) => console.log(1, response)));
 	}
 }
