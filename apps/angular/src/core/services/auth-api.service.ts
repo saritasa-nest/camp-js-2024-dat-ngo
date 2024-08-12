@@ -28,4 +28,10 @@ export class AuthApiService {
 			.pipe(tap((data) => console.log(1)))
 			.pipe(map((secret) => this.userSecretMapper.fromDto(secret)));
 	}
+
+	public refreshSecret(secret: UserSecret): Observable<UserSecret> {
+		return this.httpClient
+			.post<UserSecretDto>(this.appUrlConfig.auth.refresh, this.userSecretMapper.toDto(secret))
+			.pipe(map((token) => this.userSecretMapper.fromDto(token)));
+	}
 }
