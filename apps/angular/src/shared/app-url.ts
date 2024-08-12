@@ -8,6 +8,7 @@ import { environment } from '@js-camp/angular/environments/environment';
 @Injectable({ providedIn: 'root' })
 export class AppUrlsConfig {
 	private readonly baseUrl = environment.apiURL;
+	public readonly apiKey = environment.apiKey;
 
 	/** Anime-related routes. */
 	public readonly anime = {
@@ -17,6 +18,12 @@ export class AppUrlsConfig {
 	/** Auth-related routes. */
 	public readonly auth = {
 		login: this.toApi('auth/login/'),
+		register: this.toApi('auth/register/'),
+	};
+
+	/** Users-related routes. */
+	public readonly users = {
+		profile: this.toApi('users/profile/'),
 	};
 
 	/**
