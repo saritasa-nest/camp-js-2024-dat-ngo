@@ -3,6 +3,7 @@
 		<mat-form-field appearance="outline">
 			<mat-label class="label" for="email">Email</mat-label>
 			<input matInput type="text" id="email" name="email" placeholder="Enter email" formControlName="email" />
+			<mat-error *ngIf="formErrors['email']">{{ formErrors["email"] }}</mat-error>
 		</mat-form-field>
 
 		<mat-form-field appearance="outline">
@@ -14,7 +15,9 @@
 				name="firstName"
 				placeholder="Enter First Name"
 				formControlName="firstName"
-		/></mat-form-field>
+			/>
+			<mat-error *ngIf="formErrors['firstName']">{{ formErrors["firstName"] }}</mat-error>
+		</mat-form-field>
 		<mat-form-field appearance="outline">
 			<mat-label class="label" for="lastName">Last Name</mat-label>
 			<input
@@ -25,29 +28,36 @@
 				placeholder="Enter Last Name"
 				formControlName="lastName"
 			/>
+			<mat-error *ngIf="formErrors['lastName']">{{ formErrors["lastName"] }}</mat-error>
 		</mat-form-field>
-		<mat-form-field appearance="outline">
-			<mat-label class="label" for="password">Password</mat-label>
-			<input
-				matInput
-				type="password"
-				id="password"
-				name="password"
-				placeholder="Enter password"
-				formControlName="password"
-			/>
-		</mat-form-field>
-		<mat-form-field appearance="outline">
-			<mat-label class="label" for="reTypePassword">Retype Password</mat-label>
-			<input
-				matInput
-				type="text"
-				id="reTypePassword"
-				name="reTypePassword"
-				placeholder="Retype password"
-				formControlName="reTypePassword"
-			/>
-		</mat-form-field>
+		<form [formGroup]="profileForm.controls.passwordGroup" class="password-group">
+			<div class="input-group">
+				<mat-form-field appearance="outline">
+					<mat-label class="label" for="password">Password</mat-label>
+					<input
+						matInput
+						type="password"
+						id="password"
+						name="password"
+						placeholder="Enter password"
+						formControlName="password"
+					/>
+					<mat-error *ngIf="formErrors['passwordGroup.password']">{{ formErrors['passwordGroup.password'] }}</mat-error>
+				</mat-form-field>
+				<mat-form-field appearance="outline">
+					<mat-label class="label" for="reTypePassword">Retype Password</mat-label>
+					<input
+						matInput
+						type="text"
+						id="reTypePassword"
+						name="reTypePassword"
+						placeholder="Retype password"
+						formControlName="reTypePassword"
+					/>
+					<mat-error *ngIf="formErrors['passwordGroup.reTypePassword']">{{ formErrors['passwordGroup.reTypePassword'] }}</mat-error>
+				</mat-form-field>
+			</div>
+		</form>
 	</div>
 	<div class="remember-me">
 		<input type="checkbox" id="rememberMe" />

@@ -10,7 +10,7 @@ import { Register } from '../models/register';
 	providedIn: 'root',
 })
 export class RegisterMapper implements TMapperToDto<RegisterDto, Register> {
-	public toDto (
+	public toDto(
 		registerData: Register
 	): Readonly<{ email: string; first_name: string; last_name: string; avatar: string; password: string }> {
 		return {

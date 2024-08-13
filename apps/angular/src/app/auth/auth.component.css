@@ -12,8 +12,6 @@
 	max-height: 900px;
 	height: 100%;
 	width: 100%;
-	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
-	/* border-radius: 28px; */
 	overflow: hidden; /* Ensure content doesn't overflow the rounded corners */
 	display: flex; /* Added to ensure flex behavior */
 }
