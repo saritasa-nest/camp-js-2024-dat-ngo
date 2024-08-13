@@ -18,8 +18,8 @@ export class SignupComponent {
 		email: ['', Validators.required],
 		firstName: ['', Validators.required],
 		lastName: ['', Validators.required],
-		password: [''],
-		reTypePassword: [''],
+		password: ['', Validators.required],
+		reTypePassword: ['', Validators.required],
 	});
 
 	protected onSubmit() {

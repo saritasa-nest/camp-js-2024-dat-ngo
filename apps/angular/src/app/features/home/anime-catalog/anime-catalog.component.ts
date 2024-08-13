@@ -22,6 +22,10 @@ import { SortMapper } from '@js-camp/core/mappers/sort-mapper';
 import { SearchFilterFormComponent } from './components/search-filter-form/search-filter-form.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { AnimeTableComponent } from './components/anime-table/anime-table.component';
+import { UserService } from '@js-camp/angular/core/services/user.service';
+import { User } from '@js-camp/core/models/user';
+import { Router } from '@angular/router';
+import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
 
 /** Anime catalog. */
 @Component({
@@ -34,7 +38,6 @@ import { AnimeTableComponent } from './components/anime-table/anime-table.compon
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimeCatalogComponent implements OnInit {
-
 	private readonly destroyRef = inject(DestroyRef);
 
 	/** Anime response observable.  */
@@ -47,6 +50,15 @@ export class AnimeCatalogComponent implements OnInit {
 	private readonly animeQueryParamsService = inject(AnimeQueryParamsService);
 
 	private readonly sortMapper = inject(SortMapper);
+
+	private readonly userService = inject(UserService);
+
+	private readonly router = inject(Router);
+
+	private readonly appUrl = inject(AppUrlsConfig);
+
+	/** Current user state. */
+	protected readonly currentUser$: Observable<User | null>;
 
 	/** Loading state. */
 	protected readonly isLoading$ = new BehaviorSubject(true);
@@ -66,36 +78,35 @@ export class AnimeCatalogComponent implements OnInit {
 			tap(() => {
 				this.isLoading$.next(true);
 			}),
-			switchMap(queryParams =>
+			switchMap((queryParams) =>
 				this.animeService.getAnime(queryParams).pipe(
 					finalize(() => {
 						this.isLoading$.next(false);
-					}),
-				)),
+					})
+				)
+			)
 		);
+		this.currentUser$ = this.userService.currentUser$;
 	}
 
 	/** Subscribe the filter params and pass them to the filter form and paginator. */
 	public ngOnInit(): void {
-		this.initializeFilterParamsSideEffect()
-			.pipe(
-				takeUntilDestroyed(this.destroyRef),
-			)
-			.subscribe();
+		this.initializeFilterParamsSideEffect().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
 	}
 
 	private initializeFilterParamsSideEffect(): Observable<void> {
-		return this.filter$
-			.pipe(
-				tap(params => {
-					this.filterParams$.next(params);
-					this.sortParams$.next(this.sortMapper.toDto({
+		return this.filter$.pipe(
+			tap((params) => {
+				this.filterParams$.next(params);
+				this.sortParams$.next(
+					this.sortMapper.toDto({
 						sortField: params.sortField,
 						sortDirection: params.sortDirection,
-					}));
-				}),
-				ignoreElements(),
-			);
+					})
+				);
+			}),
+			ignoreElements()
+		);
 	}
 
 	/**
@@ -129,5 +140,20 @@ export class AnimeCatalogComponent implements OnInit {
 	protected onSortChange(event: Sort): void {
 		const param = this.sortMapper.fromDto(event);
 		this.animeQueryParamsService.appendParamsAndResetPageNumber(param);
+	}
+
+	/** Logout.*/
+	protected logOut(): void {
+		this.userService.logout().pipe(
+      ignoreElements(),
+    ).subscribe({
+      error: (error) => {
+        console.error('Error during logout:', error);
+      },
+      complete: () => {
+        console.log('Logout process complete');
+				this.router.navigate([]);
+      }
+    });
 	}
 }

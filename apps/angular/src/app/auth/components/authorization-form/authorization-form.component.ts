@@ -6,9 +6,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { Login } from '@js-camp/core/models/login';
 import { AuthApiService } from '@js-camp/angular/core/services/auth-api.service';
-import { map, Observable } from 'rxjs';
+import { ignoreElements, map, Observable } from 'rxjs';
 import { UserSecret } from '@js-camp/core/models/user-secret';
 import { UserService } from '@js-camp/angular/core/services/user.service';
+import { Router } from '@angular/router';
+import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
+import { PATHS } from '@js-camp/core/utils/paths';
 @Component({
 	selector: 'camp-authorization-form',
 	standalone: true,
@@ -19,7 +22,10 @@ import { UserService } from '@js-camp/angular/core/services/user.service';
 })
 export class AuthorizationFormComponent {
 	private readonly authService = inject(UserService);
-	// private readonly AuthObservable: Observable<UserSecret>;
+
+	private readonly router = inject(Router);
+
+	private readonly appUrlConfig = inject (AppUrlsConfig);
 
 	protected profileForm = this.formBuilder.group({
 		email: ['', Validators.required],
@@ -29,12 +35,9 @@ export class AuthorizationFormComponent {
 	public constructor(private formBuilder: NonNullableFormBuilder) {}
 
 	protected onSubmit() {
-		// TODO: Use EventEmitter with form value
-		// console.warn(this.profileForm.getRawValue());
 		const credentials = new Login(this.profileForm.getRawValue());
-		console.log(credentials);
-		console.log(typeof credentials);
 		this.authService.login(credentials).subscribe();
+		this.router.navigate([PATHS.home	]);
 	}
 
 	protected hide = signal(true);

@@ -13,14 +13,13 @@ type AuthGuardParams = {
 };
 
 export function authGuard({ isAuthorized }: AuthGuardParams): CanMatchFn {
-	console.log(1);
 	return () => {
 		const userService = inject(UserService);
 		const router = inject(Router);
 
 		return userService.isAuthorized$.pipe(
 			map((isUserAuthorized) => {
-				console.log({isUserAuthorized,isAuthorized})
+				console.log({ isUserAuthorized, isAuthorized });
 				if (isAuthorized) {
 					return isUserAuthorized ? true : router.parseUrl(PATHS.login);
 				}

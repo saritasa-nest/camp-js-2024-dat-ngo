@@ -21,8 +21,8 @@ bootstrapApplication(AppComponent, {
 		provideRouter(appRoutes),
 		provideHttpClient(withInterceptorsFromDi()),
 		{ provide: HTTP_INTERCEPTORS, useClass: ApiKeyIntercetor, multi: true },
-		{ provide: HTTP_INTERCEPTORS, useClass: AuthorizationIntercetor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: RefreshInterceptor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: AuthorizationIntercetor, multi: true },
 		provideAnimationsAsync(),
 	],
 }).catch((err) => console.error(err));

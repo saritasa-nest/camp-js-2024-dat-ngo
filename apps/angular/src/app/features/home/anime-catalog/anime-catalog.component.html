@@ -3,9 +3,14 @@
 		animePage: animePage$ | async,
 		isLoading: isLoading$ | async,
 		filterParams: filterParams$ | async,
-		sortParams: sortParams$ | async
+		sortParams: sortParams$ | async,
+		user: currentUser$ | async,
 	} as data"
 >
+	<div>
+		{{data.user?.lastName}} {{data.user?.firstName}}
+		<button type="button" (click)="logOut()">Log Out</button>
+	</div>
 	<camp-search-filter-form
 		(typeChange)="onSelectionChange($event)"
 		(searchChange)="onSearchChange($event)"
