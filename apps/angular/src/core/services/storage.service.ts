@@ -1,5 +1,17 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, defer, filter, fromEvent, map, merge, Observable, of, shareReplay, startWith, tap } from 'rxjs';
+import {
+	BehaviorSubject,
+	defer,
+	filter,
+	fromEvent,
+	map,
+	merge,
+	Observable,
+	of,
+	shareReplay,
+	startWith,
+	tap,
+} from 'rxjs';
 
 /** User secret storage. */
 @Injectable({ providedIn: 'root' })
@@ -13,7 +25,7 @@ export class StorageService {
 	 * @param data Data for save.
 	 */
 	public save<T>(key: string, data: T): Observable<void> {
-		console.log("change")
+		console.log('change');
 		return defer(() => {
 			localStorage.setItem(key, JSON.stringify(data));
 			this.valueChangedSubject$.next(key);
@@ -21,9 +33,12 @@ export class StorageService {
 		});
 	}
 
+	/**
+	 * Get a key from local and watch the change by key.
+	 * @param key Unique key.
+	 */
 	public get<T>(key: string): Observable<T | null> {
 		return this.watchStorageChangeByKey(key).pipe(
-			tap(data=>console.log(data)),
 			map(() => this.obtainFromStorageByKey<T>(key)),
 			startWith(this.obtainFromStorageByKey<T>(key)),
 			shareReplay({ refCount: true, bufferSize: 1 })

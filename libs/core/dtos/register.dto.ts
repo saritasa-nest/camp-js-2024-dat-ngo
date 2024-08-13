@@ -1,7 +1,6 @@
-export type RegisterDto = Readonly<{
+export type RegistrationDto = Readonly<{
 	email: string;
 	first_name: string;
 	last_name: string;
-	avatar: string;
 	password: string;
 }>;

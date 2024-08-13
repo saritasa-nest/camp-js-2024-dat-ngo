@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
-import { StorageService } from './storage.service';
 import { UserSecret } from '@js-camp/core/models/user-secret';
+
+import { StorageService } from './storage.service';
 
 const USER_SECRET_STORAGE_KEY = 'user';
 

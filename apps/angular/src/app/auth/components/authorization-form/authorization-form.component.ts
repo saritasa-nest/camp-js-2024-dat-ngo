@@ -1,13 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, Validators, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
+import { Validators, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { Login } from '@js-camp/core/models/login';
-import { AuthApiService } from '@js-camp/angular/core/services/auth-api.service';
-import { ignoreElements, map, Observable } from 'rxjs';
-import { UserSecret } from '@js-camp/core/models/user-secret';
+import { take } from 'rxjs';
 import { UserService } from '@js-camp/angular/core/services/user.service';
 import { Router } from '@angular/router';
 import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
@@ -25,8 +23,6 @@ export class AuthorizationFormComponent {
 
 	private readonly router = inject(Router);
 
-	private readonly appUrlConfig = inject (AppUrlsConfig);
-
 	protected profileForm = this.formBuilder.group({
 		email: ['', Validators.required],
 		password: ['', Validators.required],
@@ -35,9 +31,23 @@ export class AuthorizationFormComponent {
 	public constructor(private formBuilder: NonNullableFormBuilder) {}
 
 	protected onSubmit() {
+		if (this.profileForm.invalid) {
+			return;
+		}
+
 		const credentials = new Login(this.profileForm.getRawValue());
-		this.authService.login(credentials).subscribe();
-		this.router.navigate([PATHS.home	]);
+
+		this.authService
+			.login(credentials)
+			.pipe(take(1))
+			.subscribe({
+				next: () => {
+					this.router.navigate([PATHS.home]);
+				},
+				error: (error) => {
+					console.error('Login failed:', error);
+				},
+			});
 	}
 
 	protected hide = signal(true);

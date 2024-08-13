@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormField } from '@angular/material/form-field';
-import { BehaviorSubject, debounceTime, finalize, ignoreElements, Observable, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, debounceTime, finalize, ignoreElements, Observable, switchMap, take, tap } from 'rxjs';
 import { Pagination } from '@js-camp/core/models/pagination';
 import { Anime } from '@js-camp/core/models/anime';
 import { AnimeService } from '@js-camp/angular/core/services/anime.service';
@@ -26,6 +26,7 @@ import { UserService } from '@js-camp/angular/core/services/user.service';
 import { User } from '@js-camp/core/models/user';
 import { Router } from '@angular/router';
 import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
+import { PATHS } from '@js-camp/core/utils/paths';
 
 /** Anime catalog. */
 @Component({
@@ -144,16 +145,17 @@ export class AnimeCatalogComponent implements OnInit {
 
 	/** Logout.*/
 	protected logOut(): void {
-		this.userService.logout().pipe(
-      ignoreElements(),
-    ).subscribe({
-      error: (error) => {
-        console.error('Error during logout:', error);
-      },
-      complete: () => {
-        console.log('Logout process complete');
-				this.router.navigate([]);
-      }
-    });
+		this.userService
+			.logout()
+			.pipe(take(1))
+			.subscribe({
+				error: (error) => {
+					console.error('Error during logout:', error);
+				},
+				complete: () => {
+					console.log('Logout process complete');
+					this.router.navigate([PATHS.login]);
+				},
+			});
 	}
 }

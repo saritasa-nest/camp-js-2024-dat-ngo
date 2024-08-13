@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 
+/** Form Error Service. */
 @Injectable({ providedIn: 'root' })
 export class FormErrorService {
 	private errorMessages: Record<string, string | ((params: any) => string)> = {

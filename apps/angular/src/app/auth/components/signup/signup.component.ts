@@ -1,9 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormErrorService } from '@js-camp/angular/core/services/form-error.service';
+import { AuthApiService } from '@js-camp/angular/core/services/auth-api.service';
+import { Router } from '@angular/router';
+import { Registration } from '@js-camp/core/models/registration';
+import { BehaviorSubject, catchError, finalize, take, throwError } from 'rxjs';
+import { PATHS } from '@js-camp/core/utils/paths';
+import { UserService } from '@js-camp/angular/core/services/user.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
 	selector: 'camp-signup',
 	standalone: true,
@@ -14,9 +21,12 @@ import { FormErrorService } from '@js-camp/angular/core/services/form-error.serv
 })
 export class SignupComponent {
 	private formErrorService = inject(FormErrorService);
+	private authService = inject(UserService);
+	private router = inject(Router);
 	protected formErrors: { [key: string]: string | null } = {};
+	private readonly destroyRef = inject(DestroyRef);
 
-	public constructor(private formBuilder: FormBuilder) {}
+	public constructor(private formBuilder: NonNullableFormBuilder) {}
 
 	protected profileForm = this.formBuilder.group({
 		email: ['', [Validators.required, Validators.email]],
@@ -28,10 +38,42 @@ export class SignupComponent {
 		}),
 	});
 
+	/** Loading state. */
+	protected readonly isLoading$ = new BehaviorSubject<boolean>(false);
+
 	protected onSubmit() {
 		if (this.profileForm.valid) {
-			// Handle form submission
-			console.warn('Form submitted successfully!', this.profileForm.value);
+			const formRawValue = this.profileForm.getRawValue();
+			const registrationData = {
+				email: formRawValue.email,
+				password: formRawValue.passwordGroup.password,
+				firstName: formRawValue.firstName,
+				lastName: formRawValue.lastName,
+			};
+			this.isLoading$.next(true);
+
+			const credentials = new Registration(registrationData);
+			this.authService
+				.register(credentials)
+				.pipe(
+					catchError((error) => {
+						this.formErrors = this.formErrorService.getFormErrors(this.profileForm);
+						console.error('Registration failed:', error);
+						return throwError(() => error);
+					}),
+					finalize(() => {
+						this.isLoading$.next(false);
+					}),
+					takeUntilDestroyed(this.destroyRef)
+				)
+				.subscribe({
+					next: () => {
+						this.router.navigate([PATHS.home]);
+					},
+					error: (error) => {
+						return throwError(() => error);
+					},
+				});
 		} else {
 			this.formErrors = this.formErrorService.getFormErrors(this.profileForm);
 			console.warn('Form is invalid', this.formErrors);

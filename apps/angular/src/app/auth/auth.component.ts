@@ -9,6 +9,4 @@ import { RouterModule } from '@angular/router';
 	styleUrl: './auth.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthComponent {
-	
-}
+export class AuthComponent {}

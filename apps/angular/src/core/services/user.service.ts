@@ -24,6 +24,7 @@ import { User } from '@js-camp/core/models/user';
 import { UserSecretStorageService } from './user-secret-storage.service';
 import { AuthApiService } from './auth-api.service';
 import { UserApiService } from './user-api.service';
+import { Registration } from '@js-camp/core/models/registration';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -41,11 +42,7 @@ export class UserService {
 
 	public constructor() {
 		this.currentUser$ = this.initCurrentUserStream();
-
-		// this.currentUser$.subscribe((data) => console.log('User: ', data));
 		this.isAuthorized$ = this.currentUser$.pipe(map((user) => user != null));
-
-		// this.isAuthorized$.subscribe(data=>console.log("auth: ", data))
 	}
 
 	/**
@@ -56,16 +53,11 @@ export class UserService {
 		return this.authService.login(loginData).pipe(this.saveSecretAndWaitForAuthorized());
 	}
 
-	/**
-	 * Logout current user.
-	 */
+	/** Logout current user. */
 	public logout(): Observable<void> {
 		return this.userSecretStorage.removeSecret();
 	}
 
-	/**
-	 * Refresh token.
-	 */
 	/** Refreshes the secret via service. */
 	public refresh(): Observable<void> {
 		return this.userSecretStorage.currentSecret$.pipe(
@@ -75,6 +67,17 @@ export class UserService {
 			),
 			catchError(() => this.logout()),
 			switchMap((newSecret) => (newSecret ? this.userSecretStorage.saveSecret(newSecret) : of(null))),
+			map(() => undefined)
+		);
+	}
+
+	/**
+	 * register via service.
+	 * @param registrationData Registration Data.
+	 */
+	public register(registrationData: Registration): Observable<void> {
+		return this.authService.register(registrationData).pipe(
+			switchMap((secret) => (secret != null ? this.userSecretStorage.saveSecret(secret) : of(null))),
 			map(() => undefined)
 		);
 	}
@@ -92,7 +95,6 @@ export class UserService {
 	}
 
 	private initCurrentUserStream(): Observable<User | null> {
-		console.log('save');
 		return this.userSecretStorage.currentSecret$.pipe(
 			switchMap((secret) => (secret ? this.userApiService.getCurrentUser() : of(null))),
 			shareReplay({ bufferSize: 1, refCount: false })
