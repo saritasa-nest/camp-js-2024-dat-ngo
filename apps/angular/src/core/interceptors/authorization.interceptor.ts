@@ -6,31 +6,28 @@ import { UserSecretStorageService } from '../services/user-secret-storage.servic
 
 const AUTH_HEADER_KEY = 'Authorization';
 
+/** AuthorizationInterceptor. */
 @Injectable({ providedIn: 'root' })
-export class AuthorizationIntercetor implements HttpInterceptor {
+export class AuthorizationInterceptor implements HttpInterceptor {
 	private readonly appConfig = inject(AppUrlsConfig);
 
 	private userSecretStorageService = inject(UserSecretStorageService);
 
-	public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+	private readonly urlsToIntercept = [this.appConfig.auth.register, this.appConfig.auth.login];
+
+	private readonly regexToIntercept: RegExp[] = [/\/auth\/.*/];
+
+	/** @inheritdoc */
+	public intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 		const userSecret$ = this.userSecretStorageService.currentSecret$.pipe(first());
-		/** Paths do not need intercept secret */
-		if (this.shouldInterceptSecretForUrl(req.url)) {
+		if (this.appConfig.bypassInterceptSecretForUrl(req.url)) {
 			return next.handle(req);
 		}
 		return userSecret$.pipe(
 			map((userSecret) =>
-				userSecret
-					? req.clone({
-							headers: req.headers.set(AUTH_HEADER_KEY, `Bearer ${userSecret.accessToken}`),
-					  })
-					: req
+				userSecret ? req.clone({ headers: req.headers.set(AUTH_HEADER_KEY, `Bearer ${userSecret.accessToken}`) }) : req
 			),
 			switchMap((newReq) => next.handle(newReq))
 		);
-	}
-
-	private shouldInterceptSecretForUrl(url: string): boolean {
-		return url === this.appConfig.auth.login || url === this.appConfig.auth.register;
 	}
 }

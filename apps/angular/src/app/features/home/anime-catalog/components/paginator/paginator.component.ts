@@ -11,19 +11,16 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginatorComponent {
-
 	/** Paginator page number. */
 	@Input()
 	public pageNumber: number | null = null;
 
 	/** Paginator page size. */
 	@Input()
-
 	public pageSize: number | null = null;
 
 	/** Total amount of fetched items. */
 	@Input()
-
 	public totalCount = 0;
 
 	/** Event emitter for page changing. */

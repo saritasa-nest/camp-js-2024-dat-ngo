@@ -8,8 +8,10 @@ import {
 } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, Observable, shareReplay, switchMap, tap, throwError } from 'rxjs';
-import { UserService } from '../services/user.service';
+
 import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
+
+import { UserService } from '../services/user.service';
 
 /** Refresh interceptor for access token. */
 @Injectable()
@@ -20,9 +22,13 @@ export class RefreshInterceptor implements HttpInterceptor {
 
 	private refreshSecretRequest$: Observable<void> | null = null;
 
+	private readonly urlsToIntercept = [];
+
+	private readonly regexToIntercept: RegExp[] = [/\/auth\/.*/];
+
 	/** @inheritdoc */
 	public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		if (!this.shouldSecretBeRefreshedForUrl(request.url)) {
+		if (this.apiUrlService.bypassInterceptSecretForUrl(request.url, this.urlsToIntercept, this.regexToIntercept)) {
 			return next.handle(request);
 		}
 		return next.handle(request).pipe(
@@ -30,16 +36,15 @@ export class RefreshInterceptor implements HttpInterceptor {
 				if (this.shouldHttpErrorBeIgnored(error)) {
 					return throwError(() => console.log(error));
 				}
-				console.log(1);
 				this.refreshSecretRequest$ ??= this.userService.refresh().pipe(shareReplay({ refCount: true, bufferSize: 1 }));
 
 				return this.refreshSecretRequest$.pipe(
 					tap(() => {
 						this.refreshSecretRequest$ = null;
 					}),
-					switchMap(() => next.handle(request))
+					switchMap(() => next.handle(request)),
 				);
-			})
+			}),
 		);
 	}
 
@@ -48,9 +53,5 @@ export class RefreshInterceptor implements HttpInterceptor {
 			return error.status !== HttpStatusCode.Unauthorized;
 		}
 		return false;
-	}
-
-	private shouldSecretBeRefreshedForUrl(url: string): boolean {
-		return url !== this.apiUrlService.auth.login && url !== this.apiUrlService.auth.register && url !== this.apiUrlService.auth.refresh;
 	}
 }

@@ -10,5 +10,4 @@ import { CommonModule } from '@angular/common';
 	styleUrl: './movie-not-found.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class MovieNotFoundComponent {}

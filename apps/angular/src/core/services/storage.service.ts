@@ -52,9 +52,6 @@ export class StorageService {
 
 	private watchStorageChangeByKey(keyToWatch: string): Observable<void> {
 		const otherPageChange$ = fromEvent(window, 'storage').pipe(
-			tap(() => {
-				console.log('adssda');
-			}),
 			filter((event): event is StorageEvent => event instanceof StorageEvent),
 			map((event) => event.key)
 		);

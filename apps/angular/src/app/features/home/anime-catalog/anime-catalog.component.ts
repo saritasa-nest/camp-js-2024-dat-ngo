@@ -149,11 +149,10 @@ export class AnimeCatalogComponent implements OnInit {
 			.logout()
 			.pipe(take(1))
 			.subscribe({
-				error: (error) => {
+				error: (error: unknown) => {
 					console.error('Error during logout:', error);
 				},
 				complete: () => {
-					console.log('Logout process complete');
 					this.router.navigate([PATHS.login]);
 				},
 			});

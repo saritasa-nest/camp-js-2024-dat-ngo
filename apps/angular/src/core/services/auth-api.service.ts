@@ -8,8 +8,9 @@ import { UserSecretMapper } from '@js-camp/core/mappers/user-secret.mapper';
 import { Login } from '@js-camp/core/models/login';
 import { Registration } from '@js-camp/core/models/registration';
 import { UserSecret } from '@js-camp/core/models/user-secret';
-import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
+/** Auth api service. */
 @Injectable({
 	providedIn: 'root',
 })
@@ -40,17 +41,14 @@ export class AuthApiService {
 	 * @param secret user tokens.
 	 */
 	public refreshSecret(secret: UserSecret): Observable<UserSecret> {
-		console.log('3 - Starting refresh token process');
 		return this.httpClient
 			.post<UserSecretDto>(this.appUrlConfig.auth.refresh, this.userSecretMapper.toDto(secret))
 			.pipe(
-				tap(() => console.log('4 - HTTP request succeeded')),
-				catchError((error) => {
+				catchError((error: unknown) => {
 					console.log('Error refreshing token:', error);
 					return throwError(() => new Error('Failed to refresh token'));
 				}),
 				map((token) => {
-					console.log('5 - Mapping token');
 					return this.userSecretMapper.fromDto(token);
 				})
 			);

@@ -11,6 +11,8 @@ import { BehaviorSubject, catchError, finalize, take, throwError } from 'rxjs';
 import { PATHS } from '@js-camp/core/utils/paths';
 import { UserService } from '@js-camp/angular/core/services/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+/** Sign up.*/
 @Component({
 	selector: 'camp-signup',
 	standalone: true,
@@ -20,15 +22,21 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignupComponent {
-	private formErrorService = inject(FormErrorService);
-	private authService = inject(UserService);
-	private router = inject(Router);
+	private readonly formErrorService = inject(FormErrorService);
+
+	private readonly authService = inject(UserService);
+
+	private readonly router = inject(Router);
+
+	/** Form errors. */
 	protected formErrors: { [key: string]: string | null } = {};
+
 	private readonly destroyRef = inject(DestroyRef);
 
 	public constructor(private formBuilder: NonNullableFormBuilder) {}
 
-	protected profileForm = this.formBuilder.group({
+	/** Sign Up Form. */
+	protected signUpForm = this.formBuilder.group({
 		email: ['', [Validators.required, Validators.email]],
 		firstName: ['', [Validators.required, Validators.maxLength(30)]],
 		lastName: ['', [Validators.required, Validators.maxLength(30)]],
@@ -41,9 +49,10 @@ export class SignupComponent {
 	/** Loading state. */
 	protected readonly isLoading$ = new BehaviorSubject<boolean>(false);
 
+	/** Submit form. */
 	protected onSubmit() {
-		if (this.profileForm.valid) {
-			const formRawValue = this.profileForm.getRawValue();
+		if (this.signUpForm.valid) {
+			const formRawValue = this.signUpForm.getRawValue();
 			const registrationData = {
 				email: formRawValue.email,
 				password: formRawValue.passwordGroup.password,
@@ -57,8 +66,8 @@ export class SignupComponent {
 				.register(credentials)
 				.pipe(
 					take(1),
-					catchError((error) => {
-						this.formErrors = this.formErrorService.getFormErrors(this.profileForm);
+					catchError((error: unknown) => {
+						this.formErrors = this.formErrorService.getFormErrors(this.signUpForm);
 						console.error('Registration failed:', error);
 						return throwError(() => error);
 					}),
@@ -71,12 +80,12 @@ export class SignupComponent {
 					next: () => {
 						this.router.navigate([PATHS.home]);
 					},
-					error: (error) => {
+					error: (error: unknown) => {
 						return throwError(() => error);
 					},
 				});
 		} else {
-			this.formErrors = this.formErrorService.getFormErrors(this.profileForm);
+			this.formErrors = this.formErrorService.getFormErrors(this.signUpForm);
 			console.warn('Form is invalid', this.formErrors);
 		}
 	}

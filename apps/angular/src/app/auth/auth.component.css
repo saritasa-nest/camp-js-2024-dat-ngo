@@ -12,13 +12,13 @@
 	max-height: 900px;
 	height: 100%;
 	width: 100%;
-	overflow: hidden; /* Ensure content doesn't overflow the rounded corners */
-	display: flex; /* Added to ensure flex behavior */
+	overflow: hidden;
+	display: flex;
 }
 
 .main__background-image {
 	flex: 1;
-	background: url('../../assets/bg-1.jpg') no-repeat center center;
+	background: url("../../assets/bg-1.jpg") no-repeat center center;
 	background-size: cover;
 	max-height: 900px;
 	border: none;
@@ -31,11 +31,8 @@
 	background-color: white;
 	border: none;
 	padding: 40px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 8px rgba(0 0 0 10%);
 	display: grid;
-}
-
-.main__login-wrapper {
 }
 
 .main__logo img {

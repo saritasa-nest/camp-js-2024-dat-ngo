@@ -26,6 +26,7 @@ import { AuthApiService } from './auth-api.service';
 import { UserApiService } from './user-api.service';
 import { Registration } from '@js-camp/core/models/registration';
 
+/** User service. */
 @Injectable({ providedIn: 'root' })
 export class UserService {
 	private readonly authService = inject(AuthApiService);
@@ -42,7 +43,9 @@ export class UserService {
 
 	public constructor() {
 		this.currentUser$ = this.initCurrentUserStream();
-		this.isAuthorized$ = this.currentUser$.pipe(map((user) => user != null));
+		this.isAuthorized$ = this.currentUser$.pipe(
+			map((user) => user != null)
+		);
 	}
 
 	/**
@@ -62,7 +65,6 @@ export class UserService {
 	public refresh(): Observable<void> {
 		return this.userSecretStorage.currentSecret$.pipe(
 			take(1),
-			tap(()=> console.log(2)),
 			switchMap((secret) =>
 				secret != null ? this.authService.refreshSecret(secret) : throwError(() => new Error('No refresh token found'))
 			),

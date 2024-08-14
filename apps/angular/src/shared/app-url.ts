@@ -35,4 +35,30 @@ export class AppUrlsConfig {
 		const relativePath = args.join('/');
 		return new URL(relativePath, this.baseUrl).toString();
 	}
+
+	/**
+	 * Determines whether the URL should have its secret intercepted.
+	 * @param url The URL to check.
+	 * @param urlsToIntercept A list of URL patterns (as strings) that should trigger interception.
+	 * @param regexPatterns A list of regular expressions for more complex matching.
+	 * @returns True if the URL should be intercepted, false otherwise.
+	 */
+	public bypassInterceptSecretForUrl(
+		url: string,
+		urlsToIntercept: string[] = [],
+		regexPatterns: RegExp[] = []
+	): boolean {
+		// Check if the URL matches any of the listed URLs
+		if (urlsToIntercept.some((interceptUrl) => url === interceptUrl)) {
+			return true;
+		}
+
+		// Check if the URL matches any of the regular expression patterns
+		if (regexPatterns.some((pattern) => pattern.test(url))) {
+			return true;
+		}
+
+		// Default to true if no matches are found
+		return false;
+	}
 }
