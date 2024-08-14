@@ -56,6 +56,7 @@ export class SignupComponent {
 			this.authService
 				.register(credentials)
 				.pipe(
+					take(1),
 					catchError((error) => {
 						this.formErrors = this.formErrorService.getFormErrors(this.profileForm);
 						console.error('Registration failed:', error);

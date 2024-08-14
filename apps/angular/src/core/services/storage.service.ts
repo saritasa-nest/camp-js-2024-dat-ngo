@@ -19,6 +19,12 @@ export class StorageService {
 	/** Emits the key of the changed value. */
 	private readonly valueChangedSubject$ = new BehaviorSubject<string>('');
 
+	private readonly localStorage: Storage;
+
+	public constructor() {
+		this.localStorage = window.localStorage;
+	}
+
 	/**
 	 * Persists data to local storage by `key`.
 	 * @param key Unique key.
@@ -27,7 +33,7 @@ export class StorageService {
 	public save<T>(key: string, data: T): Observable<void> {
 		console.log('change');
 		return defer(() => {
-			localStorage.setItem(key, JSON.stringify(data));
+			this.localStorage.setItem(key, JSON.stringify(data));
 			this.valueChangedSubject$.next(key);
 			return of(undefined);
 		});
@@ -47,6 +53,9 @@ export class StorageService {
 
 	private watchStorageChangeByKey(keyToWatch: string): Observable<void> {
 		const otherPageChange$ = fromEvent(window, 'storage').pipe(
+			tap(() => {
+				console.log('adssda');
+			}),
 			filter((event): event is StorageEvent => event instanceof StorageEvent),
 			map((event) => event.key)
 		);
@@ -62,7 +71,7 @@ export class StorageService {
 	}
 
 	private obtainFromStorageByKey<T>(key: string): T | null {
-		const rawData = localStorage.getItem(key);
+		const rawData = this.localStorage.getItem(key);
 		if (rawData == null) {
 			return null;
 		}
@@ -77,7 +86,7 @@ export class StorageService {
 	 */
 	public remove(key: string): Observable<void> {
 		return defer(() => {
-			localStorage.removeItem(key);
+			this.localStorage.removeItem(key);
 			this.valueChangedSubject$.next(key);
 
 			return of(undefined);

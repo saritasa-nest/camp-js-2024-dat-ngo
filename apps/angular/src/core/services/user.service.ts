@@ -77,8 +77,7 @@ export class UserService {
 	 */
 	public register(registrationData: Registration): Observable<void> {
 		return this.authService.register(registrationData).pipe(
-			switchMap((secret) => (secret != null ? this.userSecretStorage.saveSecret(secret) : of(null))),
-			map(() => undefined)
+			this.saveSecretAndWaitForAuthorized()
 		);
 	}
 
