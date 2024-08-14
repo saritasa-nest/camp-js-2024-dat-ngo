@@ -10,10 +10,7 @@ export const appRoutes: Routes = [
 		children: [
 			{
 				path: 'signin',
-				loadComponent: () =>
-					import('./auth/components/authorization-form/authorization-form.component').then(
-						c => c.AuthorizationFormComponent,
-					),
+				loadComponent: () => import('./auth/components/signin/signin.component').then(c => c.SignInComponent),
 				canMatch: [authGuard({ isAuthorized: false })],
 			},
 			{

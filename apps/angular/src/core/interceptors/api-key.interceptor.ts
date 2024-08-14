@@ -8,7 +8,7 @@ export class ApiKeyIntercetor implements HttpInterceptor {
 	private readonly appConfig = inject(AppUrlsConfig);
 
 	/** @inheritdoc */
-	public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+	public intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 		const apiKeyRequest = req.clone({
 			headers: req.headers.set('Api-key', this.appConfig.apiKey),
 		});

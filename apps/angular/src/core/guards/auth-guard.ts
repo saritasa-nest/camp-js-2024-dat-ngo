@@ -1,8 +1,11 @@
 import { inject } from '@angular/core';
 import { CanMatchFn, Router } from '@angular/router';
 import { map } from 'rxjs';
-import { UserService } from '../services/user.service';
+
 import { PATHS } from '@js-camp/core/utils/paths';
+
+import { UserService } from '../services/user.service';
+
 type AuthGuardParams = {
 
 	/**
@@ -13,6 +16,11 @@ type AuthGuardParams = {
 	readonly isAuthorized: boolean;
 };
 
+/**
+ * Auth guard.
+ * @param isAuthorized The route required authorization or not.
+ * @returns CanMatchFn.
+ */
 export function authGuard({ isAuthorized }: AuthGuardParams): CanMatchFn {
 	return () => {
 		const userService = inject(UserService);

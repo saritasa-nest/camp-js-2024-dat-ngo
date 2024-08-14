@@ -38,7 +38,7 @@ export class AuthApiService {
 
 	/**
 	 * Refresh token with provided user refreshToken in LocalStorage.
-	 * @param secret user tokens.
+	 * @param secret User tokens.
 	 */
 	public refreshSecret(secret: UserSecret): Observable<UserSecret> {
 		return this.httpClient
@@ -48,9 +48,7 @@ export class AuthApiService {
 					console.log('Error refreshing token:', error);
 					return throwError(() => new Error('Failed to refresh token'));
 				}),
-				map((token) => {
-					return this.userSecretMapper.fromDto(token);
-				})
+				map((token) => this.userSecretMapper.fromDto(token))
 			);
 	}
 

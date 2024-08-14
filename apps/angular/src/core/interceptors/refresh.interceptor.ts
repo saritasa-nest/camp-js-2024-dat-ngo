@@ -27,14 +27,14 @@ export class RefreshInterceptor implements HttpInterceptor {
 	private readonly regexToIntercept: RegExp[] = [/\/auth\/.*/];
 
 	/** @inheritdoc */
-	public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+	public intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 		if (this.apiUrlService.bypassInterceptSecretForUrl(request.url, this.urlsToIntercept, this.regexToIntercept)) {
 			return next.handle(request);
 		}
 		return next.handle(request).pipe(
 			catchError((error: unknown) => {
 				if (this.shouldHttpErrorBeIgnored(error)) {
-					return throwError(() => console.log(error));
+					return throwError(() => new Error(error?.toString()));
 				}
 				this.refreshSecretRequest$ ??= this.userService.refresh().pipe(shareReplay({ refCount: true, bufferSize: 1 }));
 
@@ -44,7 +44,7 @@ export class RefreshInterceptor implements HttpInterceptor {
 					}),
 					switchMap(() => next.handle(request)),
 				);
-			}),
+			})
 		);
 	}
 

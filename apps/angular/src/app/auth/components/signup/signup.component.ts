@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, Validators, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
+import { Validators, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormErrorService } from '@js-camp/angular/core/services/form-error.service';
-import { AuthApiService } from '@js-camp/angular/core/services/auth-api.service';
 import { Router } from '@angular/router';
 import { Registration } from '@js-camp/core/models/registration';
 import { BehaviorSubject, catchError, finalize, take, throwError } from 'rxjs';
@@ -50,7 +49,7 @@ export class SignupComponent {
 	protected readonly isLoading$ = new BehaviorSubject<boolean>(false);
 
 	/** Submit form. */
-	protected onSubmit() {
+	protected onSubmit(): void {
 		if (this.signUpForm.valid) {
 			const formRawValue = this.signUpForm.getRawValue();
 			const registrationData = {
@@ -74,13 +73,13 @@ export class SignupComponent {
 					finalize(() => {
 						this.isLoading$.next(false);
 					}),
-					takeUntilDestroyed(this.destroyRef)
+					takeUntilDestroyed(this.destroyRef),
 				)
 				.subscribe({
 					next: () => {
 						this.router.navigate([PATHS.home]);
 					},
-					error: (error: unknown) => {
+					error(error: unknown) {
 						return throwError(() => error);
 					},
 				});

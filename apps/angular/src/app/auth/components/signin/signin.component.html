@@ -1,4 +1,4 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
 	<div class="input-group">
 		<mat-form-field appearance="outline">
 			<mat-label class="label" for="email">Email</mat-label>
@@ -15,7 +15,7 @@
 				formControlName="password"
 			/>
 			<span
-			class="icon-hide"
+				class="icon-hide"
 				mat-icon-button
 				matSuffix
 				(click)="clickEvent($event)"

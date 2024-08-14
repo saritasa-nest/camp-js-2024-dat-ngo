@@ -1,17 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-	BehaviorSubject,
-	defer,
-	filter,
-	fromEvent,
-	map,
-	merge,
-	Observable,
-	of,
-	shareReplay,
-	startWith,
-	tap,
-} from 'rxjs';
+import { BehaviorSubject, defer, filter, fromEvent, map, merge, Observable, of, shareReplay, startWith } from 'rxjs';
 
 /** User secret storage. */
 @Injectable({ providedIn: 'root' })

@@ -6,7 +6,7 @@ describe('SearchFilterFormComponent', () => {
 	let component: SearchFilterFormComponent;
 	let fixture: ComponentFixture<SearchFilterFormComponent>;
 
-	beforeEach(async () => {
+	beforeEach(async() => {
 		await TestBed.configureTestingModule({
 			imports: [SearchFilterFormComponent],
 		}).compileComponents();

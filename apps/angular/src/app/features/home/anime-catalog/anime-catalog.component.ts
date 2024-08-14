@@ -19,14 +19,16 @@ import { Sort } from '@angular/material/sort';
 
 import { SortMapper } from '@js-camp/core/mappers/sort-mapper';
 
-import { SearchFilterFormComponent } from './components/search-filter-form/search-filter-form.component';
-import { PaginatorComponent } from './components/paginator/paginator.component';
-import { AnimeTableComponent } from './components/anime-table/anime-table.component';
 import { UserService } from '@js-camp/angular/core/services/user.service';
 import { User } from '@js-camp/core/models/user';
 import { Router } from '@angular/router';
 import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
 import { PATHS } from '@js-camp/core/utils/paths';
+
+import { AnimeTableComponent } from './components/anime-table/anime-table.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+
+import { SearchFilterFormComponent } from './components/search-filter-form/search-filter-form.component';
 
 /** Anime catalog. */
 @Component({
@@ -79,34 +81,34 @@ export class AnimeCatalogComponent implements OnInit {
 			tap(() => {
 				this.isLoading$.next(true);
 			}),
-			switchMap((queryParams) =>
+			switchMap(queryParams =>
 				this.animeService.getAnime(queryParams).pipe(
 					finalize(() => {
 						this.isLoading$.next(false);
-					})
-				)
-			)
+					}),
+				)),
 		);
 		this.currentUser$ = this.userService.currentUser$;
 	}
 
 	/** Subscribe the filter params and pass them to the filter form and paginator. */
 	public ngOnInit(): void {
-		this.initializeFilterParamsSideEffect().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+		this.initializeFilterParamsSideEffect().pipe(takeUntilDestroyed(this.destroyRef))
+			.subscribe();
 	}
 
 	private initializeFilterParamsSideEffect(): Observable<void> {
 		return this.filter$.pipe(
-			tap((params) => {
+			tap(params => {
 				this.filterParams$.next(params);
 				this.sortParams$.next(
 					this.sortMapper.toDto({
 						sortField: params.sortField,
 						sortDirection: params.sortDirection,
-					})
+					}),
 				);
 			}),
-			ignoreElements()
+			ignoreElements(),
 		);
 	}
 
@@ -149,7 +151,7 @@ export class AnimeCatalogComponent implements OnInit {
 			.logout()
 			.pipe(take(1))
 			.subscribe({
-				error: (error: unknown) => {
+				error(error: unknown) {
 					console.error('Error during logout:', error);
 				},
 				complete: () => {

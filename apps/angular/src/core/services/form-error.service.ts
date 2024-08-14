@@ -20,7 +20,7 @@ export class FormErrorService {
 	 */
 	public getErrorMessage(control: AbstractControl): string | null {
 		return (
-			Object.keys(control?.errors ?? {}).map((errorKey) => {
+			Object.keys(control?.errors ?? {}).map(errorKey => {
 				const errorMessage = this.errorMessages[errorKey];
 				return typeof errorMessage === 'function' ? errorMessage(control?.errors?.[errorKey]) : errorMessage;
 			})[0] ?? null
@@ -34,7 +34,7 @@ export class FormErrorService {
 	 */
 	public getFormErrors(formGroup: FormGroup): Record<string, string | null> {
 		const formErrors: Record<string, string | null> = {};
-		Object.keys(formGroup.controls).forEach((key) => {
+		Object.keys(formGroup.controls).forEach(key => {
 			const control = formGroup.get(key);
 			if (control instanceof FormGroup) {
 				// Recursively get errors for nested form groups

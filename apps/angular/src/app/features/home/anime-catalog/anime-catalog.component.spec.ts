@@ -6,7 +6,7 @@ describe('AnimeCatalogComponent', () => {
 	let component: AnimeCatalogComponent;
 	let fixture: ComponentFixture<AnimeCatalogComponent>;
 
-	beforeEach(async () => {
+	beforeEach(async() => {
 		await TestBed.configureTestingModule({
 			imports: [AnimeCatalogComponent],
 		}).compileComponents();

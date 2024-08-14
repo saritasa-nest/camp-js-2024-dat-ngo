@@ -19,6 +19,6 @@ export class UserApiService {
 	public getCurrentUser(): Observable<User> {
 		return this.httpClient
 			.get<UserDto>(this.appUrlConfig.users.profile)
-			.pipe(map((data) => this.userMapper.fromDto(data)));
+			.pipe(map(data => this.userMapper.fromDto(data)));
 	}
 }

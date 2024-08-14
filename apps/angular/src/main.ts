@@ -9,7 +9,7 @@ import { environment } from './environments/environment';
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes';
 import { ApiKeyIntercetor } from './core/interceptors/api-key.interceptor';
-import { AuthorizationIntercetor } from './core/interceptors/authorization.interceptor';
+import { AuthorizationInterceptor } from './core/interceptors/authorization.interceptor';
 import { RefreshInterceptor } from './core/interceptors/refresh.interceptor';
 
 if (environment.production) {
@@ -22,7 +22,7 @@ bootstrapApplication(AppComponent, {
 		provideHttpClient(withInterceptorsFromDi()),
 		{ provide: HTTP_INTERCEPTORS, useClass: ApiKeyIntercetor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: RefreshInterceptor, multi: true },
-		{ provide: HTTP_INTERCEPTORS, useClass: AuthorizationIntercetor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
 		provideAnimationsAsync(),
 	],
-}).catch((err) => console.error(err));
+}).catch(err => console.error(err));

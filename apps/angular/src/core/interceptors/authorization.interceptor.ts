@@ -2,6 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { inject, Injectable } from '@angular/core';
 import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
 import { first, map, Observable, switchMap } from 'rxjs';
+
 import { UserSecretStorageService } from '../services/user-secret-storage.service';
 
 const AUTH_HEADER_KEY = 'Authorization';
@@ -24,10 +25,9 @@ export class AuthorizationInterceptor implements HttpInterceptor {
 			return next.handle(req);
 		}
 		return userSecret$.pipe(
-			map((userSecret) =>
-				userSecret ? req.clone({ headers: req.headers.set(AUTH_HEADER_KEY, `Bearer ${userSecret.accessToken}`) }) : req
-			),
-			switchMap((newReq) => next.handle(newReq))
+			map(userSecret =>
+				userSecret ? req.clone({ headers: req.headers.set(AUTH_HEADER_KEY, `Bearer ${userSecret.accessToken}`) }) : req),
+			switchMap(newReq => next.handle(newReq)),
 		);
 	}
 }

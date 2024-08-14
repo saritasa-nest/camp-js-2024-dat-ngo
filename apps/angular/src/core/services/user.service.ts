@@ -21,10 +21,11 @@ import { UserSecret } from '@js-camp/core/models/user-secret';
 
 import { User } from '@js-camp/core/models/user';
 
+import { Registration } from '@js-camp/core/models/registration';
+
 import { UserSecretStorageService } from './user-secret-storage.service';
 import { AuthApiService } from './auth-api.service';
 import { UserApiService } from './user-api.service';
-import { Registration } from '@js-camp/core/models/registration';
 
 /** User service. */
 @Injectable({ providedIn: 'root' })
@@ -44,7 +45,7 @@ export class UserService {
 	public constructor() {
 		this.currentUser$ = this.initCurrentUserStream();
 		this.isAuthorized$ = this.currentUser$.pipe(
-			map((user) => user != null)
+			map(user => user != null),
 		);
 	}
 
@@ -65,17 +66,16 @@ export class UserService {
 	public refresh(): Observable<void> {
 		return this.userSecretStorage.currentSecret$.pipe(
 			take(1),
-			switchMap((secret) =>
-				secret != null ? this.authService.refreshSecret(secret) : throwError(() => new Error('No refresh token found'))
-			),
+			switchMap(secret =>
+				secret != null ? this.authService.refreshSecret(secret) : throwError(() => new Error('No refresh token found'))),
 			catchError(() => this.logout()),
-			switchMap((newSecret) => (newSecret ? this.userSecretStorage.saveSecret(newSecret) : of(null))),
-			map(() => undefined)
+			switchMap(newSecret => (newSecret ? this.userSecretStorage.saveSecret(newSecret) : of(null))),
+			map(() => undefined),
 		);
 	}
 
 	/**
-	 * register via service.
+	 * Register via service.
 	 * @param registrationData Registration Data.
 	 */
 	public register(registrationData: Registration): Observable<void> {
@@ -84,20 +84,20 @@ export class UserService {
 
 	private saveSecretAndWaitForAuthorized(): OperatorFunction<UserSecret, void> {
 		return pipe(
-			switchMap((secret) => {
+			switchMap(secret => {
 				const saveUserSecretSideEffect$ = this.userSecretStorage.saveSecret(secret).pipe(ignoreElements());
 
 				return merge(this.isAuthorized$, saveUserSecretSideEffect$);
 			}),
-			first((isAuthorized) => isAuthorized),
-			map(() => undefined)
+			first(isAuthorized => isAuthorized),
+			map(() => undefined),
 		);
 	}
 
 	private initCurrentUserStream(): Observable<User | null> {
 		return this.userSecretStorage.currentSecret$.pipe(
-			switchMap((secret) => (secret ? this.userApiService.getCurrentUser() : of(null))),
-			shareReplay({ bufferSize: 1, refCount: false })
+			switchMap(secret => (secret ? this.userApiService.getCurrentUser() : of(null))),
+			shareReplay({ bufferSize: 1, refCount: false }),
 		);
 	}
 }

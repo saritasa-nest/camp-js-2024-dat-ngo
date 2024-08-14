@@ -6,7 +6,7 @@ describe('MovieNotFoundComponent', () => {
 	let component: MovieNotFoundComponent;
 	let fixture: ComponentFixture<MovieNotFoundComponent>;
 
-	beforeEach(async () => {
+	beforeEach(async() => {
 		await TestBed.configureTestingModule({
 			imports: [MovieNotFoundComponent],
 		}).compileComponents();
