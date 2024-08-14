@@ -29,6 +29,7 @@ export class UserSecretStorageService {
 
 	/** Removes current secret. */
 	public removeSecret(): Observable<void> {
+		console.log("hello")
 		return this.storageService.remove(USER_SECRET_STORAGE_KEY);
 	}
 }

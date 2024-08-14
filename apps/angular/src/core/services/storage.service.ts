@@ -31,7 +31,6 @@ export class StorageService {
 	 * @param data Data for save.
 	 */
 	public save<T>(key: string, data: T): Observable<void> {
-		console.log('change');
 		return defer(() => {
 			this.localStorage.setItem(key, JSON.stringify(data));
 			this.valueChangedSubject$.next(key);

@@ -28,9 +28,9 @@ export class RefreshInterceptor implements HttpInterceptor {
 		return next.handle(request).pipe(
 			catchError((error: unknown) => {
 				if (this.shouldHttpErrorBeIgnored(error)) {
-					return throwError(() => error);
+					return throwError(() => console.log(error));
 				}
-
+				console.log(1);
 				this.refreshSecretRequest$ ??= this.userService.refresh().pipe(shareReplay({ refCount: true, bufferSize: 1 }));
 
 				return this.refreshSecretRequest$.pipe(
@@ -51,6 +51,6 @@ export class RefreshInterceptor implements HttpInterceptor {
 	}
 
 	private shouldSecretBeRefreshedForUrl(url: string): boolean {
-		return url !== this.apiUrlService.auth.login && url !== this.apiUrlService.auth.register;
+		return url !== this.apiUrlService.auth.login && url !== this.apiUrlService.auth.register && url !== this.apiUrlService.auth.refresh;
 	}
 }

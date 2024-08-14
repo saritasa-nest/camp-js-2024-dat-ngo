@@ -62,6 +62,7 @@ export class UserService {
 	public refresh(): Observable<void> {
 		return this.userSecretStorage.currentSecret$.pipe(
 			take(1),
+			tap(()=> console.log(2)),
 			switchMap((secret) =>
 				secret != null ? this.authService.refreshSecret(secret) : throwError(() => new Error('No refresh token found'))
 			),
@@ -76,9 +77,7 @@ export class UserService {
 	 * @param registrationData Registration Data.
 	 */
 	public register(registrationData: Registration): Observable<void> {
-		return this.authService.register(registrationData).pipe(
-			this.saveSecretAndWaitForAuthorized()
-		);
+		return this.authService.register(registrationData).pipe(this.saveSecretAndWaitForAuthorized());
 	}
 
 	private saveSecretAndWaitForAuthorized(): OperatorFunction<UserSecret, void> {
