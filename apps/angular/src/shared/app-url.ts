@@ -48,12 +48,12 @@ export class AppUrlsConfig {
 	public bypassInterceptSecretForUrl(
 		url: string,
 		urlsToIntercept: string[] = [],
-		regexPatterns: RegExp[] = [],
+		regexPatterns: RegExp[] = []
 	): boolean {
-		if (urlsToIntercept.some(interceptUrl => url === interceptUrl)) {
+		if (urlsToIntercept.some((interceptUrl) => url === interceptUrl)) {
 			return true;
 		}
-		if (regexPatterns.some(pattern => pattern.test(url))) {
+		if (regexPatterns.some((pattern) => pattern.test(url))) {
 			return true;
 		}
 		return false;

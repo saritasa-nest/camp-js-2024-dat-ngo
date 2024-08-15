@@ -29,7 +29,7 @@ export class AuthApiService {
 
 	private readonly apiErrorMapper = inject(ApiErrorMapper);
 
-	private readonly notificationService = inject(NotificationService)
+	private readonly notificationService = inject(NotificationService);
 	/**
 	 * Login .
 	 * @param loginData Login Data from user input.
@@ -38,7 +38,10 @@ export class AuthApiService {
 		const data = this.loginDataMapper.toDto(loginData);
 		return this.httpClient.post<UserSecretDto>(this.appUrlConfig.auth.login, data).pipe(
 			catchError((error) => {
-				return throwError(() => this.notificationService.showMessage(this.apiErrorMapper.fromDto(error.error), "DISMISS"));
+				return throwError(
+					() => this.apiErrorMapper.fromDto(error.error)
+					// this.notificationService.showMessage(this.apiErrorMapper.fromDto(error.error), 'DISMISS')
+				);
 			}),
 			map((secret) => this.userSecretMapper.fromDto(secret))
 		);
@@ -53,7 +56,9 @@ export class AuthApiService {
 			.post<UserSecretDto>(this.appUrlConfig.auth.refresh, this.userSecretMapper.toDto(secret))
 			.pipe(
 				catchError((error) => {
-					return throwError(() => this.notificationService.showMessage(this.apiErrorMapper.fromDto(error.error), "DISMISS"));
+					return throwError(() =>
+						this.notificationService.showMessage(this.apiErrorMapper.fromDto(error.error), 'DISMISS')
+					);
 				}),
 				map((token) => this.userSecretMapper.fromDto(token))
 			);
@@ -68,7 +73,9 @@ export class AuthApiService {
 			.post<UserSecretDto>(this.appUrlConfig.auth.register, this.registrationMapper.toDto(registerData))
 			.pipe(
 				catchError((error) => {
-					return throwError(() => this.notificationService.showMessage(this.apiErrorMapper.fromDto(error.error), "DISMISS"));
+					return throwError(() =>
+						this.notificationService.showMessage(this.apiErrorMapper.fromDto(error.error), 'DISMISS')
+					);
 				}),
 				map((token) => this.userSecretMapper.fromDto(token))
 			);

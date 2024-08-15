@@ -25,9 +25,10 @@ export class AuthorizationInterceptor implements HttpInterceptor {
 			return next.handle(req);
 		}
 		return userSecret$.pipe(
-			map(userSecret =>
-				userSecret ? req.clone({ headers: req.headers.set(AUTH_HEADER_KEY, `Bearer ${userSecret.accessToken}`) }) : req),
-			switchMap(newReq => next.handle(newReq)),
+			map((userSecret) =>
+				userSecret ? req.clone({ headers: req.headers.set(AUTH_HEADER_KEY, `Bearer ${userSecret.accessToken}`) }) : req
+			),
+			switchMap((newReq) => next.handle(newReq))
 		);
 	}
 }
