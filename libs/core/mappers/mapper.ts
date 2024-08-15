@@ -1,4 +1,4 @@
-/** Mapper of DTO to Domain models. */
+/** Mapper of DTO to domain models. */
 export type TMapperFromDto<TDto, TDomain> = {
 
 	/** Maps from DTO to Domain model. */

@@ -44,8 +44,8 @@ export type AnimeDto = {
 	readonly user_score: number | null;
 
 	/** Studios' id as array of string. */
-	readonly studios: readonly string[];
+	readonly studios: readonly number[];
 
 	/** Genres' id as array of string. */
-	readonly genres: readonly string[];
+	readonly genres: readonly number[];
 };

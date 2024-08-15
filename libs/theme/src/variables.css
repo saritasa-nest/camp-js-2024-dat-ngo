@@ -17,9 +17,6 @@
 	--primary-dark-contrast-color: white;
 	--primary-light-color: #fb923c;
 	--primary-light-contrast-color: black;
-	--background-color: white;
-	--background-contrast-color: black;
-	--error-color: red;
 
 	/* Colors */
 	--surface-color: rgb(255 255 255 / 100%);
@@ -100,7 +97,7 @@
 	/* Form control height */
 	--form-height: 48px;
 
-	/* container width */
+	/* Container width */
 	--container-width-lg: 1280px;
 	--container-width-xl: 1600px;
 }

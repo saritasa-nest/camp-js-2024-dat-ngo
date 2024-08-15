@@ -4,14 +4,14 @@ import { AnimeStatus } from '@js-camp/core/models/anime-status';
 
 /** Movie status. */
 @Component({
-	selector: 'camp-movie-status',
+	selector: 'camp-anime-status',
 	standalone: true,
 	imports: [CommonModule],
-	templateUrl: './movie-status.component.html',
+	templateUrl: './anime-status.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MovieStatusComponent {
-	/** Session status. */
+export class AnimeStatusComponent {
+	/** Anime status. */
 	@Input({ required: true })
 	public animeStatus: AnimeStatus = AnimeStatus.CurrentlyAiring;
 

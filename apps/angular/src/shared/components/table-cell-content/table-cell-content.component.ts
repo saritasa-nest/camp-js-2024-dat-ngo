@@ -6,7 +6,7 @@ import { SkeletonDirective } from '../../directives/skeleton.directive';
 
 /** Table component content. */
 @Component({
-	selector: 'app-table-cell-content',
+	selector: 'camp-table-cell-content',
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [SkeletonDirective, CommonModule],
@@ -14,16 +14,8 @@ import { SkeletonDirective } from '../../directives/skeleton.directive';
 	styleUrls: ['./table-cell-content.component.css'],
 })
 export class TableCellContentComponent {
-	/** Default width. */
-	@Input()
-	private width = '100%';
-
-	/** Default height. */
-	@Input()
-	private height = 24;
 
 	/** Whether cell is loading or not. */
 	@Input()
-
 	public isLoading: boolean | null = false;
 }

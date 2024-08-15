@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AnimeCatalogComponent } from './anime-catalog.component';
+import { AnimeCatalogComponent } from '@js-camp/angular/app/features/anime/anime-catalog/anime-catalog.component';
 
 describe('AnimeCatalogComponent', () => {
 	let component: AnimeCatalogComponent;

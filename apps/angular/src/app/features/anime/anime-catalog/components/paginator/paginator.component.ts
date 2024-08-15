@@ -18,12 +18,10 @@ export class PaginatorComponent {
 
 	/** Paginator page size. */
 	@Input()
-
 	public pageSize: number | null = null;
 
 	/** Total amount of fetched items. */
 	@Input()
-
 	public totalCount = 0;
 
 	/** Event emitter for page changing. */

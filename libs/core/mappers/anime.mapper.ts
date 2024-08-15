@@ -69,7 +69,7 @@ export class AnimeMapper {
 	}
 
 	/**
-	 *  Mapper for model to dto.
+	 * Mapper for model to dto.
 	 * @param anime Anime model .
 	 */
 	public toDto(anime: Anime): AnimeDto {

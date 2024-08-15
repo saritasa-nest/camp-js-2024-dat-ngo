@@ -1,4 +1,4 @@
-import { BroadCastedTime } from '../types/BroadcastedTime.type';
+import { DateRange } from './date-range.type';
 
 import { AnimeType } from './anime-type';
 import { AnimeStatus } from './anime-status';
@@ -26,7 +26,7 @@ export class Anime extends Immerable {
 	public readonly coverImage: string;
 
 	/** Broadcast time frame from start to end of a anime. */
-	public readonly broadcasted: BroadCastedTime;
+	public readonly broadcasted: DateRange;
 
 	/** Type of the anime ex OVA. */
 	public readonly animeType: AnimeType;
@@ -41,10 +41,10 @@ export class Anime extends Immerable {
 	public readonly userScore: number | null;
 
 	/** Studio's id as array of string. */
-	public readonly studios: readonly string[];
+	public readonly studios: readonly number[];
 
 	/** Genres' id as array of string. */
-	public readonly genres: readonly string[];
+	public readonly genres: readonly number[];
 
 	public constructor(data: PaginationConstructorData) {
 		super();

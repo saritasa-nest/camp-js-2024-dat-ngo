@@ -15,11 +15,9 @@ import { MatSortModule, Sort } from '@angular/material/sort';
 import { SkeletonDirective } from '@js-camp/angular/shared/directives/skeleton.directive';
 import { TableCellContentComponent } from '@js-camp/angular/shared/components/table-cell-content/table-cell-content.component';
 import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
-import { MovieStatusComponent } from '@js-camp/angular/shared/components/movie-status/movie-status.component';
-import { MovieTypeComponent } from '@js-camp/angular/shared/components/movie-type/movie-type.component';
-
-import { MovieNotFoundComponent } from '../movie-not-found/movie-not-found.component';
-
+import { AnimeStatusComponent } from '@js-camp/angular/shared/components/anime-status/anime-status.component';
+import { AnimeTypeComponent } from '@js-camp/angular/shared/components/anime-type/anime-type.component';
+import { AnimeNotFoundComponent } from '../anime-not-found/anime-not-found.component';
 const COLUMN_KEYS = {
 	image: 'image',
 	titleEng: 'title_eng',
@@ -40,9 +38,9 @@ const COLUMN_KEYS = {
 		MatSortModule,
 		SkeletonDirective,
 		TableCellContentComponent,
-		MovieStatusComponent,
-		MovieTypeComponent,
-		MovieNotFoundComponent,
+		AnimeStatusComponent,
+		AnimeTypeComponent,
+		AnimeNotFoundComponent,
 	],
 	templateUrl: './anime-table.component.html',
 	styleUrl: './anime-table.component.css',
@@ -89,7 +87,7 @@ export class AnimeTableComponent {
 	protected get templateArray(): readonly object[] {
 		return Array(DEFAULT_PAGINATION.pageSize)
 			.fill(null)
-			.map(_ => ({}));
+			.map((_) => ({}));
 	}
 
 	/**
@@ -97,7 +95,7 @@ export class AnimeTableComponent {
 	 *  @param key Key of Type.
 	 */
 	protected trackBy<T>(key: keyof T): TrackByFunction<T> {
-		return function(index: number, item: T): T[keyof T] {
+		return function (index: number, item: T): T[keyof T] {
 			return item[key];
 		};
 	}

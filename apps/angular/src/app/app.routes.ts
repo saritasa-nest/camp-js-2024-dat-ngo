@@ -5,6 +5,6 @@ export const appRoutes: Routes = [
 	{
 		path: '',
 		loadComponent: () =>
-			import('./features/home/home.component').then(c => c.HomeComponent),
+			import('./features/anime/anime.component').then(c => c.AnimeComponent),
 	},
 ];

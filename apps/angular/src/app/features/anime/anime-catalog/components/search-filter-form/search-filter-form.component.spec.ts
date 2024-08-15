@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchFilterFormComponent } from './search-filter-form.component';
+import { SearchFilterFormComponent } from '@js-camp/angular/app/features/anime/anime-catalog/components/search-filter-form/search-filter-form.component';
 
 describe('SearchFilterFormComponent', () => {
 	let component: SearchFilterFormComponent;

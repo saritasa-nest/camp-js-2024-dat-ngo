@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 
 /** Anime not found. */
 @Component({
-	selector: 'camp-movie-not-found',
+	selector: 'camp-anime-not-found',
 	standalone: true,
 	imports: [CommonModule],
-	templateUrl: './movie-not-found.component.html',
-	styleUrl: './movie-not-found.component.css',
+	templateUrl: './anime-not-found.component.html',
+	styleUrl: './anime-not-found.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class MovieNotFoundComponent {}
+export class AnimeNotFoundComponent {}

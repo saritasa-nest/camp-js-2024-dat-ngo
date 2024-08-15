@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MovieStatusComponent } from './movie-status.component';
+import { MovieStatusComponent } from '@js-camp/angular/shared/components/anime-status/anime-status.component';
 
 describe('MovieStatusComponent', () => {
 	let component: MovieStatusComponent;

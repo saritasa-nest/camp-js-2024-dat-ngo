@@ -33,7 +33,10 @@ const MAP_ANIME_SORT_TO_DTO: Record<AnimeSortField, AnimeSortFieldDto> = {
 export class AnimeFiltersParamsMapper {
 	private readonly basedFilterParamsMapper = inject(BasedFiltersParamsMapper);
 
-	/** @inheritdoc */
+	/**
+	 * Map anime order option to DTO.
+	 * @param model Anime filter sorting.
+	 */
 	public mapOrderingOptionToDto(model: AnimeFilterParams.Sort): AnimeQueryParamsDto.Sort | null {
 		if (model.sortField && model.sortDirection) {
 			const dto = MAP_ANIME_SORT_TO_DTO[model.sortField];
@@ -44,7 +47,10 @@ export class AnimeFiltersParamsMapper {
 		return null;
 	}
 
-	/** @inheritdoc */
+	/**
+	 * Map anime type option to DTO.
+	 * @param model Anime filter type.
+	 */
 	public mapTypeOptionToDto(model: AnimeFilterParams.Type): AnimeQueryParamsDto.Type | null {
 		if (model.type) {
 			return {
@@ -54,7 +60,10 @@ export class AnimeFiltersParamsMapper {
 		return null;
 	}
 
-	/** @inheritdoc */
+	/**
+	 * Map combined option to DTO.
+	 * @param model Anime filter combined.
+	 */
 	public mapCombinedOptionsToDto(model: AnimeFilterParams.Combined): AnimeQueryParamsDto.Combined {
 		return {
 			...this.basedFilterParamsMapper.mapCombinedOptionsToDto(model),

@@ -1,5 +1,5 @@
 /** BroadCasted time frames of an anime. */
-export type BroadCastedTime = {
+export type DateRange = {
 
 	/** An anime can have a started date of date or null if it's not decide yet. */
 	readonly startDate: Date | null;
