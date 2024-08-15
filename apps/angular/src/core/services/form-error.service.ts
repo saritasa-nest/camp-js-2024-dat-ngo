@@ -19,12 +19,21 @@ export class FormErrorService {
 	 * @returns The error message or null if there are no errors.
 	 */
 	public getErrorMessage(control: AbstractControl): string | null {
-		return (
-			Object.keys(control?.errors ?? {}).map(errorKey => {
-				const errorMessage = this.errorMessages[errorKey];
-				return typeof errorMessage === 'function' ? errorMessage(control?.errors?.[errorKey]) : errorMessage;
-			})[0] ?? null
-		);
+		// Return null early if there are no errors
+		if (!control?.errors) {
+			return null;
+		}
+
+		// Iterate over the error keys and return the first matching message
+		for (const errorKey of Object.keys(control.errors)) {
+			const errorMessage = this.errorMessages[errorKey];
+			if (errorMessage) {
+				return typeof errorMessage === 'function' ? errorMessage(control.errors[errorKey]) : errorMessage;
+			}
+		}
+
+		// If no matching error message is found, return null
+		return null;
 	}
 
 	/**
@@ -34,7 +43,7 @@ export class FormErrorService {
 	 */
 	public getFormErrors(formGroup: FormGroup): Record<string, string | null> {
 		const formErrors: Record<string, string | null> = {};
-		Object.keys(formGroup.controls).forEach(key => {
+		Object.keys(formGroup.controls).forEach((key) => {
 			const control = formGroup.get(key);
 			if (control instanceof FormGroup) {
 				// Recursively get errors for nested form groups

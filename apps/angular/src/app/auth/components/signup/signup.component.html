@@ -30,7 +30,7 @@
 			/>
 			<mat-error *ngIf="formErrors['lastName']">{{ formErrors["lastName"] }}</mat-error>
 		</mat-form-field>
-		<form [formGroup]="signUpForm.controls.passwordGroup" class="password-group">
+		<form formGroupName="passwordGroup" class="password-group">
 			<div class="input-group">
 				<mat-form-field appearance="outline">
 					<mat-label class="label" for="password">Password</mat-label>
@@ -42,7 +42,7 @@
 						placeholder="Enter password"
 						formControlName="password"
 					/>
-					<mat-error *ngIf="formErrors['passwordGroup.password']">{{ formErrors["passwordGroup.password"] }}</mat-error>
+					<mat-error *ngIf="formErrors['password']">{{ formErrors["password"] }}</mat-error>
 				</mat-form-field>
 				<mat-form-field appearance="outline">
 					<mat-label class="label" for="reTypePassword">Retype Password</mat-label>
@@ -51,11 +51,11 @@
 						type="text"
 						id="reTypePassword"
 						name="reTypePassword"
-						placeholder="Retype password"
+						placeholder="Retype Password"
 						formControlName="reTypePassword"
 					/>
-					<mat-error *ngIf="formErrors['passwordGroup.reTypePassword']">{{
-						formErrors["passwordGroup.reTypePassword"]
+					<mat-error *ngIf="formErrors['reTypePassword']">{{
+						formErrors["reTypePassword"]
 					}}</mat-error>
 				</mat-form-field>
 			</div>

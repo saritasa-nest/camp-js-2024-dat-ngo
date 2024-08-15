@@ -44,7 +44,7 @@ export class RefreshInterceptor implements HttpInterceptor {
 					}),
 					switchMap(() => next.handle(request)),
 				);
-			})
+			}),
 		);
 	}
 

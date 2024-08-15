@@ -26,13 +26,13 @@ export function authGuard({ isAuthorized }: AuthGuardParams): CanMatchFn {
 		const userService = inject(UserService);
 		const router = inject(Router);
 		return userService.isAuthorized$.pipe(
-			map((isUserAuthorized) => {
+			map(isUserAuthorized => {
 				if (isAuthorized) {
 					return isUserAuthorized ? true : router.parseUrl(PATHS.login);
 				}
 
 				return isUserAuthorized ? router.parseUrl(PATHS.home) : true;
-			})
+			}),
 		);
 	};
 }

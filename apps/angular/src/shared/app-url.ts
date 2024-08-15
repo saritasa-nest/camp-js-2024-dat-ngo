@@ -9,7 +9,7 @@ import { environment } from '@js-camp/angular/environments/environment';
 export class AppUrlsConfig {
 	private readonly baseUrl = environment.apiURL;
 
-	/** ApiKey */
+	/** ApiKey. */
 	public readonly apiKey = environment.apiKey;
 
 	/** Anime-related routes. */
@@ -48,19 +48,14 @@ export class AppUrlsConfig {
 	public bypassInterceptSecretForUrl(
 		url: string,
 		urlsToIntercept: string[] = [],
-		regexPatterns: RegExp[] = []
+		regexPatterns: RegExp[] = [],
 	): boolean {
-		// Check if the URL matches any of the listed URLs
-		if (urlsToIntercept.some((interceptUrl) => url === interceptUrl)) {
+		if (urlsToIntercept.some(interceptUrl => url === interceptUrl)) {
 			return true;
 		}
-
-		// Check if the URL matches any of the regular expression patterns
-		if (regexPatterns.some((pattern) => pattern.test(url))) {
+		if (regexPatterns.some(pattern => pattern.test(url))) {
 			return true;
 		}
-
-		// Default to true if no matches are found
 		return false;
 	}
 }

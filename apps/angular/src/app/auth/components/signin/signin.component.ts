@@ -20,7 +20,7 @@ import { PATHS } from '@js-camp/core/utils/paths';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInComponent {
-	private readonly authService = inject(UserService);
+	private readonly userService = inject(UserService);
 
 	private readonly router = inject(Router);
 
@@ -38,7 +38,7 @@ export class SignInComponent {
 			return;
 		}
 		const credentials = new Login(this.signInForm.getRawValue());
-		this.authService
+		this.userService
 			.login(credentials)
 			.pipe(take(1))
 			.subscribe({

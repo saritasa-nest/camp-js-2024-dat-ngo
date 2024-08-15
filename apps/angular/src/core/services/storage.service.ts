@@ -34,14 +34,14 @@ export class StorageService {
 		return this.watchStorageChangeByKey(key).pipe(
 			map(() => this.obtainFromStorageByKey<T>(key)),
 			startWith(this.obtainFromStorageByKey<T>(key)),
-			shareReplay({ refCount: true, bufferSize: 1 })
+			shareReplay({ refCount: true, bufferSize: 1 }),
 		);
 	}
 
 	private watchStorageChangeByKey(keyToWatch: string): Observable<void> {
 		const otherPageChange$ = fromEvent(window, 'storage').pipe(
 			filter((event): event is StorageEvent => event instanceof StorageEvent),
-			map((event) => event.key)
+			map(event => event.key),
 		);
 
 		// storage event happens only for the other pages of this domain, so we need to handle the local changes manually
@@ -49,8 +49,8 @@ export class StorageService {
 		const currentPageChange$ = this.valueChangedSubject$;
 
 		return merge(otherPageChange$, currentPageChange$).pipe(
-			filter((key) => key === keyToWatch),
-			map(() => undefined)
+			filter(key => key === keyToWatch),
+			map(() => undefined),
 		);
 	}
 

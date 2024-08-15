@@ -51,6 +51,7 @@ export class SignupComponent {
 	/** Submit form. */
 	protected onSubmit(): void {
 		if (this.signUpForm.valid) {
+			console.log(this.signUpForm.getRawValue());
 			const formRawValue = this.signUpForm.getRawValue();
 			const registrationData = {
 				email: formRawValue.email,
@@ -67,13 +68,12 @@ export class SignupComponent {
 					take(1),
 					catchError((error: unknown) => {
 						this.formErrors = this.formErrorService.getFormErrors(this.signUpForm);
-						console.error('Registration failed:', error);
 						return throwError(() => error);
 					}),
 					finalize(() => {
 						this.isLoading$.next(false);
 					}),
-					takeUntilDestroyed(this.destroyRef),
+					takeUntilDestroyed(this.destroyRef)
 				)
 				.subscribe({
 					next: () => {
