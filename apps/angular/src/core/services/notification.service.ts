@@ -34,7 +34,7 @@ export class NotificationService {
 			const currentError = errors.error[index].detail;
 			const snackBarRef = this.snackBar.open(currentError, action, finalConfig);
 
-			/** Show the next snackbar after this one is dismissed .*/
+			/** Show the next snackbar after this one is dismissed take 1 to unsubscribe after first emit .*/
 			snackBarRef.afterDismissed().pipe(take(1)).subscribe(() => {
 				showNextSnackbar(index + 1);
 			});
