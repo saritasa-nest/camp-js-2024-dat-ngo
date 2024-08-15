@@ -17,6 +17,7 @@
 	--primary-dark-contrast-color: white;
 	--primary-light-color: #fb923c;
 	--primary-light-contrast-color: black;
+	--error-color: red;
 
 	/* Colors */
 	--surface-color: rgb(255 255 255 / 100%);
