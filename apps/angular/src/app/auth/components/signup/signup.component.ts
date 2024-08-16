@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Validators, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
+import { Validators, ReactiveFormsModule, NonNullableFormBuilder, FormControl } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormErrorService } from '@js-camp/angular/core/services/form-error.service';
@@ -38,7 +38,7 @@ export class SignupComponent {
 
 	/** Sign Up Form. */
 	protected signUpForm = this.formBuilder.group({
-		email: ['', [Validators.required, Validators.email, Validators.maxLength(5)]],
+		email: ['', [Validators.required, Validators.email]],
 		firstName: ['', [Validators.required, Validators.maxLength(30)]],
 		lastName: ['', [Validators.required, Validators.maxLength(30)]],
 		passwordGroup: this.formBuilder.group({
@@ -53,7 +53,8 @@ export class SignupComponent {
 	/** Display error. */
 
 	protected shouldShowError(controlName: string): boolean {
-		return this.formErrorService.shouldShowError(this.signUpForm, controlName);
+		const formControl = this.signUpForm.get(controlName) as FormControl;
+		return this.formErrorService.shouldShowError(formControl);
 	}
 
 	protected getErrorMessage(controlName: string): string | null {
@@ -68,7 +69,6 @@ export class SignupComponent {
 	protected onSubmit(): void {
 		this.signUpForm.markAllAsTouched();
 		if (this.signUpForm.valid) {
-			console.log(this.signUpForm.getRawValue());
 			const formRawValue = this.signUpForm.getRawValue();
 			const registrationData = {
 				email: formRawValue.email,

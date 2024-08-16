@@ -16,7 +16,7 @@
 				placeholder="Enter First Name"
 				formControlName="firstName"
 			/>
-			<mat-error *ngIf="formErrors['firstName']">{{ formErrors["firstName"] }}</mat-error>
+			<mat-error *ngIf="shouldShowError('firstName')">{{ getErrorMessage('firstName') }}</mat-error>
 		</mat-form-field>
 		<mat-form-field appearance="outline">
 			<mat-label class="label" for="lastName">Last Name</mat-label>
@@ -28,7 +28,7 @@
 				placeholder="Enter Last Name"
 				formControlName="lastName"
 			/>
-			<mat-error *ngIf="formErrors['lastName']">{{ formErrors["lastName"] }}</mat-error>
+			<mat-error *ngIf="shouldShowError('lastName')">{{ getErrorMessage('lastName') }}</mat-error>
 		</mat-form-field>
 		<form formGroupName="passwordGroup" class="password-group">
 			<div class="input-group">

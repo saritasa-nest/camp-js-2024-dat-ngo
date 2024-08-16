@@ -61,9 +61,9 @@ export class FormErrorService {
 	 * @param controlName The name of the control to check.
 	 * @returns True if the control is invalid and either touched or dirty, otherwise false.
 	 */
-	public shouldShowError(formGroup: FormGroup, controlName: string): boolean {
-		const control = formGroup.get(controlName);
-		return control ? control.invalid && (control.touched || control.dirty) : false;
+	public shouldShowError(formGroup: FormControl): boolean {
+		// const control = formGroup.get(controlName);
+		return formGroup ? formGroup.invalid && (formGroup.touched || formGroup.dirty) : false;
 	}
 
 	/**
