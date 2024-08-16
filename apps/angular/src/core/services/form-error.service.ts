@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 
 /** Form Error Service. */
 @Injectable({ providedIn: 'root' })
@@ -53,5 +53,39 @@ export class FormErrorService {
 			}
 		});
 		return formErrors;
+	}
+
+	/**
+	 * Determines whether a form control should show an error within a form group.
+	 * @param formGroup The parent form group containing the control.
+	 * @param controlName The name of the control to check.
+	 * @returns True if the control is invalid and either touched or dirty, otherwise false.
+	 */
+	public shouldShowError(formGroup: FormGroup, controlName: string): boolean {
+		const control = formGroup.get(controlName);
+		return control ? control.invalid && (control.touched || control.dirty) : false;
+	}
+
+	/**
+	 * Get error message for a specific form control.
+	 * @param control The form control.
+	 * @returns The error message or null if there are no errors.
+	 */
+	public getErrorMessage1(control: FormGroup): string | null {
+		// Return null early if there are no errors
+		if (!control?.errors) {
+			return null;
+		}
+
+		// Iterate over the error keys and return the first matching message
+		for (const errorKey of Object.keys(control.errors)) {
+			const errorMessage = this.errorMessages[errorKey];
+			if (errorMessage) {
+				return typeof errorMessage === 'function' ? errorMessage(control.errors[errorKey]) : errorMessage;
+			}
+		}
+
+		// If no matching error message is found, return null
+		return null;
 	}
 }

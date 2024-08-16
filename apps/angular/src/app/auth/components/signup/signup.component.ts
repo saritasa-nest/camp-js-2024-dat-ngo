@@ -11,11 +11,13 @@ import { PATHS } from '@js-camp/core/utils/paths';
 import { UserService } from '@js-camp/angular/core/services/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import { PasswordInputComponent } from '../password-input/password-input.component';
+
 /** Sign up.*/
 @Component({
 	selector: 'camp-signup',
 	standalone: true,
-	imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule],
+	imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule, PasswordInputComponent],
 	templateUrl: './signup.component.html',
 	styleUrl: './signup.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,7 +38,7 @@ export class SignupComponent {
 
 	/** Sign Up Form. */
 	protected signUpForm = this.formBuilder.group({
-		email: ['', [Validators.required, Validators.email]],
+		email: ['', [Validators.required, Validators.email, Validators.maxLength(5)]],
 		firstName: ['', [Validators.required, Validators.maxLength(30)]],
 		lastName: ['', [Validators.required, Validators.maxLength(30)]],
 		passwordGroup: this.formBuilder.group({
@@ -48,8 +50,23 @@ export class SignupComponent {
 	/** Loading state. */
 	protected readonly isLoading$ = new BehaviorSubject<boolean>(false);
 
+	/** Display error. */
+
+	protected shouldShowError(controlName: string): boolean {
+		return this.formErrorService.shouldShowError(this.signUpForm, controlName);
+	}
+
+	protected getErrorMessage(controlName: string): string | null {
+		const data = this.signUpForm.get(controlName);
+		if (data == null) {
+			return null;
+		}
+		return this.formErrorService.getErrorMessage(data);
+	}
+
 	/** Submit form. */
 	protected onSubmit(): void {
+		this.signUpForm.markAllAsTouched();
 		if (this.signUpForm.valid) {
 			console.log(this.signUpForm.getRawValue());
 			const formRawValue = this.signUpForm.getRawValue();
@@ -68,6 +85,7 @@ export class SignupComponent {
 					take(1),
 					catchError((error: unknown) => {
 						this.formErrors = this.formErrorService.getFormErrors(this.signUpForm);
+						console.log(this.formErrors);
 						return throwError(() => error);
 					}),
 					finalize(() => {

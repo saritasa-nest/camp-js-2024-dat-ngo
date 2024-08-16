@@ -3,7 +3,7 @@
 		<mat-form-field appearance="outline">
 			<mat-label class="label" for="email">Email</mat-label>
 			<input matInput type="text" id="email" name="email" placeholder="Enter email" formControlName="email" />
-			<mat-error *ngIf="formErrors['email']">{{ formErrors["email"] }}</mat-error>
+			<mat-error *ngIf="shouldShowError('email')">{{ getErrorMessage('email')}}</mat-error>
 		</mat-form-field>
 
 		<mat-form-field appearance="outline">
@@ -32,32 +32,16 @@
 		</mat-form-field>
 		<form formGroupName="passwordGroup" class="password-group">
 			<div class="input-group">
-				<mat-form-field appearance="outline">
-					<mat-label class="label" for="password">Password</mat-label>
-					<input
-						matInput
-						type="password"
-						id="password"
-						name="password"
-						placeholder="Enter password"
-						formControlName="password"
-					/>
-					<mat-error *ngIf="formErrors['password']">{{ formErrors["password"] }}</mat-error>
-				</mat-form-field>
-				<mat-form-field appearance="outline">
-					<mat-label class="label" for="reTypePassword">Retype Password</mat-label>
-					<input
-						matInput
-						type="text"
-						id="reTypePassword"
-						name="reTypePassword"
-						placeholder="Retype Password"
-						formControlName="reTypePassword"
-					/>
-					<mat-error *ngIf="formErrors['reTypePassword']">{{
-						formErrors["reTypePassword"]
-					}}</mat-error>
-				</mat-form-field>
+				<camp-password-input
+					[formControl]="signUpForm.controls.passwordGroup.controls.password"
+					label="Password"
+					placeholder="Enter password"
+				></camp-password-input>
+				<camp-password-input
+					[formControl]="signUpForm.controls.passwordGroup.controls.reTypePassword"
+					label="Retype Password"
+					placeholder="Retype password"
+				></camp-password-input>
 			</div>
 		</form>
 	</div>
