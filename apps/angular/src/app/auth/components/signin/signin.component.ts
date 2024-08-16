@@ -10,12 +10,20 @@ import { UserService } from '@js-camp/angular/core/services/user.service';
 import { Router } from '@angular/router';
 import { PATHS } from '@js-camp/core/utils/paths';
 import { NotificationService } from '@js-camp/angular/core/services/notification.service';
+import { PasswordInputComponent } from '../password-input/password-input.component';
 
 /** Signin. */
 @Component({
 	selector: 'camp-authorization-form',
 	standalone: true,
-	imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule, MatIconModule],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		MatInputModule,
+		MatFormFieldModule,
+		MatIconModule,
+		PasswordInputComponent,
+	],
 	templateUrl: './signin.component.html',
 	styleUrl: './signin.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,7 +38,7 @@ export class SignInComponent {
 	/** Signin form builder .*/
 	protected signInForm = this.formBuilder.group({
 		email: ['', Validators.required],
-		password: ['', Validators.required],
+		password: ['', [Validators.required, Validators.minLength(8)]],
 	});
 
 	public constructor(private formBuilder: NonNullableFormBuilder) {}
