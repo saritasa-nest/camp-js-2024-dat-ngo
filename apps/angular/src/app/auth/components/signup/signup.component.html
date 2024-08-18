@@ -3,7 +3,7 @@
 		<mat-form-field appearance="outline">
 			<mat-label class="label" for="email">Email</mat-label>
 			<input matInput type="text" id="email" name="email" placeholder="Enter email" formControlName="email" />
-			<mat-error *ngIf="shouldShowError('email')">{{ getErrorMessage('email')}}</mat-error>
+			<mat-error *ngIf="shouldShowError('email')">{{ getErrorMessage("email") }}</mat-error>
 		</mat-form-field>
 
 		<mat-form-field appearance="outline">
@@ -16,7 +16,7 @@
 				placeholder="Enter First Name"
 				formControlName="firstName"
 			/>
-			<mat-error *ngIf="shouldShowError('firstName')">{{ getErrorMessage('firstName') }}</mat-error>
+			<mat-error *ngIf="shouldShowError('firstName')">{{ getErrorMessage("firstName") }}</mat-error>
 		</mat-form-field>
 		<mat-form-field appearance="outline">
 			<mat-label class="label" for="lastName">Last Name</mat-label>
@@ -28,7 +28,7 @@
 				placeholder="Enter Last Name"
 				formControlName="lastName"
 			/>
-			<mat-error *ngIf="shouldShowError('lastName')">{{ getErrorMessage('lastName') }}</mat-error>
+			<mat-error *ngIf="shouldShowError('lastName')">{{ getErrorMessage("lastName") }}</mat-error>
 		</mat-form-field>
 		<form formGroupName="passwordGroup" class="password-group">
 			<div class="input-group">
@@ -49,7 +49,7 @@
 		<input type="checkbox" id="rememberMe" />
 		<label for="rememberMe">Remember me</label>
 	</div>
-	<button type="submit" class="btn-signin">Sign up</button>
+	<button type="submit" class="btn-signin" [disabled]="signUpForm.invalid || (isLoading$ | async)">Sign up</button>
 	<div class="signup-link">
 		<span>Already have an account?</span>
 		<a href="/auth/signin">Sign in now</a>

@@ -5,7 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { Login } from '@js-camp/core/models/login';
-import { catchError, take, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, take, throwError } from 'rxjs';
 import { UserService } from '@js-camp/angular/core/services/user.service';
 import { Router } from '@angular/router';
 import { PATHS } from '@js-camp/core/utils/paths';
@@ -35,6 +35,9 @@ export class SignInComponent {
 
 	private readonly notificationService = inject(NotificationService);
 
+	/** Loading state. */
+	protected readonly isLoading$ = new BehaviorSubject<boolean>(false);
+
 	/** Signin form builder .*/
 	protected signInForm = this.formBuilder.group({
 		email: ['', Validators.required],
@@ -48,15 +51,19 @@ export class SignInComponent {
 		if (this.signInForm.invalid) {
 			return;
 		}
+		this.isLoading$.next(true);
 		const credentials = new Login(this.signInForm.getRawValue());
 		this.userService
 			.login(credentials)
 			.pipe(
+				take(1),
 				catchError((error) => {
 					return throwError(() => this.notificationService.showMessage(error, 'DISMISS'));
+				}),
+				finalize(() => {
+					this.isLoading$.next(false);
 				})
 			)
-			.pipe(take(1))
 			.subscribe({
 				next: () => {
 					this.router.navigate([PATHS.home]);

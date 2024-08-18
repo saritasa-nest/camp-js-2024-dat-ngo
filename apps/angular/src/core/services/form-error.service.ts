@@ -65,27 +65,4 @@ export class FormErrorService {
 		// const control = formGroup.get(controlName);
 		return formGroup ? formGroup.invalid && (formGroup.touched || formGroup.dirty) : false;
 	}
-
-	/**
-	 * Get error message for a specific form control.
-	 * @param control The form control.
-	 * @returns The error message or null if there are no errors.
-	 */
-	public getErrorMessage1(control: FormGroup): string | null {
-		// Return null early if there are no errors
-		if (!control?.errors) {
-			return null;
-		}
-
-		// Iterate over the error keys and return the first matching message
-		for (const errorKey of Object.keys(control.errors)) {
-			const errorMessage = this.errorMessages[errorKey];
-			if (errorMessage) {
-				return typeof errorMessage === 'function' ? errorMessage(control.errors[errorKey]) : errorMessage;
-			}
-		}
-
-		// If no matching error message is found, return null
-		return null;
-	}
 }

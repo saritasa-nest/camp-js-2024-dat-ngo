@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Validators, ReactiveFormsModule, NonNullableFormBuilder, FormControl } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -9,8 +9,7 @@ import { Registration } from '@js-camp/core/models/registration';
 import { BehaviorSubject, catchError, finalize, take, throwError } from 'rxjs';
 import { PATHS } from '@js-camp/core/utils/paths';
 import { UserService } from '@js-camp/angular/core/services/user.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-
+import { mustMatch } from '@js-camp/angular/core/utils/custom-validator';
 import { PasswordInputComponent } from '../password-input/password-input.component';
 
 /** Sign up.*/
@@ -32,8 +31,6 @@ export class SignupComponent {
 	/** Form errors. */
 	protected formErrors: { [key: string]: string | null } = {};
 
-	private readonly destroyRef = inject(DestroyRef);
-
 	public constructor(private formBuilder: NonNullableFormBuilder) {}
 
 	/** Sign Up Form. */
@@ -41,10 +38,15 @@ export class SignupComponent {
 		email: ['', [Validators.required, Validators.email]],
 		firstName: ['', [Validators.required, Validators.maxLength(30)]],
 		lastName: ['', [Validators.required, Validators.maxLength(30)]],
-		passwordGroup: this.formBuilder.group({
-			password: ['', [Validators.required, Validators.minLength(8)]],
-			reTypePassword: ['', [Validators.required, Validators.minLength(8)]],
-		}),
+		passwordGroup: this.formBuilder.group(
+			{
+				password: ['', [Validators.required, Validators.minLength(8)]],
+				reTypePassword: ['', [Validators.required, Validators.minLength(8)]],
+			},
+			{
+				validators: mustMatch('password', 'reTypePassword'),
+			}
+		),
 	});
 
 	/** Loading state. */
@@ -85,13 +87,11 @@ export class SignupComponent {
 					take(1),
 					catchError((error: unknown) => {
 						this.formErrors = this.formErrorService.getFormErrors(this.signUpForm);
-						console.log(this.formErrors);
 						return throwError(() => error);
 					}),
 					finalize(() => {
 						this.isLoading$.next(false);
-					}),
-					takeUntilDestroyed(this.destroyRef)
+					})
 				)
 				.subscribe({
 					next: () => {

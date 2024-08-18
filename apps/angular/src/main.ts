@@ -25,4 +25,4 @@ bootstrapApplication(AppComponent, {
 		{ provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true },
 		provideAnimationsAsync(),
 	],
-}).catch(err => console.error(err));
+}).catch((err) => console.error(err));
