@@ -11,15 +11,16 @@ export class AppUrlsConfig {
 
 	/** Anime-related routes. */
 	public readonly anime = {
-		list: this.toApi('anime/anime/'),
+		list: this.toApi('anime', 'anime'),
 	};
 
 	/**
 	 * Generate Api urls as an constant.
 	 * @param args Multiple relative path.
 	 */
-	private toApi(...args: string[]): string {
+	private toApi(...args: readonly string[]): string {
 		const relativePath = args.join('/');
-		return new URL(relativePath, this.baseUrl).toString();
+		const finalPath = `${relativePath}/`;
+		return new URL(finalPath, this.baseUrl).toString();
 	}
 }

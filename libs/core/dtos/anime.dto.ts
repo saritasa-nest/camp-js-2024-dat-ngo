@@ -3,7 +3,6 @@ import { AnimeStatusDto } from './anime-status.dto';
 
 /** Anime Dto. */
 export type AnimeDto = {
-
 	/** Id of anime. */
 	readonly id: number;
 
@@ -25,10 +24,16 @@ export type AnimeDto = {
 	/** Broadcast time frame from start to end of a anime. */
 	readonly aired: {
 
-		/** Start Date.*/
+		/**
+		 * Start Date.
+		 * @example 2023-07-09T07:06:38.596236Z.
+		 * */
 		readonly start: string | null;
 
-		/** End Date.*/
+		/**
+		 * End Date.
+		 * @example 2023-07-09T07:06:38.596236Z.
+		 * */
 		readonly end: string | null;
 	};
 

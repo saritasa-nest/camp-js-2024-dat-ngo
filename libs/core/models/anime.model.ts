@@ -1,4 +1,4 @@
-import { BroadCastedTime } from './BroadcastedTime.type';
+import { BroadCastedTime } from './broadcasted-time.model';
 
 import { AnimeType } from './amime-type';
 import { AnimeStatus } from './anime-status';

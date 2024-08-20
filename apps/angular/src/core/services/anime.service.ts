@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
 import { PaginationDto } from '@js-camp/core/dtos/pagination.dto';
-import { map, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Anime } from '@js-camp/core/models/anime.model';
 import { AnimeDto } from '@js-camp/core/dtos/anime.dto';
@@ -8,6 +7,7 @@ import { PaginationMapper } from '@js-camp/core/mappers/pagination.mapper';
 import { AnimeMapper } from '@js-camp/core/mappers/anime.mapper';
 import { Pagination } from '@js-camp/core/models/pagination';
 import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
+import { map, Observable } from 'rxjs';
 
 /** Anime services. */
 @Injectable({ providedIn: 'root' })
@@ -15,8 +15,6 @@ export class AnimeService {
 	private readonly httpClient = inject(HttpClient);
 
 	private readonly paginationMapper = inject(PaginationMapper);
-
-	private readonly animeMapper = inject(AnimeMapper);
 
 	private readonly appApiConfig = inject(AppUrlsConfig);
 
@@ -28,6 +26,6 @@ export class AnimeService {
 		const url = new URL(this.appApiConfig.anime.list);
 		return this.httpClient
 			.get<PaginationDto<AnimeDto>>(url.toString(), { params: this.param })
-			.pipe(map((value) => this.paginationMapper.fromDto(value, this.animeMapper.fromDto)));
+			.pipe(map((value) => this.paginationMapper.fromDto(value, (anime)=> AnimeMapper.fromDto(anime))));
 	}
 }
