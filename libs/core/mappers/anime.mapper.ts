@@ -1,5 +1,3 @@
-import { inject, Injectable } from '@angular/core';
-
 import { Anime } from '../models/anime.model';
 import { AnimeDto } from '../dtos/anime.dto';
 

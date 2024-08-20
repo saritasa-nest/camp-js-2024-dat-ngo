@@ -2,9 +2,10 @@ import { BroadCastedTimeDto } from '../dtos/broadcasted-time.dto';
 import { BroadCastedTime } from '../models/broadcasted-time.model';
 
 export namespace broadCastedTimeMapper {
+
 	/**
 	 * Maps dto to model.
-	 * @param dto broadcasted time dto.
+	 * @param dto Broadcasted time dto.
 	 */
 	export function fromDto(dto: BroadCastedTimeDto): BroadCastedTime {
 		return new BroadCastedTime({
@@ -15,7 +16,7 @@ export namespace broadCastedTimeMapper {
 
 	/**
 	 * Maps dto to model.
-	 * @param animeTime broadcasted time dto.
+	 * @param animeTime Broadcasted time dto.
 	 */
 	export function toDto(animeTime: BroadCastedTime): BroadCastedTimeDto {
 		return {
