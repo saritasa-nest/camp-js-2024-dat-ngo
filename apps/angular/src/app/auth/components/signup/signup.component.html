@@ -36,11 +36,13 @@
 					[formControl]="signUpForm.controls.passwordGroup.controls.password"
 					label="Password"
 					placeholder="Enter password"
+					[touched]="signUpForm.controls.passwordGroup.controls.password.touched"
 				></camp-password-input>
 				<camp-password-input
 					[formControl]="signUpForm.controls.passwordGroup.controls.reTypePassword"
 					label="Retype Password"
 					placeholder="Retype password"
+					[touched]="signUpForm.controls.passwordGroup.controls.reTypePassword.touched"
 				></camp-password-input>
 			</div>
 		</form>

@@ -30,6 +30,10 @@ export class PasswordInputComponent implements ControlValueAccessor {
 	@Input()
 	public type = 'password';
 
+	/** Touched. */
+	@Input({ required: true })
+	public touched = false;
+
 	/** Form control. */
 	@Input()
 	public formControl = new FormControl();
