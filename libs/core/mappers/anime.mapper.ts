@@ -14,8 +14,6 @@ export namespace AnimeMapper {
 	export function fromDto(dto: AnimeDto): Anime {
 		return new Anime({
 			id: dto.id,
-			createdDate: new Date(dto.created),
-			modifiedDate: new Date(dto.modified),
 			englishTitle: dto.title_eng,
 			japaneseTitle: dto.title_jpn,
 			coverImageUrl: dto.image,
@@ -36,8 +34,6 @@ export namespace AnimeMapper {
 	export function toDto(anime: Anime): AnimeDto {
 		return {
 			id: anime.id,
-			created: anime.createdDate.toISOString(),
-			modified: anime.modifiedDate.toISOString(),
 			title_eng: anime.englishTitle,
 			title_jpn: anime.japaneseTitle,
 			image: anime.coverImageUrl,

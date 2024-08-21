@@ -8,12 +8,6 @@ export type AnimeDto = {
 	/** Id of anime. */
 	readonly id: number;
 
-	/** Date that anime was created. */
-	readonly created: string;
-
-	/** Last modified time. */
-	readonly modified: string;
-
 	/** Title in English. */
 	readonly title_eng: string;
 

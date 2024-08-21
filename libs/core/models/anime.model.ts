@@ -10,12 +10,6 @@ export class Anime extends Immerable {
 	/** Id of anime. */
 	public readonly id: number;
 
-	/** Date that anime was created. */
-	public readonly createdDate: Date;
-
-	/** Last modified time. */
-	public readonly modifiedDate: Date;
-
 	/** Title in English. */
 	public readonly englishTitle: string;
 
@@ -46,11 +40,9 @@ export class Anime extends Immerable {
 	/** Genres' id as array of string. */
 	public readonly genres: readonly string[];
 
-	public constructor(data: PaginationConstructorData) {
+	public constructor(data: AnimeConstructorData) {
 		super();
 		this.id = data.id;
-		this.createdDate = data.createdDate;
-		this.modifiedDate = data.modifiedDate;
 		this.englishTitle = data.englishTitle;
 		this.japaneseTitle = data.japaneseTitle;
 		this.coverImageUrl = data.coverImageUrl;
@@ -64,4 +56,4 @@ export class Anime extends Immerable {
 	}
 }
 
-type PaginationConstructorData = OmitImmerable<Anime>;
+type AnimeConstructorData = OmitImmerable<Anime>;
