@@ -6,14 +6,11 @@ import { Pagination } from '../models/pagination';
 
 import { TMapperFromDto, TMapperFunction } from '../types/mapper';
 
-import { AnimeMapper } from './anime.mapper';
-
 /** Auth mapper. */
 @Injectable({
 	providedIn: 'root',
 })
 export class PaginationMapper {
-	private readonly animeMapper = inject(AnimeMapper);
 
 	/** @inheritdoc */
 	public fromDto<TDto, TDomain>(

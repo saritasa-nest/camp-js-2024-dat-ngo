@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 /** Paginator.  */
@@ -7,8 +6,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 	selector: 'camp-paginator',
 	standalone: true,
 
-	// TODO (Dat Ngo): We should remove CommonModule if we don't use it.
-	imports: [CommonModule, MatPaginatorModule],
+	imports: [MatPaginatorModule],
 	templateUrl: './paginator.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,21 +1,20 @@
-// TODO (Dat Ngo): We should add readonly for property or Readonly for type
 export namespace BasedFilterParams {
 
 	/** Search. */
 	export type Search = {
 
 		/** Search filter. */
-		search: string | null;
+		readonly search: string | null;
 	};
 
 	/** Pagination. */
 	export type Pagination = {
 
 		/** Offset. */
-		pageNumber: number | null;
+		readonly pageNumber: number | null;
 
 		/** Page size. */
-		pageSize: number | null;
+		readonly pageSize: number | null;
 	};
 
 	/** Search and pagination filters. */

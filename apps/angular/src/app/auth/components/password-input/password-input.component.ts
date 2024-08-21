@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormErrorService } from '@js-camp/angular/core/services/form-error.service';
 import { MatIcon } from '@angular/material/icon';
 
-// TODO (Dat Ngo): Missing JSDoc comment.
+/** Camp password input. */
 @Component({
 	selector: 'camp-password-input',
 	templateUrl: './password-input.component.html',
@@ -22,48 +22,61 @@ import { MatIcon } from '@angular/material/icon';
 	standalone: true,
 })
 export class PasswordInputComponent implements ControlValueAccessor {
-// TODO (Dat Ngo): Missing JSDoc comment.
-	@Input() label = '';
+	/** Label. */
+	@Input()
+	public label = '';
 
-	// TODO (Dat Ngo): Missing JSDoc comment.
-	@Input() type = 'password';
+	/** Type of input field. */
+	@Input()
+	public type = 'password';
 
-	// TODO (Dat Ngo): Missing JSDoc comment.
-	@Input() formControl = new FormControl();
+	/** Form control. */
+	@Input()
+	public formControl = new FormControl();
 
-	// TODO (Dat Ngo): Missing JSDoc comment.
+	/** Value of the field.*/
 	protected _value = '';
 
-	// TODO (Dat Ngo): Missing JSDoc comment.
+	/** Form error service. */
 	protected readonly formErrorService = inject(FormErrorService);
 
-	// TODO (Dat Ngo): Missing JSDoc comment.
-	// ControlValueAccessor interface methods
-	onChange = (value: string) => {};
+	/** ControlValueAccessor interface methods.
+	 * @param value On change value.
+	 */
+	public onChange = (value: string): void => {};
 
-	// TODO (Dat Ngo): Missing JSDoc comment.
-	onTouched = () => {};
+	/** On touch. */
+	public onTouched = () => {};
 
-	// TODO (Dat Ngo): Missing JSDoc comment.
-	// Called when the value in the UI needs to be updated
-	writeValue(value: string): void {
+	/**
+	 * Called when the value in the UI needs to be updated
+	 * @param value String to set.
+	 */
+	public writeValue(value: string): void {
 		this._value = value;
 	}
 
-	// TODO (Dat Ngo): Missing JSDoc comment.
-	// Registers a function to call when the control value changes
-	registerOnChange(fn: (value: string) => void): void {
+	/**
+	 * Registers a function to call when the control value changes
+	 * @param fn Register function onChange.
+	 */
+	public registerOnChange(fn: (value: string) => void): void {
 		this.onChange = fn;
 	}
 
-	// TODO (Dat Ngo): Missing JSDoc comment.
-	// Registers a function to call when the control is touched
-	registerOnTouched(fn: () => void): void {
+	/**
+	 * Registers a function to call when the control is touched
+	 * @param fn Register function onTouch.
+	 */
+	public registerOnTouched(fn: () => void): void {
 		this.onTouched = fn;
 	}
 
-	// TODO (Dat Ngo): Missing JSDoc comment.
-	onInput(event: Event): void {
+	/**
+	 *On input event execute set element onChange and onTouch.
+	 * @param event Input event.
+	 */
+	public onInput(event: Event): void {
 		const inputElement = event.target as HTMLInputElement;
 		if (inputElement && inputElement.value !== null) {
 			this._value = inputElement.value;
@@ -72,12 +85,18 @@ export class PasswordInputComponent implements ControlValueAccessor {
 		}
 	}
 
-	// TODO (Dat Ngo): Missing JSDoc comment.
+	/**
+	 * Show error if there is any.
+	 * @returns Boolean.
+	 */
 	protected shouldShowError(): boolean {
 		return this.formErrorService.shouldShowError(this.formControl);
 	}
 
-	// TODO (Dat Ngo): Missing JSDoc comment.
+	/**
+	 * Get error messages from form control.
+	 * @returns Error string or null.
+	 */
 	protected getErrorMessage(): string | null {
 		return this.formErrorService.getErrorMessage(this.formControl);
 	}

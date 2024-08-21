@@ -1,22 +1,20 @@
 import { AnimeType } from './anime-type';
 
-// TODO (Dat Ngo): We should add readonly.
-
 /** Url Query Params. */
 export type UrlQueryParams = {
 
 	/** Search string. */
-	search?: string;
+	readonly search?: string;
 
 	/** Page number. */
-	pageNumber?: string;
+	readonly pageNumber?: string;
 
 	/** Page size. */
-	pageSize?: string;
+	readonly pageSize?: string;
 
 	/** Anime sort field. */
-	sortField?: string | null;
+	readonly sortField?: string | null;
 
 	/** Anime type number. */
-	type?: AnimeType | null;
+	readonly type?: AnimeType | null;
 };

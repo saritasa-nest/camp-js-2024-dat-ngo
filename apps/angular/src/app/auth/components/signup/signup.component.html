@@ -1,14 +1,13 @@
-<!-- TODO (Dat ngo): Please check signin component and fix this file. -->
 <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-	<div class="input-group">
+	<div class="form__input-group">
 		<mat-form-field appearance="outline">
-			<mat-label class="label" for="email">Email</mat-label>
+			<mat-label class="form__label" for="email">Email</mat-label>
 			<input matInput type="text" id="email" name="email" placeholder="Enter email" formControlName="email" />
 			<mat-error *ngIf="shouldShowError('email')">{{ getErrorMessage("email") }}</mat-error>
 		</mat-form-field>
 
 		<mat-form-field appearance="outline">
-			<mat-label class="label" for="firstName">First Name</mat-label
+			<mat-label class="form__label" for="firstName">First Name</mat-label
 			><input
 				matInput
 				type="text"
@@ -20,7 +19,7 @@
 			<mat-error *ngIf="shouldShowError('firstName')">{{ getErrorMessage("firstName") }}</mat-error>
 		</mat-form-field>
 		<mat-form-field appearance="outline">
-			<mat-label class="label" for="lastName">Last Name</mat-label>
+			<mat-label class="form__label" for="lastName">Last Name</mat-label>
 			<input
 				matInput
 				type="text"
@@ -32,7 +31,7 @@
 			<mat-error *ngIf="shouldShowError('lastName')">{{ getErrorMessage("lastName") }}</mat-error>
 		</mat-form-field>
 		<form formGroupName="passwordGroup" class="password-group">
-			<div class="input-group">
+			<div class="form__input-group">
 				<camp-password-input
 					[formControl]="signUpForm.controls.passwordGroup.controls.password"
 					label="Password"
@@ -46,12 +45,13 @@
 			</div>
 		</form>
 	</div>
-	<div class="remember-me">
+	<div class="form__remember-me">
 		<input type="checkbox" id="rememberMe" />
 		<label for="rememberMe">Remember me</label>
 	</div>
-	<button type="submit" class="btn-signin" [disabled]="signUpForm.invalid || (isLoading$ | async)">Sign up</button>
-	<div class="signup-link">
+	<button type="submit" class="form__btn-signup" [disabled]="signUpForm.invalid && (isLoading$ | async)">Sign up</button>
+	{{(isLoading$ | async)}} {{signUpForm.invalid}}
+	<div class="form__signup-link">
 		<span>Already have an account?</span>
 		<a href="/auth/signin">Sign in now</a>
 	</div>

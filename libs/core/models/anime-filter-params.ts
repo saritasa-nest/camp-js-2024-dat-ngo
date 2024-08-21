@@ -3,7 +3,6 @@ import { AnimeType } from './anime-type';
 import { BasedFilterParams } from './based-filter-params';
 import { SortsDirection } from './sort-direction';
 
-// TODO (Dat Ngo): We should add readonly for property or Readonly for type
 /** Anime query params . */
 export namespace AnimeFilterParams {
 
@@ -11,17 +10,17 @@ export namespace AnimeFilterParams {
 	export type Sort = {
 
 		/** Order. */
-		sortField: AnimeSortField | null;
+		readonly sortField: AnimeSortField | null;
 
 		/** Sort Direction. */
-		sortDirection: SortsDirection | null;
+		readonly sortDirection: SortsDirection | null;
 	};
 
 	/** Anime Type. */
 	export type Type = {
 
 		/** Order. */
-		type: AnimeType | null;
+		readonly type: AnimeType | null;
 	};
 
 	/** Anime query params. */

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { AnimeFilterParams } from '../models/anime-filter-params';
-import { TMapper } from '../types/mapper';
+import { AnimeFilterParams } from '../../../../../libs/core/models/anime-filter-params';
+import { TMapper } from '../../../../../libs/core/types/mapper';
 
 /** Anime query params. */
 export type AnimeQueryParams = Partial<
@@ -15,7 +15,6 @@ Omit<AnimeFilterParams.Combined, 'pageNumber' | 'pageSize'> & {
 }
 >;
 
-// TODO (Dat Ngo): Why Angular classes are in libs/core, other frameworks cannot use the Injectable.
 /** Service for handling URL query params. */
 @Injectable({
 	providedIn: 'root',

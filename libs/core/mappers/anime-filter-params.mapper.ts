@@ -1,5 +1,3 @@
-import { inject, Injectable } from '@angular/core';
-
 import { AnimeFilterParams } from '../models/anime-filter-params';
 import { AnimeQueryParamsDto } from '../dtos/anime-query-params.dto';
 import { AnimeType } from '../models/anime-type';
@@ -28,14 +26,11 @@ const MAP_ANIME_SORT_TO_DTO: Record<AnimeSortField, AnimeSortFieldDto> = {
 	[AnimeSortField.TitleEng]: AnimeSortFieldDto.TitleEng,
 };
 
-// TODO (Dat Ngo): Why Angular classes are in libs/core, other frameworks cannot use the Injectable.
 /** Mapper for filter params. */
-@Injectable({ providedIn: 'root' })
-export class AnimeFiltersParamsMapper {
-	private readonly basedFilterParamsMapper = inject(BasedFiltersParamsMapper);
+export namespace AnimeFiltersParamsMapper {
 
 	/** @inheritdoc */
-	public mapOrderingOptionToDto(model: AnimeFilterParams.Sort): AnimeQueryParamsDto.Sort | null {
+	export function mapOrderingOptionToDto(model: AnimeFilterParams.Sort): AnimeQueryParamsDto.Sort | null {
 		if (model.sortField && model.sortDirection) {
 			const dto = MAP_ANIME_SORT_TO_DTO[model.sortField];
 			return {
@@ -46,7 +41,7 @@ export class AnimeFiltersParamsMapper {
 	}
 
 	/** @inheritdoc */
-	public mapTypeOptionToDto(model: AnimeFilterParams.Type): AnimeQueryParamsDto.Type | null {
+	export function mapTypeOptionToDto(model: AnimeFilterParams.Type): AnimeQueryParamsDto.Type | null {
 		if (model.type) {
 			return {
 				type: MAP_ANIME_TYPE_TO_DTO[model.type],
@@ -56,11 +51,11 @@ export class AnimeFiltersParamsMapper {
 	}
 
 	/** @inheritdoc */
-	public mapCombinedOptionsToDto(model: AnimeFilterParams.Combined): AnimeQueryParamsDto.Combined {
+	export function mapCombinedOptionsToDto(model: AnimeFilterParams.Combined): AnimeQueryParamsDto.Combined {
 		return {
-			...this.basedFilterParamsMapper.mapCombinedOptionsToDto(model),
-			...this.mapOrderingOptionToDto(model),
-			...this.mapTypeOptionToDto(model),
+			...BasedFiltersParamsMapper.mapCombinedOptionsToDto(model),
+			...mapOrderingOptionToDto(model),
+			...mapTypeOptionToDto(model),
 		};
 	}
 }

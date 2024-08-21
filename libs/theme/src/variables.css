@@ -24,9 +24,6 @@
 	/* Colors */
 	--surface-color: rgb(255 255 255 / 100%);
 	--surface-overlay-color: rgb(0 0 0 / 5%);
-	--on-surface-color: rgb(0 0 0 / 100%);
-	--on-surface-dim-color: rgb(0 0 0 / 50%);
-	--on-primary-color: rgb(255 255 255);
 	--border-color: rgb(0 0 0 / 15%);
 	--focus-outline-color: rgb(3 1 1);
 	--anime-header-border-color: rgb(233 237 245);
@@ -57,15 +54,17 @@
 	--anime-header-row-bg: rgb(232 244 255);
 	--anime-header-row-color: rgb(2 30 74);
 	--anime-japan-title-row-color: rgb(53 141 235);
+	--anime-copy-right: rgb(102 102 102);
+	--anime-button: rgb(0 123 255);
 
 	/* Spacing */
-	--spacing-xs: 6px;
-	--spacing-sm: 8px;
-	--spacing-md: 16px;
-	--spacing-default: 20px;
-	--spacing-lg: 24px;
-	--spacing-xl: 32px;
-	--spacing-xxl: 40px;
+	--spacing-xs: 4px;
+	--spacing-sm: calc(var(--spacing-xs) * 2);
+	--spacing-md: calc(var(--spacing-xs) * 4);
+	--spacing-default: calc(var(--spacing-xs) * 5);
+	--spacing-lg: calc(var(--spacing-xs) * 6);
+	--spacing-xl: calc(var(--spacing-xs) * 8);
+	--spacing-xxl: calc(var(--spacing-xs) * 10);
 
 	/* Font size */
 	--font-size-md: 1rem;

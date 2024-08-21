@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
+
 import { ApiErrorDto } from '../dtos/api-error.dto';
 import { ApiError } from '../models/api-error';
 import { ErrorDetail } from '../models/error-detail';
 import { TMapperFromDto } from '../types/mapper';
+import { ErrorDetailDto } from '../dtos/error-detail.dto';
 
 const DEFAULT_ERROR_MESSAGE = 'Something went wrong. Please try again later.';
 
-// TODO (Dat Ngo): Why Angular classes are in libs/core, other frameworks cannot use the Injectable.
-// TODO (Dat Ngo): Missing JSDoc comment.
+/** Api error mapper. */
 @Injectable({ providedIn: 'root' })
 export class ApiErrorMapper implements TMapperFromDto<ApiErrorDto, ApiError> {
 	/**
@@ -17,8 +18,7 @@ export class ApiErrorMapper implements TMapperFromDto<ApiErrorDto, ApiError> {
 	 */
 	public fromDto(dto: ApiErrorDto): ApiError {
 		return new ApiError({
-			// TODO (Dat Ngo): Missing JSDoc comment. Add type for error.
-			error: dto.errors.map((error) => {
+			error: dto.errors.map((error: ErrorDetailDto): ErrorDetail => {
 				const detail = error.detail ?? DEFAULT_ERROR_MESSAGE;
 				return new ErrorDetail({
 					detail,

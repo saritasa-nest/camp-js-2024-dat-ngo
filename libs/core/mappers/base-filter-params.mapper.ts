@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
-
 import { BasedFilterParams } from '../models/based-filter-params';
 import { BasedQueryParamsDto } from '../dtos/based-filter-params.dto';
 
-// TODO (Dat Ngo): Why Angular classes are in libs/core, other frameworks cannot use the Injectable.
 /** Mapper for filter params. */
-@Injectable({ providedIn: 'root' })
-export class BasedFiltersParamsMapper {
-	/** @inheritdoc */
-	public mapPaginationOptionsToDto(model: BasedFilterParams.Pagination): BasedQueryParamsDto.Pagination | null {
+export namespace BasedFiltersParamsMapper {
+
+	/**
+	 *Mapper for pagination option.
+	 * @param model Base filter params.
+	 */
+	export function mapPaginationOptionsToDto(
+		model: BasedFilterParams.Pagination
+	): BasedQueryParamsDto.Pagination | null {
 		if (model.pageNumber !== null && model.pageSize !== null) {
 			return {
 				offset: model.pageNumber * model.pageSize,
@@ -18,8 +20,11 @@ export class BasedFiltersParamsMapper {
 		return null;
 	}
 
-	/** @inheritdoc */
-	public mapSearchOptionsToDto(model: BasedFilterParams.Search): BasedQueryParamsDto.Search | null {
+	/**
+	 *Mapper for pagination search.
+	 * @param model Base search params.
+	 */
+	export function mapSearchOptionsToDto(model: BasedFilterParams.Search): BasedQueryParamsDto.Search | null {
 		if (model.search) {
 			return {
 				search: model.search,
@@ -28,11 +33,14 @@ export class BasedFiltersParamsMapper {
 		return null;
 	}
 
-	/** @inheritdoc */
-	public mapCombinedOptionsToDto(model: BasedFilterParams.Combined): BasedQueryParamsDto.Combined {
+	/**
+	 *Mapper for pagination combine.
+	 * @param model Base combine params.
+	 */
+	export function mapCombinedOptionsToDto(model: BasedFilterParams.Combined): BasedQueryParamsDto.Combined {
 		return {
-			...this.mapPaginationOptionsToDto(model),
-			...this.mapSearchOptionsToDto(model),
+			...mapPaginationOptionsToDto(model),
+			...mapSearchOptionsToDto(model),
 		};
 	}
 }

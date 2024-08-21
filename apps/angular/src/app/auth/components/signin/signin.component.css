@@ -1,87 +1,61 @@
-/* TODO (Dat ngo): We should use BEM approach here. */
-
-
-.input-group {
-	margin-bottom: 1rem;
+.form__input-group {
+	margin-bottom: var(--spacing-md);
 	display: grid;
 }
 
-.label {
-	color: #007bff;
-	margin: 5px;
+.form__label {
+	color: var(--anime-button);
+	margin: var(--spacing-xs);
 }
 
-.option {
+.form__option {
 	display: flex;
 	justify-content: space-between;
 }
 
-.forgot-password {
+.form__forgot-password {
 	display: block;
 	text-align: right;
-	margin-bottom: 1rem;
-	/* TODO (Dat ngo): Can we use variable here. */
-	font-size: 0.875rem;
-
-	/* TODO (Dat ngo): We should use variable here. */
-	color: #007bff;
+	margin-bottom: var(--spacing-md);
+	font-size: var(--font-size-md);
+	color: var(--anime-button);
 	text-decoration: none;
 }
 
-.remember-me {
+.form__remember-me {
 	display: flex;
 	align-items: center;
-	margin-bottom: 1rem;
+	margin-bottom: var(--spacing-md);
 }
 
 .remember-me input {
-	margin-right: 0.5rem;
+	margin-right: var(--spacing-sm);
 }
 
-/* TODO (Dat ngo): We should fix eslint here. */
-.btn-signin, .btn-google {
+.form__btn-signin,
+.form__btn-google {
 	width: 100%;
-	/* TODO (Dat ngo): Do we actually need to use rem for padding */
-	padding: 0.75rem;
+	padding: var(--spacing-md);
 	border: none;
-	/* TODO (Dat ngo): We should use variable here. */
-	border-radius: 4px;
+	border-radius: var(--border-radius-xs);
 	cursor: pointer;
-	/* TODO (Dat ngo): Do we actually need to use rem for margin */
-	margin-bottom: 1rem;
+	margin-bottom: var(--spacing-md);
+	background-color: var(--anime-button);
+	color: var(--surface-color);
 }
 
-.btn-signin {
-	/* TODO (Dat ngo): We should use variable here. */
-	background-color: #007bff;
-	/* TODO (Dat ngo): We should use variable here. */
-	/* TODO (Dat ngo): signin and google has same color, we should move it move it to these CSS above. */
-	color: white;
-}
-
-.btn-google {
-	/* TODO (Dat ngo): We should use variable here. */
-	background-color: #4285f4;
-	/* TODO (Dat ngo): We should use variable here. */
-	color: white;
-}
-
-.signup-link {
+.form__signup-link {
 	text-align: center;
 }
 
-/* TODO (Dat ngo): We add a class for span. */
-.signup-link span {
-	/* TODO (Dat ngo): Do we actually need to use rem for margin */
-	margin-right: 0.5rem;
+.form__signup-link span {
+	margin-right: var(--spacing-sm);
 }
 
 .mat-icon-button {
-	/* TODO (Dat ngo): We should use variable here. */
-	border-color: red;
+	border-color: var(--error-color);
 }
 
 .icon-hide {
-	/* TODO (Dat ngo): We should use variable here. */
-	padding-right: 16px;
+	padding-right: var(--spacing-md);
 }

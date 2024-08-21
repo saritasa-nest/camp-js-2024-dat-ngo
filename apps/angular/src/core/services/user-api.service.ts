@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
 import { UserDto } from '@js-camp/core/dtos/user.dto';
-import { UserMapper } from '@js-camp/core/mappers/user.mapper';
+import { UserMapper } from '../mappers/user.mapper';
 import { User } from '@js-camp/core/models/user';
 import { map, Observable } from 'rxjs';
 

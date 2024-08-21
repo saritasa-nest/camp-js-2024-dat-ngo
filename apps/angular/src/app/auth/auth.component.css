@@ -4,9 +4,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
-	/* TODO (Dat ngo): We should use variable here. */
-	background-color: white;
+	background-color: var(--surface-color);
 }
 
 .main__login-container {
@@ -30,14 +28,10 @@
 	flex: 2;
 	max-width: 540px;
 	height: 100%;
-
-	/* TODO (Dat ngo): We should use variable here. */
-	background-color: white;
+	background-color: var(--surface-color);
 	border: none;
 	padding: 40px;
-
-	/* TODO (Dat ngo): We should use variable here. */
-	box-shadow: 0 4px 8px rgba(0 0 0 10%);
+	box-shadow: 0 var(--spacing-xs) var(--spacing-sm) var(--border-color);
 	display: grid;
 }
 
@@ -51,7 +45,5 @@
 	display: flex;
 	justify-content: flex-end;
 	align-items: flex-end;
-
-	/* TODO (Dat ngo): We should use variable here. */
-	color: #666;
+	color: var(--anime-copy-right);
 }

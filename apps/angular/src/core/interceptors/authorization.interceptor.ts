@@ -25,13 +25,9 @@ export class AuthorizationInterceptor implements HttpInterceptor {
 			return next.handle(req);
 		}
 		return userSecret$.pipe(
-			// TODO (Dat Ngo): We should fix linter errors
-			map((userSecret) =>
-				userSecret ? req.clone({ headers: req.headers.set(AUTH_HEADER_KEY, `Bearer ${userSecret.accessToken}`) }) : req
-			// TODO (Dat Ngo): We should fix linter errors
-			),
-			// TODO (Dat Ngo): We should fix linter errors
-			switchMap((newReq) => next.handle(newReq))
+			map(userSecret =>
+				userSecret ? req.clone({ headers: req.headers.set(AUTH_HEADER_KEY, `Bearer ${userSecret.accessToken}`) }) : req),
+			switchMap(newReq => next.handle(newReq)),
 		);
 	}
 }

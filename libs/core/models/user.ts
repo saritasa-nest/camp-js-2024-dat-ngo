@@ -1,29 +1,25 @@
-import { Injectable } from '@angular/core';
 import { Immerable, OmitImmerable } from './immerable';
 
-// TODO (Dat Ngo): We should add readonly.
-// TODO (Dat Ngo): We should remove unused code.
+/** User. */
 export class User extends Immerable {
-	email: string;
+	/** User email. */
+	public readonly email: string;
 
-	firstName: string;
+	/** User first name. */
+	public readonly firstName: string;
 
-	lastName: string;
+	/** User last name. */
+	public readonly lastName: string;
 
-	avatar: string | null;
-
-	createdAt: Date;
-
-	modifiedAt: Date;
+	/** User avatar. */
+	public readonly avatar: string | null;
 
 	public constructor(data: UserConstructorData) {
 		super();
 		this.email = data.email;
 		this.avatar = data.avatar;
-		this.createdAt = data.createdAt;
 		this.firstName = data.firstName;
 		this.lastName = data.lastName;
-		this.modifiedAt = data.modifiedAt;
 	}
 }
 

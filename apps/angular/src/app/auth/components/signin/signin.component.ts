@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Validators, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
+import { Validators, ReactiveFormsModule, NonNullableFormBuilder, FormControl } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { PATHS } from '@js-camp/core/utils/paths';
 import { NotificationService } from '@js-camp/angular/core/services/notification.service';
 import { PasswordInputComponent } from '../password-input/password-input.component';
+import { FormErrorService } from '@js-camp/angular/core/services/form-error.service';
 
 /** Signin. */
 @Component({
@@ -31,32 +32,50 @@ import { PasswordInputComponent } from '../password-input/password-input.compone
 export class SignInComponent {
 	private readonly userService = inject(UserService);
 
+	private readonly formErrorService = inject(FormErrorService);
+
 	private readonly router = inject(Router);
 
 	private readonly notificationService = inject(NotificationService);
 
-	// TODO (Dat Ngo): If we have only one type, we can use like this new BehaviorSubject(false);
 	/** Loading state. */
-	protected readonly isLoading$ = new BehaviorSubject<boolean>(false);
+	protected readonly isLoading$ = new BehaviorSubject(false);
 
-	// TODO (Dat Ngo): We should add readonly here.
+	private formBuilder = inject(NonNullableFormBuilder);
+
+	/** Password hide signal. */
+	protected hide = signal(true);
+
 	/** Signin form builder .*/
-	protected signInForm = this.formBuilder.group({
-		email: ['', Validators.required],
+	protected readonly signInForm = this.formBuilder.group({
+		email: ['', [Validators.required, Validators.email]],
 		password: ['', [Validators.required, Validators.minLength(8)]],
 	});
 
-	// TODO (Dat Ngo): We should use new approach.
-	public constructor(private formBuilder: NonNullableFormBuilder) {}
+		/** Display error. */
+
+		protected shouldShowError(controlName: string): boolean {
+			const formControl = this.signInForm.get(controlName) as FormControl;
+			return this.formErrorService.shouldShowError(formControl);
+		}
+
+		protected getErrorMessage(controlName: string): string | null {
+			const data = this.signInForm.get(controlName);
+			if (data == null) {
+				return null;
+			}
+			return this.formErrorService.getErrorMessage(data);
+		}
 
 	/** Onsubmit signin form. */
 	protected onSubmit(): void {
-		// TODO (Dat Ngo): We should mark form as touched here.
+		this.signInForm.markAllAsTouched();
 		if (this.signInForm.invalid) {
 			return;
 		}
 		this.isLoading$.next(true);
 		const credentials = new Login(this.signInForm.getRawValue());
+
 		this.userService
 			.login(credentials)
 			.pipe(
@@ -73,20 +92,5 @@ export class SignInComponent {
 					this.router.navigate([PATHS.home]);
 				},
 			});
-	}
-
-	// TODO (Dat Ngo): We should move variables above the constructor.
-	/** Password hide signal. */
-	protected hide = signal(true);
-
-	// TODO (Dat Ngo): https://wiki.saritasa.rocks/frontend/languages/ts-js/naming
-	// TODO (Dat Ngo): We should remove redundant code.
-	/**
-	 * Password hide and review click event.
-	 * @param event Mouse event.
-	 */
-	protected clickEvent(event: MouseEvent): void {
-		this.hide.set(!this.hide());
-		event.stopPropagation();
 	}
 }

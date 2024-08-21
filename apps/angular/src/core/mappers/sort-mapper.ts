@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 
 import { Sort, SortDirection } from '@angular/material/sort';
 
-import { AnimeFilterParams } from '../models/anime-filter-params';
-import { AnimeSortField } from '../models/anime-sort-field';
-import { SortsDirection } from '../models/sort-direction';
-import { TMapper } from '../types/mapper';
+import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
+import { AnimeSortField } from '@js-camp/core/models/anime-sort-field';
+import { SortsDirection } from '@js-camp/core/models/sort-direction';
+import { TMapper } from '@js-camp/core/types/mapper';
 
-// TODO (Dat Ngo): Why Angular classes are in libs/core, other frameworks cannot use the Injectable.
 /** @inheritdoc */
 @Injectable({
 	providedIn: 'root',

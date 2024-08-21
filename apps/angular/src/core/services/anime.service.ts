@@ -19,20 +19,12 @@ import { HttpParamsService } from './http-param.service';
 export class AnimeService {
 	private readonly httpClient = inject(HttpClient);
 
-	// TODO (Dat Ngo): We should add readonly
-	private paginationMapper = inject(PaginationMapper);
+	private readonly paginationMapper = inject(PaginationMapper);
 
-	// TODO (Dat Ngo): We should add readonly
-	private animeMapper = inject(AnimeMapper);
+	private readonly httpParamsService = inject(HttpParamsService);
 
-	// TODO (Dat Ngo): We should add readonly
-	private httpParamsService = inject(HttpParamsService);
+	private readonly appUrlsConfig = inject(AppUrlsConfig);
 
-	// TODO (Dat Ngo): We should add readonly
-	private appUrlsConfig = inject(AppUrlsConfig);
-
-	// TODO (Dat Ngo): We should add readonly
-	private animeQueryMapper = inject(AnimeFiltersParamsMapper);
 
 	/**
 	 * Build HttpParams from URL query params.
@@ -40,7 +32,7 @@ export class AnimeService {
 	 * @returns Http params.
 	 */
 	private getHttpParams(params: AnimeFilterParams.Combined): HttpParams {
-		const dtoQueryParams = this.animeQueryMapper.mapCombinedOptionsToDto(params);
+		const dtoQueryParams = AnimeFiltersParamsMapper.mapCombinedOptionsToDto(params);
 		return this.httpParamsService.buildHttpParamsFromDto(dtoQueryParams);
 	}
 
@@ -53,6 +45,6 @@ export class AnimeService {
 		const params = this.getHttpParams(queryParams);
 		return this.httpClient
 			.get<PaginationDto<AnimeDto>>(this.appUrlsConfig.anime.list, { params })
-			.pipe(map(responseDto => this.paginationMapper.fromDto(responseDto, this.animeMapper)));
+			.pipe(map(responseDto => this.paginationMapper.fromDto(responseDto, AnimeMapper)));
 	}
 }

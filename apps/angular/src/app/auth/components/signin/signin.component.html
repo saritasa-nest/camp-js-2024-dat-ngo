@@ -1,27 +1,26 @@
-	<!-- TODO (Dat ngo): We should use BEM approach here. -->
 <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
-	<div class="input-group">
+	<div class="form__input-group">
 		<mat-form-field appearance="outline">
-			<mat-label class="label" for="email">Email</mat-label>
+			<mat-label class="form__label" for="email">Email</mat-label>
 			<input matInput type="email" id="email" name="email" placeholder="Enter email" formControlName="email" />
+			<mat-error *ngIf="shouldShowError('email')">{{ getErrorMessage("email") }}</mat-error>
 		</mat-form-field>
-		<!-- TODO (Dat ngo): We should fix indent here. -->
 		<camp-password-input
 					[formControl]="signInForm.controls.password"
 					label="Password"
 					placeholder="Enter password"
 				></camp-password-input>
 	</div>
-	<section class="option">
-		<div class="remember-me">
+	<section class="form__option">
+		<div class="form__remember-me">
 			<input type="checkbox" id="rememberMe" />
 			<label for="rememberMe">Remember me</label>
 		</div>
-		<a href="#" class="forgot-password">Forgot password?</a>
+		<a href="#" class="form__forgot-password">Forgot password?</a>
 	</section>
-	<button type="submit" class="btn-signin">Sign in</button>
-	<button class="btn-google" type="button">Or sign in with Google</button>
-	<div class="signup-link">
+	<button type="submit" class="form__btn-signin" [disabled]="signInForm.invalid && (isLoading$ | async)">Sign in</button>
+	<button type="button" class="form__btn-google">Or sign in with Google</button>
+	<div class="form__signup-link">
 		<span>Don't have an account?</span>
 		<a href="/auth/signup">Sign up now</a>
 	</div>

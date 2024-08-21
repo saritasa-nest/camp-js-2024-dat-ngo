@@ -1,5 +1,3 @@
-import { Injectable } from '@angular/core';
-
 import { Anime } from '../models/anime';
 import { AnimeDto } from '../dtos/anime.dto';
 import { AnimeTypeDto } from '../dtos/amime-type.dto';
@@ -38,17 +36,14 @@ const MAP_ANIME_TYPE_TO_DTO: Record<AnimeType, AnimeTypeDto> = {
 	[AnimeType.Unknown]: AnimeTypeDto.Unknown,
 };
 
-// TODO (Dat Ngo): Why Angular classes are in libs/core, other frameworks cannot use the Injectable.
 /** Mapper for mapping AnimeDto and Anime. */
-@Injectable({
-	providedIn: 'root',
-})
-export class AnimeMapper {
+export namespace AnimeMapper {
+
 	/**
 	 *  Mapper for dto to model.
 	 * @param dto AnimeDto .
 	 */
-	public fromDto(dto: AnimeDto): Anime {
+	export function fromDto(dto: AnimeDto): Anime {
 		return new Anime({
 			id: dto.id,
 			createdDate: new Date(dto.created),
@@ -73,7 +68,7 @@ export class AnimeMapper {
 	 *  Mapper for model to dto.
 	 * @param anime Anime model .
 	 */
-	public toDto(anime: Anime): AnimeDto {
+	export function toDto(anime: Anime): AnimeDto {
 		return {
 			id: anime.id,
 			created: anime.createdDate.toISOString(),

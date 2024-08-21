@@ -1,66 +1,38 @@
-/* TODO (Dat ngo): We should use BEM approach here. */
-/* TODO (Dat ngo): We can reuse style by using styleUrls. */
-/* TODO (Dat ngo): Please check signin component and fix this file. */
-
-.input-group {
-	margin-bottom: 1rem;
+.form__input-group {
+	margin-bottom: var(--spacing-md);
 	display: grid;
 }
 
-.label {
-	/* TODO (Dat ngo): Can we use variable here. */
-	color: #007bff;
-	margin: 5px;
+.form__label {
+	color: var(--anime-button);
+	margin: var(--spacing-xs);
 }
 
-.option {
-	display: flex;
-	justify-content: space-between;
-}
-
-.forgot-password {
-	display: block;
-	text-align: right;
-	margin-bottom: 1rem;
-	font-size: 0.875rem;
-	color: #007bff;
-	text-decoration: none;
-}
-
-.remember-me {
+.form__remember-me {
 	display: flex;
 	align-items: center;
-	margin-bottom: 1rem;
+	margin-bottom: var(--spacing-md);
 }
 
-.remember-me input {
-	margin-right: 0.5rem;
+.form__remember-me input {
+	margin-right: var(--spacing-sm);
 }
 
-.btn-signin,
-.btn-google {
+.form__btn-signup {
 	width: 100%;
-	padding: 0.75rem;
+	padding: var(--spacing-md);
 	border: none;
-	border-radius: 4px;
+	border-radius: var(--border-radius-xs);
 	cursor: pointer;
-	margin-bottom: 1rem;
+	margin-bottom: var(--spacing-md);
+	background-color: var(--anime-button);
+	color: var(--surface-color);
 }
 
-.btn-signin {
-	background-color: #007bff;
-	color: white;
-}
-
-.btn-google {
-	background-color: #4285f4;
-	color: white;
-}
-
-.signup-link {
+.form__signup-link {
 	text-align: center;
 }
 
-.signup-link span {
-	margin-right: 0.5rem;
+.form__signup-link span {
+	margin-right: var(--spacing-sm);
 }

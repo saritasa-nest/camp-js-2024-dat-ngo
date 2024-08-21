@@ -17,12 +17,11 @@ import {
 import { AnimeQueryParamsService } from '@js-camp/angular/core/services/anime-query-params.service';
 import { Sort } from '@angular/material/sort';
 
-import { SortMapper } from '@js-camp/core/mappers/sort-mapper';
+import { SortMapper } from '@js-camp/angular/core/mappers/sort-mapper';
 
 import { UserService } from '@js-camp/angular/core/services/user.service';
 import { User } from '@js-camp/core/models/user';
 import { Router } from '@angular/router';
-import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
 import { PATHS } from '@js-camp/core/utils/paths';
 
 import { AnimeTableComponent } from './components/anime-table/anime-table.component';
@@ -57,9 +56,6 @@ export class AnimeCatalogComponent implements OnInit {
 	private readonly userService = inject(UserService);
 
 	private readonly router = inject(Router);
-
-	// TODO (Dat Ngo): We should remove redundant code.
-	private readonly appUrl = inject(AppUrlsConfig);
 
 	/** Current user state. */
 	protected readonly currentUser$: Observable<User | null>;

@@ -4,8 +4,8 @@ import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
 import { UserSecretDto } from '@js-camp/core/dtos/user-secret.dto';
 import { ApiErrorMapper } from '@js-camp/core/mappers/api-error.mapper';
 import { LoginMapper } from '@js-camp/core/mappers/login.mapper';
-import { RegisterMapper } from '@js-camp/core/mappers/registration.mapper';
-import { UserSecretMapper } from '@js-camp/core/mappers/user-secret.mapper';
+import { RegisterMapper } from '../mappers/registration.mapper';
+import { UserSecretMapper } from '../mappers/user-secret.mapper';
 import { Login } from '@js-camp/core/models/login';
 import { Registration } from '@js-camp/core/models/registration';
 import { UserSecret } from '@js-camp/core/models/user-secret';
@@ -40,8 +40,6 @@ export class AuthApiService {
 			catchError((error) => {
 				return throwError(
 					() => this.apiErrorMapper.fromDto(error.error)
-					// TODO (Dat Ngo): We should remove redundant code
-					// this.notificationService.showMessage(this.apiErrorMapper.fromDto(error.error), 'DISMISS')
 				);
 			}),
 			map((secret) => this.userSecretMapper.fromDto(secret))

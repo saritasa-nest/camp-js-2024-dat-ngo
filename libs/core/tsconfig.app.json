@@ -5,5 +5,5 @@
 		"outDir": "../../dist/out-tsc",
 		"types": ["node"]
 	},
-	"include": ["**/*.ts", "models/anime-type.ts", "models/anime-status.ts"]
+	"include": ["**/*.ts", "models/anime-type.ts", "models/anime-status.ts", "../../apps/angular/src/core/mappers/user.mapper.ts", "../../apps/angular/src/core/mappers/user-secret.mapper.ts", "../../apps/angular/src/core/mappers/sort-mapper.ts", "../../apps/angular/src/core/mappers/registration.mapper.ts", "../../apps/angular/src/core/mappers/anime-query-params.mapper.ts"]
 }

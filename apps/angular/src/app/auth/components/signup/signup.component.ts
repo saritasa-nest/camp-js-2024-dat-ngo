@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Validators, ReactiveFormsModule, NonNullableFormBuilder, FormControl } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -9,7 +9,8 @@ import { Registration } from '@js-camp/core/models/registration';
 import { BehaviorSubject, catchError, finalize, take, throwError } from 'rxjs';
 import { PATHS } from '@js-camp/core/utils/paths';
 import { UserService } from '@js-camp/angular/core/services/user.service';
-import { mustMatch } from '@js-camp/angular/core/utils/custom-validator';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
 import { PasswordInputComponent } from '../password-input/password-input.component';
 
 /** Sign up.*/
@@ -28,9 +29,10 @@ export class SignupComponent {
 
 	private readonly router = inject(Router);
 
-	// TODO (Dat Ngo): We should fix linter errors.
 	/** Form errors. */
 	protected formErrors: { [key: string]: string | null } = {};
+
+	private readonly destroyRef = inject(DestroyRef);
 
 	public constructor(private formBuilder: NonNullableFormBuilder) {}
 
@@ -39,24 +41,15 @@ export class SignupComponent {
 		email: ['', [Validators.required, Validators.email]],
 		firstName: ['', [Validators.required, Validators.maxLength(30)]],
 		lastName: ['', [Validators.required, Validators.maxLength(30)]],
-		passwordGroup: this.formBuilder.group(
-			{
-				password: ['', [Validators.required, Validators.minLength(8)]],
-				reTypePassword: ['', [Validators.required, Validators.minLength(8)]],
-			},
-			{
-				validators: mustMatch('password', 'reTypePassword'),
-				// TODO (Dat Ngo): We should fix linter errors.
-			}
-		),
+		passwordGroup: this.formBuilder.group({
+			password: ['', [Validators.required, Validators.minLength(8)]],
+			reTypePassword: ['', [Validators.required, Validators.minLength(8)]],
+		}),
 	});
 
 	/** Loading state. */
 	protected readonly isLoading$ = new BehaviorSubject<boolean>(false);
 
-	// TODO (Dat Ngo): We should fix linter errors.
-	// TODO (Dat Ngo): Missing JSDoc comment.
-	// TODO (Dat Ngo): There is an empty space below.
 	/** Display error. */
 
 	protected shouldShowError(controlName: string): boolean {
@@ -64,8 +57,6 @@ export class SignupComponent {
 		return this.formErrorService.shouldShowError(formControl);
 	}
 
-	// TODO (Dat Ngo): We should fix linter errors.
-	// TODO (Dat Ngo): Missing JSDoc comment.
 	protected getErrorMessage(controlName: string): string | null {
 		const data = this.signUpForm.get(controlName);
 		if (data == null) {
@@ -77,11 +68,6 @@ export class SignupComponent {
 	/** Submit form. */
 	protected onSubmit(): void {
 		this.signUpForm.markAllAsTouched();
-
-		// TODO (Dat Ngo): We can avoid nested by this.
-		// if (this.signUpForm.invalid) {
-		// 	return;
-		// }
 		if (this.signUpForm.valid) {
 			const formRawValue = this.signUpForm.getRawValue();
 			const registrationData = {
@@ -99,12 +85,13 @@ export class SignupComponent {
 					take(1),
 					catchError((error: unknown) => {
 						this.formErrors = this.formErrorService.getFormErrors(this.signUpForm);
+						console.log(this.formErrors);
 						return throwError(() => error);
 					}),
 					finalize(() => {
 						this.isLoading$.next(false);
-					// TODO (Dat Ngo): We should fix linter errors.
-					})
+					}),
+					takeUntilDestroyed(this.destroyRef)
 				)
 				.subscribe({
 					next: () => {
@@ -116,7 +103,6 @@ export class SignupComponent {
 				});
 		} else {
 			this.formErrors = this.formErrorService.getFormErrors(this.signUpForm);
-			// TODO (Dat Ngo): We shouldn't leave console in our code.
 			console.warn('Form is invalid', this.formErrors);
 		}
 	}

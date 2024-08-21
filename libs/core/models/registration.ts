@@ -2,13 +2,17 @@ import { Immerable, OmitImmerable } from './immerable';
 
 /** User Secret. */
 export class Registration extends Immerable {
-	// TODO (Dat Ngo): We should add readonly.
+
+	/** Email. */
 	public readonly email: string;
-	// TODO (Dat Ngo): We should add readonly.
+
+	/** First name. */
 	public readonly firstName: string;
-	// TODO (Dat Ngo): We should add readonly.
+
+	/** Last name. */
 	public readonly lastName: string;
-	// TODO (Dat Ngo): We should add readonly.
+
+	/** Password. */
 	public readonly password: string;
 
 	public constructor(data: RegisterConstructorData) {
