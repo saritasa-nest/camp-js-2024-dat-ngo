@@ -15,6 +15,7 @@ Omit<AnimeFilterParams.Combined, 'pageNumber' | 'pageSize'> & {
 }
 >;
 
+// TODO (Dat Ngo): Why Angular classes are in libs/core, other frameworks cannot use the Injectable.
 /** Service for handling URL query params. */
 @Injectable({
 	providedIn: 'root',

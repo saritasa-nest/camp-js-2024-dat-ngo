@@ -28,6 +28,7 @@ export class SignupComponent {
 
 	private readonly router = inject(Router);
 
+	// TODO (Dat Ngo): We should fix linter errors.
 	/** Form errors. */
 	protected formErrors: { [key: string]: string | null } = {};
 
@@ -45,6 +46,7 @@ export class SignupComponent {
 			},
 			{
 				validators: mustMatch('password', 'reTypePassword'),
+				// TODO (Dat Ngo): We should fix linter errors.
 			}
 		),
 	});
@@ -52,6 +54,9 @@ export class SignupComponent {
 	/** Loading state. */
 	protected readonly isLoading$ = new BehaviorSubject<boolean>(false);
 
+	// TODO (Dat Ngo): We should fix linter errors.
+	// TODO (Dat Ngo): Missing JSDoc comment.
+	// TODO (Dat Ngo): There is an empty space below.
 	/** Display error. */
 
 	protected shouldShowError(controlName: string): boolean {
@@ -59,6 +64,8 @@ export class SignupComponent {
 		return this.formErrorService.shouldShowError(formControl);
 	}
 
+	// TODO (Dat Ngo): We should fix linter errors.
+	// TODO (Dat Ngo): Missing JSDoc comment.
 	protected getErrorMessage(controlName: string): string | null {
 		const data = this.signUpForm.get(controlName);
 		if (data == null) {
@@ -70,6 +77,11 @@ export class SignupComponent {
 	/** Submit form. */
 	protected onSubmit(): void {
 		this.signUpForm.markAllAsTouched();
+
+		// TODO (Dat Ngo): We can avoid nested by this.
+		// if (this.signUpForm.invalid) {
+		// 	return;
+		// }
 		if (this.signUpForm.valid) {
 			const formRawValue = this.signUpForm.getRawValue();
 			const registrationData = {
@@ -91,6 +103,7 @@ export class SignupComponent {
 					}),
 					finalize(() => {
 						this.isLoading$.next(false);
+					// TODO (Dat Ngo): We should fix linter errors.
 					})
 				)
 				.subscribe({
@@ -103,6 +116,7 @@ export class SignupComponent {
 				});
 		} else {
 			this.formErrors = this.formErrorService.getFormErrors(this.signUpForm);
+			// TODO (Dat Ngo): We shouldn't leave console in our code.
 			console.warn('Form is invalid', this.formErrors);
 		}
 	}

@@ -35,19 +35,23 @@ export class SignInComponent {
 
 	private readonly notificationService = inject(NotificationService);
 
+	// TODO (Dat Ngo): If we have only one type, we can use like this new BehaviorSubject(false);
 	/** Loading state. */
 	protected readonly isLoading$ = new BehaviorSubject<boolean>(false);
 
+	// TODO (Dat Ngo): We should add readonly here.
 	/** Signin form builder .*/
 	protected signInForm = this.formBuilder.group({
 		email: ['', Validators.required],
 		password: ['', [Validators.required, Validators.minLength(8)]],
 	});
 
+	// TODO (Dat Ngo): We should use new approach.
 	public constructor(private formBuilder: NonNullableFormBuilder) {}
 
 	/** Onsubmit signin form. */
 	protected onSubmit(): void {
+		// TODO (Dat Ngo): We should mark form as touched here.
 		if (this.signInForm.invalid) {
 			return;
 		}
@@ -71,9 +75,12 @@ export class SignInComponent {
 			});
 	}
 
+	// TODO (Dat Ngo): We should move variables above the constructor.
 	/** Password hide signal. */
 	protected hide = signal(true);
 
+	// TODO (Dat Ngo): https://wiki.saritasa.rocks/frontend/languages/ts-js/naming
+	// TODO (Dat Ngo): We should remove redundant code.
 	/**
 	 * Password hide and review click event.
 	 * @param event Mouse event.

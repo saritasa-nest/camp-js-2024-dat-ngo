@@ -1,3 +1,4 @@
+// TODO (Dat Ngo): We should add readonly for property or Readonly for type
 export namespace BasedFilterParams {
 
 	/** Search. */

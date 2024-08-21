@@ -1,3 +1,6 @@
+/* TODO (Dat ngo): We should use BEM approach here. */
+
+
 .input-group {
 	margin-bottom: 1rem;
 	display: grid;
@@ -17,7 +20,10 @@
 	display: block;
 	text-align: right;
 	margin-bottom: 1rem;
+	/* TODO (Dat ngo): Can we use variable here. */
 	font-size: 0.875rem;
+
+	/* TODO (Dat ngo): We should use variable here. */
 	color: #007bff;
 	text-decoration: none;
 }
@@ -32,22 +38,31 @@
 	margin-right: 0.5rem;
 }
 
+/* TODO (Dat ngo): We should fix eslint here. */
 .btn-signin, .btn-google {
 	width: 100%;
+	/* TODO (Dat ngo): Do we actually need to use rem for padding */
 	padding: 0.75rem;
 	border: none;
+	/* TODO (Dat ngo): We should use variable here. */
 	border-radius: 4px;
 	cursor: pointer;
+	/* TODO (Dat ngo): Do we actually need to use rem for margin */
 	margin-bottom: 1rem;
 }
 
 .btn-signin {
+	/* TODO (Dat ngo): We should use variable here. */
 	background-color: #007bff;
+	/* TODO (Dat ngo): We should use variable here. */
+	/* TODO (Dat ngo): signin and google has same color, we should move it move it to these CSS above. */
 	color: white;
 }
 
 .btn-google {
+	/* TODO (Dat ngo): We should use variable here. */
 	background-color: #4285f4;
+	/* TODO (Dat ngo): We should use variable here. */
 	color: white;
 }
 
@@ -55,14 +70,18 @@
 	text-align: center;
 }
 
+/* TODO (Dat ngo): We add a class for span. */
 .signup-link span {
+	/* TODO (Dat ngo): Do we actually need to use rem for margin */
 	margin-right: 0.5rem;
 }
 
 .mat-icon-button {
+	/* TODO (Dat ngo): We should use variable here. */
 	border-color: red;
 }
 
 .icon-hide {
+	/* TODO (Dat ngo): We should use variable here. */
 	padding-right: 16px;
 }

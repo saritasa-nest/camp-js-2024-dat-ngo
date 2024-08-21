@@ -1,9 +1,14 @@
+/* TODO (Dat ngo): We should use BEM approach here. */
+/* TODO (Dat ngo): We can reuse style by using styleUrls. */
+/* TODO (Dat ngo): Please check signin component and fix this file. */
+
 .input-group {
 	margin-bottom: 1rem;
 	display: grid;
 }
 
 .label {
+	/* TODO (Dat ngo): Can we use variable here. */
 	color: #007bff;
 	margin: 5px;
 }

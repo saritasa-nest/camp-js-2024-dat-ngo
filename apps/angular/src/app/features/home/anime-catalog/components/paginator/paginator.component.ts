@@ -6,6 +6,8 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 @Component({
 	selector: 'camp-paginator',
 	standalone: true,
+
+	// TODO (Dat Ngo): We should remove CommonModule if we don't use it.
 	imports: [CommonModule, MatPaginatorModule],
 	templateUrl: './paginator.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,

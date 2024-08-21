@@ -4,10 +4,13 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 /** Form Error Service. */
 @Injectable({ providedIn: 'root' })
 export class FormErrorService {
+	// TODO (Dat Ngo): MUnexpected any. Specify a different type.
 	private errorMessages: Record<string, string | ((params: any) => string)> = {
 		required: 'This field is required',
 		email: 'Please enter a valid email address',
+	// TODO (Dat Ngo): MUnexpected any. Specify a different type.
 		minlength: (params: any) => `Minimum length is ${params.requiredLength} characters`,
+	// TODO (Dat Ngo): MUnexpected any. Specify a different type.
 		maxlength: (params: any) => `Maximum length is ${params.requiredLength} characters`,
 		passwordMismatch: 'Passwords do not match',
 		pattern: 'Invalid format',
@@ -43,6 +46,7 @@ export class FormErrorService {
 	 */
 	public getFormErrors(formGroup: FormGroup): Record<string, string | null> {
 		const formErrors: Record<string, string | null> = {};
+		// TODO (Dat Ngo): We should fix linter errors.
 		Object.keys(formGroup.controls).forEach((key) => {
 			const control = formGroup.get(key);
 			if (control instanceof FormGroup) {

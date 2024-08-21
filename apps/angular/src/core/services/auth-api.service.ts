@@ -40,6 +40,7 @@ export class AuthApiService {
 			catchError((error) => {
 				return throwError(
 					() => this.apiErrorMapper.fromDto(error.error)
+					// TODO (Dat Ngo): We should remove redundant code
 					// this.notificationService.showMessage(this.apiErrorMapper.fromDto(error.error), 'DISMISS')
 				);
 			}),

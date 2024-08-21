@@ -58,6 +58,7 @@ export class AnimeCatalogComponent implements OnInit {
 
 	private readonly router = inject(Router);
 
+	// TODO (Dat Ngo): We should remove redundant code.
 	private readonly appUrl = inject(AppUrlsConfig);
 
 	/** Current user state. */

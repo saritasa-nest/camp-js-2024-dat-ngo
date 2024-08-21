@@ -3,6 +3,7 @@ import { UserSecretDto } from '../dtos/user-secret.dto';
 import { UserSecret } from '../models/user-secret';
 import { TMapper } from '../types/mapper';
 
+// TODO (Dat Ngo): Why Angular classes are in libs/core, other frameworks cannot use the Injectable.
 /** UserSecret Mappper. */
 @Injectable({
 	providedIn: 'root',

@@ -14,10 +14,12 @@ import { SkeletonDirective } from '../../directives/skeleton.directive';
 	styleUrls: ['./table-cell-content.component.css'],
 })
 export class TableCellContentComponent {
+	// TODO (Dat Ngo): We should remove unused code.
 	/** Default width. */
 	@Input()
 	private width = '100%';
 
+	// TODO (Dat Ngo): We should remove unused code.
 	/** Default height. */
 	@Input()
 	private height = 24;

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 
+/* TODO (Dat Ngo): Missing JSDocs comment. */
 @Component({
 	selector: 'camp-error-snack-bar',
 	standalone: true,
@@ -11,5 +12,6 @@ import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ErrorSnackBarComponent {
+	// TODO (Dat Ngo): We should use inject approach
 	constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {}
 }

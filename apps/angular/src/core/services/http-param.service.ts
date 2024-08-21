@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 	providedIn: 'root',
 })
 export class HttpParamsService {
+	// TODO (Dat Ngo): Wrong docs
 	/** Buldt an HTTP params from the URL hold the URL.
 	 * @param params Filter Params.
 	 */

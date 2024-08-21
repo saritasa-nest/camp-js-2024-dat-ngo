@@ -3,6 +3,7 @@ import { AnimeType } from './anime-type';
 import { BasedFilterParams } from './based-filter-params';
 import { SortsDirection } from './sort-direction';
 
+// TODO (Dat Ngo): We should add readonly for property or Readonly for type
 /** Anime query params . */
 export namespace AnimeFilterParams {
 

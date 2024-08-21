@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BasedFilterParams } from '../models/based-filter-params';
 import { BasedQueryParamsDto } from '../dtos/based-filter-params.dto';
 
+// TODO (Dat Ngo): Why Angular classes are in libs/core, other frameworks cannot use the Injectable.
 /** Mapper for filter params. */
 @Injectable({ providedIn: 'root' })
 export class BasedFiltersParamsMapper {

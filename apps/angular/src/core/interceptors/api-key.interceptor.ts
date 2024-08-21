@@ -3,6 +3,7 @@ import { inject } from '@angular/core';
 import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
 import { Observable } from 'rxjs';
 
+// TODO (Dat Ngo): Wrong name => Interceptor
 /** ApiKey Interceptor. */
 export class ApiKeyIntercetor implements HttpInterceptor {
 	private readonly appConfig = inject(AppUrlsConfig);

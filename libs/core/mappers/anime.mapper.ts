@@ -38,6 +38,7 @@ const MAP_ANIME_TYPE_TO_DTO: Record<AnimeType, AnimeTypeDto> = {
 	[AnimeType.Unknown]: AnimeTypeDto.Unknown,
 };
 
+// TODO (Dat Ngo): Why Angular classes are in libs/core, other frameworks cannot use the Injectable.
 /** Mapper for mapping AnimeDto and Anime. */
 @Injectable({
 	providedIn: 'root',

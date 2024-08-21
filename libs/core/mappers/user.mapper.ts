@@ -3,8 +3,10 @@ import { UserDto } from '../dtos/user.dto';
 import { User } from '../models/user';
 import { TMapper } from '../types/mapper';
 
+// TODO (Dat Ngo): Why Angular classes are in libs/core, other frameworks cannot use the Injectable.
 @Injectable({ providedIn: 'root' })
 export class UserMapper implements TMapper<UserDto, User> {
+	// TODO (Dat Ngo): We should fix linter errors and add JSDocs comments.
 	public fromDto(dto: UserDto): User {
 		return new User({
 			email: dto.email,
@@ -16,6 +18,7 @@ export class UserMapper implements TMapper<UserDto, User> {
 		});
 	}
 
+	// TODO (Dat Ngo): We should fix linter errors and add JSDocs comments.
 	public toDto(model: User): UserDto {
 		return {
 			email: model.email,

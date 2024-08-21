@@ -7,6 +7,7 @@ import { AnimeSortField } from '../models/anime-sort-field';
 import { SortsDirection } from '../models/sort-direction';
 import { TMapper } from '../types/mapper';
 
+// TODO (Dat Ngo): Why Angular classes are in libs/core, other frameworks cannot use the Injectable.
 /** @inheritdoc */
 @Injectable({
 	providedIn: 'root',

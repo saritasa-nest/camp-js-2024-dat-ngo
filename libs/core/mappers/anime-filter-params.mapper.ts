@@ -28,6 +28,7 @@ const MAP_ANIME_SORT_TO_DTO: Record<AnimeSortField, AnimeSortFieldDto> = {
 	[AnimeSortField.TitleEng]: AnimeSortFieldDto.TitleEng,
 };
 
+// TODO (Dat Ngo): Why Angular classes are in libs/core, other frameworks cannot use the Injectable.
 /** Mapper for filter params. */
 @Injectable({ providedIn: 'root' })
 export class AnimeFiltersParamsMapper {

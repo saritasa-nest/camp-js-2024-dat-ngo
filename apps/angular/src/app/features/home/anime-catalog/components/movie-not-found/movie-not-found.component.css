@@ -2,6 +2,7 @@
 	display: grid;
 	justify-content: center;
 	align-items: center;
+	/* TODO (Dat Ngo): We should use variables here. */
 	background-color: white;
 }
 

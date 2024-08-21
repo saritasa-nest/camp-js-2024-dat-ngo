@@ -1,5 +1,7 @@
 import { AnimeType } from './anime-type';
 
+// TODO (Dat Ngo): We should add readonly.
+
 /** Url Query Params. */
 export type UrlQueryParams = {
 

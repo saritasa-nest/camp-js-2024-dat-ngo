@@ -19,14 +19,19 @@ import { HttpParamsService } from './http-param.service';
 export class AnimeService {
 	private readonly httpClient = inject(HttpClient);
 
+	// TODO (Dat Ngo): We should add readonly
 	private paginationMapper = inject(PaginationMapper);
 
+	// TODO (Dat Ngo): We should add readonly
 	private animeMapper = inject(AnimeMapper);
 
+	// TODO (Dat Ngo): We should add readonly
 	private httpParamsService = inject(HttpParamsService);
 
+	// TODO (Dat Ngo): We should add readonly
 	private appUrlsConfig = inject(AppUrlsConfig);
 
+	// TODO (Dat Ngo): We should add readonly
 	private animeQueryMapper = inject(AnimeFiltersParamsMapper);
 
 	/**
