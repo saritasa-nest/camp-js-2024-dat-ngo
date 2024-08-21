@@ -1,4 +1,4 @@
-import { Component, forwardRef, inject, Input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,6 +20,7 @@ import { MatIcon } from '@angular/material/icon';
 		},
 	],
 	standalone: true,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasswordInputComponent implements ControlValueAccessor {
 	/** Label. */
