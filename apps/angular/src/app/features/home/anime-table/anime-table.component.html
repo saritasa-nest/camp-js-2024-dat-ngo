@@ -1,5 +1,4 @@
 @if(animePage$ | async; as animePage) {
-	<section class="mat-elevation-z8 anime__table-container" >
 		<table mat-table [dataSource]="animePage?.items ?? []" [trackBy]="trackById">
 			<!--- Note that these columns can be defined in any order.
 						The actual rendered columns are set as a property on the row definition" -->
@@ -40,5 +39,4 @@
 			<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
 			<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 		</table>
-	</section>
 }

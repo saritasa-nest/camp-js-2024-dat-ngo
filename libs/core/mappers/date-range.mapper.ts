@@ -1,14 +1,14 @@
-import { BroadCastedTimeDto } from '../dtos/broadcasted-time.dto';
-import { BroadCastedTime } from '../models/broadcasted-time.model';
+import { DateRangeDto } from '../dtos/date-range.dto';
+import { DateRange } from '../models/date-range';
 
-export namespace broadCastedTimeMapper {
+export namespace DateRangeMapper {
 
 	/**
 	 * Maps dto to model.
 	 * @param dto Broadcasted time dto.
 	 */
-	export function fromDto(dto: BroadCastedTimeDto): BroadCastedTime {
-		return new BroadCastedTime({
+	export function fromDto(dto: DateRangeDto): DateRange {
+		return new DateRange({
 			startDate: dto.start ? new Date(dto.start) : null,
 			endDate: dto.end ? new Date(dto.end) : null,
 		});
@@ -18,7 +18,7 @@ export namespace broadCastedTimeMapper {
 	 * Maps dto to model.
 	 * @param animeTime Broadcasted time dto.
 	 */
-	export function toDto(animeTime: BroadCastedTime): BroadCastedTimeDto {
+	export function toDto(animeTime: DateRange): DateRangeDto {
 		return {
 			start: animeTime.startDate ? animeTime.startDate.toISOString() : null,
 			end: animeTime.endDate ? animeTime.endDate.toISOString() : null,

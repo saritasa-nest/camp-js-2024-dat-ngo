@@ -1,4 +1,4 @@
-import { BroadCastedTime } from './broadcasted-time.model';
+import { DateRange } from './date-range';
 
 import { AnimeType } from './amime-type';
 import { AnimeStatus } from './anime-status';
@@ -26,7 +26,7 @@ export class Anime extends Immerable {
 	public readonly coverImageUrl: string;
 
 	/** Broadcast time frame from start to end of a anime. */
-	public readonly broadcasted: BroadCastedTime;
+	public readonly broadcasted: DateRange;
 
 	/** Type of the anime ex OVA. */
 	public readonly animeType: AnimeType;

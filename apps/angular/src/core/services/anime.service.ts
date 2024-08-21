@@ -14,7 +14,6 @@ import { map, Observable } from 'rxjs';
 export class AnimeService {
 	private readonly httpClient = inject(HttpClient);
 
-	private readonly paginationMapper = inject(PaginationMapper);
 
 	private readonly appApiConfig = inject(AppUrlsConfig);
 
@@ -27,6 +26,6 @@ export class AnimeService {
 		const url = new URL(this.appApiConfig.anime.list);
 		return this.httpClient
 			.get<PaginationDto<AnimeDto>>(url.toString(), { params: this.param })
-			.pipe(map(value => this.paginationMapper.fromDto(value, anime => AnimeMapper.fromDto(anime))));
+			.pipe(map(value => PaginationMapper.fromDto(value, anime => AnimeMapper.fromDto(anime))));
 	}
 }

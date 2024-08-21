@@ -3,14 +3,10 @@ import { AnimeDto } from '../dtos/anime.dto';
 
 import { AnimeStatusMapper } from './anime-status.mapper';
 import { AnimeTypeMapper } from './anime-type.mapper';
-import { broadCastedTimeMapper } from './broadcasted-time.mapper';
+import { DateRangeMapper } from './date-range.mapper';
 
 /** Mapper for mapping AnimeDto and Anime. */
 export namespace AnimeMapper {
-	const animeStatusMapper = new AnimeStatusMapper();
-
-	const animeTypeMapper = new AnimeTypeMapper();
-
 	/**
 	 * Mapper for dto to model.
 	 * @param dto AnimeDto .
@@ -23,9 +19,9 @@ export namespace AnimeMapper {
 			englishTitle: dto.title_eng,
 			japaneseTitle: dto.title_jpn,
 			coverImageUrl: dto.image,
-			broadcasted: broadCastedTimeMapper.fromDto(dto.aired),
-			animeType: animeTypeMapper.MAP_ANIME_TYPE_FROM_DTO[dto.type],
-			animeStatus: animeStatusMapper.MAP_ANIME_STATUS_FROM_DTO[dto.status],
+			broadcasted: DateRangeMapper.fromDto(dto.aired),
+			animeType: AnimeTypeMapper.fromDto(dto.type),
+			animeStatus: AnimeStatusMapper.fromDto(dto.status),
 			score: dto.score,
 			userScore: dto.user_score,
 			studios: dto.studios,
@@ -45,9 +41,9 @@ export namespace AnimeMapper {
 			title_eng: anime.englishTitle,
 			title_jpn: anime.japaneseTitle,
 			image: anime.coverImageUrl,
-			aired: broadCastedTimeMapper.toDto(anime.broadcasted),
-			type: animeTypeMapper.MAP_ANIME_TYPE_TO_DTO[anime.animeType],
-			status: animeStatusMapper.MAP_ANIME_STATUS_TO_DTO[anime.animeStatus],
+			aired: DateRangeMapper.toDto(anime.broadcasted),
+			type: AnimeTypeMapper.toDto(anime.animeType),
+			status: AnimeStatusMapper.toDto(anime.animeStatus),
 			score: anime.score,
 			user_score: anime.userScore,
 			studios: anime.studios,
