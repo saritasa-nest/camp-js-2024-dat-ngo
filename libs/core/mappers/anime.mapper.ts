@@ -1,11 +1,5 @@
-import { Injectable } from '@angular/core';
-
 import { Anime } from '../models/anime';
 import { AnimeDto } from '../dtos/anime.dto';
-import { AnimeTypeDto } from '../dtos/amime-type.dto';
-import { AnimeType } from '../models/anime-type';
-import { AnimeStatusDto } from '../dtos/anime-status.dto';
-import { AnimeStatus } from '../models/anime-status';
 
 import { AnimeStatusMapper } from './anime-status.mapper';
 import { AnimeTypeMapper } from './anime-type.mapper';
@@ -13,6 +7,7 @@ import { DateRangeMapper } from './date-range.mapper';
 
 /** Mapper for mapping AnimeDto and Anime. */
 export namespace AnimeMapper {
+
 	/**
 	 * Mapper for dto to model.
 	 * @param dto AnimeDto .

@@ -3,6 +3,7 @@ import { AnimeType } from '../models/anime-type';
 
 /** Mapper for mapping Anime types. */
 export namespace AnimeTypeMapper {
+
 	/** Anime Type from DTO. */
 	const MAP_ANIME_TYPE_FROM_DTO: Record<AnimeTypeDto, AnimeType> = {
 		[AnimeTypeDto.Movie]: AnimeType.Movie,
