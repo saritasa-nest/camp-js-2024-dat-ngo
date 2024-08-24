@@ -14,7 +14,7 @@
 			<td mat-cell class="anime__cell" *matCellDef="let anime">
 				<camp-table-cell-content [isLoading]="isLoading" class="anime__image-cell">
 					<div class="anime__image-container">
-						<img class="anime__image" [src]="anime.coverImage" [alt]="isLoading ? null : anime.titleJpn" />
+						<img class="anime__image" [src]="anime.coverImageUrl" [alt]="isLoading ? null : anime.titleJpn" />
 					</div>
 				</camp-table-cell-content>
 			</td>
@@ -24,7 +24,7 @@
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>English Title</th>
 			<td mat-cell class="anime__cell anime__title" *matCellDef="let anime">
 				<camp-table-cell-content [isLoading]="isLoading">
-					{{ anime.titleEng | empty }}
+					{{ anime.englishTitle | empty }}
 				</camp-table-cell-content>
 			</td>
 		</ng-container>
@@ -33,7 +33,7 @@
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Japanese Title</th>
 			<td mat-cell class="anime__cell anime__title" *matCellDef="let anime">
 				<camp-table-cell-content [isLoading]="isLoading">
-					<span class="anime__japan-title">{{ anime.titleJpn | empty }}</span>
+					<span class="anime__japan-title">{{ anime.japaneseTitle | empty }}</span>
 				</camp-table-cell-content>
 			</td>
 		</ng-container>

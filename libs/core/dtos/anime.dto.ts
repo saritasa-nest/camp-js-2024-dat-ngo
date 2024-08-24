@@ -1,16 +1,12 @@
 import { AnimeTypeDto } from './amime-type.dto';
 import { AnimeStatusDto } from './anime-status.dto';
+import { DateRangeDto } from './date-range.dto';
 
+/** Anime Dto. */
 export type AnimeDto = {
 
 	/** Id of anime. */
 	readonly id: number;
-
-	/** Date that anime was created. */
-	readonly created: string;
-
-	/** Last modified time. */
-	readonly modified: string;
 
 	/** Title in English. */
 	readonly title_eng: string;
@@ -22,14 +18,7 @@ export type AnimeDto = {
 	readonly image: string;
 
 	/** Broadcast time frame from start to end of a anime. */
-	readonly aired: {
-
-		/** Start Date.*/
-		readonly start: string | null;
-
-		/** End Date.*/
-		readonly end: string | null;
-	};
+	readonly aired: DateRangeDto;
 
 	/** Type of the anime ex OVA. */
 	readonly type: AnimeTypeDto;
