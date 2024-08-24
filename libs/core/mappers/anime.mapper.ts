@@ -7,6 +7,7 @@ import { DateRangeMapper } from './date-range.mapper';
 
 /** Mapper for mapping AnimeDto and Anime. */
 export namespace AnimeMapper {
+
 	/**
 	 * Mapper for dto to model.
 	 * @param dto AnimeDto .

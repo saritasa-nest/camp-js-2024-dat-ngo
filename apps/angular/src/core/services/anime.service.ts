@@ -14,7 +14,6 @@ import { map, Observable } from 'rxjs';
 export class AnimeService {
 	private readonly httpClient = inject(HttpClient);
 
-
 	private readonly appApiConfig = inject(AppUrlsConfig);
 
 	// TODO (Dat Ngo): Create filter params model and dto instead of using this while doing next task

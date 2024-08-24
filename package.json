@@ -22,7 +22,7 @@
     "vanilla:serve": "nx run vanilla:serve",
     "vanilla:lint": "nx run vanilla:lint --fix",
     "vanilla:stylelint": "nx run vanilla:stylelint",
-    "core:lint": "nx run core:lint --verbose",
+    "core:lint": "nx run core:lint --fix",
     "theme:stylelint": "nx run theme:stylelint",
     "material": "nx add @angular/material"
   },
