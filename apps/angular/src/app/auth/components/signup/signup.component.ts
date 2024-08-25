@@ -54,14 +54,14 @@ export class SignupComponent {
 			{
 				password: [
 					'',
-					[Validators.required, Validators.minLength(EMAIL_MIN_LENGTH), Validators.maxLength(EMAIL_MAX_LENGTH)],
+					[Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH), Validators.maxLength(PASSWORD_MAX_LENGTH)],
 				],
 				reTypePassword: [
 					'',
 					[Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH), Validators.maxLength(PASSWORD_MAX_LENGTH)],
 				],
 			},
-			{ validators: mustMatch('password', 'reTypePassword') },
+			{ validators: mustMatch('password', 'reTypePassword') }
 		),
 	});
 

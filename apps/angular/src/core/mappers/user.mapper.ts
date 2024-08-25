@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { UserDto } from '../../../../../libs/core/dtos/user.dto';
-import { User } from '../../../../../libs/core/models/user';
-import { TMapper } from '../../../../../libs/core/types/mapper';
+import { UserDto } from '@js-camp/core/dtos/user.dto';
+import { User } from '@js-camp/core/models/user';
+import { TMapper } from '@js-camp/core/types/mapper';
+
+/** User mapper . */
 @Injectable({ providedIn: 'root' })
 export class UserMapper implements TMapper<UserDto, User> {
-
 	/** @inheritdoc */
 	public fromDto(dto: UserDto): User {
 		return new User({

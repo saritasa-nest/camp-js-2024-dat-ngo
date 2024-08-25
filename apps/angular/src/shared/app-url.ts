@@ -19,14 +19,14 @@ export class AppUrlsConfig {
 
 	/** Auth-related routes. */
 	public readonly auth = {
-		login: this.toApi('auth/login/'),
-		register: this.toApi('auth/register/'),
-		refresh: this.toApi('auth/token/refresh/'),
+		login: this.toApi('auth', 'login'),
+		register: this.toApi('auth', 'register'),
+		refresh: this.toApi('auth', 'token', 'refresh'),
 	};
 
 	/** Users-related routes. */
 	public readonly users = {
-		profile: this.toApi('users/profile/'),
+		profile: this.toApi('users', 'profile'),
 	};
 
 	/**
