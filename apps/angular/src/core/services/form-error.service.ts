@@ -9,7 +9,7 @@ export class FormErrorService {
 		email: 'Please enter a valid email address',
 		minlength: (params: ValidationErrors) => `Minimum length is ${params['requiredLength']} characters`,
 		maxlength: (params: ValidationErrors) => `Maximum length is ${params['requiredLength']} characters`,
-		passwordMismatch: 'The retype password does not match with password',
+		passwordMismatch: 'The provided passwords do not match.',
 		pattern: 'Invalid format',
 	};
 
@@ -43,7 +43,7 @@ export class FormErrorService {
 	 */
 	public getFormErrors(formGroup: FormGroup): Record<string, string | null> {
 		const formErrors: Record<string, string | null> = {};
-		Object.keys(formGroup.controls).forEach(key => {
+		Object.keys(formGroup.controls).forEach((key) => {
 			const control = formGroup.get(key);
 			if (control instanceof FormGroup) {
 				// Recursively get errors for nested form groups
