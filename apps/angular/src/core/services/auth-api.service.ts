@@ -10,7 +10,7 @@ import { Registration } from '@js-camp/core/models/registration';
 import { UserSecret } from '@js-camp/core/models/user-secret';
 import { catchError, map, Observable, throwError } from 'rxjs';
 
-import { ApiError } from '@js-camp/core/models/api-error';
+import { ApiErrorExtended } from '@js-camp/core/models/api-error';
 
 import { UserSecretMapper } from '../mappers/user-secret.mapper';
 import { RegisterMapper } from '../mappers/registration.mapper';
@@ -42,17 +42,17 @@ export class AuthApiService {
 		const data = this.loginDataMapper.toDto(loginData);
 		return this.httpClient.post<UserSecretDto>(this.appUrlConfig.auth.login, data).pipe(
 			catchError((error: unknown) => {
-				let mappedError: Error;
+				let mappedError: ApiErrorExtended;
 				if (error instanceof HttpErrorResponse) {
 					if (errorGuardFromDTO(error.error)) {
-						mappedError = new Error(JSON.stringify(this.apiErrorMapper.fromDto(error.error)));
+						mappedError = this.apiErrorMapper.fromDto(error.error);
 					}
 				}
 
 				// Return the Error instance to comply with the rule
 				return throwError(() => mappedError);
 			}),
-			map((secret) => this.userSecretMapper.fromDto(secret))
+			map(secret => this.userSecretMapper.fromDto(secret)),
 		);
 	}
 
@@ -65,7 +65,7 @@ export class AuthApiService {
 			.post<UserSecretDto>(this.appUrlConfig.auth.refresh, this.userSecretMapper.toDto(secret))
 			.pipe(
 				catchError((error: unknown) => {
-					let mappedError: ApiError;
+					let mappedError: ApiErrorExtended;
 					if (error instanceof HttpErrorResponse) {
 						if (errorGuardFromDTO(error.error)) {
 							mappedError = this.apiErrorMapper.fromDto(error.error);
@@ -75,7 +75,7 @@ export class AuthApiService {
 					// Return the Error instance to comply with the rule
 					return throwError(() => mappedError);
 				}),
-				map((token) => this.userSecretMapper.fromDto(token))
+				map(token => this.userSecretMapper.fromDto(token)),
 			);
 	}
 
@@ -88,7 +88,7 @@ export class AuthApiService {
 			.post<UserSecretDto>(this.appUrlConfig.auth.register, this.registrationMapper.toDto(registerData))
 			.pipe(
 				catchError((error: unknown) => {
-					let mappedError: ApiError;
+					let mappedError: ApiErrorExtended;
 					if (error instanceof HttpErrorResponse) {
 						if (errorGuardFromDTO(error.error)) {
 							mappedError = this.apiErrorMapper.fromDto(error.error);
@@ -98,7 +98,7 @@ export class AuthApiService {
 					// Return the Error instance to comply with the rule
 					return throwError(() => mappedError);
 				}),
-				map((token) => this.userSecretMapper.fromDto(token))
+				map(token => this.userSecretMapper.fromDto(token)),
 			);
 	}
 }
