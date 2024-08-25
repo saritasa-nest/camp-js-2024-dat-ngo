@@ -1,4 +1,4 @@
-<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+<form class="form" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
 	<div class="form__input-group">
 		<mat-form-field appearance="outline">
 			<mat-label class="form__label" for="email">Email</mat-label>
@@ -51,10 +51,11 @@
 		<input type="checkbox" id="rememberMe" />
 		<label for="rememberMe">Remember me</label>
 	</div>
-	<button type="submit" class="form__btn-signup" [disabled]="signUpForm.invalid && (isLoading$ | async)">Sign up</button>
-	{{(isLoading$ | async)}} {{signUpForm.invalid}}
+	<button type="submit" class="form__btn-signup" [disabled]="signUpForm.invalid && (isLoading$ | async)">
+		Sign up
+	</button>
 	<div class="form__signup-link">
 		<span>Already have an account?</span>
-		<a href="/auth/signin">Sign in now</a>
+		<a [routerLink]="['../', 'signin']">Sign in now</a>
 	</div>
 </form>

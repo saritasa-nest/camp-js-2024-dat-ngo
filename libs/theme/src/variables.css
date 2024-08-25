@@ -53,9 +53,9 @@
 	--anime-not-yet-aired-color: rgb(244 67 54);
 	--anime-header-row-bg: rgb(232 244 255);
 	--anime-header-row-color: rgb(2 30 74);
-	--anime-japan-title-row-color: rgb(53 141 235);
+	--anime-dodger-blue: rgb(53 141 235);
 	--anime-copy-right: rgb(102 102 102);
-	--anime-button: rgb(0 123 255);
+	--anime-blue-ribbon: rgb(0 123 255);
 
 	/* Spacing */
 	--spacing-xs: 4px;

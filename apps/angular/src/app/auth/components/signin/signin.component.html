@@ -1,4 +1,4 @@
-<form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+<form class="form" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
 	<div class="form__input-group">
 		<mat-form-field appearance="outline">
 			<mat-label class="form__label" for="email">Email</mat-label>
@@ -6,23 +6,25 @@
 			<mat-error *ngIf="shouldShowError('email')">{{ getErrorMessage("email") }}</mat-error>
 		</mat-form-field>
 		<camp-password-input
-					[formControl]="signInForm.controls.password"
-					label="Password"
-					placeholder="Enter password"
-					[touched]="signInForm.controls.password.touched"
-				></camp-password-input>
+			[formControl]="signInForm.controls.password"
+			label="Password"
+			placeholder="Enter password"
+			[touched]="signInForm.controls.password.touched"
+		></camp-password-input>
 	</div>
 	<section class="form__option">
 		<div class="form__remember-me">
 			<input type="checkbox" id="rememberMe" />
 			<label for="rememberMe">Remember me</label>
 		</div>
-		<a href="#" class="form__forgot-password">Forgot password?</a>
+		<a class="form__forgot-password">Forgot password?</a>
 	</section>
-	<button type="submit" class="form__btn-signin" [disabled]="signInForm.invalid && (isLoading$ | async)">Sign in</button>
+	<button type="submit" class="form__btn-signin" [disabled]="signInForm.invalid && (isLoading$ | async)">
+		Sign in
+	</button>
 	<button type="button" class="form__btn-google">Or sign in with Google</button>
 	<div class="form__signup-link">
 		<span>Don't have an account?</span>
-		<a href="/auth/signup">Sign up now</a>
+		<a [routerLink]="['../', 'signup']">Sign up now</a>
 	</div>
 </form>

@@ -4,20 +4,29 @@ import { Validators, ReactiveFormsModule, NonNullableFormBuilder, FormControl } 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormErrorService } from '@js-camp/angular/core/services/form-error.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Registration } from '@js-camp/core/models/registration';
 import { BehaviorSubject, catchError, finalize, take, throwError } from 'rxjs';
 import { PATHS } from '@js-camp/core/utils/paths';
 import { UserService } from '@js-camp/angular/core/services/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import {
+	PASSWORD_MIN_LENGTH,
+	PASSWORD_MAX_LENGTH,
+	EMAIL_MIN_LENGTH,
+	EMAIL_MAX_LENGTH,
+	NAME_MAX_LENGTH,
+} from '@js-camp/angular/shared/constant';
+
 import { PasswordInputComponent } from '../password-input/password-input.component';
+import { mustMatch } from '@js-camp/angular/core/utils/custom-validator';
 
 /** Sign up.*/
 @Component({
 	selector: 'camp-signup',
 	standalone: true,
-	imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule, PasswordInputComponent],
+	imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule, PasswordInputComponent, RouterLink],
 	templateUrl: './signup.component.html',
 	styleUrl: './signup.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,34 +38,50 @@ export class SignupComponent {
 
 	private readonly router = inject(Router);
 
-	/** Form errors. */
-	protected formErrors: { [key: string]: string | null } = {};
+	private formBuilder = inject(NonNullableFormBuilder);
 
 	private readonly destroyRef = inject(DestroyRef);
 
-	public constructor(private formBuilder: NonNullableFormBuilder) {}
+	/** Form errors. */
+	protected formErrors: { [key: string]: string | null } = {};
 
 	/** Sign Up Form. */
 	protected signUpForm = this.formBuilder.group({
 		email: ['', [Validators.required, Validators.email]],
-		firstName: ['', [Validators.required, Validators.maxLength(30)]],
-		lastName: ['', [Validators.required, Validators.maxLength(30)]],
-		passwordGroup: this.formBuilder.group({
-			password: ['', [Validators.required, Validators.minLength(8)]],
-			reTypePassword: ['', [Validators.required, Validators.minLength(8)]],
-		}),
+		firstName: ['', [Validators.required, Validators.maxLength(NAME_MAX_LENGTH)]],
+		lastName: ['', [Validators.required, Validators.maxLength(NAME_MAX_LENGTH)]],
+		passwordGroup: this.formBuilder.group(
+			{
+				password: [
+					'',
+					[Validators.required, Validators.minLength(EMAIL_MIN_LENGTH), Validators.maxLength(EMAIL_MAX_LENGTH)],
+				],
+				reTypePassword: [
+					'',
+					[Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH), Validators.maxLength(PASSWORD_MAX_LENGTH)],
+				],
+			},
+			{ validators: mustMatch('password', 'reTypePassword') },
+		),
 	});
 
 	/** Loading state. */
 	protected readonly isLoading$ = new BehaviorSubject<boolean>(false);
 
-	/** Display error. */
-
+	/** Display error.
+	 * @param controlName Name of the control.
+	 * @returns Should show error of control field.
+	 */
 	protected shouldShowError(controlName: string): boolean {
 		const formControl = this.signUpForm.get(controlName) as FormControl;
 		return this.formErrorService.shouldShowError(formControl);
 	}
 
+	/**
+	 *	Get Error message.
+	 * @param controlName Name of the control.
+	 * @returns The error message.
+	 */
 	protected getErrorMessage(controlName: string): string | null {
 		const data = this.signUpForm.get(controlName);
 		if (data == null) {
@@ -85,7 +110,6 @@ export class SignupComponent {
 					take(1),
 					catchError((error: unknown) => {
 						this.formErrors = this.formErrorService.getFormErrors(this.signUpForm);
-						console.log(this.formErrors);
 						return throwError(() => error);
 					}),
 					finalize(() => {
@@ -103,7 +127,6 @@ export class SignupComponent {
 				});
 		} else {
 			this.formErrors = this.formErrorService.getFormErrors(this.signUpForm);
-			console.warn('Form is invalid', this.formErrors);
 		}
 	}
 }

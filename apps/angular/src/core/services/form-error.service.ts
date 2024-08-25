@@ -43,7 +43,7 @@ export class FormErrorService {
 	 */
 	public getFormErrors(formGroup: FormGroup): Record<string, string | null> {
 		const formErrors: Record<string, string | null> = {};
-		Object.keys(formGroup.controls).forEach(key => {
+		Object.keys(formGroup.controls).forEach((key) => {
 			const control = formGroup.get(key);
 			if (control instanceof FormGroup) {
 				// Recursively get errors for nested form groups

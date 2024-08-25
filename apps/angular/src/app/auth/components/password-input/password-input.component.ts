@@ -40,7 +40,7 @@ export class PasswordInputComponent implements ControlValueAccessor {
 	public formControl = new FormControl();
 
 	/** Value of the field.*/
-	protected _value = '';
+	protected value = '';
 
 	/** Form error service. */
 	protected readonly formErrorService = inject(FormErrorService);
@@ -48,21 +48,21 @@ export class PasswordInputComponent implements ControlValueAccessor {
 	/** ControlValueAccessor interface methods.
 	 * @param value On change value.
 	 */
-	public onChange = (value: string): void => {};
+	private onChange = (value: string): void => {};
 
 	/** On touch. */
-	public onTouched = () => {};
+	private onTouched = () => {};
 
 	/**
-	 * Called when the value in the UI needs to be updated
+	 * Called when the value in the UI needs to be updated.
 	 * @param value String to set.
 	 */
 	public writeValue(value: string): void {
-		this._value = value;
+		this.value = value;
 	}
 
 	/**
-	 * Registers a function to call when the control value changes
+	 * Registers a function to call when the control value changes.
 	 * @param fn Register function onChange.
 	 */
 	public registerOnChange(fn: (value: string) => void): void {
@@ -81,11 +81,11 @@ export class PasswordInputComponent implements ControlValueAccessor {
 	 *On input event execute set element onChange and onTouch.
 	 * @param event Input event.
 	 */
-	public onInput(event: Event): void {
+	protected onInput(event: Event): void {
 		const inputElement = event.target as HTMLInputElement;
 		if (inputElement && inputElement.value !== null) {
-			this._value = inputElement.value;
-			this.onChange(this._value);
+			this.value = inputElement.value;
+			this.onChange(this.value);
 			this.onTouched();
 		}
 	}
@@ -107,7 +107,7 @@ export class PasswordInputComponent implements ControlValueAccessor {
 	}
 
 	/** Password hide signal. */
-	protected hide = signal(true);
+	protected readonly hide = signal(true);
 
 	/**
 	 * Password hide and review click event.
