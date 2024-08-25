@@ -9,7 +9,7 @@ export class FormErrorService {
 		email: 'Please enter a valid email address',
 		minlength: (params: ValidationErrors) => `Minimum length is ${params['requiredLength']} characters`,
 		maxlength: (params: ValidationErrors) => `Maximum length is ${params['requiredLength']} characters`,
-		passwordMismatch: 'The provided passwords do not match.',
+		passwordMismatch: 'Confirmation does not match. Please verify both fields.',
 		pattern: 'Invalid format',
 	};
 
