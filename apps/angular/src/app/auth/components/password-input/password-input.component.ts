@@ -46,12 +46,16 @@ export class PasswordInputComponent implements ControlValueAccessor {
 	protected readonly formErrorService = inject(FormErrorService);
 
 	/** ControlValueAccessor interface methods.
-	 * @param value On change value.
+	 * @param _value On change value.
 	 */
-	private onChange = (value: string): void => {};
+	private onChange = (_value: string): void => {
+		/** No-op: Placeholder function for ControlValueAccessor. */
+	};
 
 	/** On touch. */
-	private onTouched = () => {};
+	private onTouched = (): void => {
+		/** No-op: Placeholder function for ControlValueAccessor. */
+	};
 
 	/**
 	 * Called when the value in the UI needs to be updated.
@@ -70,7 +74,7 @@ export class PasswordInputComponent implements ControlValueAccessor {
 	}
 
 	/**
-	 * Registers a function to call when the control is touched
+	 * Registers a function to call when the control is touched.
 	 * @param fn Register function onTouch.
 	 */
 	public registerOnTouched(fn: () => void): void {

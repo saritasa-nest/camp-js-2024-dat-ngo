@@ -19,8 +19,9 @@ import {
 	NAME_MAX_LENGTH,
 } from '@js-camp/angular/shared/constant';
 
-import { PasswordInputComponent } from '../password-input/password-input.component';
 import { mustMatch } from '@js-camp/angular/core/utils/custom-validator';
+
+import { PasswordInputComponent } from '../password-input/password-input.component';
 
 /** Sign up.*/
 @Component({
@@ -43,11 +44,19 @@ export class SignupComponent {
 	private readonly destroyRef = inject(DestroyRef);
 
 	/** Form errors. */
-	protected formErrors: { [key: string]: string | null } = {};
+	protected formErrors: { [key: string]: string | null; } = {};
 
 	/** Sign Up Form. */
 	protected signUpForm = this.formBuilder.group({
-		email: ['', [Validators.required, Validators.email]],
+		email: [
+			'',
+			[
+				Validators.required,
+				Validators.email,
+				Validators.minLength(EMAIL_MIN_LENGTH),
+				Validators.maxLength(EMAIL_MAX_LENGTH),
+			],
+		],
 		firstName: ['', [Validators.required, Validators.maxLength(NAME_MAX_LENGTH)]],
 		lastName: ['', [Validators.required, Validators.maxLength(NAME_MAX_LENGTH)]],
 		passwordGroup: this.formBuilder.group(
@@ -61,7 +70,7 @@ export class SignupComponent {
 					[Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH), Validators.maxLength(PASSWORD_MAX_LENGTH)],
 				],
 			},
-			{ validators: mustMatch('password', 'reTypePassword') }
+			{ validators: mustMatch('password', 'reTypePassword') },
 		),
 	});
 
@@ -115,7 +124,7 @@ export class SignupComponent {
 					finalize(() => {
 						this.isLoading$.next(false);
 					}),
-					takeUntilDestroyed(this.destroyRef)
+					takeUntilDestroyed(this.destroyRef),
 				)
 				.subscribe({
 					next: () => {

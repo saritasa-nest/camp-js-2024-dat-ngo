@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { UserSecretDto } from '../../../../../libs/core/dtos/user-secret.dto';
-import { UserSecret } from '../../../../../libs/core/models/user-secret';
-import { TMapper } from '../../../../../libs/core/types/mapper';
+
+import { UserSecretDto } from '@js-camp/core/dtos/user-secret.dto';
+import { UserSecret } from '@js-camp/core/models/user-secret';
+import { TMapper } from '@js-camp/core/types/mapper';
 
 /** UserSecret Mappper. */
 @Injectable({
@@ -30,4 +31,3 @@ export class UserSecretMapper implements TMapper<UserSecretDto, UserSecret> {
 		};
 	}
 }
-

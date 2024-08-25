@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { AnimeFilterParams } from '../../../../../libs/core/models/anime-filter-params';
-import { TMapper } from '../../../../../libs/core/types/mapper';
+import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
+import { TMapper } from '@js-camp/core/types/mapper';
 
 /** Anime query params. */
 export type AnimeQueryParams = Partial<

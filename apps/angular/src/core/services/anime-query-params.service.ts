@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { AnimeQueryParamsMapper } from '../mappers/anime-query-params.mapper';
 
 import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
 import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
+
+import { AnimeQueryParamsMapper } from '../mappers/anime-query-params.mapper';
 
 import { UrlParamsService } from './url-param.service';
 

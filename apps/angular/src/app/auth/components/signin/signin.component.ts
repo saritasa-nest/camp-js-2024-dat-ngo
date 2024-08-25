@@ -10,7 +10,7 @@ import { UserService } from '@js-camp/angular/core/services/user.service';
 import { Router, RouterLink } from '@angular/router';
 import { PATHS } from '@js-camp/core/utils/paths';
 import { NotificationService } from '@js-camp/angular/core/services/notification.service';
-import { PasswordInputComponent } from '../password-input/password-input.component';
+
 import { FormErrorService } from '@js-camp/angular/core/services/form-error.service';
 import {
 	PASSWORD_MIN_LENGTH,
@@ -18,6 +18,11 @@ import {
 	EMAIL_MIN_LENGTH,
 	EMAIL_MAX_LENGTH,
 } from '@js-camp/angular/shared/constant';
+
+import { errorGuard } from '@js-camp/angular/core/guards/error-guard';
+
+import { PasswordInputComponent } from '../password-input/password-input.component';
+
 /** Signin. */
 @Component({
 	selector: 'camp-authorization-form',
@@ -104,9 +109,14 @@ export class SignInComponent {
 			.pipe(
 				tap(() => this.isLoading$.next(true)),
 				take(1),
-				catchError((error) => {
-					return throwError(() => this.notificationService.showMessage(error, 'DISMISS'));
-				}),
+				catchError((error: unknown) =>
+					throwError(() => {
+						if (errorGuard(error)) {
+							this.notificationService.showMessage(error, 'DISMISS');
+						}
+						return error;
+					})
+				),
 				finalize(() => {
 					this.isLoading$.next(false);
 				})

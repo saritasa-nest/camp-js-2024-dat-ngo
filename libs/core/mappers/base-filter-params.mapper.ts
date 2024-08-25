@@ -9,7 +9,7 @@ export namespace BasedFiltersParamsMapper {
 	 * @param model Base filter params.
 	 */
 	export function mapPaginationOptionsToDto(
-		model: BasedFilterParams.Pagination
+		model: BasedFilterParams.Pagination,
 	): BasedQueryParamsDto.Pagination | null {
 		if (model.pageNumber !== null && model.pageSize !== null) {
 			return {
