@@ -24,4 +24,4 @@ export class Pagination<T> extends Immerable {
 }
 
 /** Pagination Type. */
-export type PaginationConstructorData<T> = OmitImmerable<Pagination<T>>;
+type PaginationConstructorData<T> = OmitImmerable<Pagination<T>>;

@@ -10,17 +10,6 @@
     --<name>-light-contrast-color: <light-contrast-color>;
   */
 
-	/** Prevalent color in the application */
-	--primary-color: #f97316;
-	--primary-contrast-color: white;
-	--primary-dark-color: #ea580c;
-	--primary-dark-contrast-color: white;
-	--primary-light-color: #fb923c;
-	--primary-light-contrast-color: black;
-	--background-color: white;
-	--background-contrast-color: black;
-	--error-color: red;
-
 	/* Colors */
 	--surface-color: rgb(255 255 255 / 100%);
 	--surface-overlay-color: rgb(0 0 0 / 5%);

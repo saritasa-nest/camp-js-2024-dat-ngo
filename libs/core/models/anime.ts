@@ -1,4 +1,4 @@
-import { BroadCastedTime } from '../types/BroadcastedTime.type';
+import { DateRange } from './date-range';
 
 import { AnimeType } from './anime-type';
 import { AnimeStatus } from './anime-status';
@@ -10,23 +10,17 @@ export class Anime extends Immerable {
 	/** Id of anime. */
 	public readonly id: number;
 
-	/** Date that anime was created. */
-	public readonly createdDate: Date;
-
-	/** Last modified time. */
-	public readonly modifiedDate: Date;
-
 	/** Title in English. */
-	public readonly titleEng: string;
+	public readonly englishTitle: string;
 
 	/** Title in Japanese. */
-	public readonly titleJpn: string;
+	public readonly japaneseTitle: string;
 
 	/** Cover image of the anime. */
-	public readonly coverImage: string;
+	public readonly coverImageUrl: string;
 
 	/** Broadcast time frame from start to end of a anime. */
-	public readonly broadcasted: BroadCastedTime;
+	public readonly broadcasted: DateRange;
 
 	/** Type of the anime ex OVA. */
 	public readonly animeType: AnimeType;
@@ -46,14 +40,12 @@ export class Anime extends Immerable {
 	/** Genres' id as array of string. */
 	public readonly genres: readonly string[];
 
-	public constructor(data: PaginationConstructorData) {
+	public constructor(data: AnimeConstructorData) {
 		super();
 		this.id = data.id;
-		this.createdDate = data.createdDate;
-		this.modifiedDate = data.modifiedDate;
-		this.titleEng = data.titleEng;
-		this.titleJpn = data.titleJpn;
-		this.coverImage = data.coverImage;
+		this.englishTitle = data.englishTitle;
+		this.japaneseTitle = data.japaneseTitle;
+		this.coverImageUrl = data.coverImageUrl;
 		this.broadcasted = data.broadcasted;
 		this.animeType = data.animeType;
 		this.animeStatus = data.animeStatus;
@@ -64,4 +56,4 @@ export class Anime extends Immerable {
 	}
 }
 
-type PaginationConstructorData = OmitImmerable<Anime>;
+type AnimeConstructorData = OmitImmerable<Anime>;

@@ -1,4 +1,4 @@
-/** Anime Type Dto. */
+/** Anime Status Dto. */
 export enum AnimeStatusDto {
 	CurrentlyAiring = 'AIRING',
 	FinishedAiring = 'FINISHED',

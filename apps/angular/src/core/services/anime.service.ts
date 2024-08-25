@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
 import { PaginationDto } from '@js-camp/core/dtos/pagination.dto';
-import { map, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Anime } from '@js-camp/core/models/anime';
 import { AnimeDto } from '@js-camp/core/dtos/anime.dto';
@@ -12,6 +11,8 @@ import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
 
 import { AnimeFiltersParamsMapper } from '@js-camp/core/mappers/anime-filter-params.mapper';
 
+import { map, Observable } from 'rxjs';
+
 import { HttpParamsService } from './http-param.service';
 
 /** Anime services. */
@@ -19,12 +20,9 @@ import { HttpParamsService } from './http-param.service';
 export class AnimeService {
 	private readonly httpClient = inject(HttpClient);
 
-	private readonly paginationMapper = inject(PaginationMapper);
-
 	private readonly httpParamsService = inject(HttpParamsService);
 
 	private readonly appUrlsConfig = inject(AppUrlsConfig);
-
 
 	/**
 	 * Build HttpParams from URL query params.
@@ -45,6 +43,6 @@ export class AnimeService {
 		const params = this.getHttpParams(queryParams);
 		return this.httpClient
 			.get<PaginationDto<AnimeDto>>(this.appUrlsConfig.anime.list, { params })
-			.pipe(map(responseDto => this.paginationMapper.fromDto(responseDto, AnimeMapper)));
+			.pipe(map((responseDto) => PaginationMapper.fromDto(responseDto, AnimeMapper.fromDto)));
 	}
 }

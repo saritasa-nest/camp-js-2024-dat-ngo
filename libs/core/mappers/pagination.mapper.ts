@@ -1,23 +1,17 @@
-import { inject, Injectable } from '@angular/core';
-
 import { PaginationDto } from '../../core/dtos/pagination.dto';
 
 import { Pagination } from '../models/pagination';
 
-import { TMapperFromDto, TMapperFunction } from '../types/mapper';
+import { MapperFunction } from '../types/mapper';
 
-/** Auth mapper. */
-@Injectable({
-	providedIn: 'root',
-})
-export class PaginationMapper {
+/** Pagination mapper. */
+export namespace PaginationMapper {
 
 	/** @inheritdoc */
-	public fromDto<TDto, TDomain>(
+	export function fromDto<TDto, TDomain>(
 		paginationDto: PaginationDto<TDto>,
-		mapper: TMapperFromDto<TDto, TDomain> | TMapperFunction<TDto, TDomain>,
+		mapperFn: MapperFunction<TDto, TDomain>,
 	): Pagination<TDomain> {
-		const mapperFn = typeof mapper === 'function' ? mapper : mapper.fromDto;
 		return new Pagination<TDomain>({
 			totalCount: paginationDto.count,
 			hasNext: Boolean(paginationDto.next),

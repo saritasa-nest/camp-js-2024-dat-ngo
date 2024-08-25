@@ -22,7 +22,7 @@
     "vanilla:serve": "nx run vanilla:serve",
     "vanilla:lint": "nx run vanilla:lint --fix",
     "vanilla:stylelint": "nx run vanilla:stylelint",
-    "core:lint": "nx run core:lint --verbose",
+    "core:lint": "nx run core:lint --fix",
     "theme:stylelint": "nx run theme:stylelint",
     "material": "nx add @angular/material"
   },
@@ -34,7 +34,6 @@
     "@angular/compiler": "18.0.5",
     "@angular/core": "18.0.5",
     "@angular/forms": "18.0.5",
-    "@angular/material": "~18.1.0",
     "@angular/platform-browser": "18.0.5",
     "@angular/platform-browser-dynamic": "18.0.5",
     "@angular/router": "18.0.5",
