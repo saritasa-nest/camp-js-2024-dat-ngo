@@ -23,6 +23,8 @@ import { SearchFilterFormComponent } from '@js-camp/angular/app/features/anime/a
 import { PaginatorComponent } from '@js-camp/angular/app/features/anime/anime-catalog/components/paginator/paginator.component';
 import { AnimeTableComponent } from '@js-camp/angular/app/features/anime/anime-catalog/components/anime-table/anime-table.component';
 
+const DEBOUNCE_TIME = 1000;
+
 /** Anime catalog. */
 @Component({
 	selector: 'camp-anime-catalog',
@@ -60,7 +62,6 @@ export class AnimeCatalogComponent implements OnInit {
 	});
 
 	public constructor() {
-		const DEBOUNCE_TIME = 1000;
 		this.animePage$ = this.filter$.pipe(
 			debounceTime(DEBOUNCE_TIME),
 			tap(() => {
@@ -70,29 +71,29 @@ export class AnimeCatalogComponent implements OnInit {
 				this.animeService.getAnime(queryParams).pipe(
 					finalize(() => {
 						this.isLoading$.next(false);
-					}),
-				)),
+					})
+				)
+			)
 		);
 	}
 
 	/** Subscribe the filter params and pass them to the filter form and paginator. */
 	public ngOnInit(): void {
-		this.initializeFilterParamsSideEffect().pipe(takeUntilDestroyed(this.destroyRef))
-			.subscribe();
+		this.initializeFilterParamsSideEffect().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
 	}
 
 	private initializeFilterParamsSideEffect(): Observable<void> {
 		return this.filter$.pipe(
-			tap(params => {
+			tap((params) => {
 				this.filterParams$.next(params);
 				this.sortParams$.next(
 					this.sortMapper.toDto({
 						sortField: params.sortField,
 						sortDirection: params.sortDirection,
-					}),
+					})
 				);
 			}),
-			ignoreElements(),
+			ignoreElements()
 		);
 	}
 

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 import { CommonModule } from '@angular/common';
 import { AnimeStatus } from '@js-camp/core/models/anime-status';
 
-/** Movie status. */
+/** Anime status component. */
 @Component({
 	selector: 'camp-anime-status',
 	standalone: true,
