@@ -23,7 +23,7 @@ export class UrlParamsService {
 	 * @param params Params to append.
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public append(params: Record<string, any>): void {
+	public append(params: Record<string, unknown>): void {
 		const paramsWithoutUndefinedField = this.removeUndefinedFields(params);
 		this.router.navigate([], {
 			queryParams: paramsWithoutUndefinedField,

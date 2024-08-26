@@ -24,10 +24,12 @@ import { User } from '@js-camp/core/models/user';
 import { Router } from '@angular/router';
 import { PATHS } from '@js-camp/core/utils/paths';
 
+import { SearchFilterFormComponent } from '@js-camp/angular/app/features/anime/anime-catalog/components/search-filter-form/search-filter-form.component';
+
 import { AnimeTableComponent } from './components/anime-table/anime-table.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 
-import { SearchFilterFormComponent } from './components/search-filter-form/search-filter-form.component';
+const DEBOUNCE_TIME = 1000;
 
 /** Anime catalog. */
 @Component({
@@ -42,7 +44,7 @@ import { SearchFilterFormComponent } from './components/search-filter-form/searc
 export class AnimeCatalogComponent implements OnInit {
 	private readonly destroyRef = inject(DestroyRef);
 
-	/** Anime response observable.  */
+	/** Anime response observable. */
 	protected readonly animePage$: Observable<Pagination<Anime>>;
 
 	private readonly filter$ = inject(ANIME_FILTER_PARAMS_TOKEN);
@@ -74,38 +76,38 @@ export class AnimeCatalogComponent implements OnInit {
 
 	public constructor() {
 		this.animePage$ = this.filter$.pipe(
-			debounceTime(1000),
+			debounceTime(DEBOUNCE_TIME),
 			tap(() => {
 				this.isLoading$.next(true);
 			}),
-			switchMap(queryParams =>
+			switchMap((queryParams) =>
 				this.animeService.getAnime(queryParams).pipe(
 					finalize(() => {
 						this.isLoading$.next(false);
-					}),
-				)),
+					})
+				)
+			)
 		);
 		this.currentUser$ = this.userService.currentUser$;
 	}
 
 	/** Subscribe the filter params and pass them to the filter form and paginator. */
 	public ngOnInit(): void {
-		this.initializeFilterParamsSideEffect().pipe(takeUntilDestroyed(this.destroyRef))
-			.subscribe();
+		this.initializeFilterParamsSideEffect().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
 	}
 
 	private initializeFilterParamsSideEffect(): Observable<void> {
 		return this.filter$.pipe(
-			tap(params => {
+			tap((params) => {
 				this.filterParams$.next(params);
 				this.sortParams$.next(
 					this.sortMapper.toDto({
 						sortField: params.sortField,
 						sortDirection: params.sortDirection,
-					}),
+					})
 				);
 			}),
-			ignoreElements(),
+			ignoreElements()
 		);
 	}
 
@@ -126,7 +128,7 @@ export class AnimeCatalogComponent implements OnInit {
 	}
 
 	/**
-	 * Event handler for anime search by japanese or english changing .
+	 * Event handler for anime search by name .
 	 * @param event Search input.
 	 */
 	protected onSearchChange(event: string | null): void {

@@ -6,7 +6,7 @@ import { SkeletonDirective } from '../../directives/skeleton.directive';
 
 /** Table component content. */
 @Component({
-	selector: 'app-table-cell-content',
+	selector: 'camp-table-cell-content',
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [SkeletonDirective, CommonModule],
@@ -16,6 +16,5 @@ import { SkeletonDirective } from '../../directives/skeleton.directive';
 export class TableCellContentComponent {
 	/** Whether cell is loading or not. */
 	@Input()
-
 	public isLoading: boolean | null = false;
 }
