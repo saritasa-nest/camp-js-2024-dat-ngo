@@ -43,6 +43,6 @@ export class AnimeService {
 		const params = this.getHttpParams(queryParams);
 		return this.httpClient
 			.get<PaginationDto<AnimeDto>>(this.appUrlsConfig.anime.list, { params })
-			.pipe(map((responseDto) => PaginationMapper.fromDto(responseDto, AnimeMapper.fromDto)));
+			.pipe(map(responseDto => PaginationMapper.fromDto(responseDto, AnimeMapper.fromDto)));
 	}
 }
