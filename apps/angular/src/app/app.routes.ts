@@ -10,11 +10,13 @@ export const appRoutes: Routes = [
 		children: [
 			{
 				path: 'signin',
+				title: 'Sign In',
 				loadComponent: () => import('./auth/components/signin/signin.component').then(c => c.SignInComponent),
 				canMatch: [authGuard({ isAuthorized: false })],
 			},
 			{
 				path: 'signup',
+				title: 'Sign Up',
 				loadComponent: () => import('./auth/components/signup/signup.component').then(c => c.SignupComponent),
 				canMatch: [authGuard({ isAuthorized: false })],
 			},
@@ -23,7 +25,14 @@ export const appRoutes: Routes = [
 	},
 	{
 		path: '',
+		title: 'Home',
 		loadComponent: () => import('./features/anime/home.component').then(c => c.HomeComponent),
-		canMatch: [authGuard({ isAuthorized: true })],
+	},
+	{
+		path: 'anime/:id',
+		title: 'Anime Detail',
+		loadComponent: () =>
+			import('./features/anime/anime-detail/anime-detail.component').then(c => c.AnimeDetailComponent),
+		// canMatch: [authGuard({ isAuthorized: true })],
 	},
 ];

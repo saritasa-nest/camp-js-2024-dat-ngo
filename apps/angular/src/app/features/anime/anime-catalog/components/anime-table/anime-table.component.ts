@@ -4,6 +4,7 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
+	inject,
 	Input,
 	Output,
 	TrackByFunction,
@@ -17,6 +18,8 @@ import { TableCellContentComponent } from '@js-camp/angular/shared/components/ta
 import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
 import { MovieStatusComponent } from '@js-camp/angular/shared/components/movie-status/movie-status.component';
 import { MovieTypeComponent } from '@js-camp/angular/shared/components/movie-type/movie-type.component';
+
+import { Router } from '@angular/router';
 
 import { MovieNotFoundComponent } from '../movie-not-found/movie-not-found.component';
 
@@ -74,6 +77,8 @@ export class AnimeTableComponent {
 	@Output()
 	public sortChange = new EventEmitter<Sort>();
 
+	private readonly router = inject(Router);
+
 	/**
 	 * Emit the page event.
 	 * @param event The page event.
@@ -100,5 +105,14 @@ export class AnimeTableComponent {
 		return function(index: number, item: T): T[keyof T] {
 			return item[key];
 		};
+	}
+
+	/**
+	 * Navigate the selected anime to the detail page.
+	 * @param anime The anime associated with the row.
+	 */
+	protected onRowClick(anime: Anime): void {
+		console.log(anime.id + anime.japaneseTitle);
+		this.router.navigate([`/anime/${anime.id}`]);
 	}
 }
