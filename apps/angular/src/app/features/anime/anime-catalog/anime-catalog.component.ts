@@ -71,29 +71,29 @@ export class AnimeCatalogComponent implements OnInit {
 				this.animeService.getAnime(queryParams).pipe(
 					finalize(() => {
 						this.isLoading$.next(false);
-					})
-				)
-			)
+					}),
+				)),
 		);
 	}
 
 	/** Subscribe the filter params and pass them to the filter form and paginator. */
 	public ngOnInit(): void {
-		this.initializeFilterParamsSideEffect().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+		this.initializeFilterParamsSideEffect().pipe(takeUntilDestroyed(this.destroyRef))
+			.subscribe();
 	}
 
 	private initializeFilterParamsSideEffect(): Observable<void> {
 		return this.filter$.pipe(
-			tap((params) => {
+			tap(params => {
 				this.filterParams$.next(params);
 				this.sortParams$.next(
 					this.sortMapper.toDto({
 						sortField: params.sortField,
 						sortDirection: params.sortDirection,
-					})
+					}),
 				);
 			}),
-			ignoreElements()
+			ignoreElements(),
 		);
 	}
 
