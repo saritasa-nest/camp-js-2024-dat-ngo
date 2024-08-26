@@ -14,7 +14,6 @@ import { SkeletonCellComponent } from '@js-camp/angular/shared/components/skelet
 	standalone: true,
 	imports: [CommonModule, EmptyPipe, MovieTypeComponent, MovieStatusComponent, SkeletonCellComponent],
 	templateUrl: './anime-detail-information.component.html',
-	styleUrl: './anime-detail-information.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimeDetailInformationComponent {
