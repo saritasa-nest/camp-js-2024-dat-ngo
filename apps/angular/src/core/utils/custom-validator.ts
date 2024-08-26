@@ -14,12 +14,12 @@ export function mustMatch(controlName: string, matchingControlName: string): Val
 			return null;
 		}
 
-		if (matchingControl.errors && !matchingControl.errors['passwordMismatch']) {
+		if (matchingControl.errors && !matchingControl.errors['mismatchField']) {
 			return null;
 		}
 
 		if (control.value !== matchingControl.value) {
-			matchingControl.setErrors({ passwordMismatch: true });
+			matchingControl.setErrors({ mismatchField: true });
 		} else {
 			matchingControl.setErrors(null);
 		}
