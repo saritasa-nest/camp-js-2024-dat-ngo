@@ -28,6 +28,7 @@ const MAP_ANIME_SORT_TO_DTO: Record<AnimeSortField, AnimeSortFieldDto> = {
 
 /** Mapper for filter params. */
 export namespace AnimeFiltersParamsMapper {
+
 	/**
 	 * Mapper for filter sort from model to dto.
 	 * @param model Anime filter sort params.

@@ -6,13 +6,14 @@ import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
 
 /** Anime query params. */
 export type AnimeQueryParams = Partial<
-	Omit<AnimeFilterParams.Combined, 'pageNumber' | 'pageSize'> & {
-		/** Page number query param. */
-		pageNumber: string | null;
+Omit<AnimeFilterParams.Combined, 'pageNumber' | 'pageSize'> & {
 
-		/** Page size query param. */
-		pageSize: string | null;
-	}
+	/** Page number query param. */
+	pageNumber: string | null;
+
+	/** Page size query param. */
+	pageSize: string | null;
+}
 >;
 
 /** Service for handling URL query params. */
@@ -37,9 +38,9 @@ export class AnimeQueryParamsMapper implements TMapper<AnimeQueryParams, AnimeFi
 		return {
 			type: model.type !== undefined ? model.type : undefined,
 			pageNumber:
-				model.pageNumber != null && model.pageNumber >= DEFAULT_PAGINATION.pageNumber
-					? model.pageNumber.toString()
-					: undefined,
+				model.pageNumber != null && model.pageNumber >= DEFAULT_PAGINATION.pageNumber ?
+					model.pageNumber.toString() :
+					undefined,
 			pageSize: model.pageSize != null ? model.pageSize.toString() : undefined,
 			search: model.search !== undefined ? model.search : undefined,
 			sortField: model.sortField !== undefined ? model.sortField : undefined,
