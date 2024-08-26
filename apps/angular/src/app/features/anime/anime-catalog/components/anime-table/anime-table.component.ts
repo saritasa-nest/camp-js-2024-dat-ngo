@@ -13,8 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
 import { Anime } from '@js-camp/core/models/anime';
 import { MatSortModule, Sort } from '@angular/material/sort';
-import { SkeletonDirective } from '@js-camp/angular/shared/directives/skeleton.directive';
-import { TableCellContentComponent } from '@js-camp/angular/shared/components/table-cell-content/table-cell-content.component';
+import { SkeletonCellComponent } from '@js-camp/angular/shared/components/skeleton-cell/skeleton-cell.component';
 import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
 import { MovieStatusComponent } from '@js-camp/angular/shared/components/movie-status/movie-status.component';
 import { MovieTypeComponent } from '@js-camp/angular/shared/components/movie-type/movie-type.component';
@@ -41,8 +40,7 @@ const COLUMN_KEYS = {
 		CommonModule,
 		EmptyPipe,
 		MatSortModule,
-		SkeletonDirective,
-		TableCellContentComponent,
+		SkeletonCellComponent,
 		MovieStatusComponent,
 		MovieTypeComponent,
 		MovieNotFoundComponent,
@@ -75,7 +73,7 @@ export class AnimeTableComponent {
 
 	/** Event emitter for page changing. */
 	@Output()
-	public sortChange = new EventEmitter<Sort>();
+	public readonly sortChange = new EventEmitter<Sort>();
 
 	private readonly router = inject(Router);
 
@@ -112,7 +110,6 @@ export class AnimeTableComponent {
 	 * @param anime The anime associated with the row.
 	 */
 	protected onRowClick(anime: Anime): void {
-		console.log(anime.id + anime.japaneseTitle);
 		this.router.navigate([`/anime/${anime.id}`]);
 	}
 }

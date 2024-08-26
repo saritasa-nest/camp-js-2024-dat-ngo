@@ -2,18 +2,18 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 
-import { SkeletonDirective } from '../../directives/skeleton.directive';
+import { SkeletonDirective } from '@js-camp/angular/shared/directives/skeleton.directive';
 
 /** Table component content. */
 @Component({
-	selector: 'app-table-cell-content',
+	selector: 'camp-skeleton-cell',
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [SkeletonDirective, CommonModule],
-	templateUrl: './table-cell-content.component.html',
-	styleUrls: ['./table-cell-content.component.css'],
+	templateUrl: './skeleton-cell.component.html',
+	styleUrls: ['./skeleton-cell.component.css'],
 })
-export class TableCellContentComponent {
+export class SkeletonCellComponent {
 	/** Whether cell is loading or not. */
 	@Input()
 

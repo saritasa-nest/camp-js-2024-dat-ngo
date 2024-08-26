@@ -1,10 +1,11 @@
 :host {
 	--height: 30px;
+	--width: 100%;
 }
 
 .skeleton-cell {
-	width: 100%;
 	height: var(--height);
+	margin: var(--spacing-xs);
 }
 
 .skeleton-loading {

@@ -11,12 +11,13 @@ import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
 
 import { AnimeFiltersParamsMapper } from '@js-camp/core/mappers/anime-filter-params.mapper';
 
-import { map, Observable } from 'rxjs';
+import { delay, map, Observable } from 'rxjs';
 
-import { HttpParamsService } from './http-param.service';
 import { AnimeDetailDto } from '@js-camp/core/dtos/anime-detail.dto';
 import { AnimeDetail } from '@js-camp/core/models/anime-detail';
 import { AnimeDetailMapper } from '@js-camp/core/mappers/anime-detail.mapper';
+
+import { HttpParamsService } from './http-param.service';
 
 /** Anime services. */
 @Injectable({ providedIn: 'root' })
@@ -46,7 +47,7 @@ export class AnimeService {
 		const params = this.getHttpParams(queryParams);
 		return this.httpClient
 			.get<PaginationDto<AnimeDto>>(this.appUrlsConfig.anime.list, { params })
-			.pipe(map(responseDto => PaginationMapper.fromDto(responseDto, AnimeMapper.fromDto)));
+			.pipe(map((responseDto) => PaginationMapper.fromDto(responseDto, AnimeMapper.fromDto)));
 	}
 
 	/**
@@ -54,8 +55,9 @@ export class AnimeService {
 	 * @param id Anime id.
 	 */
 	public getAnimeDetail(id: string): Observable<AnimeDetail> {
-		return this.httpClient
-			.get<AnimeDetailDto>(this.appUrlsConfig.anime.detail(id))
-			.pipe(map(detailDto => AnimeDetailMapper.fromDto(detailDto)));
+		return this.httpClient.get<AnimeDetailDto>(this.appUrlsConfig.anime.detail(id)).pipe(
+			delay(1000),
+			map((detailDto) => AnimeDetailMapper.fromDto(detailDto))
+		);
 	}
 }

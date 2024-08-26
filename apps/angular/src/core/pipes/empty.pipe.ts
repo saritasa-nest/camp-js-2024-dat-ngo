@@ -10,7 +10,7 @@ export class EmptyPipe implements PipeTransform {
 	 * Transform a value return itself if not null, undefined and no value otherwise return N/A string.
 	 * @param value Value can be a string or a null.
 	 */
-	public transform(value: string | null): string {
+	public transform(value: string | null | undefined): string {
 		return value && value.length > 0 ? value : '-';
 	}
 }

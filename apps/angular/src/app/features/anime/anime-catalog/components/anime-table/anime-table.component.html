@@ -12,56 +12,56 @@
 		<ng-container class="anime__column" matColumnDef="image">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef>Image</th>
 			<td mat-cell class="anime__cell" *matCellDef="let anime">
-				<app-table-cell-content [isLoading]="isLoading" class="anime__image-cell">
+				<camp-skeleton-cell [isLoading]="isLoading" class="anime__image-cell">
 					<div class="anime__image-container">
 						<img class="anime__image" [src]="anime.coverImageUrl" [alt]="isLoading ? null : anime.titleJpn" />
 					</div>
-				</app-table-cell-content>
+				</camp-skeleton-cell>
 			</td>
 		</ng-container>
 
 		<ng-container class="anime__column" matColumnDef="title_eng">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>English Title</th>
 			<td mat-cell class="anime__cell anime__title" *matCellDef="let anime">
-				<app-table-cell-content [isLoading]="isLoading">
+				<camp-skeleton-cell [isLoading]="isLoading">
 					{{ anime.englishTitle | empty }}
-				</app-table-cell-content>
+				</camp-skeleton-cell>
 			</td>
 		</ng-container>
 		s
 		<ng-container class="anime__column" matColumnDef="title_jpn">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Japanese Title</th>
 			<td mat-cell class="anime__cell anime__title" *matCellDef="let anime">
-				<app-table-cell-content [isLoading]="isLoading">
+				<camp-skeleton-cell [isLoading]="isLoading">
 					<span class="anime__japan-title">{{ anime.japaneseTitle | empty }}</span>
-				</app-table-cell-content>
+				</camp-skeleton-cell>
 			</td>
 		</ng-container>
 
 		<ng-container class="anime__column" matColumnDef="aired_start_date">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Broadcasted Date</th>
 			<td mat-cell class="anime__cell anime__started-date" *matCellDef="let anime">
-				<app-table-cell-content [isLoading]="isLoading">
+				<camp-skeleton-cell [isLoading]="isLoading">
 					{{ anime.broadcasted?.startDate | date | empty }}
-				</app-table-cell-content>
+				</camp-skeleton-cell>
 			</td>
 		</ng-container>
 
 		<ng-container class="anime__column" matColumnDef="type">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef>Type</th>
 			<td mat-cell class="anime__cell anime__type" *matCellDef="let anime">
-				<app-table-cell-content [isLoading]="isLoading">
+				<camp-skeleton-cell [isLoading]="isLoading">
 					<camp-movie-type [animeType]="anime.animeType"></camp-movie-type>
-				</app-table-cell-content>
+				</camp-skeleton-cell>
 			</td>
 		</ng-container>
 
 		<ng-container class="anime__column" matColumnDef="status">
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
 			<td mat-cell class="anime__cell anime__status" *matCellDef="let anime">
-				<app-table-cell-content [isLoading]="isLoading">
+				<camp-skeleton-cell [isLoading]="isLoading">
 					<camp-movie-status [animeStatus]="anime.animeStatus"></camp-movie-status>
-				</app-table-cell-content>
+				</camp-skeleton-cell>
 			</td>
 		</ng-container>
 

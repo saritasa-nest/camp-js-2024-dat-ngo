@@ -61,3 +61,30 @@
 .anime-detail__informations {
 	width: 100%;
 }
+
+.anime-detail__loading {
+	display: flex;
+	place-content: center;
+	width: 200px;
+}
+
+.tab__content-video-wrapper {
+	width: 100vh;
+	display: flex;
+	place-content: center;
+}
+
+.anime-details__trailer {
+	width: 90%;
+	aspect-ratio: 16/9;
+}
+
+.skeleton__image-cell {
+	--height: 300px;
+
+	aspect-ratio: 2/3;
+}
+
+.skeleton__title-cell {
+	--width: 50px;
+}

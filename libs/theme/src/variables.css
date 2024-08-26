@@ -11,6 +11,7 @@
   */
 
 	/* Colors */
+	--error-color: rgb(255 0 0);
 	--surface-color: rgb(255 255 255 / 100%);
 	--surface-overlay-color: rgb(0 0 0 / 5%);
 	--border-color: rgb(0 0 0 / 15%);
