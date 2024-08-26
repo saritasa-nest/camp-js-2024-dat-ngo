@@ -1,7 +1,6 @@
 <section class="anime-detail-wrapper">
 	<mat-card class="anime-detail mat-elevation-z10">
 		<ng-container *ngIf="animeDetail$ | async as animeDetail; else loadingOrNotFound">
-			<p>{{ animeDetail | json }}</p>
 			<section class="anime-detail__summary">
 				<section class="anime-detail__image-wrapper">
 					<img mat-card-image class="anime-detail__anime-image" [src]="animeDetail.coverImageUrl" />
@@ -31,8 +30,8 @@
 					<mat-tab label="Detail">
 						<camp-anime-detail-information [animeDetail]="animeDetail" />
 					</mat-tab>
-					<mat-tab label="Trailer">
-						<section class="tab__content-video-wrapper">
+					@if(animeDetail.trailerYoutubeId.length > 0){
+					<mat-tab label="Trailer" class="tab__content-video-wrapper">
 							<iframe
 								title="trailer"
 								[src]="getAnimeTrailerUrl(animeDetail.trailerYoutubeId)"
@@ -40,8 +39,8 @@
 								class="anime-details__trailer"
 							>
 							</iframe>
-						</section>
 					</mat-tab>
+					}
 				</mat-tab-group>
 			</section>
 		</ng-container>
@@ -50,15 +49,15 @@
 			<ng-container *ngIf="isLoading$ | async; else notFound">
 				<section class="anime-detail__summary">
 					<section class="anime-detail__image-wrapper">
-						<camp-skeleton-cell [isLoading]="true" class="skeleton__image-cell"/>
+						<camp-skeleton-cell [isLoading]="true" class="skeleton__image-cell" />
 					</section>
 					<section class="anime-detail__anime-content">
 						<mat-card-header>
 							<section class="anime-detail__header">
 								<mat-card-title class="anime-detail__title">
-									<camp-skeleton-cell [isLoading]="true" class="skeleton__title-cell"/>
+									<camp-skeleton-cell [isLoading]="true" class="skeleton__title-cell" />
 								</mat-card-title>
-								<camp-skeleton-cell [isLoading]="true" class="skeleton__title-cell"/>
+								<camp-skeleton-cell [isLoading]="true" class="skeleton__title-cell" />
 							</section>
 						</mat-card-header>
 						<mat-card-content>
@@ -80,7 +79,7 @@
 				</section>
 			</ng-container>
 			<ng-template #notFound>
-				<camp-movie-not-found/>
+				<camp-movie-not-found />
 			</ng-template>
 		</ng-template>
 	</mat-card>
