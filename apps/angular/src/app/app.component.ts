@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 @Component({
 	selector: 'camp-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css'],
 	standalone: true,
 	imports: [RouterModule, ReactiveFormsModule],
 })
