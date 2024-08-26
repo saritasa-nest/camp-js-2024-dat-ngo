@@ -60,6 +60,11 @@
 	--font-size-lg: 1.125rem;
 	--font-size-xl: 1.25rem;
 
+	/* Header size */
+	--header-size-default: 2rem;
+	--header-size-md: 3rem;
+	--header-size-lg: 4rem;
+
 	/* Line height */
 	--line-height-md: 1.5rem;
 	--line-height-lg: 2rem;

@@ -33,6 +33,6 @@ export const appRoutes: Routes = [
 		title: 'Anime Detail',
 		loadComponent: () =>
 			import('./features/anime/anime-detail/anime-detail.component').then(c => c.AnimeDetailComponent),
-		// canMatch: [authGuard({ isAuthorized: true })],
+		canMatch: [authGuard({ isAuthorized: true })],
 	},
 ];

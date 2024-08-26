@@ -14,6 +14,9 @@ import { AnimeFiltersParamsMapper } from '@js-camp/core/mappers/anime-filter-par
 import { map, Observable } from 'rxjs';
 
 import { HttpParamsService } from './http-param.service';
+import { AnimeDetailDto } from '@js-camp/core/dtos/anime-detail.dto';
+import { AnimeDetail } from '@js-camp/core/models/anime-detail';
+import { AnimeDetailMapper } from '@js-camp/core/mappers/anime-detail.mapper';
 
 /** Anime services. */
 @Injectable({ providedIn: 'root' })
@@ -44,5 +47,15 @@ export class AnimeService {
 		return this.httpClient
 			.get<PaginationDto<AnimeDto>>(this.appUrlsConfig.anime.list, { params })
 			.pipe(map(responseDto => PaginationMapper.fromDto(responseDto, AnimeMapper.fromDto)));
+	}
+
+	/**
+	 * Get the anime with the given id.
+	 * @param id Anime id.
+	 */
+	public getAnimeDetail(id: string): Observable<AnimeDetail> {
+		return this.httpClient
+			.get<AnimeDetailDto>(this.appUrlsConfig.anime.detail(id))
+			.pipe(map(detailDto => AnimeDetailMapper.fromDto(detailDto)));
 	}
 }
