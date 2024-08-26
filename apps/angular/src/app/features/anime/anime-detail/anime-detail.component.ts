@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { AnimeService } from '@js-camp/angular/core/services/anime.service';
-import { BehaviorSubject, defer, finalize, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, defer, finalize, Observable, of } from 'rxjs';
 import { AnimeDetail } from '@js-camp/core/models/anime-detail';
 import { MatCardModule } from '@angular/material/card';
 import { EmptyPipe } from '@js-camp/angular/core/pipes/empty.pipe';
@@ -62,9 +62,7 @@ export class AnimeDetailComponent {
 	protected skeletonDetailsArray = Array(7);
 
 	public constructor() {
-		console.log('hello:', this.animeId);
 		this.animeDetail$ = defer(() => (this.animeId ? this.animeService.getAnimeDetail(this.animeId) : of(null)))
-			.pipe(tap((data) => console.log(data)))
 			.pipe(finalize(() => this.isLoading$.next(false)));
 	}
 }
