@@ -59,15 +59,12 @@ export class SignInComponent {
 
 	/** Signin form builder .*/
 	protected readonly signInForm = this.formBuilder.group({
-		email: [
-			'',
-			[
+		email: this.formBuilder.control('', [
 				Validators.required,
 				Validators.email,
 				Validators.minLength(EMAIL_MIN_LENGTH),
 				Validators.maxLength(EMAIL_MAX_LENGTH),
-			],
-		],
+			]),
 		password: [
 			'',
 			[Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH), Validators.maxLength(PASSWORD_MAX_LENGTH)],
