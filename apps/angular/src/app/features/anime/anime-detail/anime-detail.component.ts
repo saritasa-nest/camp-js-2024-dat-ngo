@@ -12,10 +12,15 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { SkeletonCellComponent } from '@js-camp/angular/shared/components/skeleton-cell/skeleton-cell.component';
 
+import { MatDialog } from '@angular/material/dialog';
+
+import { AnimeStudioData } from '@js-camp/core/models/anime-studio';
+
 import { MovieNotFoundComponent } from '../anime-catalog/components/movie-not-found/movie-not-found.component';
 
 import { AnimeDetailInformationComponent } from './anime-detail-information/anime-detail-information.component';
 
+import { AnimeDetailDialogComponent } from './anime-detail-dialog/anime-detail-dialog.component';
 const EMBEDDED_LINK = 'https://www.youtube.com/embed/';
 
 /** Anime detail. */
@@ -30,6 +35,7 @@ const EMBEDDED_LINK = 'https://www.youtube.com/embed/';
 		AnimeDetailInformationComponent,
 		MovieNotFoundComponent,
 		SkeletonCellComponent,
+		AnimeDetailDialogComponent,
 	],
 	templateUrl: './anime-detail.component.html',
 	styleUrl: './anime-detail.component.css',
@@ -40,15 +46,26 @@ export class AnimeDetailComponent {
 
 	private readonly animeService = inject(AnimeService);
 
-	private readonly animeId = this.route.snapshot.paramMap.get('id');
-
 	private readonly domSanitizer = inject(DomSanitizer);
+
+	private readonly matDialog = inject(MatDialog);
+
+	private readonly animeId = this.route.snapshot.paramMap.get('id');
 
 	/** Anime detail. */
 	protected readonly animeDetail$: Observable<AnimeDetail | null>;
 
 	/** Loading state. */
 	protected readonly isLoading$ = new BehaviorSubject(true);
+
+	/** Skeleton details array. */
+	protected skeletonDetailsArray = Array(7);
+
+	public constructor() {
+		this.animeDetail$ = defer(() => (this.animeId ? this.animeService.getAnimeDetail(this.animeId) : of(null))).pipe(
+			finalize(() => this.isLoading$.next(false)),
+		);
+	}
 
 	/**
 	 * Get anime trailer based on its id.
@@ -58,11 +75,25 @@ export class AnimeDetailComponent {
 		return this.domSanitizer.bypassSecurityTrustResourceUrl(`${EMBEDDED_LINK}${id}`);
 	}
 
-	/** Skeleton details array. */
-	protected skeletonDetailsArray = Array(7);
+	/**
+	 * Gets formatted list.
+	 * @param array Array of studios.
+	 */
+	protected getFormattedList(array: readonly AnimeStudioData[]): string {
+		return array.map(item => item.name).join(', ');
+	}
 
-	public constructor() {
-		this.animeDetail$ = defer(() => (this.animeId ? this.animeService.getAnimeDetail(this.animeId) : of(null)))
-			.pipe(finalize(() => this.isLoading$.next(false)));
+	/**
+	 * Open inage dialog.
+	 * @param imageSource Source of image.
+	 * @param title Title of Anime.
+	 * @param studios Studios of Anime.
+	 */
+	protected openImageDialog(imageSource: string | null, title: string, studios: string): void {
+		this.matDialog.open(AnimeDetailDialogComponent, {
+			data: { source: imageSource, title, studios },
+			height: '80vh',
+			panelClass: 'borderless-dialog',
+		});
 	}
 }

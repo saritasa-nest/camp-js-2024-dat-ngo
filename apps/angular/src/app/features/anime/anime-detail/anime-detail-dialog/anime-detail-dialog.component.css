@@ -1,0 +1,21 @@
+.dialog-wrapper {
+	height: 100%;
+	aspect-ratio: 3/4;
+	display: flex;
+	place-content: center;
+	flex-direction: column;
+}
+
+.dialog-image {
+	object-fit: fill;
+	padding: var(--spacing-sm);
+}
+
+.dialog-source {
+	height: fit-content;
+	padding: var(--spacing-sm);
+}
+
+.dialog-source-title {
+	font-weight: var(--font-weight-bold);
+}

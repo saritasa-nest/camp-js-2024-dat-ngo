@@ -3,7 +3,7 @@
 		<ng-container *ngIf="animeDetail$ | async as animeDetail; else loadingOrNotFound">
 			<section class="anime-detail__summary">
 				<section class="anime-detail__image-wrapper">
-					<img mat-card-image class="anime-detail__anime-image" [src]="animeDetail.coverImageUrl" />
+					<img mat-card-image class="anime-detail__anime-image" [src]="animeDetail.coverImageUrl" (click)="openImageDialog(animeDetail.coverImageUrl, animeDetail.japaneseTitle, getFormattedList(animeDetail.studiosData))"/>
 				</section>
 				<section class="anime-detail__anime-content">
 					<mat-card-header>
@@ -25,7 +25,7 @@
 					</ng-container>
 				</section>
 			</section>
-			<section class="anime-detail__informations">
+			<section class="anime-detail__information">
 				<mat-tab-group animationDuration="500ms">
 					<mat-tab label="Detail">
 						<camp-anime-detail-information [animeDetail]="animeDetail" />
@@ -55,23 +55,23 @@
 						<mat-card-header>
 							<section class="anime-detail__header">
 								<mat-card-title class="anime-detail__title">
-									<camp-skeleton-cell [isLoading]="true" class="skeleton__title-cell" />
+									<camp-skeleton-cell [isLoading]="true" class="skeleton__header-cell" />
 								</mat-card-title>
-								<camp-skeleton-cell [isLoading]="true" class="skeleton__title-cell" />
+								<camp-skeleton-cell [isLoading]="true" />
 							</section>
 						</mat-card-header>
 						<mat-card-content>
 							<p class="anime-detail__synopsis">
-								<camp-skeleton-cell [isLoading]="true"></camp-skeleton-cell>
+								<camp-skeleton-cell [isLoading]="true"/>
 							</p>
 						</mat-card-content>
 					</section>
 				</section>
-				<section class="anime-detail__informations">
+				<section class="anime-detail__information">
 					<mat-tab-group animationDuration="500ms">
 						<mat-tab label="Detail" disabled="true">
 							<ng-container *ngFor="let _ of skeletonDetailsArray">
-								<camp-skeleton-cell [isLoading]="true" class="skeleton__title-cell" />
+								<camp-skeleton-cell [isLoading]="true" />
 							</ng-container>
 						</mat-tab>
 						<mat-tab label="Trailer" disabled="true"></mat-tab>

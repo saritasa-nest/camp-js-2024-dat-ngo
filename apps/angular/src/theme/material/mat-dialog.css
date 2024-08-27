@@ -1,0 +1,5 @@
+.mdc-dialog__container {
+	--mdc-dialog-container-shape: 0;
+
+	border: 2px solid var(--anime-dialog-border);
+}

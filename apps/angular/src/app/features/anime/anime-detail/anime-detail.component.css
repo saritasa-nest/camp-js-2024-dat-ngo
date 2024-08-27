@@ -58,7 +58,7 @@
 	font-size: var(--font-size-xl);
 }
 
-.anime-detail__informations {
+.anime-detail__information {
 	width: 100%;
 }
 
@@ -85,6 +85,6 @@
 	aspect-ratio: 2/3;
 }
 
-.skeleton__title-cell {
-	--width: 50px;
+.skeleton__header-cell {
+	--height: 50px;
 }
