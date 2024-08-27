@@ -80,12 +80,13 @@ export class AnimeCatalogComponent implements OnInit {
 			tap(() => {
 				this.isLoading$.next(true);
 			}),
-			switchMap(queryParams =>
+			switchMap((queryParams) =>
 				this.animeService.getAnime(queryParams).pipe(
 					finalize(() => {
 						this.isLoading$.next(false);
-					}),
-				)),
+					})
+				)
+			)
 		);
 	}
 
@@ -96,22 +97,21 @@ export class AnimeCatalogComponent implements OnInit {
 
 	/** @inheritdoc */
 	public ngOnInit(): void {
-		this.initializeFilterParamsSideEffect().pipe(takeUntilDestroyed(this.destroyRef))
-			.subscribe();
+		this.initializeFilterParamsSideEffect().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
 	}
 
 	private initializeFilterParamsSideEffect(): Observable<void> {
 		return this.filter$.pipe(
-			tap(params => {
+			tap((params) => {
 				this.filterParams$.next(params);
 				this.sortParams$.next(
 					this.sortMapper.toDto({
 						sortField: params.sortField,
 						sortDirection: params.sortDirection,
-					}),
+					})
 				);
 			}),
-			ignoreElements(),
+			ignoreElements()
 		);
 	}
 
@@ -120,7 +120,7 @@ export class AnimeCatalogComponent implements OnInit {
 	 * @param event Page event.
 	 */
 	protected onPageChange(event: PageEvent): void {
-		this.animeQueryParamsService.patch({ pageNumber: event.pageIndex, pageSize: event.pageSize });
+		this.animeQueryParamsService.patch({ pageNumber: event.pageIndex, pageSize: event.pageSize }, false);
 	}
 
 	/**
@@ -128,7 +128,7 @@ export class AnimeCatalogComponent implements OnInit {
 	 * @param event Anime type.
 	 */
 	protected onSelectionChange(event: AnimeType | null): void {
-		this.animeQueryParamsService.patchParamsAndResetPageNumber({ type: event });
+		this.animeQueryParamsService.patch({ type: event }, true);
 	}
 
 	/**
@@ -136,7 +136,7 @@ export class AnimeCatalogComponent implements OnInit {
 	 * @param event Search input.
 	 */
 	protected onSearchChange(event: string | null): void {
-		this.animeQueryParamsService.patchParamsAndResetPageNumber({ search: event });
+		this.animeQueryParamsService.patch({ search: event }, true);
 	}
 
 	/**
@@ -145,7 +145,7 @@ export class AnimeCatalogComponent implements OnInit {
 	 */
 	protected onSortChange(event: Sort): void {
 		const param = this.sortMapper.fromDto(event);
-		this.animeQueryParamsService.patchParamsAndResetPageNumber(param);
+		this.animeQueryParamsService.patch(param, true);
 	}
 
 	/** Logout.*/

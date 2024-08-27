@@ -49,7 +49,7 @@ const COLUMN_KEYS = {
 })
 export class AnimeTableComponent {
 	/** Anime list. */
-	@Input()
+	@Input({ required: true })
 	public set animeList(values: ReadonlyArray<Anime> | null) {
 		if (values !== null) {
 			this.dataSource = [...values];
@@ -77,7 +77,7 @@ export class AnimeTableComponent {
 	 * Emit the page event.
 	 * @param event The page event.
 	 */
-	public onSortChange(event: Sort): void {
+	protected onSortChange(event: Sort): void {
 		this.sortChange.emit(event);
 	}
 
@@ -85,11 +85,7 @@ export class AnimeTableComponent {
 	protected readonly displayedColumns: string[] = Object.values(COLUMN_KEYS);
 
 	/** Generate number array for the template table data source. */
-	protected get templateArray(): readonly object[] {
-		return Array(DEFAULT_PAGINATION.pageSize)
-			.fill(null)
-			.map(_ => ({}));
-	}
+	protected readonly templateArray: readonly unknown[] = Array(DEFAULT_PAGINATION.pageSize).fill({});
 
 	/**
 	 *  Track object by id.

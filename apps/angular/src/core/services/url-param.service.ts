@@ -19,8 +19,8 @@ export class UrlParamsService {
 	}
 
 	/**
-	 * Append provide query params to the URL.
-	 * @param params Params to append.
+	 * Patch provide query params to the URL.
+	 * @param params Params to patch.
 	 */
 	public patch(params: Record<string, unknown>): void {
 		const paramsWithoutUndefinedField = this.removeUndefinedFields(params);

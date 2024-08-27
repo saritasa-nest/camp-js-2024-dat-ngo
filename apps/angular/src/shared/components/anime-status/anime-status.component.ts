@@ -8,6 +8,7 @@ import { AnimeStatus } from '@js-camp/core/models/anime-status';
 	standalone: true,
 	imports: [CommonModule],
 	templateUrl: './anime-status.component.html',
+	styleUrl: './anime-status.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimeStatusComponent {
@@ -28,12 +29,9 @@ export class AnimeStatusComponent {
 		}
 	}
 
-	private get classes(): string {
-		return `anime-badge ${this.color}`;
-	}
-
+	/** Bind color to class. */
 	@HostBinding('class')
-	private get _classes(): string {
-		return this.classes;
+	protected get classes(): string {
+		return `anime-badge ${this.color}`;
 	}
 }

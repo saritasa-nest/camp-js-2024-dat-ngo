@@ -1,10 +1,10 @@
 type Pagination = {
 
 	/** Page number. */
-	pageNumber: number;
+	readonly pageNumber: number;
 
 	/** Page size. */
-	pageSize: number;
+	readonly pageSize: number;
 };
 
 /** Default pagination params. */
