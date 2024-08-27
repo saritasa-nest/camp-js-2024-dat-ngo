@@ -23,7 +23,7 @@ import { errorGuard } from '@js-camp/angular/core/guards/error-guard';
 
 import { PasswordInputComponent } from '../password-input/password-input.component';
 
-/** Signin. */
+/** Signin component. */
 @Component({
 	selector: 'camp-authorization-form',
 	standalone: true,
@@ -49,7 +49,7 @@ export class SignInComponent {
 
 	private readonly notificationService = inject(NotificationService);
 
-	private formBuilder = inject(NonNullableFormBuilder);
+	private readonly formBuilder = inject(NonNullableFormBuilder);
 
 	/** Loading state. */
 	protected readonly isLoading$ = new BehaviorSubject(false);
@@ -74,7 +74,8 @@ export class SignInComponent {
 		],
 	});
 
-	/** Display error.
+	/**
+	 * Display error.
 	 * @param controlName Name of the control.
 	 * @returns Should show error of control field.
 	 */
@@ -115,7 +116,8 @@ export class SignInComponent {
 							this.notificationService.showMessage(error, 'DISMISS');
 						}
 						return error;
-					})),
+					}),
+				),
 				finalize(() => {
 					this.isLoading$.next(false);
 				}),

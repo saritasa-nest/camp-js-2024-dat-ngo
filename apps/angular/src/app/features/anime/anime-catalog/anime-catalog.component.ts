@@ -29,6 +29,8 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
 
 import { SearchFilterFormComponent } from './components/search-filter-form/search-filter-form.component';
 
+const DEBOUNCE_TIME_MILLISECONDS = 1000;
+
 /** Anime catalog. */
 @Component({
 	selector: 'camp-anime-catalog',
@@ -74,7 +76,7 @@ export class AnimeCatalogComponent implements OnInit {
 
 	public constructor() {
 		this.animePage$ = this.filter$.pipe(
-			debounceTime(1000),
+			debounceTime(DEBOUNCE_TIME_MILLISECONDS),
 			tap(() => {
 				this.isLoading$.next(true);
 			}),
@@ -88,7 +90,7 @@ export class AnimeCatalogComponent implements OnInit {
 		this.currentUser$ = this.userService.currentUser$;
 	}
 
-	/** Subscribe the filter params and pass them to the filter form and paginator. */
+	/** @inheritdoc */
 	public ngOnInit(): void {
 		this.initializeFilterParamsSideEffect().pipe(takeUntilDestroyed(this.destroyRef))
 			.subscribe();
