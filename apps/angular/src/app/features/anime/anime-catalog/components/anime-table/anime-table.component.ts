@@ -15,13 +15,11 @@ import { Anime } from '@js-camp/core/models/anime';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { SkeletonCellComponent } from '@js-camp/angular/shared/components/skeleton-cell/skeleton-cell.component';
 import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
-import { MovieStatusComponent } from '@js-camp/angular/shared/components/movie-status/movie-status.component';
-import { MovieTypeComponent } from '@js-camp/angular/shared/components/movie-type/movie-type.component';
+import { AnimeStatusComponent } from '@js-camp/angular/shared/components/anime-status/anime-status.component';
+import { AnimeTypeComponent } from '@js-camp/angular/shared/components/anime-type/anime-type.component';
 
+import { AnimeNotFoundComponent } from '../anime-not-found/anime-not-found.component';
 import { Router } from '@angular/router';
-
-import { MovieNotFoundComponent } from '../movie-not-found/movie-not-found.component';
-
 const COLUMN_KEYS = {
 	image: 'image',
 	titleEng: 'title_eng',
@@ -41,9 +39,9 @@ const COLUMN_KEYS = {
 		EmptyPipe,
 		MatSortModule,
 		SkeletonCellComponent,
-		MovieStatusComponent,
-		MovieTypeComponent,
-		MovieNotFoundComponent,
+		AnimeStatusComponent,
+		AnimeTypeComponent,
+		AnimeNotFoundComponent,
 	],
 	templateUrl: './anime-table.component.html',
 	styleUrl: './anime-table.component.css',
@@ -51,7 +49,7 @@ const COLUMN_KEYS = {
 })
 export class AnimeTableComponent {
 	/** Anime list. */
-	@Input()
+	@Input({ required: true })
 	public set animeList(values: ReadonlyArray<Anime> | null) {
 		if (values !== null) {
 			this.dataSource = [...values];
@@ -81,7 +79,7 @@ export class AnimeTableComponent {
 	 * Emit the page event.
 	 * @param event The page event.
 	 */
-	public onSortChange(event: Sort): void {
+	protected onSortChange(event: Sort): void {
 		this.sortChange.emit(event);
 	}
 
@@ -89,11 +87,7 @@ export class AnimeTableComponent {
 	protected readonly displayedColumns: string[] = Object.values(COLUMN_KEYS);
 
 	/** Generate number array for the template table data source. */
-	protected get templateArray(): readonly object[] {
-		return Array(DEFAULT_PAGINATION.pageSize)
-			.fill(null)
-			.map(_ => ({}));
-	}
+	protected readonly templateArray: readonly unknown[] = Array(DEFAULT_PAGINATION.pageSize).fill({});
 
 	/**
 	 *  Track object by id.

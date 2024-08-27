@@ -18,7 +18,7 @@ import { AnimeStudioData } from '@js-camp/core/models/anime-studio';
 
 import { MatIcon } from '@angular/material/icon';
 
-import { MovieNotFoundComponent } from '../anime-catalog/components/movie-not-found/movie-not-found.component';
+import { AnimeNotFoundComponent } from '../anime-catalog/components/anime-not-found/anime-not-found.component';
 
 import { AnimeDetailInformationComponent } from './anime-detail-information/anime-detail-information.component';
 
@@ -36,7 +36,7 @@ const EMBEDDED_LINK = 'https://www.youtube.com/embed/';
 		EmptyPipe,
 		MatTabsModule,
 		AnimeDetailInformationComponent,
-		MovieNotFoundComponent,
+		AnimeNotFoundComponent,
 		SkeletonCellComponent,
 		AnimeDetailDialogComponent,
 		MatIcon,
@@ -69,7 +69,7 @@ export class AnimeDetailComponent {
 
 	public constructor() {
 		this.animeDetail$ = defer(() => (this.animeId ? this.animeService.getAnimeDetail(this.animeId) : of(null))).pipe(
-			finalize(() => this.isLoading$.next(false)),
+			finalize(() => this.isLoading$.next(false))
 		);
 	}
 
@@ -86,7 +86,7 @@ export class AnimeDetailComponent {
 	 * @param array Array of studios.
 	 */
 	protected getFormattedList(array: readonly AnimeStudioData[]): string {
-		return array.map(item => item.name).join(', ');
+		return array.map((item) => item.name).join(', ');
 	}
 
 	/**

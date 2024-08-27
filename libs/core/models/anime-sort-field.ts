@@ -1,4 +1,4 @@
-/** Anime Sort enum. */
+/** Anime Sort. */
 export enum AnimeSortField {
 	TitleEng = 'English Title',
 	TitleJpn = 'Japan Title',

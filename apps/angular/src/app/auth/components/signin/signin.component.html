@@ -19,7 +19,7 @@
 		</div>
 		<a class="form__forgot-password">Forgot password?</a>
 	</section>
-	<button type="submit" class="form__btn-signin" [disabled]="signInForm.invalid && (isLoading$ | async)">
+	<button type="submit" class="form__btn-signin" [disabled]="signInForm.invalid || (isLoading$ | async)">
 		Sign in
 	</button>
 	<button type="button" class="form__btn-google">Or sign in with Google</button>

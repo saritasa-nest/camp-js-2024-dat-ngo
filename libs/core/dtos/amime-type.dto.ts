@@ -1,4 +1,4 @@
-/** Anime Type Dto. */
+/** Anime type DTO. */
 export enum AnimeTypeDto {
 	TV = 'TV',
 	OVA = 'OVA',

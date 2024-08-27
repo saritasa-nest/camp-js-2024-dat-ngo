@@ -10,6 +10,15 @@
     --<name>-light-contrast-color: <light-contrast-color>;
   */
 
+	/** Prevalent color in the application */
+	--primary-color: #f97316;
+	--primary-contrast-color: white;
+	--primary-dark-color: #ea580c;
+	--primary-dark-contrast-color: white;
+	--primary-light-color: #fb923c;
+	--primary-light-contrast-color: black;
+	--error-color: red;
+
 	/* Colors */
 	--error-color: rgb(255 0 0);
 	--surface-color: rgb(255 255 255 / 100%);
@@ -19,28 +28,6 @@
 	--anime-header-border-color: rgb(233 237 245);
 	--anime-header-bg-color: rgb(247 249 252);
 	--anime-header-color: rgb(104 113 130);
-	--anime-tv-bg: rgb(232 244 255);
-	--anime-tv-color: rgb(53 141 235);
-	--anime-ova-bg: rgb(255 248 222);
-	--anime-ova-color: rgb(179 145 41);
-	--anime-movie-bg: rgb(255 240 237);
-	--anime-movie-color: rgb(208 86 86);
-	--anime-special-bg: rgb(227 255 252);
-	--anime-special-color: rgb(51 153 153);
-	--anime-ona-bg: rgb(242 232 255);
-	--anime-ona-color: rgb(156 108 235);
-	--anime-music-bg: rgb(255 247 242);
-	--anime-music-color: rgb(201 117 80);
-	--anime-promotional-videos-bg: rgb(255 235 245);
-	--anime-promotional-videos-color: rgb(215 106 131);
-	--anime-unknown-bg: rgb(176 176 176);
-	--anime-unknown-color: rgb(51 51 51);
-	--anime-currently-airing-bg: rgb(255 243 224);
-	--anime-currently-airing-color: rgb(255 152 0);
-	--anime-finished-airing-bg: rgb(232 245 233);
-	--anime-finished-airing-color: rgb(76 175 80);
-	--anime-not-yet-aired-bg: rgb(255 235 238);
-	--anime-not-yet-aired-color: rgb(244 67 54);
 	--anime-header-row-bg: rgb(232 244 255);
 	--anime-header-row-color: rgb(2 30 74);
 	--anime-dodger-blue: rgb(53 141 235);

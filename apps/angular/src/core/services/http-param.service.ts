@@ -10,15 +10,12 @@ export class HttpParamsService {
 	 * @param params Filter Params.
 	 */
 	public buildHttpParamsFromDto<T extends object>(params: T): HttpParams {
-		let httpParams = new HttpParams();
-
-		Object.keys(params).forEach(key => {
+		return Object.keys(params).reduce((httpParams, key) => {
 			const value = params[key as keyof T];
 			if (value != null) {
-				httpParams = httpParams.set(key, value.toString());
+				return httpParams.set(key, value.toString());
 			}
-		});
-
-		return httpParams;
+			return httpParams;
+		}, new HttpParams());
 	}
 }

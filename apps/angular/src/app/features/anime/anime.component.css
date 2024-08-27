@@ -1,0 +1,10 @@
+:host {
+	display: block;
+}
+
+.home-container {
+	padding: var(--spacing-xxl) 0;
+	align-items: center;
+	border: 3px;
+	height: 100vh;
+}

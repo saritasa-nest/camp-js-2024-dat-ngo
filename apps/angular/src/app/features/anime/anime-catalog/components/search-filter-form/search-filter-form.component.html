@@ -1,19 +1,19 @@
-<section class="main">
-	<mat-form-field>
-		<mat-label>Anime type</mat-label>
-		<mat-select [(value)]="selectedType" (selectionChange)="onSelectionChange($event)">
-			@for (option of selectTypes; track option) {
-			<mat-option [value]="option">{{ option }}</mat-option>
-			}
-		</mat-select>
+<!-- Anime Type Selection -->
+<mat-form-field appearance="fill">
+	<mat-label>Anime type</mat-label>
+	<mat-select [formControl]="typeControl">
+		<mat-option *ngFor="let option of selectTypes" [value]="option">{{ option }}</mat-option>
+	</mat-select>
+</mat-form-field>
+
+<!-- Search Field -->
+<div>
+	<mat-form-field appearance="fill">
+		<mat-label>Search</mat-label>
+		<input matInput [formControl]="searchControl" placeholder="Anime Name" (keydown)="onKeyDown($event)" />
 	</mat-form-field>
-	<div>
-		<mat-form-field appearance="fill">
-			<mat-label>Search</mat-label>
-			<input matInput [(ngModel)]="search" placeholder="Anime Name" (keydown)="onKeyDown($event)" (onchange)="onSearch()" />
-		</mat-form-field>
-	</div>
-	<div class="main__search">
-		<button class="main__search-button" type="button" (click)="onSearch()">Search</button>
-	</div>
-</section>
+</div>
+
+<div class="main__search">
+	<button mat-flat-button type="button" (click)="searchChange.emit(searchControl.value?.trim() || null)">Search</button>
+</div>
