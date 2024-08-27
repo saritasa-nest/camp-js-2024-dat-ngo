@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AnimeType } from '@js-camp/core/models/anime-type';
 import { MatInputModule } from '@angular/material/input';
 
@@ -10,51 +10,53 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
 	selector: 'camp-search-filter-form',
 	standalone: true,
-	imports: [CommonModule, MatFormFieldModule, MatSelectModule, FormsModule, MatInputModule],
+	imports: [CommonModule, MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule],
 	templateUrl: './search-filter-form.component.html',
-	styleUrl: './search-filter-form.component.css',
+	styleUrls: ['./search-filter-form.component.css'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchFilterFormComponent {
-	/** Search input. */
-	@Input()
+	/** Search form control. */
+	public searchControl: FormControl = new FormControl('');
 
-	public search = '';
+	/** Anime type form control. */
+	public typeControl: FormControl = new FormControl(null);
 
 	/** Selection type of anime. */
 	@Input()
+	public set selectedType(value: AnimeType | null) {
+		this.typeControl.setValue(value);
+	}
 
-	public selectedType: AnimeType | null = null;
+	/** Search input. */
+	@Input()
+	public set search(value: string) {
+		this.searchControl.setValue(value);
+	}
 
-	/** Event emitter for type sort change. */
+	/** Event emitter for type change. */
 	@Output()
-	public typeChange = new EventEmitter<AnimeType>();
+	public readonly typeChange = new EventEmitter<AnimeType>();
 
-	/** Event Emitter for search input change. */
+	/** Event emitter for search input change. */
 	@Output()
-	public searchChange = new EventEmitter<string | null>();
+	public readonly searchChange = new EventEmitter<string | null>();
 
 	/** An array of available anime types to choose from. */
 	protected readonly selectTypes = Object.values(AnimeType);
 
-	/**
-	 *  Emit selection type to parent.
-	 * @param event The selection type.
-	 */
-	protected onSelectionChange(event: MatSelectChange): void {
-		const isValidType = Object.values(AnimeType).includes(event.value);
-		if (isValidType) {
-			this.typeChange.emit(event.value);
-		}
-	}
+	public constructor() {
+		// Emit search change when the search input changes.
+		this.searchControl.valueChanges.subscribe((value) => {
+			this.searchChange.emit(value?.trim() || null);
+		});
 
-	/** Emit search input to parent. */
-	protected onSearch(): void {
-		if (this.search.length > 0) {
-			this.searchChange.emit(this.search);
-		} else {
-			this.searchChange.emit(null);
-		}
+		// Emit type change when the anime type changes.
+		this.typeControl.valueChanges.subscribe((value) => {
+			if (this.selectTypes.includes(value)) {
+				this.typeChange.emit(value);
+			}
+		});
 	}
 
 	/** Execute onSearch on Enter key down.
@@ -62,7 +64,7 @@ export class SearchFilterFormComponent {
 	 */
 	protected onKeyDown(event: KeyboardEvent): void {
 		if (event.key === 'Enter') {
-			this.onSearch();
+			this.searchChange.emit(this.searchControl.value?.trim() || null);
 		}
 	}
 }

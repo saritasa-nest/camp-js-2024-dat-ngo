@@ -20,11 +20,11 @@ import { HttpParamsService } from './http-param.service';
 export class AnimeService {
 	private readonly httpClient = inject(HttpClient);
 
-	private httpParamsService = inject(HttpParamsService);
+	private readonly httpParamsService = inject(HttpParamsService);
 
-	private appUrlsConfig = inject(AppUrlsConfig);
+	private readonly appUrlsConfig = inject(AppUrlsConfig);
 
-	private animeQueryMapper = inject(AnimeFiltersParamsMapper);
+	private readonly animeQueryMapper = inject(AnimeFiltersParamsMapper);
 
 	/**
 	 * Build HttpParams from URL query params.

@@ -13,20 +13,20 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 export class PaginatorComponent {
 
 	/** Paginator page number. */
-	@Input()
+	@Input({ required: true })
 	public pageNumber: number | null = null;
 
 	/** Paginator page size. */
-	@Input()
+	@Input({ required: true })
 	public pageSize: number | null = null;
 
 	/** Total amount of fetched items. */
-	@Input()
+	@Input({ required: true })
 	public totalCount = 0;
 
 	/** Event emitter for page changing. */
 	@Output()
-	public pageChange = new EventEmitter<PageEvent>();
+	public readonly pageChange = new EventEmitter<PageEvent>();
 
 	/** Page size options. */
 	protected readonly pageSizeOptions = [5, 10, 25, 100] as const;
