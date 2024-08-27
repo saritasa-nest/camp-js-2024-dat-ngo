@@ -47,12 +47,12 @@ export class SearchFilterFormComponent {
 
 	public constructor() {
 		// Emit search change when the search input changes.
-		this.searchControl.valueChanges.subscribe((value) => {
+		this.searchControl.valueChanges.subscribe(value => {
 			this.searchChange.emit(value?.trim() || null);
 		});
 
 		// Emit type change when the anime type changes.
-		this.typeControl.valueChanges.subscribe((value) => {
+		this.typeControl.valueChanges.subscribe(value => {
 			if (this.selectTypes.includes(value)) {
 				this.typeChange.emit(value);
 			}

@@ -70,7 +70,7 @@ export class SignupComponent {
 					[Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH), Validators.maxLength(PASSWORD_MAX_LENGTH)],
 				],
 			},
-			{ validators: mustMatch('password', 'reTypePassword') }
+			{ validators: mustMatch('password', 'reTypePassword') },
 		),
 	});
 
@@ -126,7 +126,7 @@ export class SignupComponent {
 				finalize(() => {
 					this.isLoading$.next(false);
 				}),
-				takeUntilDestroyed(this.destroyRef)
+				takeUntilDestroyed(this.destroyRef),
 			)
 			.subscribe({
 				next: () => {

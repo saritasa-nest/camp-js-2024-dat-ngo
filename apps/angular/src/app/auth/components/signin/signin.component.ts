@@ -113,11 +113,10 @@ export class SignInComponent {
 							this.notificationService.showMessage(error, 'DISMISS');
 						}
 						return error;
-					})
-				),
+					})),
 				finalize(() => {
 					this.isLoading$.next(false);
-				})
+				}),
 			)
 			.subscribe(() => this.router.navigate([PATHS.home]));
 	}
