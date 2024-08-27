@@ -26,11 +26,11 @@ export class SearchFilterFormComponent {
 
 	/** Event emitter for type sort change. */
 	@Output()
-	public typeChange = new EventEmitter<AnimeType>();
+	public readonly typeChange = new EventEmitter<AnimeType>();
 
 	/** Event Emitter for search input change. */
 	@Output()
-	public searchChange = new EventEmitter<string | null>();
+	public readonly searchChange = new EventEmitter<string | null>();
 
 	/** An array of available anime types to choose from. */
 	protected readonly selectTypes = Object.values(AnimeType);
@@ -40,7 +40,7 @@ export class SearchFilterFormComponent {
 	 * @param event The selection type.
 	 */
 	protected onSelectionChange(event: MatSelectChange): void {
-		const isValidType = Object.values(AnimeType).includes(event.value);
+		const isValidType = this.selectTypes.includes(event.value);
 		if (isValidType) {
 			this.typeChange.emit(event.value);
 		}

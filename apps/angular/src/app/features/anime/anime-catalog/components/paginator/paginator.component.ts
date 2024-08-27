@@ -25,7 +25,7 @@ export class PaginatorComponent {
 
 	/** Event emitter for page changing. */
 	@Output()
-	public pageChange = new EventEmitter<PageEvent>();
+	public readonly pageChange = new EventEmitter<PageEvent>();
 
 	/** Page size options. */
 	protected readonly pageSizeOptions = [5, 10, 25, 100] as const;

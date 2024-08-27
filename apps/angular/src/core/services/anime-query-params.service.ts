@@ -18,17 +18,17 @@ export class AnimeQueryParamsService {
 	 * Append query params.
 	 * @param params Anime filter params.
 	 */
-	public append(params: Partial<AnimeFilterParams.Combined>): void {
+	public patch(params: Partial<AnimeFilterParams.Combined>): void {
 		const queryParams = this.animeQueryParams.toDto(params);
-		this.queryParamsService.append(queryParams);
+		this.queryParamsService.patch(queryParams);
 	}
 
 	/**
 	 * Append provide query params and reset page number params to the URL.
 	 * @param params Anime filter params to append.
 	 */
-	public appendParamsAndResetPageNumber(params: Partial<AnimeFilterParams.Combined>): void {
+	public patchParamsAndResetPageNumber(params: Partial<AnimeFilterParams.Combined>): void {
 		const queryParams = this.animeQueryParams.toDto(params);
-		return this.queryParamsService.appendAndResetPageNumber(queryParams, DEFAULT_PAGINATION.pageNumber);
+		return this.queryParamsService.patchAndResetPageNumber(queryParams, DEFAULT_PAGINATION.pageNumber);
 	}
 }

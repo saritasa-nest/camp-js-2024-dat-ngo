@@ -74,8 +74,8 @@ export class AnimeCatalogComponent implements OnInit {
 		active: '',
 	});
 
-	public constructor() {
-		this.animePage$ = this.filter$.pipe(
+	private createAnimeStream(): Observable<Pagination<Anime>> {
+		return this.filter$.pipe(
 			debounceTime(DEBOUNCE_TIME_MILLISECONDS),
 			tap(() => {
 				this.isLoading$.next(true);
@@ -87,6 +87,10 @@ export class AnimeCatalogComponent implements OnInit {
 					}),
 				)),
 		);
+	}
+
+	public constructor() {
+		this.animePage$ = this.createAnimeStream();
 		this.currentUser$ = this.userService.currentUser$;
 	}
 
@@ -116,7 +120,7 @@ export class AnimeCatalogComponent implements OnInit {
 	 * @param event Page event.
 	 */
 	protected onPageChange(event: PageEvent): void {
-		this.animeQueryParamsService.append({ pageNumber: event.pageIndex, pageSize: event.pageSize });
+		this.animeQueryParamsService.patch({ pageNumber: event.pageIndex, pageSize: event.pageSize });
 	}
 
 	/**
@@ -124,7 +128,7 @@ export class AnimeCatalogComponent implements OnInit {
 	 * @param event Anime type.
 	 */
 	protected onSelectionChange(event: AnimeType | null): void {
-		this.animeQueryParamsService.appendParamsAndResetPageNumber({ type: event });
+		this.animeQueryParamsService.patchParamsAndResetPageNumber({ type: event });
 	}
 
 	/**
@@ -132,7 +136,7 @@ export class AnimeCatalogComponent implements OnInit {
 	 * @param event Search input.
 	 */
 	protected onSearchChange(event: string | null): void {
-		this.animeQueryParamsService.appendParamsAndResetPageNumber({ search: event });
+		this.animeQueryParamsService.patchParamsAndResetPageNumber({ search: event });
 	}
 
 	/**
@@ -141,7 +145,7 @@ export class AnimeCatalogComponent implements OnInit {
 	 */
 	protected onSortChange(event: Sort): void {
 		const param = this.sortMapper.fromDto(event);
-		this.animeQueryParamsService.appendParamsAndResetPageNumber(param);
+		this.animeQueryParamsService.patchParamsAndResetPageNumber(param);
 	}
 
 	/** Logout.*/

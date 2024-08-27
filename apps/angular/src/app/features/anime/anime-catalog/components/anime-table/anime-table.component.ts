@@ -71,7 +71,7 @@ export class AnimeTableComponent {
 
 	/** Event emitter for page changing. */
 	@Output()
-	public sortChange = new EventEmitter<Sort>();
+	public readonly sortChange = new EventEmitter<Sort>();
 
 	/**
 	 * Emit the page event.

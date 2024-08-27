@@ -1,16 +1,16 @@
 <section class="main">
-	<mat-form-field>
+	<mat-form-field type="search">
 		<mat-label>Anime type</mat-label>
-		<mat-select [(value)]="selectedType" (selectionChange)="onSelectionChange($event)">
+		<mat-select [value]="selectedType" (selectionChange)="onSelectionChange($event)">
 			@for (option of selectTypes; track option) {
 			<mat-option [value]="option">{{ option }}</mat-option>
 			}
 		</mat-select>
 	</mat-form-field>
 	<div>
-		<mat-form-field appearance="fill">
+		<mat-form-field appearance="fill" type="search">
 			<mat-label>Search</mat-label>
-			<input matInput [(ngModel)]="search" placeholder="Anime Name" (keydown)="onKeyDown($event)" (onchange)="onSearch()" />
+			<input matInput [ngModel]="search" placeholder="Anime Name" (keydown)="onKeyDown($event)" (onchange)="onSearch()" />
 		</mat-form-field>
 	</div>
 	<div class="main__search">

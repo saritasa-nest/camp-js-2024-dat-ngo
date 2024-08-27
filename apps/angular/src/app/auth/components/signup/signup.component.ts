@@ -126,7 +126,7 @@ export class SignupComponent {
 				finalize(() => {
 					this.isLoading$.next(false);
 				}),
-				takeUntilDestroyed(this.destroyRef)
+				takeUntilDestroyed(this.destroyRef),
 			)
 			.subscribe({
 				next: () => {
