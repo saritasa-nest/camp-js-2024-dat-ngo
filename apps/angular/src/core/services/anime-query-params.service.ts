@@ -14,15 +14,16 @@ export class AnimeQueryParamsService {
 	private queryParamsService = inject(UrlParamsService);
 
 	/**
-	 * patch query params.
+	 * Patch query params.
 	 * @param params Anime filter params.
+	 * @param resetPageNumber Whether to reset the page number to the default. Defaults to false.
 	 */
-	public patch(params: Partial<AnimeFilterParams.Combined>, resetPageNumber = false): void {
+	public patch(params: Partial<AnimeFilterParams.Combined>, resetPageNumber: boolean): void {
 		const queryParams = this.animeQueryParams.toDto(params);
 		const pageNumber = resetPageNumber ? DEFAULT_PAGINATION.pageNumber : queryParams.pageNumber;
 		this.queryParamsService.patch({
-		  ...queryParams,
-		  pageNumber,
+			...queryParams,
+			pageNumber,
 		});
 	}
 }

@@ -106,7 +106,7 @@ export class AnimeCatalogComponent implements OnInit {
 	 * @param event Page event.
 	 */
 	protected onPageChange(event: PageEvent): void {
-		this.animeQueryParamsService.patch({ pageNumber: event.pageIndex, pageSize: event.pageSize });
+		this.animeQueryParamsService.patch({ pageNumber: event.pageIndex, pageSize: event.pageSize }, false);
 	}
 
 	/**

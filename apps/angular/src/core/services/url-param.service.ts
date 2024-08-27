@@ -22,7 +22,7 @@ export class UrlParamsService {
 	 * Patch provide query params to the URL.
 	 * @param params Params to patch.
 	 */
-	public patch(params: Record<string, unknown>, resetPageNumber = false): void {
+	public patch(params: Record<string, unknown>): void {
 		const paramsWithoutUndefinedField = this.removeUndefinedFields(params);
 		this.router.navigate([], {
 			queryParams: paramsWithoutUndefinedField,

@@ -19,23 +19,21 @@ const ANIME_TYPE_COLORS: Record<AnimeType, string> = {
 	standalone: true,
 	imports: [CommonModule],
 	templateUrl: './anime-type.component.html',
+	styleUrl: './anime-type.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimeTypeComponent {
 	/** Session status. */
 	@Input({ required: true })
-	public animeType!: AnimeType;
+	public animeType: AnimeType = AnimeType.Movie;
 
 	private get color(): string {
 		return ANIME_TYPE_COLORS[this.animeType];
 	}
 
-	private get classes(): string {
-		return `anime-badge ${this.color}`;
-	}
-
+	/** Bind color to class. */
 	@HostBinding('class')
-	private get _classes(): string {
-		return this.classes;
+	protected get classes(): string {
+		return `anime-badge ${this.color}`;
 	}
 }

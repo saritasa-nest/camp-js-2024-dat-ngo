@@ -1,0 +1,8 @@
+:host {
+	--anime-currently-airing-bg: rgb(255 243 224);
+	--anime-currently-airing-color: rgb(255 152 0);
+	--anime-finished-airing-bg: rgb(232 245 233);
+	--anime-finished-airing-color: rgb(76 175 80);
+	--anime-not-yet-aired-bg: rgb(255 235 238);
+	--anime-not-yet-aired-color: rgb(244 67 54);
+}
