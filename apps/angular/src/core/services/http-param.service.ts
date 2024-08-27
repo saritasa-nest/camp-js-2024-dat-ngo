@@ -6,19 +6,16 @@ import { Injectable } from '@angular/core';
 	providedIn: 'root',
 })
 export class HttpParamsService {
-	/** Buldt an HTTP params from the URL hold the URL.
+	/** Build an HTTP params from the URL hold the URL.
 	 * @param params Filter Params.
 	 */
 	public buildHttpParamsFromDto<T extends object>(params: T): HttpParams {
-		let httpParams = new HttpParams();
-
-		Object.keys(params).forEach(key => {
+		return Object.keys(params).reduce((httpParams, key) => {
 			const value = params[key as keyof T];
 			if (value != null) {
-				httpParams = httpParams.set(key, value.toString());
+				return httpParams.set(key, value.toString());
 			}
-		});
-
-		return httpParams;
+			return httpParams;
+		}, new HttpParams());
 	}
 }

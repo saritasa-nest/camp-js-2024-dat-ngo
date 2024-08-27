@@ -19,26 +19,15 @@ export class UrlParamsService {
 	}
 
 	/**
-	 * Append provide query params to the URL.
-	 * @param params Params to append.
+	 * Patch provide query params to the URL.
+	 * @param params Params to patch.
 	 */
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public append(params: Record<string, unknown>): void {
+	public patch(params: Record<string, unknown>, resetPageNumber = false): void {
 		const paramsWithoutUndefinedField = this.removeUndefinedFields(params);
 		this.router.navigate([], {
 			queryParams: paramsWithoutUndefinedField,
 			relativeTo: this.activatedRoute,
 			queryParamsHandling: 'merge',
 		});
-	}
-
-	/**
-	 * Append the query params and reset the page number on URL.
-	 * @param params Params to append.
-	 * @param defaultPageNumber Default page number to reset.
-	 */
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	public appendAndResetPageNumber(params: Record<string, any>, defaultPageNumber: number): void {
-		return this.append({ ...params, pageNumber: defaultPageNumber });
 	}
 }
