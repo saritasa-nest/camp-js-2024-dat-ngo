@@ -4,7 +4,6 @@ import { AnimeSource } from '../models/anime-source';
 export namespace AnimeSourceMapper {
 
 	/** Map DTO to model. */
-	/** Map DTO to model. */
 	const MAP_ANIME_SOURCE_FROM_DTO: Record<AnimeSourceDto, AnimeSource> = {
 		[AnimeSourceDto.Book]: AnimeSource.Book,
 		[AnimeSourceDto.CardGame]: AnimeSource.CardGame,

@@ -13,7 +13,6 @@
 		{{ animeDetail.broadcasted.endDate | date : "longDate" | empty }}
 	</p>
 
-	<!-- Studios Section -->
 	<ng-container *ngIf="animeDetail.studiosData.length > 0">
 		<p>
 			<span class="label">Studios:</span>
@@ -21,7 +20,6 @@
 		</p>
 	</ng-container>
 
-	<!-- Genres Section -->
 	<ng-container *ngIf="animeDetail.genresData.length > 0">
 		<p>
 			<span class="label">Genres:</span>

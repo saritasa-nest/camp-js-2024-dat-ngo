@@ -7,7 +7,11 @@ import { TMapperFunction } from './mapper';
 /** Pagination mapper. */
 export namespace PaginationMapper {
 
-	/** @inheritdoc */
+	/**
+	 *  From Dto.
+	 * @param paginationDto Pagination dto.
+	 * @param mapperFn Mapper fuction.
+	 * */
 	export function fromDto<TDto, TDomain>(
 		paginationDto: PaginationDto<TDto>,
 		mapperFn: TMapperFunction<TDto, TDomain>,

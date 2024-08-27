@@ -5,7 +5,7 @@ import { BasedQueryParamsDto } from '../dtos/based-filter-params.dto';
 export namespace BasedFiltersParamsMapper {
 
 	/**
-	 *Mapper for pagination option.
+	 * Mapper for pagination option.
 	 * @param model Base filter params.
 	 */
 	export function mapPaginationOptionsToDto(
@@ -21,7 +21,7 @@ export namespace BasedFiltersParamsMapper {
 	}
 
 	/**
-	 *Mapper for pagination search.
+	 * Mapper for pagination search.
 	 * @param model Base search params.
 	 */
 	export function mapSearchOptionsToDto(model: BasedFilterParams.Search): BasedQueryParamsDto.Search | null {
@@ -34,7 +34,7 @@ export namespace BasedFiltersParamsMapper {
 	}
 
 	/**
-	 *Mapper for pagination combine.
+	 * Mapper for pagination combine.
 	 * @param model Base combine params.
 	 */
 	export function mapCombinedOptionsToDto(model: BasedFilterParams.Combined): BasedQueryParamsDto.Combined {
