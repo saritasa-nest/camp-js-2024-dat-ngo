@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { AnimeService } from '@js-camp/angular/core/services/anime.service';
 import { BehaviorSubject, defer, finalize, Observable, of } from 'rxjs';
@@ -16,11 +16,14 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { AnimeStudioData } from '@js-camp/core/models/anime-studio';
 
+import { MatIcon } from '@angular/material/icon';
+
 import { MovieNotFoundComponent } from '../anime-catalog/components/movie-not-found/movie-not-found.component';
 
 import { AnimeDetailInformationComponent } from './anime-detail-information/anime-detail-information.component';
 
 import { AnimeDetailDialogComponent } from './anime-detail-dialog/anime-detail-dialog.component';
+
 const EMBEDDED_LINK = 'https://www.youtube.com/embed/';
 
 /** Anime detail. */
@@ -36,6 +39,7 @@ const EMBEDDED_LINK = 'https://www.youtube.com/embed/';
 		MovieNotFoundComponent,
 		SkeletonCellComponent,
 		AnimeDetailDialogComponent,
+		MatIcon,
 	],
 	templateUrl: './anime-detail.component.html',
 	styleUrl: './anime-detail.component.css',
@@ -51,6 +55,8 @@ export class AnimeDetailComponent {
 	private readonly matDialog = inject(MatDialog);
 
 	private readonly animeId = this.route.snapshot.paramMap.get('id');
+
+	private readonly location = inject(Location);
 
 	/** Anime detail. */
 	protected readonly animeDetail$: Observable<AnimeDetail | null>;
@@ -84,7 +90,7 @@ export class AnimeDetailComponent {
 	}
 
 	/**
-	 * Open inage dialog.
+	 * Open image dialog.
 	 * @param imageSource Source of image.
 	 * @param title Title of Anime.
 	 * @param studios Studios of Anime.
@@ -92,8 +98,12 @@ export class AnimeDetailComponent {
 	protected openImageDialog(imageSource: string | null, title: string, studios: string): void {
 		this.matDialog.open(AnimeDetailDialogComponent, {
 			data: { source: imageSource, title, studios },
-			height: '80vh',
-			panelClass: 'borderless-dialog',
+			height: '600px',
 		});
+	}
+
+	/** Go back to the previous page. */
+	protected handleGoBack(): void {
+		this.location.back();
 	}
 }

@@ -1,7 +1,6 @@
 :host {
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	place-content: center;
 	min-height: 100vh;
 	border: 3px;
 	box-sizing: border-box;
@@ -56,6 +55,14 @@
 
 .anime-detail__subtitle {
 	font-size: var(--font-size-xl);
+}
+
+.anime-detail__back-button {
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border: none;
+	background-color: var(--anime-dodger-blue);
 }
 
 .anime-detail__information {
