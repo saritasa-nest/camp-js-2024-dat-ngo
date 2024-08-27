@@ -6,6 +6,7 @@ import { AnimeStudioData } from '../models/anime-studio';
 import { DateTimeMapper } from './date-time.mapper';
 
 export namespace AnimeStudioMapper {
+
 	/**
 	 * Function to convert anime studio DTO to internal model.
 	 * @param dto Anime studio DTO.

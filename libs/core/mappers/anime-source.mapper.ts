@@ -1,5 +1,5 @@
-import { AnimeSourceDto } from "../dtos/anime-source.dto";
-import { AnimeSource } from "../models/anime-source";
+import { AnimeSourceDto } from '../dtos/anime-source.dto';
+import { AnimeSource } from '../models/anime-source';
 
 export namespace AnimeSourceMapper {
 

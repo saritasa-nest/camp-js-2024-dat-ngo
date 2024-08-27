@@ -30,6 +30,6 @@ export class AnimeDetailInformationComponent {
 	 * @param array Array of items.
 	 */
 	protected getFormattedList(array: readonly Genre[] | readonly AnimeStudioData[]): string {
-		return array.map((item) => item.name).join(', ');
+		return array.map(item => item.name).join(', ');
 	}
 }

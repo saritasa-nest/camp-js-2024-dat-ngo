@@ -18,8 +18,9 @@ import { DEFAULT_PAGINATION } from '@js-camp/core/const/pagination';
 import { AnimeStatusComponent } from '@js-camp/angular/shared/components/anime-status/anime-status.component';
 import { AnimeTypeComponent } from '@js-camp/angular/shared/components/anime-type/anime-type.component';
 
-import { AnimeNotFoundComponent } from '../anime-not-found/anime-not-found.component';
 import { Router } from '@angular/router';
+
+import { AnimeNotFoundComponent } from '../anime-not-found/anime-not-found.component';
 const COLUMN_KEYS = {
 	image: 'image',
 	titleEng: 'title_eng',

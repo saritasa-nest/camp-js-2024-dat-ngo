@@ -2,6 +2,7 @@ import { AnimeRatingDto } from '../dtos/anime-rating.dto';
 import { AnimeRating } from '../models/anime-rating';
 
 export namespace AnimeRatingMapper {
+
 	/** Map DTO to model. */
 	const MAP_ANIME_RATING_FROM_DTO: Record<AnimeRatingDto, AnimeRating> = {
 		[AnimeRatingDto.G]: AnimeRating.G,

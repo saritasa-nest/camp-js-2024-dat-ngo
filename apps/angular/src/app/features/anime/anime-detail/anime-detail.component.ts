@@ -69,7 +69,7 @@ export class AnimeDetailComponent {
 
 	public constructor() {
 		this.animeDetail$ = defer(() => (this.animeId ? this.animeService.getAnimeDetail(this.animeId) : of(null))).pipe(
-			finalize(() => this.isLoading$.next(false))
+			finalize(() => this.isLoading$.next(false)),
 		);
 	}
 
@@ -86,7 +86,7 @@ export class AnimeDetailComponent {
 	 * @param array Array of studios.
 	 */
 	protected getFormattedList(array: readonly AnimeStudioData[]): string {
-		return array.map((item) => item.name).join(', ');
+		return array.map(item => item.name).join(', ');
 	}
 
 	/**

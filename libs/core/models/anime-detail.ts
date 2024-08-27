@@ -6,6 +6,7 @@ import { AnimeStudioData } from './anime-studio';
 import { Genre } from './genre';
 import { OmitImmerable } from './immerable';
 
+/** Anime detail. */
 export class AnimeDetail extends Anime {
 	/** Youtube trailer url. */
 	public readonly trailerYoutubeId: string;
