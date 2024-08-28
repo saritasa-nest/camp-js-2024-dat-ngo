@@ -48,27 +48,26 @@ export class SignupComponent {
 
 	/** Sign Up Form. */
 	protected signUpForm = this.formBuilder.group({
-		email: [
-			'',
-			[
-				Validators.required,
-				Validators.required,
-				Validators.minLength(EMAIL_MIN_LENGTH),
-				Validators.maxLength(EMAIL_MAX_LENGTH),
-			],
-		],
-		firstName: ['', [Validators.required, Validators.maxLength(NAME_MAX_LENGTH)]],
-		lastName: ['', [Validators.required, Validators.maxLength(NAME_MAX_LENGTH)]],
+		email: this.formBuilder.control('', [
+			Validators.required,
+			Validators.required,
+			Validators.minLength(EMAIL_MIN_LENGTH),
+			Validators.maxLength(EMAIL_MAX_LENGTH),
+		]),
+		firstName: this.formBuilder.control('', [Validators.required, Validators.maxLength(NAME_MAX_LENGTH)]),
+		lastName: this.formBuilder.control('', [Validators.required, Validators.maxLength(NAME_MAX_LENGTH)]),
 		passwordGroup: this.formBuilder.group(
 			{
-				password: [
-					'',
-					[Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH), Validators.maxLength(PASSWORD_MAX_LENGTH)],
-				],
-				reTypePassword: [
-					'',
-					[Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH), Validators.maxLength(PASSWORD_MAX_LENGTH)],
-				],
+				password: this.formBuilder.control('', [
+					Validators.required,
+					Validators.minLength(PASSWORD_MIN_LENGTH),
+					Validators.maxLength(PASSWORD_MAX_LENGTH),
+				]),
+				reTypePassword: this.formBuilder.control('', [
+					Validators.required,
+					Validators.minLength(PASSWORD_MIN_LENGTH),
+					Validators.maxLength(PASSWORD_MAX_LENGTH),
+				]),
 			},
 			{ validators: mustMatch('password', 'reTypePassword') },
 		),
