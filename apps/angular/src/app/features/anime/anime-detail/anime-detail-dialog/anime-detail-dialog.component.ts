@@ -4,13 +4,13 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 type ImageDialogData = {
 
 	/** Source. */
-	source: string | null;
+	readonly source: string | null;
 
 	/** Title. */
-	title: string;
+	readonly title: string;
 
 	/** Studio. */
-	studios: string;
+	readonly studios: string;
 };
 
 /** Anime dialog component. */

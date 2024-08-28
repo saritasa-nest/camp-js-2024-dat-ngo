@@ -26,8 +26,9 @@ export class AnimeDetailInformationComponent {
 	public isLoading = true;
 
 	/**
-	 * Gets formatted list.
+	 * Gets formatted an array of genre or studios to a string with commas.
 	 * @param array Array of items.
+	 * @returns A string of genres or studio separated by commas.
 	 */
 	protected getFormattedList(array: readonly Genre[] | readonly AnimeStudioData[]): string {
 		return array.map(item => item.name).join(', ');

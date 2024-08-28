@@ -35,7 +35,8 @@ export namespace AnimeStudioMapper {
 		};
 	}
 
-	/** Map genres array from dto to model.
+	/**
+	 * Map genres array from dto to model.
 	 * @param dto Genres dto array.
 	 * @returns Genres array model.
 	 */
@@ -43,7 +44,8 @@ export namespace AnimeStudioMapper {
 		return dto.map(genreDto => fromDto(genreDto));
 	}
 
-	/** Map genres array from model to dto.
+	/**
+	 * Map genres array from model to dto.
 	 * @param model Genres model array.
 	 * @returns Genres array dto.
 	 */

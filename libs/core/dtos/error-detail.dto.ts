@@ -1,6 +1,6 @@
 /** Error detail. */
-export type ErrorDetailDto = Readonly<{
-	code: string;
-	detail: string;
-	attr: string | null;
-}>;
+export type ErrorDetailDto = {
+	readonly code: string;
+	readonly detail: string;
+	readonly attr: string | null;
+};

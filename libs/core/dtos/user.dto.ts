@@ -1,6 +1,15 @@
+/** User Dto. */
 export type UserDto = {
-	email: string;
-	first_name: string;
-	last_name: string;
-	avatar: string | null;
+
+	/** Email. */
+	readonly email: string;
+
+	/** First name. */
+	readonly first_name: string;
+
+	/** Last name. */
+	readonly last_name: string;
+
+	/** Avatar. */
+	readonly avatar: string | null;
 };

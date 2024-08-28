@@ -7,17 +7,17 @@ export type AnimeStudioDataDto = {
 	 * Create date.
 	 * @example '2024-08-26T03:41:51.338Z'.
 	 */
-	created: string;
+	readonly created: string;
 
 	/**
 	 * Modified date.
 	 * @example '2024-08-26T03:41:51.338Z'.
 	 */
-	modified: string;
+	readonly modified: string;
 
 	/** Name. */
-	name: string;
+	readonly name: string;
 
 	/** Image. */
-	image: string;
+	readonly image: string;
 };

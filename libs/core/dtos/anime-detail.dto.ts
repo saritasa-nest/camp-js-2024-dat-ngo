@@ -9,38 +9,38 @@ import { GenreDto } from './genre.dto';
 export type AnimeDetailDto = AnimeDto & {
 
 	/** Youtube trailer url. */
-	trailer_youtube_id: string;
+	readonly trailer_youtube_id: string;
 
 	/** Anime source. */
-	source: AnimeSourceDto;
+	readonly source: AnimeSourceDto;
 
 	/** Anime rating. */
-	rating: AnimeRatingDto;
+	readonly rating: AnimeRatingDto;
 
 	/** Anime rating. */
-	season: AnimeSeasonDto;
+	readonly season: AnimeSeasonDto;
 
 	/** Anime airing status. */
 	readonly airing: boolean;
 
 	/** Anime synopsis. */
-	synopsis: string;
+	readonly synopsis: string;
 
 	/** Anime background. */
-	background: string;
+	readonly background: string;
 
 	/** Anime broadcast day. */
-	broadcast_day: number;
+	readonly broadcast_day: number;
 
 	/** Anime broadcast time. */
-	broadcast_time: string;
+	readonly broadcast_time: string;
 
 	/** Anime broadcast timezone. */
-	broadcast_timezone: string;
+	readonly broadcast_timezone: string;
 
 	/** Anime studios data dto. */
-	studios_data: readonly AnimeStudioDataDto[];
+	readonly studios_data: readonly AnimeStudioDataDto[];
 
 	/** Anime genres data dto. */
-	genres_data: readonly GenreDto[];
+	readonly genres_data: readonly GenreDto[];
 };

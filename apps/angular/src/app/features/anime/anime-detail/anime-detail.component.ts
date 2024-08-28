@@ -117,7 +117,6 @@ export class AnimeDetailComponent {
 
 	/** Go back to the previous page. */
 	protected handleGoBack(): void {
-		console.log(this.location);
 		this.location.back();
 	}
 }

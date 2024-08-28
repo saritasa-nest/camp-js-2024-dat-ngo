@@ -2,8 +2,8 @@
 export type UserSecretDto = {
 
 	/** Access Token. */
-	access: string;
+	readonly access: string;
 
 	/** Refresh Token. */
-	refresh: string;
+	readonly refresh: string;
 };
