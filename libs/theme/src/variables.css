@@ -1,7 +1,7 @@
 :root {
 	/*
 	/*
-    Please use the following template to add new variables, dark/light valuations are optional.
+    Please use the following template to add new variables dark/light valuations are optional.
     --<name>-color: <color>;
     --<name>-contrast-color: <contrast-color>;
     --<name>-dark-color: <dark-color>;
@@ -33,6 +33,7 @@
 	--anime-copy-right: rgb(102 102 102);
 	--anime-blue-ribbon: rgb(0 123 255);
 	--anime-dialog-border: rgb(241 93 39);
+	--anime-hover: rgb(245 245 245);
 
 	/* Spacing */
 	--spacing-xs: 4px;

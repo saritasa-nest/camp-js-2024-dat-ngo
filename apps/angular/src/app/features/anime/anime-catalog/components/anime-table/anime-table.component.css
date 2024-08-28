@@ -46,3 +46,8 @@
 
 	margin: 5px;
 }
+
+.mat-row:hover {
+	background-color: var(--anime-hover);
+	cursor: pointer;
+}
