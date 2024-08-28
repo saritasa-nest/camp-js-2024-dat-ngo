@@ -65,10 +65,11 @@ export class SignInComponent {
 			Validators.minLength(EMAIL_MIN_LENGTH),
 			Validators.maxLength(EMAIL_MAX_LENGTH),
 		]),
-		password: [
-			'',
-			[Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH), Validators.maxLength(PASSWORD_MAX_LENGTH)],
-		],
+		password: this.formBuilder.control('', [
+			Validators.required,
+			Validators.minLength(PASSWORD_MIN_LENGTH),
+			Validators.maxLength(PASSWORD_MAX_LENGTH),
+		]),
 	});
 
 	/**

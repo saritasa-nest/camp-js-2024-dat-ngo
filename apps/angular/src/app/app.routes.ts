@@ -6,16 +6,16 @@ import { authGuard } from '../core/guards/auth-guard';
 export const appRoutes: Routes = [
 	{
 		path: 'auth',
-		loadComponent: () => import('./auth/auth.component').then(c => c.AuthComponent),
+		loadComponent: () => import('./features/auth/auth.component').then(c => c.AuthComponent),
 		children: [
 			{
 				path: 'signin',
-				loadComponent: () => import('./auth/components/signin/signin.component').then(c => c.SignInComponent),
+				loadComponent: () => import('./features/auth/components/signin/signin.component').then(c => c.SignInComponent),
 				canMatch: [authGuard({ isAuthorized: false })],
 			},
 			{
 				path: 'signup',
-				loadComponent: () => import('./auth/components/signup/signup.component').then(c => c.SignupComponent),
+				loadComponent: () => import('./features/auth/components/signup/signup.component').then(c => c.SignupComponent),
 				canMatch: [authGuard({ isAuthorized: false })],
 			},
 			{ path: '', redirectTo: 'signin', pathMatch: 'full' },
