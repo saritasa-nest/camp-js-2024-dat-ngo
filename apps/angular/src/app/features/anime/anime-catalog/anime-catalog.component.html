@@ -7,10 +7,14 @@
 		user: currentUser$ | async,
 	} as data"
 >
+	@if(data.user){
 	<div>
-		{{data.user?.lastName}} {{data.user?.firstName}}
-		<button type="button" (click)="logOut()">Log Out</button>
+		{{ data.user.lastName }} {{ data.user.firstName }}
+		<button mat-raised-button class="catalog-button" type="button" (click)="logOut()">Log Out</button>
 	</div>
+	}@else{
+	<button mat-raised-button class="catalog-button" type="button" (click)="logIn()">Log In</button>
+	}
 	<camp-search-filter-form
 		(typeChange)="onSelectionChange($event)"
 		(searchChange)="onSearchChange($event)"

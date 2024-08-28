@@ -6,7 +6,8 @@ import { Genre } from '../models/genre';
 /** Anime genre mapper. */
 export namespace AnimeGenreMapper {
 
-	/** Map genres from dto to model.
+	/**
+	 * Map genres from dto to model.
 	 * @param dto Genres dto.
 	 * @returns Genres.
 	 */
@@ -17,7 +18,8 @@ export namespace AnimeGenreMapper {
 		});
 	}
 
-	/** Map genres from model to dto.
+	/**
+	 * Map genres from model to dto.
 	 * @param model Genres model.
 	 * @returns Genres dto.
 	 */
@@ -28,7 +30,8 @@ export namespace AnimeGenreMapper {
 		};
 	}
 
-	/** Map genres array from dto to model.
+	/**
+	 * Map genres array from dto to model.
 	 * @param dto Genres dto array.
 	 * @returns Genres array model.
 	 */
@@ -36,7 +39,8 @@ export namespace AnimeGenreMapper {
 		return dto.map(genreDto => fromDto(genreDto));
 	}
 
-	/** Map genres array from model to dto.
+	/**
+	 *  Map genres array from model to dto.
 	 * @param model Genres model array.
 	 * @returns Genres array dto.
 	 */

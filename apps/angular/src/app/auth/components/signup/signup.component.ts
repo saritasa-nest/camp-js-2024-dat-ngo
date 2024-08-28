@@ -39,7 +39,7 @@ export class SignupComponent {
 
 	private readonly router = inject(Router);
 
-	private formBuilder = inject(NonNullableFormBuilder);
+	private readonly formBuilder = inject(NonNullableFormBuilder);
 
 	private readonly destroyRef = inject(DestroyRef);
 
@@ -52,7 +52,7 @@ export class SignupComponent {
 			'',
 			[
 				Validators.required,
-				Validators.email,
+				Validators.required,
 				Validators.minLength(EMAIL_MIN_LENGTH),
 				Validators.maxLength(EMAIL_MAX_LENGTH),
 			],
@@ -102,40 +102,39 @@ export class SignupComponent {
 	/** Submit form. */
 	protected onSubmit(): void {
 		this.signUpForm.markAllAsTouched();
-		if (this.signUpForm.valid) {
-			const formRawValue = this.signUpForm.getRawValue();
-			const registrationData = {
-				email: formRawValue.email,
-				password: formRawValue.passwordGroup.password,
-				firstName: formRawValue.firstName,
-				lastName: formRawValue.lastName,
-			};
-			this.isLoading$.next(true);
-
-			const credentials = new Registration(registrationData);
-			this.authService
-				.register(credentials)
-				.pipe(
-					take(1),
-					catchError((error: unknown) => {
-						this.formErrors = this.formErrorService.getFormErrors(this.signUpForm);
-						return throwError(() => error);
-					}),
-					finalize(() => {
-						this.isLoading$.next(false);
-					}),
-					takeUntilDestroyed(this.destroyRef),
-				)
-				.subscribe({
-					next: () => {
-						this.router.navigate([PATHS.home]);
-					},
-					error(error: unknown) {
-						return throwError(() => error);
-					},
-				});
-		} else {
-			this.formErrors = this.formErrorService.getFormErrors(this.signUpForm);
+		if (this.signUpForm.invalid) {
+			return;
 		}
+		const formRawValue = this.signUpForm.getRawValue();
+		const registrationData = {
+			email: formRawValue.email,
+			password: formRawValue.passwordGroup.password,
+			firstName: formRawValue.firstName,
+			lastName: formRawValue.lastName,
+		};
+		this.isLoading$.next(true);
+
+		const credentials = new Registration(registrationData);
+		this.authService
+			.register(credentials)
+			.pipe(
+				take(1),
+				catchError((error: unknown) => {
+					this.formErrors = this.formErrorService.getFormErrors(this.signUpForm);
+					return throwError(() => error);
+				}),
+				finalize(() => {
+					this.isLoading$.next(false);
+				}),
+				takeUntilDestroyed(this.destroyRef),
+			)
+			.subscribe({
+				next: () => {
+					this.router.navigate([PATHS.home]);
+				},
+				error(error: unknown) {
+					return throwError(() => error);
+				},
+			});
 	}
 }

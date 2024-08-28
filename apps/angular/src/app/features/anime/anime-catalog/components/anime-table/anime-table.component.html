@@ -51,7 +51,7 @@
 			<th class="anime__header" mat-header-cell *matHeaderCellDef>Type</th>
 			<td mat-cell class="anime__cell anime__type" *matCellDef="let anime">
 				<camp-skeleton-cell [isLoading]="isLoading">
-					<camp-movie-type [animeType]="anime.animeType"></camp-movie-type>
+					<camp-anime-type [animeType]="anime.animeType" />
 				</camp-skeleton-cell>
 			</td>
 		</ng-container>
@@ -60,17 +60,17 @@
 			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
 			<td mat-cell class="anime__cell anime__status" *matCellDef="let anime">
 				<camp-skeleton-cell [isLoading]="isLoading">
-					<camp-movie-status [animeStatus]="anime.animeStatus"></camp-movie-status>
+					<camp-anime-status [animeStatus]="anime.animeStatus" />
 				</camp-skeleton-cell>
 			</td>
 		</ng-container>
 
 		<tr mat-header-row class="anime__header-row" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-		<tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClick(row)" ></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClick(row)"></tr>
 		<tr class="mat-row" *matNoDataRow>
 			<td class="mat-cell" [attr.colspan]="displayedColumns.length">
 				<div class="not-found-message">
-					<camp-movie-not-found></camp-movie-not-found>
+					<camp-anime-not-found></camp-anime-not-found>
 				</div>
 			</td>
 		</tr>

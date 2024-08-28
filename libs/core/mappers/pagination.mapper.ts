@@ -2,15 +2,19 @@ import { PaginationDto } from '../../core/dtos/pagination.dto';
 
 import { Pagination } from '../models/pagination';
 
-import { MapperFunction } from '../types/mapper';
+import { TMapperFunction } from './mapper';
 
 /** Pagination mapper. */
 export namespace PaginationMapper {
 
-	/** @inheritdoc */
+	/**
+	 *  From Dto.
+	 * @param paginationDto Pagination dto.
+	 * @param mapperFn Mapper fuction.
+	 * */
 	export function fromDto<TDto, TDomain>(
 		paginationDto: PaginationDto<TDto>,
-		mapperFn: MapperFunction<TDto, TDomain>,
+		mapperFn: TMapperFunction<TDto, TDomain>,
 	): Pagination<TDomain> {
 		return new Pagination<TDomain>({
 			totalCount: paginationDto.count,

@@ -2,16 +2,17 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 import { CommonModule } from '@angular/common';
 import { AnimeStatus } from '@js-camp/core/models/anime-status';
 
-/** Movie status. */
+/** Anime status component. */
 @Component({
-	selector: 'camp-movie-status',
+	selector: 'camp-anime-status',
 	standalone: true,
 	imports: [CommonModule],
-	templateUrl: './movie-status.component.html',
+	templateUrl: './anime-status.component.html',
+	styleUrl: './anime-status.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MovieStatusComponent {
-	/** Session status. */
+export class AnimeStatusComponent {
+	/** Anime status. */
 	@Input({ required: true })
 	public animeStatus: AnimeStatus = AnimeStatus.CurrentlyAiring;
 
@@ -28,12 +29,9 @@ export class MovieStatusComponent {
 		}
 	}
 
-	private get classes(): string {
-		return `anime-badge ${this.color}`;
-	}
-
+	/** Bind color to class. */
 	@HostBinding('class')
-	private get _classes(): string {
-		return this.classes;
+	protected get classes(): string {
+		return `anime-badge ${this.color}`;
 	}
 }

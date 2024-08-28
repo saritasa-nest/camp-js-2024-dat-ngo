@@ -1,6 +1,20 @@
 :host {
-	display: block;
+	display: grid;
 	width: 100%;
 	height: 80%;
 	max-height: 100%;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.catalog-button {
+	background-color: var(--anime-dodger-blue);
+	color: var(--primary-contrast-color);
+	height: 40px;
+	padding: 0 15px;
+	margin: 10px 0;
+	border-radius: 4px;
 }

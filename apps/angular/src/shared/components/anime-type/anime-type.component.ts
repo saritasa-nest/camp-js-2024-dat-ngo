@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 import { CommonModule } from '@angular/common';
 import { AnimeType } from '@js-camp/core/models/anime-type';
 
-const ANIME_MOVIE_COLORS: Record<AnimeType, string> = {
+const ANIME_TYPE_COLORS: Record<AnimeType, string> = {
 	[AnimeType.Movie]: 'anime-type_movie',
 	[AnimeType.Music]: 'anime-type_music',
 	[AnimeType.ONA]: 'anime-type_ona',
@@ -15,27 +15,25 @@ const ANIME_MOVIE_COLORS: Record<AnimeType, string> = {
 
 /** Anime type. */
 @Component({
-	selector: 'camp-movie-type',
+	selector: 'camp-anime-type',
 	standalone: true,
 	imports: [CommonModule],
-	templateUrl: './movie-type.component.html',
+	templateUrl: './anime-type.component.html',
+	styleUrl: './anime-type.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MovieTypeComponent {
+export class AnimeTypeComponent {
 	/** Session status. */
 	@Input({ required: true })
-	public animeType!: AnimeType;
+	public animeType: AnimeType = AnimeType.Movie;
 
 	private get color(): string {
-		return ANIME_MOVIE_COLORS[this.animeType];
+		return ANIME_TYPE_COLORS[this.animeType];
 	}
 
-	private get classes(): string {
-		return `anime-badge ${this.color}`;
-	}
-
+	/** Bind color to class. */
 	@HostBinding('class')
-	private get _classes(): string {
-		return this.classes;
+	protected get classes(): string {
+		return `anime-badge ${this.color}`;
 	}
 }

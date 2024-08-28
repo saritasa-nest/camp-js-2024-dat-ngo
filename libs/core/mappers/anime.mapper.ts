@@ -29,7 +29,7 @@ export namespace AnimeMapper {
 	}
 
 	/**
-	 *  Mapper for model to dto.
+	 * Mapper for model to dto.
 	 * @param anime Anime model .
 	 */
 	export function toDto(anime: Anime): AnimeDto {

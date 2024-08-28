@@ -16,6 +16,5 @@ import { SkeletonDirective } from '@js-camp/angular/shared/directives/skeleton.d
 export class SkeletonCellComponent {
 	/** Whether cell is loading or not. */
 	@Input()
-
 	public isLoading: boolean | null = false;
 }

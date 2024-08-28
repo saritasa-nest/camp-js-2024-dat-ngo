@@ -30,7 +30,7 @@ export class ResultDisplayer implements Subscriber<Result> {
 
 		const wrapper = document.getElementById('game-screen');
 		if (resultDisplayerElement) {
-			wrapper?.appendChild(resultDisplayerElement);
+			wrapper?.patchChild(resultDisplayerElement);
 		}
 		this.resultElement = document.getElementById(`${name}-dice-results`);
 		this.totalElement = document.getElementById(`${name}-score`);

@@ -1,31 +1,29 @@
 <ng-container *ngIf="animeDetail">
-  <p><span class="label">Type: </span><camp-movie-type [animeType]="animeDetail.animeType"/></p>
-  <p><span class="label">Rating: </span> {{ animeDetail.rating }}</p>
-  <p><span class="label">Source: </span> {{ animeDetail.source }}</p>
-  <p><span class="label">Season: </span> {{ animeDetail.season }}</p>
-  <p>
-    <span class="label">Aring Status:</span>
-    <camp-movie-status [animeStatus]="animeDetail.animeStatus"></camp-movie-status>
-  </p>
-  <p>
-    <span class="label">Broadcasting Dates:</span>
-    {{ animeDetail.broadcasted.startDate | date: 'longDate' | empty }} —
-    {{ animeDetail.broadcasted.endDate | date: 'longDate' | empty }}
-  </p>
+	<p><span class="label">Type: </span><camp-anime-type [animeType]="animeDetail.animeType" /></p>
+	<p><span class="label">Rating: </span> {{ animeDetail.rating }}</p>
+	<p><span class="label">Source: </span> {{ animeDetail.source }}</p>
+	<p><span class="label">Season: </span> {{ animeDetail.season }}</p>
+	<p>
+		<span class="label">Aring Status:</span>
+		<camp-anime-status [animeStatus]="animeDetail.animeStatus" />
+	</p>
+	<p>
+		<span class="label">Broadcasting Dates:</span>
+		{{ animeDetail.broadcasted.startDate | date : "longDate" | empty }} —
+		{{ animeDetail.broadcasted.endDate | date : "longDate" | empty }}
+	</p>
 
-  <!-- Studios Section -->
-  <ng-container *ngIf="animeDetail.studiosData.length > 0">
-    <p>
-      <span class="label">Studios:</span>
-      {{ getFormattedList(animeDetail.studiosData) }}
-    </p>
-  </ng-container>
+	<ng-container *ngIf="animeDetail.studiosData.length > 0">
+		<p>
+			<span class="label">Studios:</span>
+			{{ getFormattedList(animeDetail.studiosData) }}
+		</p>
+	</ng-container>
 
-  <!-- Genres Section -->
-  <ng-container *ngIf="animeDetail.genresData.length > 0">
-    <p>
-      <span class="label">Genres:</span>
-      {{ getFormattedList(animeDetail.genresData) }}
-    </p>
-  </ng-container>
+	<ng-container *ngIf="animeDetail.genresData.length > 0">
+		<p>
+			<span class="label">Genres:</span>
+			{{ getFormattedList(animeDetail.genresData) }}
+		</p>
+	</ng-container>
 </ng-container>
