@@ -1,4 +1,8 @@
 <div class="dialog-wrapper">
-	<img class="dialog-image" [src]="dialogData.source" [alt]="dialogData.title">
-	<p class="dialog-source"><span class="dialog-source-title">Source: </span>&#169; {{dialogData.studios}}</p>
+	<img class="dialog-image" [src]="dialogData.source" [alt]="dialogData.title" />
+	<p class="dialog-source">
+		<span class="dialog-source-title"></span>Source: @if( dialogData.studios.length>0){&#169; {{ dialogData.studios }}}@else {
+			Unknown
+		}
+	</p>
 </div>

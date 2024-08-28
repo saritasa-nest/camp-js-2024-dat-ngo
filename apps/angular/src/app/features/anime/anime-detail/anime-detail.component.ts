@@ -102,8 +102,22 @@ export class AnimeDetailComponent {
 		});
 	}
 
+	/**
+	 * Handles a keydown event on a image.
+	 * @param event The keyboard event.
+	 * @param imageSource Image source.
+	 * @param title Japanese title.
+	 * @param studios Studios string.
+	 */
+	protected handleKeydown(event: KeyboardEvent, imageSource: string | null, title: string, studios: string): void {
+		if (event.key === 'Enter') {
+			this.openImageDialog(imageSource, title, studios);
+		}
+	}
+
 	/** Go back to the previous page. */
 	protected handleGoBack(): void {
+		console.log(this.location);
 		this.location.back();
 	}
 }
