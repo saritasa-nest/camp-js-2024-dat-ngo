@@ -102,9 +102,20 @@ export class AnimeTableComponent {
 
 	/**
 	 * Navigate the selected anime to the detail page.
-	 * @param anime The anime associated with the row.
+	 * @param id The anime associated with the row.
 	 */
-	protected onRowClick(anime: Anime): void {
-		this.router.navigate([`/anime/${anime.id}`]);
+	protected onRowClick(id: Anime['id']): void {
+		this.router.navigate([`/anime/${id}`]);
+	}
+
+	/**
+	 * Handles a keydown event on a image.
+	 * @param event The keyboard event.
+	 * @param anime Anime that clicked.
+	 */
+	protected handleKeydown(event: KeyboardEvent, anime: Anime): void {
+		if (event.key === 'Enter') {
+			this.onRowClick(anime.id);
+		}
 	}
 }
