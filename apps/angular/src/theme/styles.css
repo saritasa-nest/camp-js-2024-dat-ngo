@@ -1,6 +1,8 @@
 /* Global styles. */
 
 @import url("/libs/theme/src/variables.css");
+@import url("material/index.css");
+@import url("elements/index.css");
 
 * {
 	box-sizing: border-box;

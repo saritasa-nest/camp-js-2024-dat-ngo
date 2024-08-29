@@ -1,6 +1,6 @@
 import { DateRange } from './date-range';
 
-import { AnimeType } from './amime-type';
+import { AnimeType } from './anime-type';
 import { AnimeStatus } from './anime-status';
 
 import { Immerable, OmitImmerable } from './immerable';
@@ -35,10 +35,10 @@ export class Anime extends Immerable {
 	public readonly userScore: number | null;
 
 	/** Studio's id as array of string. */
-	public readonly studios: readonly string[];
+	public readonly studios: readonly number[];
 
 	/** Genres' id as array of string. */
-	public readonly genres: readonly string[];
+	public readonly genres: readonly number[];
 
 	public constructor(data: AnimeConstructorData) {
 		super();

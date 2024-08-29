@@ -1,0 +1,78 @@
+<section class="mat-elevation-z8 anime__table-container" *ngIf="sortParams !== null">
+	<table
+		mat-table
+		[dataSource]="isLoading ? templateArray : dataSource"
+		matSort
+		(matSortChange)="onSortChange($event)"
+		[matSortActive]="sortParams.active"
+		[matSortDirection]="sortParams.direction"
+		[trackBy]="trackBy('id')"
+		class="anime-table"
+	>
+		<ng-container class="anime__column" matColumnDef="image">
+			<th class="anime__header" mat-header-cell *matHeaderCellDef>Image</th>
+			<td mat-cell class="anime__cell" *matCellDef="let anime">
+				<camp-table-cell-content [isLoading]="isLoading" class="anime__image-cell">
+					<div class="anime__image-container">
+						<img class="anime__image" [src]="anime.coverImageUrl" [alt]="isLoading ? null : anime.titleJpn" />
+					</div>
+				</camp-table-cell-content>
+			</td>
+		</ng-container>
+
+		<ng-container class="anime__column" matColumnDef="title_eng">
+			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>English Title</th>
+			<td mat-cell class="anime__cell anime__title" *matCellDef="let anime">
+				<camp-table-cell-content [isLoading]="isLoading">
+					{{ anime.englishTitle | empty }}
+				</camp-table-cell-content>
+			</td>
+		</ng-container>
+
+		<ng-container class="anime__column" matColumnDef="title_jpn">
+			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Japanese Title</th>
+			<td mat-cell class="anime__cell anime__title" *matCellDef="let anime">
+				<camp-table-cell-content [isLoading]="isLoading">
+					<span class="anime__japan-title">{{ anime.japaneseTitle | empty }}</span>
+				</camp-table-cell-content>
+			</td>
+		</ng-container>
+
+		<ng-container class="anime__column" matColumnDef="aired_start_date">
+			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Broadcasted Date</th>
+			<td mat-cell class="anime__cell anime__started-date" *matCellDef="let anime">
+				<camp-table-cell-content [isLoading]="isLoading">
+					{{ anime.broadcasted?.startDate | date | empty }}
+				</camp-table-cell-content>
+			</td>
+		</ng-container>
+
+		<ng-container class="anime__column" matColumnDef="type">
+			<th class="anime__header" mat-header-cell *matHeaderCellDef>Type</th>
+			<td mat-cell class="anime__cell anime__type" *matCellDef="let anime">
+				<camp-table-cell-content [isLoading]="isLoading">
+					<camp-anime-type [animeType]="anime.animeType"></camp-anime-type>
+				</camp-table-cell-content>
+			</td>
+		</ng-container>
+
+		<ng-container class="anime__column" matColumnDef="status">
+			<th class="anime__header" mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+			<td mat-cell class="anime__cell anime__status" *matCellDef="let anime">
+				<camp-table-cell-content [isLoading]="isLoading">
+					<camp-anime-status [animeStatus]="anime.animeStatus"></camp-anime-status>
+				</camp-table-cell-content>
+			</td>
+		</ng-container>
+
+		<tr mat-header-row class="anime__header-row" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+		<tr class="mat-row" *matNoDataRow>
+			<td class="mat-cell" [attr.colspan]="displayedColumns.length">
+				<div class="not-found-message">
+					<camp-anime-not-found></camp-anime-not-found>
+				</div>
+			</td>
+		</tr>
+	</table>
+</section>

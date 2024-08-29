@@ -1,5 +1,6 @@
 :root {
 	/*
+	/*
     Please use the following template to add new variables, dark/light valuations are optional.
     --<name>-color: <color>;
     --<name>-contrast-color: <contrast-color>;
@@ -9,6 +10,15 @@
     --<name>-light-contrast-color: <light-contrast-color>;
   */
 
+	/** Prevalent color in the application */
+	--primary-color: #f97316;
+	--primary-contrast-color: white;
+	--primary-dark-color: #ea580c;
+	--primary-dark-contrast-color: white;
+	--primary-light-color: #fb923c;
+	--primary-light-contrast-color: black;
+	--error-color: red;
+
 	/* Colors */
 	--surface-color: rgb(255 255 255 / 100%);
 	--surface-overlay-color: rgb(0 0 0 / 5%);
@@ -16,9 +26,16 @@
 	--on-surface-dim-color: rgb(0 0 0 / 50%);
 	--on-primary-color: rgb(255 255 255);
 	--border-color: rgb(0 0 0 / 15%);
-	--focus-outline-color: #212121;
+	--focus-outline-color: rgb(3 1 1);
+	--anime-header-border-color: rgb(233 237 245);
+	--anime-header-bg-color: rgb(247 249 252);
+	--anime-header-color: rgb(104 113 130);
+	--anime-header-row-bg: rgb(232 244 255);
+	--anime-header-row-color: rgb(2 30 74);
+	--anime-japan-title-row-color: rgb(53 141 235);
 
 	/* Spacing */
+	--spacing-xs: 6px;
 	--spacing-sm: 8px;
 	--spacing-md: calc(var(--spacing-sm) * 2);
 	--spacing-default: calc(var(--spacing-sm) * 2.5);
@@ -26,6 +43,7 @@
 	--spacing-xl: calc(var(--spacing-sm) * 4);
 	--spacing-xxl: calc(var(--spacing-sm) * 5);
 
-	/* container width */
+	/* Container width */
 	--container-width-lg: 1280px;
+	--container-width-xl: 1600px;
 }

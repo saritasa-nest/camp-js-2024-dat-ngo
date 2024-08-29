@@ -1,9 +1,9 @@
 {
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "composite": true,
-    "outDir": "../../dist/out-tsc",
-    "types": ["node"]
-  },
-  "include": ["**/*.ts", "models/amime-type.ts", "models/anime-status.ts"]
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"composite": true,
+		"outDir": "../../dist/out-tsc",
+		"types": ["node"]
+	},
+	"include": ["**/*.ts", "models/anime-type.ts", "models/anime-status.ts"]
 }

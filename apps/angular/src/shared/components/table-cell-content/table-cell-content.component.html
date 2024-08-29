@@ -1,0 +1,8 @@
+<div
+	class="skeleton-cell"
+	*ngIf="isLoading; else contentTemplate"
+	campSkeleton
+></div>
+<ng-template #contentTemplate>
+	<ng-content></ng-content>
+</ng-template>

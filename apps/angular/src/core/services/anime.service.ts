@@ -1,30 +1,50 @@
 import { inject, Injectable } from '@angular/core';
 import { PaginationDto } from '@js-camp/core/dtos/pagination.dto';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Anime } from '@js-camp/core/models/anime.model';
+import { Anime } from '@js-camp/core/models/anime';
 import { AnimeDto } from '@js-camp/core/dtos/anime.dto';
 import { PaginationMapper } from '@js-camp/core/mappers/pagination.mapper';
 import { AnimeMapper } from '@js-camp/core/mappers/anime.mapper';
 import { Pagination } from '@js-camp/core/models/pagination';
 import { AppUrlsConfig } from '@js-camp/angular/shared/app-url';
+import { AnimeFilterParams } from '@js-camp/core/models/anime-filter-params';
+
+import { AnimeFiltersParamsMapper } from '@js-camp/core/mappers/anime-filter-params.mapper';
+
 import { map, Observable } from 'rxjs';
+
+import { HttpParamsService } from './http-param.service';
 
 /** Anime services. */
 @Injectable({ providedIn: 'root' })
 export class AnimeService {
 	private readonly httpClient = inject(HttpClient);
 
-	private readonly appApiConfig = inject(AppUrlsConfig);
+	private readonly httpParamsService = inject(HttpParamsService);
 
-	// TODO (Dat Ngo): Create filter params model and dto instead of using this while doing next task
-	private readonly param = new HttpParams().set('offset', 25)
-		.set('limit', 25);
+	private readonly appUrlsConfig = inject(AppUrlsConfig);
 
-	/** Observable to get all anime and map from pagination dto to pagination.*/
-	public getAll(): Observable<Pagination<Anime>> {
-		const url = new URL(this.appApiConfig.anime.list);
+	private readonly animeQueryMapper = inject(AnimeFiltersParamsMapper);
+
+	/**
+	 * Build HttpParams from URL query params.
+	 * @param params URL query params.
+	 * @returns Http params.
+	 */
+	private getHttpParams(params: AnimeFilterParams.Combined): HttpParams {
+		const dtoQueryParams = this.animeQueryMapper.mapCombinedOptionsToDto(params);
+		return this.httpParamsService.buildHttpParamsFromDto(dtoQueryParams);
+	}
+
+	/** Get Anime.
+	 * @param queryParams URL filter query params.
+	 * @returns An Observable of anime Pagination.
+	 */
+	public getAnime(queryParams: AnimeFilterParams.Combined): Observable<Pagination<Anime>> {
+		/** Set isLoading to true at the start of the fetch. */
+		const params = this.getHttpParams(queryParams);
 		return this.httpClient
-			.get<PaginationDto<AnimeDto>>(url.toString(), { params: this.param })
-			.pipe(map(value => PaginationMapper.fromDto(value, anime => AnimeMapper.fromDto(anime))));
+			.get<PaginationDto<AnimeDto>>(this.appUrlsConfig.anime.list, { params })
+			.pipe(map(responseDto => PaginationMapper.fromDto(responseDto, AnimeMapper.fromDto)));
 	}
 }

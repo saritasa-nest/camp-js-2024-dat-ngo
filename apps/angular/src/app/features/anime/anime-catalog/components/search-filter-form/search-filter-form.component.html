@@ -1,0 +1,19 @@
+<!-- Anime Type Selection -->
+<mat-form-field appearance="fill">
+	<mat-label>Anime type</mat-label>
+	<mat-select [formControl]="typeControl">
+		<mat-option *ngFor="let option of selectTypes" [value]="option">{{ option }}</mat-option>
+	</mat-select>
+</mat-form-field>
+
+<!-- Search Field -->
+<div>
+	<mat-form-field appearance="fill">
+		<mat-label>Search</mat-label>
+		<input matInput [formControl]="searchControl" placeholder="Anime Name" (keydown)="onKeyDown($event)" />
+	</mat-form-field>
+</div>
+
+<div class="main__search">
+	<button mat-flat-button type="button" (click)="searchChange.emit(searchControl.value?.trim() || null)">Search</button>
+</div>

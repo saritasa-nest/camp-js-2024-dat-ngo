@@ -1,0 +1,14 @@
+.anime-status_currently-airing {
+	background-color: var(--anime-currently-airing-bg);
+	color: var(--anime-currently-airing-color);
+}
+
+.anime-status_finished-airing {
+	background-color: var(--anime-finished-airing-bg);
+	color: var(--anime-finished-airing-color);
+}
+
+.anime-status_not-yet-aired {
+	background-color: var(--anime-not-yet-aired-bg);
+	color: var(--anime-not-yet-aired-color);
+}
